@@ -5,12 +5,13 @@ import { ProductInfo } from './models';
 @Injectable()
 export class Data {
     Products: Array<ProductInfo>;
+    SelectedProduct: ProductInfo;
 
     constructor(public core: Core) {
-        this.loadProducts();
+        this.LoadProducts();
     }
 
-    private loadProducts(): void {
+    public LoadProducts(): void {
         this.Products = new Array<ProductInfo>();
         for(let x=0; x < 10; x++)
         {

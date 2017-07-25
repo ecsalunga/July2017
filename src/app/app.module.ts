@@ -19,11 +19,15 @@ import { Data } from './data';
 import { FormsModule }   from '@angular/forms';
 import { AppComponent } from './app.component';
 import { TesterComponent } from './tester/tester.component';
+import { ProductListComponent } from './product/list/product-list.component';
+import { ProductDetailComponent } from './product/detail/product-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TesterComponent
+    TesterComponent,
+    ProductListComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule, 
@@ -39,6 +43,10 @@ import { TesterComponent } from './tester/tester.component';
   ],
   providers: [Core, Data],
   bootstrap: [AppComponent],
-  entryComponents: [ TesterComponent ]
+  entryComponents: [ 
+    TesterComponent,
+    ProductListComponent,
+    ProductDetailComponent
+  ]
 })
 export class AppModule { }

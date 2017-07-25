@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   constructor(public core: Core) { }
 
   loadTester(name: string) {
-    this.core.loadComponent("app-tester");
+    this.core.loadComponent("app-product-list");
   }
 
   ngOnInit() {

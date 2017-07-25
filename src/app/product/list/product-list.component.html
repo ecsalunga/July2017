@@ -1,11 +1,4 @@
 <div>
-  <div>
-    <md-input-container>
-      <input (click)="picker.open()" mdInput [mdDatepicker]="picker" placeholder="Select date">
-      <button mdSuffix [mdDatepickerToggle]="picker"></button>
-    </md-input-container>
-    <md-datepicker #picker></md-datepicker>
-  </div>
   <table>
     <thead>
       <tr>
@@ -17,6 +10,9 @@
         </td>
         <td>
           QUANTITY
+        </td>
+        <td>
+          ACTIONS
         </td>
       </tr>
     </thead>
@@ -30,6 +26,9 @@
         </td>
         <td>
           {{product.Quantity}}
+        </td>
+        <td>
+          <button md-raised-button (click)="SelectProduct(product)">View</button>
         </td>
       </tr>
     </ng-container>

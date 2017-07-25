@@ -1,0 +1,17 @@
+<div>
+    <fieldset>
+      <legend>Product Detail</legend>
+      <div>
+        <label for="txtCode">Code</label>
+        <input id="txtCode" [(ngModel)]="model.Code" />
+      </div>
+      <div>
+        <label for="txtDescription">Description</label>
+        <input id="txtDescription" [(ngModel)]="model.Description" />
+      </div>
+
+      <div>
+        <button md-raised-button (click)="LoadProductList()">Go to list</button>
+      </div>
+    </fieldset>
+</div>
