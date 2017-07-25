@@ -8,8 +8,8 @@ import { Core } from './core';
 })
 export class AppComponent implements OnInit {
 
-  @ViewChild('childView', {read: ViewContainerRef})
-  childView: ViewContainerRef;
+  @ViewChild('viewChild', {read: ViewContainerRef})
+  viewChild: ViewContainerRef;
 
   constructor(public core: Core) { }
 
@@ -18,6 +18,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.core.childView = this.childView;
+    this.core.viewChild = this.viewChild;
   }
 }

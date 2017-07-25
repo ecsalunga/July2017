@@ -2,7 +2,7 @@ import { Injectable, ComponentFactory, ComponentFactoryResolver, ViewContainerRe
 
 @Injectable()
 export class Core {
-    childView: ViewContainerRef;
+    viewChild: ViewContainerRef;
     component: any;
     selector: string;
 
@@ -15,7 +15,7 @@ export class Core {
             this.clearComponent();
             this.selector = selector;
             let factory = this.resolver.resolveComponentFactory(component.componentType);
-            let created = this.childView.createComponent(factory);
+            let created = this.viewChild.createComponent(factory);
             this.component = created;
         }
     }
