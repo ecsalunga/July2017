@@ -1,0 +1,38 @@
+<p>
+  tester works!
+  <md-input-container>
+    <input (click)="picker.open()" mdInput [mdDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="selectedDate">
+    <button mdSuffix [mdDatepickerToggle]="picker"></button>
+  </md-input-container>
+  <md-datepicker #picker></md-datepicker>
+</p>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <td>
+          CODE
+        </td>
+         <td>
+           PRICE
+        </td>
+         <td>
+           QUANTITY
+        </td>
+      </tr>
+    </thead>
+    <ng-container *ngFor="let product of data.Products">
+      <tr>
+        <td>
+          {{product.Code}}
+        </td>
+        <td>
+          {{product.SellPrice}}
+        </td>
+        <td>
+          {{product.Quantity}}
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+</div>

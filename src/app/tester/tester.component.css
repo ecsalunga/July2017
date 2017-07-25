@@ -1,0 +1,12 @@
+table {
+    width: 90%
+}
+
+thead tr td {
+    text-align: left;
+    font-weight: bold; 
+}
+
+table tr td {
+    text-align: left;
+}
