@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Data } from '../data';
+import { DataLayer } from '../data';
 
 @Component({
   selector: 'app-tester',
@@ -8,7 +8,7 @@ import { Data } from '../data';
 })
 export class TesterComponent implements OnInit {
 
-  constructor(public data: Data) 
+  constructor(public DL: DataLayer) 
   {
 
   }

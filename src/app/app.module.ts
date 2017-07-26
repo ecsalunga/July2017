@@ -14,7 +14,7 @@ import {
  } from '@angular/material';
 
 import { Core } from './core';
-import { Data } from './data';
+import { DataAccess, DataLayer } from './data';
 
 import { FormsModule }   from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -41,7 +41,7 @@ import { ProductDetailComponent } from './product/detail/product-detail.componen
     MdNativeDateModule,
     FormsModule
   ],
-  providers: [Core, Data],
+  providers: [Core, DataAccess, DataLayer],
   bootstrap: [AppComponent],
   entryComponents: [ 
     TesterComponent,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
-import { Data } from '../../data';
+import { DataLayer } from '../../data';
 import { ProductInfo } from '../../models';
 
 @Component({
@@ -10,10 +10,10 @@ import { ProductInfo } from '../../models';
 })
 export class ProductListComponent implements OnInit {
 
-  constructor(public core: Core, public data: Data) {}
+  constructor(private core: Core, private DL: DataLayer) {}
 
   SelectProduct(product: ProductInfo) {
-    this.data.SelectedProduct = product;
+    this.DL.SelectedProduct = product;
     this.core.loadComponent("app-product-detail");
   }
 
