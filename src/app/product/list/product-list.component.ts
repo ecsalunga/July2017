@@ -13,7 +13,7 @@ export class ProductListComponent implements OnInit {
   constructor(private core: Core, private DL: DataLayer) {}
 
   SelectProduct(product: ProductInfo) {
-    this.DL.SelectedProduct = product;
+    this.DL.Product = product;
     this.core.loadComponent("app-product-detail");
   }
 

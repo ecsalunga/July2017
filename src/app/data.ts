@@ -4,9 +4,7 @@ import { ProductInfo } from './models';
 @Injectable()
 export class DataLayer {
     Products: Array<ProductInfo>;
-    SelectedProduct: ProductInfo;
-
-    constructor() { }
+    Product: ProductInfo;
 }
 
 @Injectable()
@@ -26,12 +24,13 @@ export class DataAccess {
     }
 
     public SaveProduct(item: ProductInfo) {
-        if (this.DL.SelectedProduct) {
-            this.DL.SelectedProduct.Code = item.Code;
-            this.DL.SelectedProduct.Description = item.Description;
-            this.DL.SelectedProduct.BuyPrice = item.BuyPrice;
-            this.DL.SelectedProduct.SellPrice = item.SellPrice;
-            this.DL.SelectedProduct.Quantity = item.Quantity;
+        // save here
+        if (this.DL.Product) {
+            this.DL.Product.Code = item.Code;
+            this.DL.Product.Description = item.Description;
+            this.DL.Product.BuyPrice = item.BuyPrice;
+            this.DL.Product.SellPrice = item.SellPrice;
+            this.DL.Product.Quantity = item.Quantity;
         }
         else
             this.DL.Products.push(item);

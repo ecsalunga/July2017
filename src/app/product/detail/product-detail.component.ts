@@ -12,13 +12,13 @@ export class ProductDetailComponent implements OnInit {
   model: ProductInfo;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
-    this.model = new ProductInfo("P00");
-    if (this.DL.SelectedProduct) {
-      this.model.Code = this.DL.SelectedProduct.Code;
-      this.model.Description = this.DL.SelectedProduct.Description;
-      this.model.BuyPrice = this.DL.SelectedProduct.BuyPrice;
-      this.model.SellPrice = this.DL.SelectedProduct.SellPrice;
-      this.model.Quantity = this.DL.SelectedProduct.Quantity;
+    this.model = new ProductInfo("");
+    if (this.DL.Product) {
+      this.model.Code = this.DL.Product.Code;
+      this.model.Description = this.DL.Product.Description;
+      this.model.BuyPrice = this.DL.Product.BuyPrice;
+      this.model.SellPrice = this.DL.Product.SellPrice;
+      this.model.Quantity = this.DL.Product.Quantity;
     }
   }
 
