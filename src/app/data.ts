@@ -12,7 +12,7 @@ export class DataLayer {
 export class DataAccess {
     constructor(private DL: DataLayer, private af: AngularFireDatabase) { }
 
-    public LoadProducts(): void {
+    public LoadData(): void {
        this.af.list('/products').subscribe(snapshots => {
             this.DL.Products = new Array<ProductInfo>();
 
@@ -29,14 +29,8 @@ export class DataAccess {
     }
 
     public SaveProduct(item: ProductInfo) {
-        if (item.key) {
-            this.DL.Product.Code = item.Code;
-            this.DL.Product.Description = item.Description;
-            this.DL.Product.BuyPrice = item.BuyPrice;
-            this.DL.Product.SellPrice = item.SellPrice;
-            this.DL.Product.Quantity = item.Quantity;
+        if (item.key)
             this.af.list('/products').update(item.key, item);
-        }
         else
             this.af.list('/products').push(item);
     }

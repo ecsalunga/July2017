@@ -12,9 +12,7 @@ export class AppComponent implements OnInit {
   @ViewChild('viewChild', {read: ViewContainerRef})
   viewChild: ViewContainerRef;
 
-  constructor(public core: Core, DA: DataAccess) { 
-    DA.LoadProducts();
-  }
+  constructor(public core: Core, private DA: DataAccess) { }
 
   loadTester(name: string) {
     this.core.loadComponent("app-product-list");
@@ -22,5 +20,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.core.viewChild = this.viewChild;
+    this.DA.LoadData();
   }
 }
