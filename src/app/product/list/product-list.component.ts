@@ -17,6 +17,11 @@ export class ProductListComponent implements OnInit {
     this.core.loadComponent("app-product-detail");
   }
 
+  AddProduct(){
+    this.DL.Product = null;
+    this.core.loadComponent("app-product-detail");
+  }
+
   ngOnInit() { }
 
 }

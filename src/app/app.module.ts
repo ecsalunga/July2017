@@ -13,6 +13,10 @@ import {
   MdNativeDateModule
  } from '@angular/material';
 
+import { AngularFireModule } from 'angularfire2'
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { environment } from '../environments/environment';
+
 import { Core } from './core';
 import { DataAccess, DataLayer } from './data';
 
@@ -30,7 +34,7 @@ import { ProductDetailComponent } from './product/detail/product-detail.componen
     ProductDetailComponent
   ],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     BrowserAnimationsModule,
     MdButtonModule,
     MdInputModule,
@@ -39,7 +43,9 @@ import { ProductDetailComponent } from './product/detail/product-detail.componen
     MdChipsModule,
     MdDatepickerModule,
     MdNativeDateModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
   ],
   providers: [Core, DataAccess, DataLayer],
   bootstrap: [AppComponent],

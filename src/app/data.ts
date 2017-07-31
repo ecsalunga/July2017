@@ -1,5 +1,6 @@
 import { Injectable, ComponentFactory, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import { ProductInfo } from './models';
+import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 
 @Injectable()
 export class DataLayer {
@@ -9,30 +10,34 @@ export class DataLayer {
 
 @Injectable()
 export class DataAccess {
-    constructor(private DL: DataLayer) { }
+    constructor(private DL: DataLayer, private af: AngularFireDatabase) { }
 
     public LoadProducts(): void {
-        this.DL.Products = new Array<ProductInfo>();
-        for (let x = 0; x < 10; x++) {
-            let product = new ProductInfo("P00" + x);
-            product.BuyPrice = x;
-            product.SellPrice = x;
-            product.Quantity = x + 12;
-            product.Description = 'Sample Product ' + x;
-            this.DL.Products.push(product);
-        }
+       this.af.list('/products').subscribe(snapshots => {
+            this.DL.Products = new Array<ProductInfo>();
+
+            snapshots.forEach(snapshot => {
+                let product = new ProductInfo(snapshot.Code);
+                product.BuyPrice = snapshot.BuyPrice;
+                product.SellPrice = snapshot.SellPrice;
+                product.Quantity = snapshot.Quantity;
+                product.Description = snapshot.Description;
+                product.key = snapshot.$key;
+                this.DL.Products.push(product);
+            });
+        });
     }
 
     public SaveProduct(item: ProductInfo) {
-        // save here
-        if (this.DL.Product) {
+        if (item.key) {
             this.DL.Product.Code = item.Code;
             this.DL.Product.Description = item.Description;
             this.DL.Product.BuyPrice = item.BuyPrice;
             this.DL.Product.SellPrice = item.SellPrice;
             this.DL.Product.Quantity = item.Quantity;
+            this.af.list('/products').update(item.key, item);
         }
         else
-            this.DL.Products.push(item);
+            this.af.list('/products').push(item);
     }
 }

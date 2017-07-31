@@ -14,6 +14,7 @@ export class ProductDetailComponent implements OnInit {
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
     this.model = new ProductInfo("");
     if (this.DL.Product) {
+      this.model.key = this.DL.Product.key;
       this.model.Code = this.DL.Product.Code;
       this.model.Description = this.DL.Product.Description;
       this.model.BuyPrice = this.DL.Product.BuyPrice;
