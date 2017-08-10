@@ -5,14 +5,14 @@ export class ProductInfo {
     BuyPrice: number;
     SellPrice: number;
     Quantity: number;
-    Status: number;  
+    Status: number;
 }
 
 export class SellInfo {
     ProductCode: string;
     Quantity: number;
 
-    constructor(productCode: string, quntity: number){
+    constructor(productCode: string, quntity: number) {
         this.ProductCode = productCode;
         this.Quantity = quntity;
     }
@@ -31,12 +31,9 @@ export class MemberInfo {
     Address: string;
     Block: number;
     Lot: number;
+    Contact1: string;
+    Contact2: string;
+    Contact3: string;
     JoinDate: string;
     Status: number;
-}
-
-export class ContactInfo {
-    key: string;
-    MemberKey: string;
-    Contact: string;
 }

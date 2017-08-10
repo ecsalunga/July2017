@@ -41,6 +41,9 @@ export class DataAccess {
                 member.Address = snapshot.Address;
                 member.Block = snapshot.Block;
                 member.Lot = snapshot.Lot;
+                member.Contact1 = snapshot.Contact1;
+                member.Contact2 = snapshot.Contact2;
+                member.Contact3 = snapshot.Contact3;
                 member.JoinDate = snapshot.JoinDate;
                 member.Status = snapshot.Status;
                 member.key = snapshot.$key;
