@@ -10,7 +10,8 @@ import {
   MdCardModule,
   MdChipsModule,
   MdDatepickerModule,
-  MdNativeDateModule
+  MdNativeDateModule,
+  DateAdapter
  } from '@angular/material';
 
 import { AngularFireModule } from 'angularfire2'
@@ -23,15 +24,21 @@ import { DataAccess, DataLayer } from './data';
 import { FormsModule }   from '@angular/forms';
 import { AppComponent } from './app.component';
 import { TesterComponent } from './tester/tester.component';
+
 import { ProductListComponent } from './product/list/product-list.component';
 import { ProductDetailComponent } from './product/detail/product-detail.component';
+
+import { MemberListComponent } from './member/list/member-list.component';
+import { MemberDetailComponent } from './member/detail/member-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TesterComponent,
     ProductListComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    MemberListComponent,
+    MemberDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +59,13 @@ import { ProductDetailComponent } from './product/detail/product-detail.componen
   entryComponents: [ 
     TesterComponent,
     ProductListComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    MemberListComponent,
+    MemberDetailComponent
   ]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private dateAdapter: DateAdapter<Date>) {
+    dateAdapter.setLocale('sv-SE'); // DD.MM.YYYY
+  }
+}

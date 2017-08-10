@@ -5,11 +5,7 @@ export class ProductInfo {
     BuyPrice: number;
     SellPrice: number;
     Quantity: number;
-
-    constructor(code: string)
-    {
-        this.Code = code
-    }
+    Status: number;  
 }
 
 export class SellInfo {
@@ -23,6 +19,24 @@ export class SellInfo {
 }
 
 export class TransactionInfo {
+    key: string;
+    MemberKey: string;
     Items: Array<SellInfo>;
-    Date: Date;
+    Date: string;
+}
+
+export class MemberInfo {
+    key: string;
+    Name: string;
+    Address: string;
+    Block: number;
+    Lot: number;
+    JoinDate: string;
+    Status: number;
+}
+
+export class ContactInfo {
+    key: string;
+    MemberKey: string;
+    Contact: string;
 }

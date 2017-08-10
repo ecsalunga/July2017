@@ -2,28 +2,33 @@
   <fieldset>
     <legend>Product Detail</legend>
     <div>
-      <label for="txtCode">Code</label>
-      <input id="txtCode" [(ngModel)]="model.Code" />
+      <md-input-container>
+        <input id="txtCode" mdInput placeholder="Code" [(ngModel)]="model.Code" />
+      </md-input-container>
     </div>
     <div>
-      <label for="txtDescription">Description</label>
-      <input id="txtDescription" [(ngModel)]="model.Description" />
+      <md-input-container>
+        <input id="txtDescription" mdInput placeholder="Description" [(ngModel)]="model.Description" />
+      </md-input-container>
     </div>
     <div>
-      <label for="txtBuy">Buy</label>
-      <input id="txtBuy" [(ngModel)]="model.BuyPrice" />
+      <md-input-container>
+        <input id="txtBuy" mdInput placeholder="Buy Price" [(ngModel)]="model.BuyPrice" />
+      </md-input-container>
     </div>
     <div>
-      <label for="txtSell">Sell</label>
-      <input id="txtSell" [(ngModel)]="model.SellPrice" />
+      <md-input-container>
+        <input id="txtSell" mdInput placeholder="Sell Price" [(ngModel)]="model.SellPrice" />
+      </md-input-container>
     </div>
     <div>
-      <label for="txtQuantity">Quantity</label>
-      <input id="txtQuantity" [(ngModel)]="model.Quantity" />
+      <md-input-container>
+        <input id="txtQuantity" mdInput placeholder="Quantity" [(ngModel)]="model.Quantity" />
+      </md-input-container>
     </div>
   </fieldset>
   <div>
     <button md-raised-button (click)="Save()">Save</button>
-    <button md-raised-button (click)="LoadProductList()">Back to list</button>
+    <button md-raised-button (click)="LoadList()">Back to list</button>
   </div>
 </div>

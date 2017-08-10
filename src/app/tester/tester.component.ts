@@ -7,10 +7,14 @@ import { DataLayer } from '../data';
   styleUrls: ['./tester.component.css']
 })
 export class TesterComponent implements OnInit {
-
+  selectedDate: Date;
   constructor(public DL: DataLayer) 
   {
 
+  }
+
+  alertDate() {
+    alert(this.selectedDate.getUTCFullYear());
   }
 
   ngOnInit() {

@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   constructor(public core: Core, private DA: DataAccess) { }
 
   loadTester(name: string) {
-    this.core.loadComponent("app-product-list");
+    this.core.loadComponent(name);
   }
 
   ngOnInit() {

@@ -1,4 +1,6 @@
 <div>
-  <button md-raised-button (click)="loadTester()">Load Component</button>
+  <button md-raised-button (click)="loadTester('app-tester')">Load Tester</button>
+  <button md-raised-button (click)="loadTester('app-product-list')">Load Product</button>
+  <button md-raised-button (click)="loadTester('app-member-list')">Load Member</button>
 </div>
 <ng-container #viewChild></ng-container>

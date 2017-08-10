@@ -1,0 +1,36 @@
+<div>
+  <fieldset>
+    <legend>Member Detail</legend>
+    <div>
+      <md-input-container>
+        <input id="txtName" mdInput placeholder="Name" [(ngModel)]="model.Name" />
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container>
+        <input id="txtAddress" mdInput placeholder="Address" [(ngModel)]="model.Address" />
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container>
+        <input id="txtBlock" mdInput placeholder="Block #" [(ngModel)]="model.Block" />
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container>
+        <input id="txtLot" mdInput placeholder="Lot #" [(ngModel)]="model.Lot" />
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container>
+        <input (click)="picker.open()" mdInput [mdDatepicker]="picker" placeholder="Join Date" [(ngModel)]="model.JoinDate">
+        <button mdSuffix [mdDatepickerToggle]="picker"></button>
+      </md-input-container>
+      <md-datepicker #picker></md-datepicker>
+    </div>
+  </fieldset>
+  <div>
+    <button md-raised-button (click)="Save()">Save</button>
+    <button md-raised-button (click)="LoadList()">Back to list</button>
+  </div>
+</div>
