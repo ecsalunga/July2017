@@ -12,9 +12,9 @@ export class SellInfo {
     ProductCode: string;
     Quantity: number;
 
-    constructor(productCode: string, quntity: number) {
+    constructor(productCode: string, quantity: number) {
         this.ProductCode = productCode;
-        this.Quantity = quntity;
+        this.Quantity = quantity;
     }
 }
 
@@ -22,7 +22,7 @@ export class TransactionInfo {
     key: string;
     MemberKey: string;
     Items: Array<SellInfo>;
-    Date: string;
+    ActionDate: Date;
 }
 
 export class MemberInfo {
@@ -34,6 +34,6 @@ export class MemberInfo {
     Contact1: string;
     Contact2: string;
     Contact3: string;
-    JoinDate: string;
+    JoinDate: Date;
     Status: number;
 }
