@@ -17,10 +17,34 @@ export class SellComponent implements OnInit {
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) { }
 
   AddProduct() {
+    let duplicate: SellInfo;
     let item = new SellInfo();
     item.Code = this.model.Code;
     item.Description = this.model.Description;
+    item.Price = this.model.SellPrice;
     item.Quantity = this.selectedQuantity;
+    
+
+    // merge items
+    this.DL.SellInfos.forEach(info => {
+      if(info.Code == item.Code) {
+        duplicate = info;
+        item.Quantity += info.Quantity;
+      }
+    });
+
+    if(duplicate) {
+       this.DA.DeleteSellInfo(duplicate);
+    }
+
+    // re-evaluate quantity
+    this.DL.Products.forEach(product => {
+      if(product.Code == item.Code && product.Quantity < item.Quantity) {
+        item.Quantity = product.Quantity;
+      }
+    });
+    item.Total = item.Quantity * item.Price;
+    
     this.DA.SaveSellInfo(item);
     this.clearSelection();
   }
@@ -40,6 +64,11 @@ export class SellComponent implements OnInit {
 
   Delete(info: SellInfo) {
      this.DA.DeleteSellInfo(info);
+  }
+
+  Done() {
+    this.DA.ClearSellInfo();
+    alert("Save to transaction");
   }
 
   ngOnInit() {

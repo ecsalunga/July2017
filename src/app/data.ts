@@ -55,15 +55,32 @@ export class DataAccess {
 
         this.af.list('/sellInfos').subscribe(snapshots => {
             this.DL.SellInfos = new Array<SellInfo>();
+            let itemCount: number = 0;
+            let grandTotal: number = 0;
 
             snapshots.forEach(snapshot => {
                 let sellInfo = new SellInfo();
                 sellInfo.Code = snapshot.Code;
                 sellInfo.Description = snapshot.Description;
                 sellInfo.Quantity = snapshot.Quantity;
+                sellInfo.Price = snapshot.Price;
+                sellInfo.Total = snapshot.Total;
                 sellInfo.key = snapshot.$key;
                 this.DL.SellInfos.push(sellInfo);
+
+                itemCount+= sellInfo.Quantity;
+                grandTotal+= sellInfo.Total;
             });
+            
+            if(itemCount > 0) {
+                let sellInfo = new SellInfo();
+                sellInfo.Code = "TOTAL";
+                sellInfo.Description = "";
+                sellInfo.Quantity = itemCount;
+                sellInfo.Total = grandTotal;
+                sellInfo.key = "";
+                this.DL.SellInfos.push(sellInfo);
+            }
         });
     }
 

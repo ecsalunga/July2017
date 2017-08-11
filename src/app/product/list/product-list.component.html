@@ -1,41 +1,43 @@
 <div>
-  <table>
-    <thead>
-      <tr>
-        <td>
-          CODE
-        </td>
-        <td>
-          PRICE
-        </td>
-        <td>
-          QUANTITY
-        </td>
-        <td>
-          ACTIONS
-        </td>
-      </tr>
-    </thead>
-    <ng-container *ngFor="let product of DL.Products">
-      <tr>
-        <td>
-          {{product.Code}}
-        </td>
-        <td>
-          {{product.SellPrice}}
-        </td>
-        <td>
-          {{product.Quantity}}
-        </td>
-        <td>
-          <button md-mini-fab (click)="SelectProduct(product)"><i class="material-icons">pageview</i></button>
-        </td>
-      </tr>
-    </ng-container>
-    <tr>
-        <td colspan="4">      
-          <button md-raised-button (click)="AddProduct()">Add</button>
-        </td>
-      </tr>
-  </table>
+  <fieldset>
+    <legend>Product List</legend>
+    <table>
+      <thead>
+        <tr>
+          <td>
+            CODE
+          </td>
+          <td>
+            PRICE
+          </td>
+          <td>
+            QUANTITY
+          </td>
+          <td>
+            ACTIONS
+          </td>
+        </tr>
+      </thead>
+      <ng-container *ngFor="let product of DL.Products">
+        <tr>
+          <td>
+            {{product.Code}}
+          </td>
+          <td>
+            {{product.SellPrice}}
+          </td>
+          <td>
+            {{product.Quantity}}
+          </td>
+          <td>
+            <button md-mini-fab (click)="SelectProduct(product)"><i class="material-icons">pageview</i></button>
+          </td>
+        </tr>
+      </ng-container>
+    </table>
+  </fieldset>
+  <div class="hSpacer"></div>
+  <div>
+    <button md-fab (click)="AddProduct()" mdTooltip="Add" mdTooltipPosition="above"><i class="material-icons">note_add</i></button>
+  </div>
 </div>

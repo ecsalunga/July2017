@@ -3,7 +3,7 @@ td {
 }
 
 .product {
-    width:  200px;
+    width:  250px;
 }
 
 .quantity {
@@ -12,7 +12,10 @@ td {
     width:  100px;
 }
 
-.hSpacer {
-    height: 30px;
-    border-bottom: 1px black solid;
+.blankCell {
+    height: 50px;
+}
+
+.numberCell {
+    text-align: right;
 }

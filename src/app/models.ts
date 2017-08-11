@@ -13,6 +13,8 @@ export class SellInfo {
     Code: string;
     Description: string;
     Quantity: number;
+    Price: number;
+    Total: number;
 }
 
 export class TransactionInfo {

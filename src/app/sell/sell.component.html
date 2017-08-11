@@ -10,8 +10,16 @@
           <td>
             DESCRIPTION
           </td>
-          <td>
+          <td class="numberCell">
             QUANTITY
+          </td>
+          <td class="numberCell">
+            PRICE
+          </td>
+          <td class="numberCell">
+            TOTAL
+          </td>
+          <td>
           </td>
           <td>
             ACTIONS
@@ -26,11 +34,24 @@
           <td>
             {{info.Description}}
           </td>
-          <td>
+          <td class="numberCell">
             {{info.Quantity}}
           </td>
+          <td class="numberCell">
+            {{info.Price | number:'1.2-2'}}
+          </td>
+          <td class="numberCell">
+            {{info.Total | number:'1.2-2'}}
+          </td>
+           <td>
+          </td>
           <td>
-            <button md-mini-fab (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><i class="material-icons">delete</i></button>
+            <ng-container *ngIf="info.Price; else elseBlock">
+              <button md-mini-fab (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><i class="material-icons">delete</i></button>
+            </ng-container>
+            <ng-template #elseBlock>
+              <div class="blankCell"></div>
+            </ng-template>
           </td>
         </tr>
       </ng-container>
@@ -50,5 +71,6 @@
     </md-select>
 
     <button md-fab (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
+    <button md-fab (click)="Done()" mdTooltip="Done" mdTooltipPosition="above"><i class="material-icons">payment</i></button>
   </div>
 </div>
