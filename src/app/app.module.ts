@@ -9,6 +9,7 @@ import {
   MdCheckboxModule,
   MdCardModule,
   MdChipsModule,
+  MdTooltipModule,
   MdDatepickerModule,
   MdNativeDateModule,
   DateAdapter
@@ -48,6 +49,7 @@ import { MemberDetailComponent } from './member/detail/member-detail.component';
     MdCheckboxModule,
     MdCardModule,
     MdChipsModule,
+    MdTooltipModule,
     MdDatepickerModule,
     MdNativeDateModule,
     FormsModule,

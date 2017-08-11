@@ -40,14 +40,14 @@
           {{member.JoinDate | date: 'yyyy-MM-dd'}}
         </td>
         <td>
-          <button md-raised-button (click)="SelectMember(member)">View</button>
+          <button md-mini-fab (click)="SelectMember(member)" mdTooltip="View" mdTooltipPosition="above"><i class="material-icons">pageview</i></button>
         </td>
       </tr>
     </ng-container>
     <tr>
-        <td colspan="6">      
-          <button md-raised-button (click)="AddMember()">Add</button>
-        </td>
-      </tr>
+      <td colspan="6">
+        <button md-fab (click)="AddMember()" mdTooltip="Add" mdTooltipPosition="above"><i class="material-icons">note_add</i></button>
+      </td>
+    </tr>
   </table>
 </div>
