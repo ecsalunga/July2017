@@ -9,13 +9,10 @@ export class ProductInfo {
 }
 
 export class SellInfo {
-    ProductCode: string;
+    key: string;
+    Code: string;
+    Description: string;
     Quantity: number;
-
-    constructor(productCode: string, quantity: number) {
-        this.ProductCode = productCode;
-        this.Quantity = quantity;
-    }
 }
 
 export class TransactionInfo {

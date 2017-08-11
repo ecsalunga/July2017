@@ -1,5 +1,5 @@
 import { Injectable, ComponentFactory, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
-import { ProductInfo, MemberInfo } from './models';
+import { ProductInfo, MemberInfo, SellInfo } from './models';
 import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 
 @Injectable()
@@ -9,6 +9,8 @@ export class DataLayer {
 
     Members: Array<MemberInfo>;
     Member: MemberInfo;
+
+    SellInfos: Array<SellInfo>;
 }
 
 @Injectable()
@@ -50,6 +52,19 @@ export class DataAccess {
                 this.DL.Members.push(member);
             });
         });
+
+        this.af.list('/sellInfos').subscribe(snapshots => {
+            this.DL.SellInfos = new Array<SellInfo>();
+
+            snapshots.forEach(snapshot => {
+                let sellInfo = new SellInfo();
+                sellInfo.Code = snapshot.Code;
+                sellInfo.Description = snapshot.Description;
+                sellInfo.Quantity = snapshot.Quantity;
+                sellInfo.key = snapshot.$key;
+                this.DL.SellInfos.push(sellInfo);
+            });
+        });
     }
 
     public SaveProduct(item: ProductInfo) {
@@ -68,5 +83,17 @@ export class DataAccess {
             item.Status = 1;
             this.af.list('/members').push(item);
         }
+    }
+
+    public SaveSellInfo(item: SellInfo) {
+        this.af.list('/sellInfos').push(item);
+    }
+
+    public DeleteSellInfo(item: SellInfo) {
+        this.af.list('/sellInfos').remove(item.key);
+    }
+
+    public ClearSellInfo() {
+        this.af.list('/sellInfos').remove();
     }
 }

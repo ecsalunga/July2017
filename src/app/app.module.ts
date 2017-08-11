@@ -10,8 +10,10 @@ import {
   MdCardModule,
   MdChipsModule,
   MdTooltipModule,
+  MdSelectModule,
   MdDatepickerModule,
   MdNativeDateModule,
+  MdAutocompleteModule,
   DateAdapter
  } from '@angular/material';
 
@@ -22,7 +24,7 @@ import { environment } from '../environments/environment';
 import { Core } from './core';
 import { DataAccess, DataLayer } from './data';
 
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { AppComponent } from './app.component';
 import { TesterComponent } from './tester/tester.component';
 
@@ -31,6 +33,7 @@ import { ProductDetailComponent } from './product/detail/product-detail.componen
 
 import { MemberListComponent } from './member/list/member-list.component';
 import { MemberDetailComponent } from './member/detail/member-detail.component';
+import { SellComponent } from './sell/sell.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import { MemberDetailComponent } from './member/detail/member-detail.component';
     ProductListComponent,
     ProductDetailComponent,
     MemberListComponent,
-    MemberDetailComponent
+    MemberDetailComponent,
+    SellComponent
   ],
   imports: [
     BrowserModule,
@@ -50,9 +54,12 @@ import { MemberDetailComponent } from './member/detail/member-detail.component';
     MdCardModule,
     MdChipsModule,
     MdTooltipModule,
+    MdAutocompleteModule,
+    MdSelectModule,
     MdDatepickerModule,
     MdNativeDateModule,
     FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule
   ],
@@ -63,7 +70,8 @@ import { MemberDetailComponent } from './member/detail/member-detail.component';
     ProductListComponent,
     ProductDetailComponent,
     MemberListComponent,
-    MemberDetailComponent
+    MemberDetailComponent,
+    SellComponent
   ]
 })
 export class AppModule {
