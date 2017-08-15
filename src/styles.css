@@ -2,11 +2,13 @@
 
 body {
     font-family: Geneva,Tahoma,Verdana,sans-serif;
-	font-size: 14px;
+	font-size: 12px;
 	font-style: normal;
 	font-variant: normal;
-	font-weight: 400;
-	line-height: 19.99px;
+}
+
+td {
+    padding: 10px;
 }
 
 .hSpacer {

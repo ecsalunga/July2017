@@ -1,19 +1,15 @@
-td {
-    width: 100px;
-}
-
 .product {
-    width:  250px;
+    width: 200px;
 }
 
 .quantity {
-    margin-left: 20px;
-    margin-right: 20px;
-    width:  100px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 100px;
 }
 
 .blankCell {
-    height: 50px;
+    height: 100px;
 }
 
 .numberCell {
