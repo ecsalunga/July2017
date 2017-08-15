@@ -1,3 +1,11 @@
 td{
     width: 100px;
 }
+
+.quantityNotify {
+    color: red;
+}
+
+.quantityOK {
+    color: green;
+}

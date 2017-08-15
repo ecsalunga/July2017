@@ -13,17 +13,22 @@
     </div>
     <div>
       <md-input-container>
-        <input id="txtBuy" mdInput placeholder="Buy Price" [(ngModel)]="model.BuyPrice" />
+        <input id="txtBuy" type="number" mdInput placeholder="Buy Price" [(ngModel)]="model.BuyPrice" />
       </md-input-container>
     </div>
     <div>
       <md-input-container>
-        <input id="txtSell" mdInput placeholder="Sell Price" [(ngModel)]="model.SellPrice" />
+        <input id="txtSell" type="number" mdInput placeholder="Sell Price" [(ngModel)]="model.SellPrice" />
       </md-input-container>
     </div>
     <div>
       <md-input-container>
-        <input id="txtQuantity" mdInput placeholder="Quantity" [(ngModel)]="model.Quantity" />
+        <input id="txtQuantity" type="number" mdInput placeholder="Quantity" [(ngModel)]="model.Quantity" />
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container>
+        <input id="txtNotifyQuantity" type="number" mdInput placeholder="Notify Quantity" [(ngModel)]="model.NotifyQuantity" />
       </md-input-container>
     </div>
   </fieldset>

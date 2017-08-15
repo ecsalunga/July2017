@@ -5,6 +5,7 @@ export class ProductInfo {
     BuyPrice: number;
     SellPrice: number;
     Quantity: number;
+    NotifyQuantity: number;
     Status: number;
 }
 

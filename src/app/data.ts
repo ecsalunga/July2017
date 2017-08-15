@@ -27,6 +27,7 @@ export class DataAccess {
                 product.BuyPrice = snapshot.BuyPrice;
                 product.SellPrice = snapshot.SellPrice;
                 product.Quantity = snapshot.Quantity;
+                product.NotifyQuantity = snapshot.NotifyQuantity;
                 product.Description = snapshot.Description;
                 product.Status = snapshot.Status;
                 product.key = snapshot.$key;

@@ -28,7 +28,7 @@
           <td>
             {{product.SellPrice}}
           </td>
-          <td>
+          <td class="{{ (product.NotifyQuantity >= product.Quantity) ? 'quantityNotify' : 'quantityOK' }}">
             {{product.Quantity}}
           </td>
            <td>
