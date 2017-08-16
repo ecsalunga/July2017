@@ -4,20 +4,20 @@
     <table>
       <thead>
         <tr>
-          <td>
+          <th>
             CODE
-          </td>
-          <td>
+          </th>
+          <th>
             PRICE
-          </td>
-          <td>
+          </th>
+          <th>
             QUANTITY
-          </td>
-           <td>
-          </td>
-          <td>
+          </th>
+          <th>
+          </th>
+          <th>
             ACTIONS
-          </td>
+          </th>
         </tr>
       </thead>
       <ng-container *ngFor="let product of DL.Products">
@@ -26,9 +26,9 @@
             {{product.Code}}
           </td>
           <td>
-            {{product.SellPrice}}
+            {{product.SellPrice | number:'1.2-2'}}
           </td>
-          <td class="{{ (product.NotifyQuantity >= product.Quantity) ? 'quantityNotify' : 'quantityOK' }}">
+          <td class="{{ (product.Quantity > product.QuantityNotify) ?  'quantityOK' : 'quantityNotify' }}">
             {{product.Quantity}}
           </td>
            <td>

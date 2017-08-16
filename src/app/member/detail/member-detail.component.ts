@@ -9,17 +9,21 @@ import { MemberInfo } from '../../models';
   styleUrls: ['./member-detail.component.css']
 })
 export class MemberDetailComponent implements OnInit {
+  joinDate: Date;
   model: MemberInfo;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
-    if (this.DL.Member)
+    if (this.DL.Member) {
       this.model = this.DL.Member;
+      this.joinDate = this.core.numberToDate(this.model.JoinDate);
+    }
     else
       this.model = new MemberInfo();
   }
 
   Save() {
-    this.DA.SaveMember(this.model);
+    this.model.JoinDate = this.core.dateToNumber(this.joinDate);
+    this.DA.MemberSave(this.model);
     this.LoadList();
   }
 

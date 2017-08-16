@@ -4,23 +4,23 @@
     <table>
       <thead>
         <tr>
-          <td>
+          <th>
             DESCRIPTION
-          </td>
-          <td class="numberCell">
+          </th>
+          <th class="totalColumn">
             QTY
-          </td>
-          <td class="numberCell">
+          </th>
+          <th>
             PRICE
-          </td>
-          <td class="numberCell">
+          </th>
+          <th class="totalColumn">
             TOTAL
-          </td>
-          <td>
-          </td>
-          <td>
+          </th>
+          <th>
+          </th>
+          <th>
             ACTIONS
-          </td>
+          </th>
         </tr>
       </thead>
       <ng-container *ngFor="let info of DL.SellInfos">
@@ -28,13 +28,13 @@
           <td>
             {{info.Description}}
           </td>
-          <td class="numberCell">
+          <td class="totalColumn">
             {{info.Quantity}}
           </td>
-          <td class="numberCell">
+          <td>
             {{info.Price | number:'1.2-2'}}
           </td>
-          <td class="numberCell">
+          <td class="totalColumn">
             {{info.Total | number:'1.2-2'}}
           </td>
           <td>

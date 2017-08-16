@@ -7,12 +7,22 @@ body {
 	font-variant: normal;
 }
 
-td {
+td, th {
     padding: 10px;
+    text-align: left;
+    padding: 10px;
+    text-align: left;
 }
 
 .hSpacer {
     margin-top: 10px;
     height: 20px;
-    border-top: 1px black solid;
+}
+
+.blankCell {
+    height: 50px;
+}
+
+.totalColumn {
+    text-align: right;
 }

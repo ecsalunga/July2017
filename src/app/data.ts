@@ -1,6 +1,7 @@
 import { Injectable, ComponentFactory, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
-import { ProductInfo, MemberInfo, SellInfo } from './models';
 import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
+import { Core } from './core';
+import { ProductInfo, MemberInfo, SellInfo, TransactionInfo } from './models';
 
 @Injectable()
 export class DataLayer {
@@ -9,109 +10,149 @@ export class DataLayer {
 
     Members: Array<MemberInfo>;
     Member: MemberInfo;
+    
+    Transactions: Array<TransactionInfo>;
+    Transaction: TransactionInfo;
 
     SellInfos: Array<SellInfo>;
 }
 
 @Injectable()
 export class DataAccess {
-    constructor(private DL: DataLayer, private af: AngularFireDatabase) { }
+    PRODUCTS: string = "/products";
+    MEMBERS: string = "/members";
+    SELL_INFOS: string = "/sellInfos";
+    TRANSACTION_INFOS: string = "/transactionInfos";
+
+    constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) { }
 
     public LoadData(): void {
-       this.af.list('/products', {query: {  orderByChild: 'Status', equalTo: 1}}).subscribe(snapshots => {
+       this.af.list(this.PRODUCTS, {query: {  orderByChild: 'Status', equalTo: 1}}).subscribe(snapshots => {
             this.DL.Products = new Array<ProductInfo>();
 
             snapshots.forEach(snapshot => {
-                let product = new ProductInfo();
-                product.Code = snapshot.Code;
-                product.BuyPrice = snapshot.BuyPrice;
-                product.SellPrice = snapshot.SellPrice;
-                product.Quantity = snapshot.Quantity;
-                product.NotifyQuantity = snapshot.NotifyQuantity;
-                product.Description = snapshot.Description;
-                product.Status = snapshot.Status;
-                product.key = snapshot.$key;
-                this.DL.Products.push(product);
+                let info = new ProductInfo();
+                info.Code = snapshot.Code;
+                info.BuyPrice = snapshot.BuyPrice;
+                info.SellPrice = snapshot.SellPrice;
+                info.Quantity = snapshot.Quantity;
+                info.QuantityNotify = snapshot.QuantityNotify;
+                info.Description = snapshot.Description;
+                info.Status = snapshot.Status;
+                info.key = snapshot.$key;
+                this.DL.Products.push(info);
             });
         });
 
-        this.af.list('/members', {query: {  orderByChild: 'Status', equalTo: 1}}).subscribe(snapshots => {
+        this.af.list(this.MEMBERS, {query: {  orderByChild: 'Status', equalTo: 1}}).subscribe(snapshots => {
             this.DL.Members = new Array<MemberInfo>();
 
             snapshots.forEach(snapshot => {
-                let member = new MemberInfo();
-                member.Name = snapshot.Name;
-                member.Address1 = snapshot.Address1;
-                member.Address2 = snapshot.Address2;
-                member.Address3 = snapshot.Address3;
-                member.Contact1 = snapshot.Contact1;
-                member.Contact2 = snapshot.Contact2;
-                member.Contact3 = snapshot.Contact3;
-                member.JoinDate = snapshot.JoinDate;
-                member.Status = snapshot.Status;
-                member.key = snapshot.$key;
-                this.DL.Members.push(member);
+                let info = new MemberInfo();
+                info.Name = snapshot.Name;
+                info.Address1 = snapshot.Address1;
+                info.Address2 = snapshot.Address2;
+                info.Address3 = snapshot.Address3;
+                info.Contact1 = snapshot.Contact1;
+                info.Contact2 = snapshot.Contact2;
+                info.Contact3 = snapshot.Contact3;
+                info.JoinDate = snapshot.JoinDate;
+                info.Status = snapshot.Status;
+                info.key = snapshot.$key;
+                this.DL.Members.push(info);
             });
         });
 
-        this.af.list('/sellInfos').subscribe(snapshots => {
+        this.af.list(this.SELL_INFOS).subscribe(snapshots => {
             this.DL.SellInfos = new Array<SellInfo>();
             let itemCount: number = 0;
             let grandTotal: number = 0;
 
             snapshots.forEach(snapshot => {
-                let sellInfo = new SellInfo();
-                sellInfo.Code = snapshot.Code;
-                sellInfo.Description = snapshot.Description;
-                sellInfo.Quantity = snapshot.Quantity;
-                sellInfo.Price = snapshot.Price;
-                sellInfo.Total = snapshot.Total;
-                sellInfo.key = snapshot.$key;
-                this.DL.SellInfos.push(sellInfo);
+                let info = new SellInfo();
+                info.Code = snapshot.Code;
+                info.Description = snapshot.Description;
+                info.Quantity = snapshot.Quantity;
+                info.Price = snapshot.Price;
+                info.Total = snapshot.Total;
+                info.key = snapshot.$key;
+                this.DL.SellInfos.push(info);
 
-                itemCount+= sellInfo.Quantity;
-                grandTotal+= sellInfo.Total;
+                itemCount+= info.Quantity;
+                grandTotal+= info.Total;
             });
             
             if(itemCount > 0) {
-                let sellInfo = new SellInfo();
-                sellInfo.Code = "";
-                sellInfo.Description = "TOTAL";
-                sellInfo.Quantity = itemCount;
-                sellInfo.Total = grandTotal;
-                sellInfo.key = "";
-                this.DL.SellInfos.push(sellInfo);
+                let info = new SellInfo();
+                info.Code = "TOTAL";
+                info.Description = "TOTAL";
+                info.Quantity = itemCount;
+                info.Total = grandTotal;
+                info.key = "";
+                this.DL.SellInfos.push(info);
             }
+        });
+
+        this.af.list(this.TRANSACTION_INFOS, {query: {  orderByChild: 'ActionDate'}}).subscribe(snapshots => {
+            this.DL.Transactions = new Array<TransactionInfo>();
+
+            snapshots.forEach(snapshot => {
+                let info = new TransactionInfo();
+                info.MemberKey = snapshot.MemberKey;
+                info.BuyerName = snapshot.BuyerName;
+                info.Items = snapshot.Items;
+                info.Count = snapshot.Count;
+                info.ActionDate = snapshot.ActionDate;
+                info.key = snapshot.$key;
+                this.DL.Transactions.push(info);
+            });
+
+            this.DL.Transactions.reverse();
         });
     }
 
-    public SaveProduct(item: ProductInfo) {
+    public ProductSave(item: ProductInfo) {
         if (item.key)
-            this.af.list('/products').update(item.key, item);
+            this.af.list(this.PRODUCTS).update(item.key, item);
         else {
             item.Status = 1;
-            this.af.list('/products').push(item);
+            this.af.list(this.PRODUCTS).push(item);
         }
     }
 
-    public SaveMember(item: MemberInfo) {
+    public MemberSave(item: MemberInfo) {
         if (item.key)
-            this.af.list('/members').update(item.key, item);
+            this.af.list(this.MEMBERS).update(item.key, item);
         else { 
             item.Status = 1;
-            this.af.list('/members').push(item);
+            this.af.list(this.MEMBERS).push(item);
         }
     }
 
-    public SaveSellInfo(item: SellInfo) {
-        this.af.list('/sellInfos').push(item);
+    public SellInfoSave(item: SellInfo) {
+        this.af.list(this.SELL_INFOS).push(item);
     }
 
-    public DeleteSellInfo(item: SellInfo) {
-        this.af.list('/sellInfos').remove(item.key);
+    public SellInfoDelete(item: SellInfo) {
+        this.af.list(this.SELL_INFOS).remove(item.key);
     }
 
-    public ClearSellInfo() {
-        this.af.list('/sellInfos').remove();
+    public SellInfoClear() {
+        this.af.list(this.SELL_INFOS).remove();
+    }
+
+    public SellInfoDone(menberKey: string, buyerName: string) {
+        let info = new TransactionInfo();
+        info.MemberKey = menberKey
+        info.BuyerName = buyerName;
+        info.Items = this.DL.SellInfos;
+        info.Count = this.DL.SellInfos.length -1;
+        info.ActionDate = this.core.dateToNumber(new Date());
+        this.TransactionInfoSave(info);
+        this.SellInfoClear();
+    }
+
+    public TransactionInfoSave(item: TransactionInfo) {
+        this.af.list(this.TRANSACTION_INFOS).push(item);
     }
 }

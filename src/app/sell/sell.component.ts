@@ -34,7 +34,7 @@ export class SellComponent implements OnInit {
     });
 
     if(duplicate) {
-       this.DA.DeleteSellInfo(duplicate);
+       this.DA.SellInfoDelete(duplicate);
     }
 
     // re-evaluate quantity
@@ -45,7 +45,7 @@ export class SellComponent implements OnInit {
     });
     item.Total = item.Quantity * item.Price;
     
-    this.DA.SaveSellInfo(item);
+    this.DA.SellInfoSave(item);
     this.clearSelection();
   }
 
@@ -63,12 +63,11 @@ export class SellComponent implements OnInit {
   }
 
   Delete(info: SellInfo) {
-     this.DA.DeleteSellInfo(info);
+     this.DA.SellInfoDelete(info);
   }
 
   Done() {
-    this.DA.ClearSellInfo();
-    alert("Save to transaction");
+    this.DA.SellInfoDone("-AAA-AAA_AAA0000000", "Walk-In");
   }
 
   ngOnInit() {

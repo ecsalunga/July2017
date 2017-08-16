@@ -5,7 +5,7 @@ export class ProductInfo {
     BuyPrice: number;
     SellPrice: number;
     Quantity: number;
-    NotifyQuantity: number;
+    QuantityNotify: number;
     Status: number;
 }
 
@@ -21,8 +21,10 @@ export class SellInfo {
 export class TransactionInfo {
     key: string;
     MemberKey: string;
+    BuyerName: string;
     Items: Array<SellInfo>;
-    ActionDate: Date;
+    Count: number;
+    ActionDate: number;
 }
 
 export class MemberInfo {
@@ -34,6 +36,6 @@ export class MemberInfo {
     Contact1: string;
     Contact2: string;
     Contact3: string;
-    JoinDate: Date;
+    JoinDate: number;
     Status: number;
 }

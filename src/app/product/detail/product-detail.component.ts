@@ -19,7 +19,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   Save() {
-    this.DA.SaveProduct(this.model);
+    this.DA.ProductSave(this.model);
     this.LoadList();
   }
 

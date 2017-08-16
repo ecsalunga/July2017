@@ -34,6 +34,8 @@ import { ProductDetailComponent } from './product/detail/product-detail.componen
 import { MemberListComponent } from './member/list/member-list.component';
 import { MemberDetailComponent } from './member/detail/member-detail.component';
 import { SellComponent } from './sell/sell.component';
+import { TransactionListComponent } from './transaction/list/transaction-list.component';
+import { TransactionDetailComponent } from './transaction/detail/transaction-detail.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { SellComponent } from './sell/sell.component';
     ProductDetailComponent,
     MemberListComponent,
     MemberDetailComponent,
-    SellComponent
+    SellComponent,
+    TransactionListComponent,
+    TransactionDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +75,9 @@ import { SellComponent } from './sell/sell.component';
     ProductDetailComponent,
     MemberListComponent,
     MemberDetailComponent,
-    SellComponent
+    SellComponent,
+    TransactionListComponent,
+    TransactionDetailComponent
   ]
 })
 export class AppModule {

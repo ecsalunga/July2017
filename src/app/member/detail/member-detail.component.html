@@ -38,7 +38,7 @@
     </div>
     <div>
       <md-input-container>
-        <input (click)="picker.open()" mdInput [mdDatepicker]="picker" placeholder="Join Date" [(ngModel)]="model.JoinDate">
+        <input (click)="picker.open()" mdInput [mdDatepicker]="picker" placeholder="Join Date" [(ngModel)]="joinDate">
         <button mdSuffix [mdDatepickerToggle]="picker"></button>
       </md-input-container>
       <md-datepicker #picker></md-datepicker>
