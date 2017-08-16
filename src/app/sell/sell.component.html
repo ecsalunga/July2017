@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <ng-container *ngFor="let info of DL.SellInfos">
-        <tr>
+        <tr class="{{ (info.Price) ?  '' : 'blankCell' }}">
           <td>
             {{info.Description}}
           </td>
@@ -40,12 +40,9 @@
           <td>
           </td>
           <td>
-            <ng-container *ngIf="info.Price; else elseBlock">
+            <ng-container *ngIf="info.Price">
               <button md-mini-fab (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><i class="material-icons">delete</i></button>
             </ng-container>
-            <ng-template #elseBlock>
-              <div class="blankCell"></div>
-            </ng-template>
           </td>
         </tr>
       </ng-container>
