@@ -41,9 +41,9 @@ export class DataAccess {
             snapshots.forEach(snapshot => {
                 let member = new MemberInfo();
                 member.Name = snapshot.Name;
-                member.Address = snapshot.Address;
-                member.Block = snapshot.Block;
-                member.Lot = snapshot.Lot;
+                member.Address1 = snapshot.Address1;
+                member.Address2 = snapshot.Address2;
+                member.Address3 = snapshot.Address3;
                 member.Contact1 = snapshot.Contact1;
                 member.Contact2 = snapshot.Contact2;
                 member.Contact3 = snapshot.Contact3;
@@ -75,8 +75,8 @@ export class DataAccess {
             
             if(itemCount > 0) {
                 let sellInfo = new SellInfo();
-                sellInfo.Code = "TOTAL";
-                sellInfo.Description = "";
+                sellInfo.Code = "";
+                sellInfo.Description = "TOTAL";
                 sellInfo.Quantity = itemCount;
                 sellInfo.Total = grandTotal;
                 sellInfo.key = "";
