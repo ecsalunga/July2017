@@ -2,15 +2,13 @@
 
 body {
     font-family: Geneva,Tahoma,Verdana,sans-serif;
-	font-size: 12px;
+	font-size: 11px;
 	font-style: normal;
 	font-variant: normal;
 }
 
 td, th {
-    padding: 10px;
-    text-align: left;
-    padding: 10px;
+    padding: 5px;
     text-align: left;
 }
 

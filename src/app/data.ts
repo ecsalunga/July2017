@@ -6,17 +6,20 @@ import 'rxjs/add/operator/first';
 
 @Injectable()
 export class DataLayer {
-    Products: Array<ProductInfo>;
     Product: ProductInfo;
+    Products: Array<ProductInfo>;
 
-    Members: Array<MemberInfo>;
     Member: MemberInfo;
-    
-    Transactions: Array<TransactionInfo>;
+    Members: Array<MemberInfo>;
+
     Transaction: TransactionInfo;
+    Transactions: Array<TransactionInfo>;
 
     SellInfos: Array<SellInfo>;
-    Query: QueryInfo;
+    SellInfosAmount: number = 0;
+    SellInfosCount: number = 0;
+
+    QueryToday: QueryInfo;
     Date: Date = new Date();
 }
 
@@ -28,11 +31,11 @@ export class DataAccess {
     TRANSACTIONS: string;
 
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) { 
-        this.DL.Query = new QueryInfo();
-        this.DL.Query.KeyDay = this.core.dateToKeyDay(this.DL.Date);
-        this.DL.Query.KeyMonth = this.core.dateToKeyMonth(this.DL.Date);
-        this.DL.Query.KeyYear = this.DL.Date.getFullYear();
-        this.TRANSACTIONS = "/transactions/" + this.DL.Query.KeyYear + "/" + this.DL.Query.KeyMonth;
+        this.DL.QueryToday = new QueryInfo();
+        this.DL.QueryToday.KeyDay = this.core.dateToKeyDay(this.DL.Date);
+        this.DL.QueryToday.KeyMonth = this.core.dateToKeyMonth(this.DL.Date);
+        this.DL.QueryToday.KeyYear = this.DL.Date.getFullYear();
+        this.TRANSACTIONS = "/transactions/" + this.DL.QueryToday.KeyYear + "/" + this.DL.QueryToday.KeyMonth;
     }
 
     public LoadData(): void {
@@ -46,12 +49,7 @@ export class DataAccess {
 
             snapshots.forEach(snapshot => {
                 let info = new ProductInfo();
-                info.Code = snapshot.Code;
-                info.BuyPrice = snapshot.BuyPrice;
-                info.SellPrice = snapshot.SellPrice;
-                info.Quantity = snapshot.Quantity;
-                info.QuantityNotify = snapshot.QuantityNotify;
-                info.Description = snapshot.Description;
+                info = snapshot;
                 info.key = snapshot.$key;
                 this.DL.Products.push(info);
             });
@@ -59,48 +57,30 @@ export class DataAccess {
 
         this.af.list(this.SELL_INFOS).subscribe(snapshots => {
             this.DL.SellInfos = new Array<SellInfo>();
-            let itemCount: number = 0;
-            let grandTotal: number = 0;
+            this.DL.SellInfosAmount = 0;
+            this.DL.SellInfosCount = 0;
 
             snapshots.forEach(snapshot => {
                 let info = new SellInfo();
-                info.Code = snapshot.Code;
-                info.Description = snapshot.Description;
-                info.Quantity = snapshot.Quantity;
-                info.Price = snapshot.Price;
-                info.Total = snapshot.Total;
+                info = snapshot;
                 info.key = snapshot.$key;
                 this.DL.SellInfos.push(info);
 
-                itemCount+= info.Quantity;
-                grandTotal+= info.Total;
+                this.DL.SellInfosCount+= info.Quantity;
+                this.DL.SellInfosAmount+= info.Total;
             });
-            
-            if(itemCount > 0) {
-                let info = new SellInfo();
-                info.Code = "TOTAL";
-                info.Description = "TOTAL";
-                info.Quantity = itemCount;
-                info.Total = grandTotal;
-                info.key = "";
-                this.DL.SellInfos.push(info);
-            }
         });
 
-        this.af.list(this.TRANSACTIONS, {query: {  orderByChild: 'KeyDay', equalTo: this.DL.Query.KeyDay}}).subscribe(snapshots => {
+        this.af.list(this.TRANSACTIONS, {query: {  orderByChild: 'KeyDay', equalTo: this.DL.QueryToday.KeyDay}}).subscribe(snapshots => {
             this.DL.Transactions = new Array<TransactionInfo>();
+            this.DL.QueryToday.Count = 0;
+            this.DL.QueryToday.Amount = 0;
 
             snapshots.forEach(snapshot => {
-                let info = new TransactionInfo();
-                info.MemberKey = snapshot.MemberKey;
-                info.BuyerName = snapshot.BuyerName;
-                info.Items = snapshot.Items;
-                info.Count = snapshot.Count;
-                info.ActionDate = snapshot.ActionDate;
-                info.KeyMonth = snapshot.KeyMonth;
-                info.KeyDay = snapshot.KeyDay;
-                info.key = snapshot.$key;
-                this.DL.Transactions.push(info);
+                this.DL.Transactions.push(snapshot);
+
+                this.DL.QueryToday.Count += snapshot.Count;
+                this.DL.QueryToday.Amount += snapshot.Amount;
             });
 
             this.DL.Transactions.reverse();
@@ -113,14 +93,7 @@ export class DataAccess {
 
             snapshots.forEach(snapshot => {
                 let info = new MemberInfo();
-                info.Name = snapshot.Name;
-                info.Address1 = snapshot.Address1;
-                info.Address2 = snapshot.Address2;
-                info.Address3 = snapshot.Address3;
-                info.Contact1 = snapshot.Contact1;
-                info.Contact2 = snapshot.Contact2;
-                info.Contact3 = snapshot.Contact3;
-                info.JoinDate = snapshot.JoinDate;
+                info = snapshot;
                 info.key = snapshot.$key;
                 this.DL.Members.push(info);
             });
@@ -179,7 +152,8 @@ export class DataAccess {
         info.MemberKey = menberKey
         info.BuyerName = buyerName;
         info.Items = this.DL.SellInfos;
-        info.Count = this.DL.SellInfos.length -1;
+        info.Count = this.DL.SellInfosCount;
+        info.Amount = this.DL.SellInfosAmount;
         info.ActionDate = this.core.dateToNumber(new Date());
         info.KeyDay = this.core.dateToKeyDay(this.DL.Date);
         info.KeyMonth= this.core.dateToKeyMonth(this.DL.Date);

@@ -1,49 +1,64 @@
 <div>
-    <fieldset>
-      <legend>Cart Items</legend>
-      <table>
-        <thead>
-          <tr>
-            <th>
-              #
-            </th>
-            <th>
-              DESCRIPTION
-            </th>
-            <th class="totalColumn">
-              QTY
-            </th>
-            <th>
-              PRICE
-            </th>
-            <th class="totalColumn">
-              TOTAL
-            </th>
-          </tr>
-        </thead>
-        <ng-container *ngFor="let info of DL.Transaction.Items; let num = index;">
-          <tr class="{{ (info.Price) ?  '' : 'blankCell' }}">
-            <td>
-              {{ (info.Price) ?  num+1 : '' }}
-            </td>
-            <td>
-              {{ info.Description }}
-            </td>
-            <td class="totalColumn">
-              {{ info.Quantity }}
-            </td>
-            <td>
-              {{ info.Price | number:'1.2-2' }}
-            </td>
-            <td class="totalColumn">
-              {{ info.Total | number:'1.2-2' }}
-            </td>
-          </tr>
-        </ng-container>
-      </table>
-    </fieldset>
-    <div class="hSpacer"></div>
-    <div>
-        <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><i class="material-icons">assignment_return</i></button>
-    </div>
+  <fieldset>
+    <legend>Cart Items</legend>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            #
+          </th>
+          <th>
+            DESCRIPTION
+          </th>
+          <th class="totalColumn">
+            QTY
+          </th>
+          <th>
+            PRICE
+          </th>
+          <th class="totalColumn">
+            TOTAL
+          </th>
+        </tr>
+      </thead>
+      <ng-container *ngFor="let info of DL.Transaction.Items; let num = index;">
+        <tr>
+          <td>
+            {{ (info.Price) ? num+1 : '' }}
+          </td>
+          <td>
+            {{ info.Description }}
+          </td>
+          <td class="totalColumn">
+            {{ info.Quantity }}
+          </td>
+          <td>
+            {{ info.Price | number:'1.2-2' }}
+          </td>
+          <td class="totalColumn">
+            {{ info.Total | number:'1.2-2' }}
+          </td>
+        </tr>
+      </ng-container>
+      <tr class="blankCell">
+        <td>
+        </td>
+        <td>
+          TOTAL
+        </td>
+        <td class="totalColumn">
+          {{ DL.Transaction.Count }}
+        </td>
+        <td>
+        </td>
+        <td class="totalColumn">
+          {{ DL.Transaction.Amount | number:'1.2-2' }}
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+  <div class="hSpacer"></div>
+  <div>
+    <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><i class="material-icons">assignment_return</i></button>
   </div>
+</div>

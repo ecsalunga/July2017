@@ -35,6 +35,7 @@ export class TransactionInfo {
     BuyerName: string;
     Items: Array<SellInfo>;
     Count: number;
+    Amount: number;
     ActionDate: number;
     KeyDay: number;
     KeyMonth: number;
@@ -44,4 +45,6 @@ export class QueryInfo {
     KeyDay: number;
     KeyMonth: number;
     KeyYear: number;
+    Count: number;
+    Amount: number;
 }
