@@ -48,3 +48,11 @@ export class QueryInfo {
     Count: number;
     Amount: number;
 }
+
+export class ReportInfo {
+    key: string;
+    KeyDay: number;
+    KeyMonth: number;
+    Count: number;
+    Amount: number;
+}

@@ -80,6 +80,6 @@
     </md-select>
 
     <button md-fab [disabled]="selectedQuantity < 1" (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
-    <button md-fab [disabled]="DL.SellInfos.length < 1" (click)="Done()" mdTooltip="Done" mdTooltipPosition="above"><i class="material-icons">payment</i></button>
+    <button md-fab [disabled]="DL.SellInfosCount < 1" (click)="Done()" mdTooltip="Done" mdTooltipPosition="above"><i class="material-icons">payment</i></button>
   </div>
 </div>

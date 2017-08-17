@@ -21,6 +21,7 @@ td, th {
     height: 35px;
     font-weight: bold;
     vertical-align: bottom;
+    border-top: 1px black dotted;
 }
 
 .totalColumn {

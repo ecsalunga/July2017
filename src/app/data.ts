@@ -1,7 +1,7 @@
 import { Injectable, ComponentFactory, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 import { Core } from './core';
-import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, QueryInfo } from './models';
+import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, QueryInfo, ReportInfo } from './models';
 import 'rxjs/add/operator/first';
 
 @Injectable()
@@ -19,8 +19,9 @@ export class DataLayer {
     SellInfosAmount: number = 0;
     SellInfosCount: number = 0;
 
-    QueryToday: QueryInfo;
     Date: Date = new Date();
+    QueryToday: QueryInfo;
+    ReportToday: ReportInfo;
 }
 
 @Injectable()
@@ -29,16 +30,25 @@ export class DataAccess {
     MEMBERS: string = "/members";
     SELL_INFOS: string = "/sellInfos";
     TRANSACTIONS: string;
+    REPORTS: string;
 
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) { 
         this.DL.QueryToday = new QueryInfo();
+        this.DL.ReportToday = new ReportInfo();
+
         this.DL.QueryToday.KeyDay = this.core.dateToKeyDay(this.DL.Date);
         this.DL.QueryToday.KeyMonth = this.core.dateToKeyMonth(this.DL.Date);
         this.DL.QueryToday.KeyYear = this.DL.Date.getFullYear();
+
+        this.DL.ReportToday.KeyDay = this.DL.QueryToday.KeyDay;
+        this.DL.ReportToday.KeyMonth = this.DL.QueryToday.KeyMonth;
+
         this.TRANSACTIONS = "/transactions/" + this.DL.QueryToday.KeyYear + "/" + this.DL.QueryToday.KeyMonth;
+        this.REPORTS = "/reports/" + this.DL.QueryToday.KeyYear;
     }
 
     public LoadData(): void {
+        this.LoadReportToday();
         this.LoadMemberData();
         this.LoadActiveData();
     }
@@ -83,8 +93,15 @@ export class DataAccess {
                 this.DL.QueryToday.Amount += snapshot.Amount;
             });
 
+            // update daily report
+            this.DL.ReportToday.Count = this.DL.QueryToday.Count;
+            this.DL.ReportToday.Amount = this.DL.QueryToday.Amount;
+            this.ReportInfoSave();
+
             this.DL.Transactions.reverse();
         });
+
+       
     }
 
     LoadMemberData() {
@@ -96,6 +113,15 @@ export class DataAccess {
                 info = snapshot;
                 info.key = snapshot.$key;
                 this.DL.Members.push(info);
+            });
+        });
+    }
+
+    LoadReportToday() {
+        this.af.list(this.REPORTS, {query: {  orderByChild: 'KeyDay', equalTo: this.DL.QueryToday.KeyDay}}).first().subscribe(snapshots => {
+            snapshots.forEach(snapshot => {
+                this.DL.ReportToday =  snapshot;
+                this.DL.ReportToday.key =  snapshot.$key;
             });
         });
     }
@@ -160,10 +186,20 @@ export class DataAccess {
 
         this.TransactionInfoSave(info);
         this.ProductUpdateFromSellInfo();
+        this.ReportInfoSave();
         this.SellInfoClear();
     }
 
     public TransactionInfoSave(item: TransactionInfo) {
         this.af.list(this.TRANSACTIONS).push(item);
+    }
+
+    public ReportInfoSave() {
+        if (this.DL.ReportToday.key)
+            this.af.list(this.REPORTS).update(this.DL.ReportToday.key, this.DL.ReportToday);
+        else { 
+            this.af.list(this.REPORTS).push(this.DL.ReportToday);
+            this.LoadReportToday();
+        }
     }
 }
