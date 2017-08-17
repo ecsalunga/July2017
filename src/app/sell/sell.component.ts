@@ -11,7 +11,7 @@ import { ProductInfo, SellInfo } from '../models';
 })
 export class SellComponent implements OnInit {
   model: ProductInfo;
-  selectedQuantity: number;
+  selectedQuantity: number = 0;
   quantities: Array<number>;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) { }

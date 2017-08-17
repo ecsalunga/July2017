@@ -23,29 +23,38 @@
           </th>
         </tr>
       </thead>
-      <ng-container *ngFor="let info of DL.SellInfos">
-        <tr class="{{ (info.Price) ?  '' : 'blankCell' }}">
-          <td>
-            {{info.Description}}
-          </td>
-          <td class="totalColumn">
-            {{info.Quantity}}
-          </td>
-          <td>
-            {{info.Price | number:'1.2-2'}}
-          </td>
-          <td class="totalColumn">
-            {{info.Total | number:'1.2-2'}}
-          </td>
-          <td>
-          </td>
-          <td>
-            <ng-container *ngIf="info.Price">
-              <button md-mini-fab (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><i class="material-icons">delete</i></button>
-            </ng-container>
+      <ng-container *ngIf="DL.SellInfos.length < 1;else showCart">
+        <tr class="blankCell">
+          <td colspan="6">
+            no item to cart
           </td>
         </tr>
       </ng-container>
+      <ng-template #showCart>
+        <ng-container *ngFor="let info of DL.SellInfos">
+          <tr class="{{ (info.Price) ?  '' : 'blankCell' }}">
+            <td>
+              {{info.Description}}
+            </td>
+            <td class="totalColumn">
+              {{info.Quantity}}
+            </td>
+            <td>
+              {{info.Price | number:'1.2-2'}}
+            </td>
+            <td class="totalColumn">
+              {{info.Total | number:'1.2-2'}}
+            </td>
+            <td>
+            </td>
+            <td>
+              <ng-container *ngIf="info.Price">
+                <button md-mini-fab (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><i class="material-icons">delete</i></button>
+              </ng-container>
+            </td>
+          </tr>
+        </ng-container>
+      </ng-template>
     </table>
   </fieldset>
   <div class="hSpacer"></div>
@@ -61,7 +70,7 @@
       </md-option>
     </md-select>
 
-    <button md-fab (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
-    <button md-fab (click)="Done()" mdTooltip="Done" mdTooltipPosition="above"><i class="material-icons">payment</i></button>
+    <button md-fab [disabled]="selectedQuantity < 1" (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
+    <button md-fab [disabled]="DL.SellInfos.length < 1" (click)="Done()" mdTooltip="Done" mdTooltipPosition="above"><i class="material-icons">payment</i></button>
   </div>
 </div>

@@ -34,6 +34,18 @@ export class Core {
         return parseInt(strDate);
     }
 
+    dateToKeyDay(date: Date): number
+    {
+        let strDate = date.getFullYear() + this.az(date.getMonth()+1) + this.az(date.getDate());
+        return parseInt(strDate);
+    }
+
+    dateToKeyMonth(date: Date): number
+    {
+        let strDate = date.getFullYear() + this.az(date.getMonth()+1);
+        return parseInt(strDate);
+    }
+
     numberToDate(num: number): Date
     {
         let val = num.toString();
@@ -54,5 +66,4 @@ export class Core {
         
         return num;
     }
-
 }
