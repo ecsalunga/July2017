@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Core } from '../core';
 import { DataAccess, DataLayer } from '../data';
-import { ProductInfo, SellInfo } from '../models';
+import { ProductInfo, MemberInfo, SellInfo } from '../models';
 
 @Component({
   selector: 'app-sell',
@@ -13,6 +13,7 @@ export class SellComponent implements OnInit {
   model: ProductInfo;
   selectedQuantity: number = 0;
   quantities: Array<number>;
+  selectedMember: MemberInfo = this.DL.MemberWalkIn;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) { }
 
@@ -23,7 +24,6 @@ export class SellComponent implements OnInit {
     item.Description = this.model.Description;
     item.Price = this.model.SellPrice;
     item.Quantity = this.selectedQuantity;
-    
 
     // merge items
     this.DL.SellInfos.forEach(info => {
@@ -67,7 +67,8 @@ export class SellComponent implements OnInit {
   }
 
   Done() {
-    this.DA.SellInfoDone("-AAA-AAA_AAA0000000", "Walk-In");
+    this.DA.SellInfoDone(this.selectedMember.key, this.selectedMember.Name);
+    this.selectedMember = this.DL.MemberWalkIn;
   }
 
   ngOnInit() {

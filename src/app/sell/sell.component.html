@@ -8,7 +8,7 @@
             Description
           </th>
           <th class="totalColumn">
-            Price / QTY 
+            Price / QTY
           </th>
           <th class="totalColumn">
             Total
@@ -47,35 +47,59 @@
           </tr>
         </ng-container>
         <tr class="blankCell">
-            <td>
-              Total
-            </td>
-            <td class="totalColumn">
-              {{ DL.SellInfosCount }}
-            </td>
-            <td class="totalColumn">
-              {{ DL.SellInfosAmount | number:'1.2-2'}}
-            </td>
-            <td></td>
-            <td></td>
-          </tr>
+          <td>
+            Total
+          </td>
+          <td class="totalColumn">
+            {{ DL.SellInfosCount }}
+          </td>
+          <td class="totalColumn">
+            {{ DL.SellInfosAmount | number:'1.2-2'}}
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
       </ng-template>
     </table>
   </fieldset>
   <div class="hSpacer"></div>
   <div>
-    <md-select class="product" placeholder="Product" [(ngModel)]="model" (change)="productSelected()">
-      <md-option *ngFor="let product of DL.Products" [value]="product">
-        {{ product.Description }} ({{ product.Code }})
-      </md-option>
-    </md-select>
-    <md-select class="quantity" placeholder="Quantity" [(ngModel)]="selectedQuantity">
-      <md-option *ngFor="let quantity of quantities" [value]="quantity">
-        {{quantity}}
-      </md-option>
-    </md-select>
+    <table>
+      <tr class="rightRow">
+        <td>
+          <md-select class="product" placeholder="Product" [(ngModel)]="model" (change)="productSelected()">
+            <md-option *ngFor="let product of DL.Products" [value]="product">
+              {{ product.Description }} ({{ product.Code }})
+            </md-option>
+          </md-select>
+          <md-select class="quantity" placeholder="Quantity" [(ngModel)]="selectedQuantity">
+            <md-option *ngFor="let quantity of quantities" [value]="quantity">
+              {{quantity}}
+            </md-option>
+          </md-select>
+        </td>
+        <td></td>
+        <td>
+          <md-select placeholder="Member" [(ngModel)]="selectedMember">
+            <md-option *ngFor="let member of this.DL.MemberSelections" [value]="member">
+              {{ member.Name }}
+            </md-option>
+          </md-select>
+        </td>
+      </tr>
+      <tr class="rightRow">
+        <td>
+          <button md-fab [disabled]="!selectedQuantity" (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
+        </td>
+        <td></td>
+        <td>
+          <button md-fab [disabled]="!DL.SellInfosCount" (click)="Done()" mdTooltip="Done" mdTooltipPosition="above"><i class="material-icons">payment</i></button>
+        </td>
+      </tr>
+    </table>
 
-    <button md-fab [disabled]="!selectedQuantity" (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
-    <button md-fab [disabled]="!DL.SellInfosCount" (click)="Done()" mdTooltip="Done" mdTooltipPosition="above"><i class="material-icons">payment</i></button>
+
+
+
   </div>
 </div>

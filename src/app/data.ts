@@ -11,6 +11,8 @@ export class DataLayer {
 
     Member: MemberInfo;
     Members: Array<MemberInfo>;
+    MemberSelections: Array<MemberInfo>;
+    MemberWalkIn: MemberInfo;
 
     Transaction: TransactionInfo;
     Transactions: Array<TransactionInfo>;
@@ -107,12 +109,20 @@ export class DataAccess {
     LoadMemberData() {
         this.af.list(this.MEMBERS, {query: {  orderByChild: 'Name'}}).first().subscribe(snapshots => {
             this.DL.Members = new Array<MemberInfo>();
+            this.DL.MemberSelections = new Array<MemberInfo>();
+
+            // add walk-in
+            this.DL.MemberWalkIn = new MemberInfo();
+            this.DL.MemberWalkIn.Name = "Walk-In";
+            this.DL.MemberWalkIn.key = "Walk-In";
+            this.DL.MemberSelections.push(this.DL.MemberWalkIn);
 
             snapshots.forEach(snapshot => {
                 let info = new MemberInfo();
                 info = snapshot;
                 info.key = snapshot.$key;
                 this.DL.Members.push(info);
+                this.DL.MemberSelections.push(info);
             });
         });
     }
