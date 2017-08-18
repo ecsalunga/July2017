@@ -5,7 +5,7 @@
       <thead>
         <tr>
           <th>
-            CODE
+            DESCRIPTION
           </th>
           <th>
             PRICE
@@ -13,17 +13,16 @@
           <th>
             QUANTITY
           </th>
+          <th></th>
           <th>
-          </th>
-          <th>
-            ACTIONS
+            ACTION
           </th>
         </tr>
       </thead>
       <ng-container *ngFor="let product of DL.Products">
         <tr>
           <td>
-            {{product.Code}}
+            {{product.Description}}
           </td>
           <td>
             {{product.SellPrice | number:'1.2-2'}}
@@ -31,8 +30,7 @@
           <td class="{{ (product.Quantity > product.QuantityNotify) ?  'quantityOK' : 'quantityNotify' }}">
             {{product.Quantity}}
           </td>
-           <td>
-          </td>
+          <td></td>
           <td>
             <button md-mini-fab (click)="SelectProduct(product)"><i class="material-icons">pageview</i></button>
           </td>

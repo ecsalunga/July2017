@@ -7,16 +7,15 @@
           <th>
             DESCRIPTION
           </th>
-          <th>
-            QTY / PRICE
+          <th class="totalColumn">
+            PRICE / QTY 
           </th>
           <th class="totalColumn">
             TOTAL
           </th>
+          <th></th>
           <th>
-          </th>
-          <th>
-            ACTIONS
+            ACTION
           </th>
         </tr>
       </thead>
@@ -33,14 +32,13 @@
             <td>
               {{info.Description}}
             </td>
-            <td>
-              {{ info.Quantity }} / {{ info.Price | number:'1.2-2' }}
+            <td class="totalColumn">
+              {{ info.Price | number:'1.2-2' }} x {{ info.Quantity }}
             </td>
             <td class="totalColumn">
               {{info.Total | number:'1.2-2'}}
             </td>
-            <td>
-            </td>
+            <td></td>
             <td>
               <ng-container *ngIf="info.Price">
                 <button md-mini-fab (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><i class="material-icons">delete</i></button>
@@ -52,16 +50,14 @@
             <td>
               TOTAL
             </td>
-            <td>
+            <td class="totalColumn">
               {{ DL.SellInfosCount }}
             </td>
             <td class="totalColumn">
               {{ DL.SellInfosAmount | number:'1.2-2'}}
             </td>
-            <td>
-            </td>
-            <td>
-            </td>
+            <td></td>
+            <td></td>
           </tr>
       </ng-template>
     </table>
@@ -79,7 +75,7 @@
       </md-option>
     </md-select>
 
-    <button md-fab [disabled]="selectedQuantity < 1" (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
-    <button md-fab [disabled]="DL.SellInfosCount < 1" (click)="Done()" mdTooltip="Done" mdTooltipPosition="above"><i class="material-icons">payment</i></button>
+    <button md-fab [disabled]="!selectedQuantity" (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
+    <button md-fab [disabled]="!DL.SellInfosCount" (click)="Done()" mdTooltip="Done" mdTooltipPosition="above"><i class="material-icons">payment</i></button>
   </div>
 </div>

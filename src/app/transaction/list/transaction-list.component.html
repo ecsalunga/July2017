@@ -10,16 +10,15 @@
           <th>
             DATE
           </th>
-          <th>
+          <th class="totalColumn">
             Count
           </th>
           <th class="totalColumn">
             Amount
           </th>
+          <th></th>
           <th>
-          </th>
-          <th>
-            ACTIONS
+            ACTION
           </th>
         </tr>
       </thead>
@@ -31,14 +30,13 @@
           <td>
             {{ this.core.numberToDate(tran.ActionDate) | date : 'medium' }}
           </td>
-          <td>
+          <td class="totalColumn">
             {{ tran.Count }}
           </td>
           <td class="totalColumn">
             {{ tran.Amount | number:'1.2-2' }}
           </td>
-          <td>
-          </td>
+          <td></td>
           <td>
             <button md-mini-fab (click)="SelectTransaction(tran)"><i class="material-icons">pageview</i></button>
           </td>
@@ -48,18 +46,15 @@
         <td>
           TOTAL
         </td>
-        <td>
-        </td>
-        <td>
+        <td></td>
+        <td class="totalColumn">
           {{ DL.QueryToday.Count }}
         </td>
         <td class="totalColumn">
           {{ DL.QueryToday.Amount | number:'1.2-2' }}
         </td>
-        <td>
-        </td>
-        <td>
-        </td>
+        <td></td>
+        <td></td>
       </tr>
     </table>
   </fieldset>

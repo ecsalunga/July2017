@@ -11,10 +11,7 @@
             DESCRIPTION
           </th>
           <th class="totalColumn">
-            QTY
-          </th>
-          <th>
-            PRICE
+            PRICE / QTY
           </th>
           <th class="totalColumn">
             TOTAL
@@ -30,10 +27,7 @@
             {{ info.Description }}
           </td>
           <td class="totalColumn">
-            {{ info.Quantity }}
-          </td>
-          <td>
-            {{ info.Price | number:'1.2-2' }}
+            {{ info.Price | number:'1.2-2' }} x {{ info.Quantity }}
           </td>
           <td class="totalColumn">
             {{ info.Total | number:'1.2-2' }}
@@ -41,15 +35,12 @@
         </tr>
       </ng-container>
       <tr class="blankCell">
-        <td>
-        </td>
+        <td></td>
         <td>
           TOTAL
         </td>
         <td class="totalColumn">
           {{ DL.Transaction.Count }}
-        </td>
-        <td>
         </td>
         <td class="totalColumn">
           {{ DL.Transaction.Amount | number:'1.2-2' }}
