@@ -62,12 +62,11 @@
       </ng-template>
     </table>
   </fieldset>
-  <div class="hSpacer"></div>
   <div>
     <table>
       <tr class="rightRow">
-        <td>
-          <md-select class="product" placeholder="Product" [(ngModel)]="model" (change)="productSelected()">
+        <td class="selectionRow">
+          <md-select class="bigSelection" placeholder="Product" [(ngModel)]="model" (change)="productSelected()">
             <md-option *ngFor="let product of DL.Products" [value]="product">
               {{ product.Description }} ({{ product.Code }})
             </md-option>
@@ -79,8 +78,8 @@
           </md-select>
         </td>
         <td></td>
-        <td>
-          <md-select placeholder="Member" [(ngModel)]="selectedMember">
+        <td class="selectionRow">
+          <md-select class="bigSelection" placeholder="Buyer" [(ngModel)]="selectedMember">
             <md-option *ngFor="let member of this.DL.MemberSelections" [value]="member">
               {{ member.Name }}
             </md-option>
@@ -97,9 +96,5 @@
         </td>
       </tr>
     </table>
-
-
-
-
   </div>
 </div>

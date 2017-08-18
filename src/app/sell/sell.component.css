@@ -1,4 +1,4 @@
-.product {
+.bigSelection {
     width: 200px;
 }
 
@@ -10,4 +10,12 @@
 
 .rightRow td {
     text-align: right;
+}
+
+.selectionRow {
+    vertical-align: bottom;
+}
+
+.selectionRow md-select {
+    padding-top: 20px;
 }
