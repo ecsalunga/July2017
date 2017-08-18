@@ -182,7 +182,6 @@ export class DataAccess {
         info.Amount = this.DL.SellInfosAmount;
         info.ActionDate = this.core.dateToNumber(new Date());
         info.KeyDay = this.core.dateToKeyDay(this.DL.Date);
-        info.KeyMonth= this.core.dateToKeyMonth(this.DL.Date);
 
         this.TransactionInfoSave(info);
         this.ProductUpdateFromSellInfo();

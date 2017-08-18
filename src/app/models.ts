@@ -38,7 +38,6 @@ export class TransactionInfo {
     Amount: number;
     ActionDate: number;
     KeyDay: number;
-    KeyMonth: number;
 }
 
 export class QueryInfo {
