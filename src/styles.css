@@ -30,3 +30,23 @@ td, th {
 .totalColumn {
     text-align: right;
 }
+
+.rightRow, .rightRow td {
+    text-align: right;
+}
+
+.selectionRow {
+    vertical-align: bottom;
+}
+
+.selectionRow md-select {
+    padding-top: 25px;
+}
+
+.product {
+    width: 170px;
+}
+
+.member {
+    width: 140px;
+}
