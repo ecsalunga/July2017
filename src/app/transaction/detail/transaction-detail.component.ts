@@ -5,7 +5,7 @@ import { DataAccess, DataLayer } from '../../data';
 
 
 @Component({
-  selector: 'app-transaction-detail',
+  selector: 'transaction-detail',
   templateUrl: './transaction-detail.component.html',
   styleUrls: ['./transaction-detail.component.css']
 })
@@ -14,7 +14,7 @@ export class TransactionDetailComponent implements OnInit {
   constructor(private core: Core, private DL: DataLayer) { }
   
   LoadList() {
-    this.core.loadComponent("app-transaction-list");
+    this.core.loadComponent("transaction-list");
   }
 
   ngOnInit() {

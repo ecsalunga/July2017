@@ -62,24 +62,22 @@
       </ng-template>
     </table>
   </fieldset>
-  <div>
     <table>
       <tr class="rightRow">
-        <td class="selectionRow">
-          <md-select class="bigSelection" placeholder="Product" [(ngModel)]="model" (change)="productSelected()">
+        <td class="selectionRow" style="width: 60%">
+          <md-select class="product" placeholder="Product" [(ngModel)]="model" (change)="productSelected()">
             <md-option *ngFor="let product of DL.Products" [value]="product">
               {{ product.Description }} ({{ product.Code }})
             </md-option>
           </md-select>
-          <md-select class="quantity" placeholder="Quantity" [(ngModel)]="selectedQuantity">
+          <md-select placeholder="Quantity" [(ngModel)]="selectedQuantity">
             <md-option *ngFor="let quantity of quantities" [value]="quantity">
               {{quantity}}
             </md-option>
           </md-select>
         </td>
-        <td></td>
         <td class="selectionRow">
-          <md-select class="bigSelection" placeholder="Buyer" [(ngModel)]="selectedMember">
+          <md-select class="member" placeholder="Member" [(ngModel)]="selectedMember">
             <md-option *ngFor="let member of this.DL.MemberSelections" [value]="member">
               {{ member.Name }}
             </md-option>
@@ -90,11 +88,9 @@
         <td>
           <button md-fab [disabled]="!selectedQuantity" (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
         </td>
-        <td></td>
         <td>
           <button md-fab [disabled]="!DL.SellInfosCount" (click)="Done()" mdTooltip="Done" mdTooltipPosition="above"><i class="material-icons">payment</i></button>
         </td>
       </tr>
     </table>
-  </div>
 </div>

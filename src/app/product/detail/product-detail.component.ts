@@ -4,7 +4,7 @@ import { DataAccess, DataLayer } from '../../data';
 import { ProductInfo } from '../../models';
 
 @Component({
-  selector: 'app-product-detail',
+  selector: 'product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
@@ -24,7 +24,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   LoadList() {
-    this.core.loadComponent("app-product-list");
+    this.core.loadComponent("product-list");
   }
 
   ngOnInit() {

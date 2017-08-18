@@ -4,7 +4,7 @@ import { DataAccess, DataLayer } from '../../data';
 import { MemberInfo } from '../../models';
 
 @Component({
-  selector: 'app-member-detail',
+  selector: 'member-detail',
   templateUrl: './member-detail.component.html',
   styleUrls: ['./member-detail.component.css']
 })
@@ -29,7 +29,7 @@ export class MemberDetailComponent implements OnInit {
   }
 
   LoadList() {
-    this.core.loadComponent("app-member-list");
+    this.core.loadComponent("member-list");
   }
 
   ngOnInit() {

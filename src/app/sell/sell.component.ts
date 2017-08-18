@@ -5,7 +5,7 @@ import { DataAccess, DataLayer } from '../data';
 import { ProductInfo, MemberInfo, SellInfo } from '../models';
 
 @Component({
-  selector: 'app-sell',
+  selector: 'sell',
   templateUrl: './sell.component.html',
   styleUrls: ['./sell.component.css']
 })

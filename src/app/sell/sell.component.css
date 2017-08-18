@@ -1,11 +1,9 @@
-.bigSelection {
-    width: 200px;
+.product {
+    width: 170px;
 }
 
-.quantity {
-    margin-left: 10px;
-    margin-right: 10px;
-    width: 100px;
+.member {
+    width: 140px;
 }
 
 .rightRow td {
@@ -17,5 +15,9 @@
 }
 
 .selectionRow md-select {
-    padding-top: 20px;
+    padding-top: 25px;
+}
+
+::ng-deep .mat-select-trigger {
+    font-size: inherit;
 }
