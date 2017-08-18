@@ -26,11 +26,9 @@ import { DataAccess, DataLayer } from './data';
 
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { AppComponent } from './app.component';
-import { TesterComponent } from './tester/tester.component';
 
 import { ProductListComponent } from './product/list/product-list.component';
 import { ProductDetailComponent } from './product/detail/product-detail.component';
-
 import { MemberListComponent } from './member/list/member-list.component';
 import { MemberDetailComponent } from './member/detail/member-detail.component';
 import { SellComponent } from './sell/sell.component';
@@ -40,7 +38,6 @@ import { TransactionDetailComponent } from './transaction/detail/transaction-det
 @NgModule({
   declarations: [
     AppComponent,
-    TesterComponent,
     ProductListComponent,
     ProductDetailComponent,
     MemberListComponent,
@@ -70,7 +67,6 @@ import { TransactionDetailComponent } from './transaction/detail/transaction-det
   providers: [Core, DataAccess, DataLayer],
   bootstrap: [AppComponent],
   entryComponents: [ 
-    TesterComponent,
     ProductListComponent,
     ProductDetailComponent,
     MemberListComponent,
