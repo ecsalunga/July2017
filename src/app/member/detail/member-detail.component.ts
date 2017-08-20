@@ -17,8 +17,10 @@ export class MemberDetailComponent implements OnInit {
       this.model = this.DL.Member;
       this.joinDate = this.core.numberToDate(this.model.JoinDate);
     }
-    else
+    else {
       this.model = new MemberInfo();
+      this.joinDate = new Date();
+    }
   }
 
   Save() {
