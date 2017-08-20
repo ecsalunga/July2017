@@ -8,6 +8,7 @@ import 'rxjs/add/operator/first';
 export class DataLayer {
     Product: ProductInfo;
     Products: Array<ProductInfo>;
+    ProductSelections: Array<ProductInfo>;
 
     Member: MemberInfo;
     Members: Array<MemberInfo>;
@@ -58,12 +59,15 @@ export class DataAccess {
     LoadActiveData() {
         this.af.list(this.PRODUCTS, {query: {  orderByChild: 'Description'}}).subscribe(snapshots => {
             this.DL.Products = new Array<ProductInfo>();
+            this.DL.ProductSelections = new Array<ProductInfo>();
 
             snapshots.forEach(snapshot => {
                 let info = new ProductInfo();
                 info = snapshot;
                 info.key = snapshot.$key;
                 this.DL.Products.push(info);
+                if(info.Quantity > 0)
+                    this.DL.ProductSelections.push(info);
             });
         });
 

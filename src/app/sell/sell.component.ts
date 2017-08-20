@@ -52,7 +52,7 @@ export class SellComponent implements OnInit {
   clearSelection() {
     this.model = new ProductInfo();
     this.quantities = new Array<number>();
-    this.selectedQuantity = 0;
+    this.selectedQuantity = 1;
   }
 
   productSelected() {
