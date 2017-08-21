@@ -25,6 +25,12 @@ export class AppComponent implements OnInit {
     this.core.loadComponent(name);
   }
 
+  loadExpense(name: string) {
+    this.DL.ExpenseSelected = this.DL.Expenses;
+    this.DL.ReportSelected = this.DL.ReportToday;
+    this.core.loadComponent(name);
+  }
+
   ngOnInit() {
     this.core.viewChild = this.viewChild;
     this.DA.LoadData();

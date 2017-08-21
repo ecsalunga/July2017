@@ -34,6 +34,7 @@ import { MemberDetailComponent } from './member/detail/member-detail.component';
 import { SellComponent } from './sell/sell.component';
 import { TransactionListComponent } from './transaction/list/transaction-list.component';
 import { TransactionDetailComponent } from './transaction/detail/transaction-detail.component';
+import { ExpenseComponent } from './expense/expense.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { TransactionDetailComponent } from './transaction/detail/transaction-det
     MemberDetailComponent,
     SellComponent,
     TransactionListComponent,
-    TransactionDetailComponent
+    TransactionDetailComponent,
+    ExpenseComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,8 @@ import { TransactionDetailComponent } from './transaction/detail/transaction-det
     MemberDetailComponent,
     SellComponent,
     TransactionListComponent,
-    TransactionDetailComponent
+    TransactionDetailComponent,
+    ExpenseComponent
   ]
 })
 export class AppModule {

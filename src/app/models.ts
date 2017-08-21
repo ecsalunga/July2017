@@ -47,4 +47,13 @@ export class ReportInfo {
     KeyYear: number;
     Count: number;
     Amount: number;
+    ExpenseAmount: number;
+    ExpenseCount: number;
+}
+
+export class ExpenseInfo {
+    Description: string;
+    Amount: number;
+    ActionDate: number;
+    KeyDay: number;
 }

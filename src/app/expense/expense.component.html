@@ -1,0 +1,79 @@
+<div>
+  <fieldset>
+    <legend>Expenses</legend>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Description
+          </th>
+          <th>
+            Date
+          </th>
+          <th class="totalColumn">
+            Amount
+          </th>
+        </tr>
+      </thead>
+      <ng-container *ngIf="DL.ReportSelected.ExpenseCount < 1;else showExpense">
+        <tr class="blankCell">
+          <td colspan="3">
+            no item to show
+          </td>
+        </tr>
+      </ng-container>
+      <ng-template #showExpense>
+        <ng-container *ngFor="let info of DL.ExpenseSelected">
+          <tr>
+            <td>
+              {{info.Description}}
+            </td>
+            <td>
+              {{ this.core.numberToDate(info.ActionDate) | date : 'short' }}
+            </td>
+            <td class="totalColumn">
+              {{info.Amount | number:'1.2-2'}}
+            </td>
+          </tr>
+        </ng-container>
+        <tr class="blankCell">
+          <td>
+            Total
+          </td>
+          <td></td>
+          <td class="totalColumn">
+            {{ DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
+          </td>
+          <td></td>
+        </tr>
+      </ng-template>
+    </table>
+  </fieldset>
+  <table>
+    <tr class="rightRow">
+      <td class="selectionRow" style="width: 60%" [hidden]="!isToday">
+        <md-input-container>
+          <input id="txtDescription" mdInput placeholder="Description" [(ngModel)]="description" />
+        </md-input-container>
+        <md-input-container>
+          <input id="txtAmount" type="number" mdInput placeholder="Amount" [(ngModel)]="amount" />
+        </md-input-container>
+      </td>
+      <td class="selectionRow">
+        <md-input-container>
+          <input (click)="picker.open()" mdInput [mdDatepicker]="picker" placeholder="Report Date" [(ngModel)]="ReportDate">
+          <button mdSuffix [mdDatepickerToggle]="picker"></button>
+        </md-input-container>
+        <md-datepicker #picker></md-datepicker>
+      </td>
+    </tr>
+    <tr class="rightRow">
+      <td [hidden]="!isToday">
+        <button md-fab [disabled]="!description || !amount" (click)="AddExpense()" mdTooltip="Add to expense" mdTooltipPosition="above"><i class="material-icons">payment</i></button>
+      </td>
+      <td>
+        <button md-fab [disabled]="!ReportDate" (click)="ReportView()" mdTooltip="View report" mdTooltipPosition="above"><i class="material-icons">pageview</i></button>
+      </td>
+    </tr>
+  </table>
+</div>

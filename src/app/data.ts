@@ -1,7 +1,7 @@
 import { Injectable, ComponentFactory, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 import { Core } from './core';
-import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, ReportInfo } from './models';
+import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, ReportInfo, ExpenseInfo } from './models';
 import 'rxjs/add/operator/first';
 
 @Injectable()
@@ -18,14 +18,18 @@ export class DataLayer {
     Transaction: TransactionInfo;
     Transactions: Array<TransactionInfo>;
     TransactionSelected: Array<TransactionInfo>;
-    ReportSelected: ReportInfo;
 
     SellInfos: Array<SellInfo>;
     SellInfosAmount: number = 0;
     SellInfosCount: number = 0;
 
+    Expenses: Array<ExpenseInfo>;
+    ExpenseSelected: Array<ExpenseInfo>;
+    ExpensesAmount: number = 0;
+
     Date: Date = new Date();
     ReportToday: ReportInfo;
+    ReportSelected: ReportInfo;
 }
 
 @Injectable()
@@ -34,7 +38,9 @@ export class DataAccess {
     MEMBERS: string = "/members";
     SELL_INFOS: string = "/sellInfos";
     TRANSACTIONS: string;
-    REPORTS: string;
+    SALES: string;
+    EXPENSES: string;
+    KEYDAY: string = "KeyDay";
 
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) { 
         this.DL.ReportToday = new ReportInfo();
@@ -46,7 +52,8 @@ export class DataAccess {
         this.DL.ReportSelected = this.DL.ReportToday;
 
         this.TRANSACTIONS = "/transactions/" + this.DL.ReportToday.KeyYear + "/" + this.DL.ReportToday.KeyMonth;
-        this.REPORTS = "/reports/" + this.DL.ReportToday.KeyYear;
+        this.EXPENSES = "/expenses/" + this.DL.ReportToday.KeyYear + "/" + this.DL.ReportToday.KeyMonth;
+        this.SALES = "/reports/" + this.DL.ReportToday.KeyYear;
     }
 
     public LoadData(): void {
@@ -86,7 +93,7 @@ export class DataAccess {
             });
         });
 
-        this.af.list(this.TRANSACTIONS, {query: {  orderByChild: 'KeyDay', equalTo: this.DL.ReportToday.KeyDay}}).subscribe(snapshots => {
+        this.af.list(this.TRANSACTIONS, {query: {  orderByChild: this.KEYDAY, equalTo: this.DL.ReportToday.KeyDay}}).subscribe(snapshots => {
             this.DL.Transactions = new Array<TransactionInfo>();
             this.DL.ReportToday.Count = 0;
             this.DL.ReportToday.Amount = 0;
@@ -97,14 +104,22 @@ export class DataAccess {
                 this.DL.ReportToday.Count += snapshot.Count;
                 this.DL.ReportToday.Amount += snapshot.Amount;
             });
-
-            // update daily report
-            this.ReportInfoSave();
-
             this.DL.Transactions.reverse();
         });
 
-       
+        this.af.list(this.EXPENSES, {query: {  orderByChild: this.KEYDAY, equalTo: this.DL.ReportToday.KeyDay}}).subscribe(snapshots => {
+            this.DL.Expenses = new Array<ExpenseInfo>();
+            this.DL.ReportToday.ExpenseAmount = 0;
+            this.DL.ReportToday.ExpenseCount = 0;
+
+            snapshots.forEach(snapshot => {
+                this.DL.Expenses.push(snapshot);
+
+                this.DL.ReportToday.ExpenseCount++;
+                this.DL.ReportToday.ExpenseAmount += snapshot.Amount;
+            });
+            this.DL.Expenses.reverse();
+        });
     }
 
     LoadMemberData() {
@@ -129,7 +144,7 @@ export class DataAccess {
     }
 
     LoadTransactionSelected(report: ReportInfo) {
-        this.af.list("/transactions/" + report.KeyYear + "/" + report.KeyMonth, {query: {  orderByChild: 'KeyDay', equalTo: report.KeyDay}}).subscribe(snapshots => {
+        this.af.list("/transactions/" + report.KeyYear + "/" + report.KeyMonth, {query: {  orderByChild: this.KEYDAY, equalTo: report.KeyDay}}).subscribe(snapshots => {
             this.DL.TransactionSelected = new Array<TransactionInfo>();
             this.DL.ReportSelected.Count = 0;
             this.DL.ReportSelected.Amount = 0;
@@ -145,8 +160,24 @@ export class DataAccess {
         });
     }
 
+    LoadExpenseSelected(report: ReportInfo) {
+        this.af.list("/expenses/" + report.KeyYear + "/" + report.KeyMonth, {query: {  orderByChild: this.KEYDAY, equalTo: report.KeyDay}}).subscribe(snapshots => {
+            this.DL.ExpenseSelected = new Array<ExpenseInfo>();
+            this.DL.ReportSelected.ExpenseAmount = 0;
+            this.DL.ReportSelected.ExpenseCount = 0;
+
+            snapshots.forEach(snapshot => {
+                this.DL.ExpenseSelected.push(snapshot);
+                this.DL.ReportSelected.ExpenseCount++;
+                this.DL.ReportSelected.ExpenseAmount += snapshot.Amount;
+            });
+
+            this.DL.ExpenseSelected.reverse();
+        });
+    }
+
     LoadReportToday() {
-        this.af.list(this.REPORTS, {query: {  orderByChild: 'KeyDay', equalTo: this.DL.ReportToday.KeyDay}}).first().subscribe(snapshots => {
+        this.af.list(this.SALES, {query: {  orderByChild: this.KEYDAY, equalTo: this.DL.ReportToday.KeyDay}}).first().subscribe(snapshots => {
             snapshots.forEach(snapshot => {
                 this.DL.ReportToday =  snapshot;
                 this.DL.ReportToday.key =  snapshot.$key;
@@ -213,7 +244,7 @@ export class DataAccess {
 
         this.TransactionInfoSave(info);
         this.ProductUpdateFromSellInfo();
-        this.ReportInfoSave();
+        this.ReportTodaySave();
         this.SellInfoClear();
     }
 
@@ -221,12 +252,23 @@ export class DataAccess {
         this.af.list(this.TRANSACTIONS).push(item);
     }
 
-    public ReportInfoSave() {
+    public ExpenseInfoSave(description: string, amount: number) {
+        let info = new ExpenseInfo();
+        info.Description = description;
+        info.Amount = amount;
+        info.ActionDate = this.core.dateToNumber(new Date());
+        info.KeyDay = this.core.dateToKeyDay(this.DL.Date);
+        this.af.list(this.EXPENSES).push(info);
+        this.ReportTodaySave();
+    }
+
+    public ReportTodaySave() {
         if (this.DL.ReportToday.key)
-            this.af.list(this.REPORTS).update(this.DL.ReportToday.key, this.DL.ReportToday);
+            this.af.list(this.SALES).update(this.DL.ReportToday.key, this.DL.ReportToday);
         else { 
-            this.af.list(this.REPORTS).push(this.DL.ReportToday);
+            this.af.list(this.SALES).push(this.DL.ReportToday);
             this.LoadReportToday();
         }
+        
     }
 }
