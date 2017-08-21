@@ -22,13 +22,13 @@
           </th>
         </tr>
       </thead>
-      <ng-container *ngFor="let tran of DL.Transactions">
+      <ng-container *ngFor="let tran of DL.TransactionSelected">
         <tr>
           <td>
             {{ tran.BuyerName }}
           </td>
           <td>
-            {{ this.core.numberToDate(tran.ActionDate) | date : 'yyyy-MM-dd h:mm a' }}
+            {{ this.core.numberToDate(tran.ActionDate) | date : 'short' }}
           </td>
           <td class="totalColumn">
             {{ tran.Count }}
@@ -48,14 +48,31 @@
         </td>
         <td></td>
         <td class="totalColumn">
-          {{ DL.QueryToday.Count }}
+          {{ DL.ReportSelected.Count }}
         </td>
         <td class="totalColumn">
-          {{ DL.QueryToday.Amount | number:'1.2-2' }}
+          {{ DL.ReportSelected.Amount | number:'1.2-2' }}
         </td>
         <td></td>
         <td></td>
       </tr>
     </table>
   </fieldset>
+  <div class="hSpacer"></div>
+  <table>
+    <tr class="rightRow">
+      <td class="selectionRow">
+        <md-input-container>
+          <input (click)="picker.open()" mdInput [mdDatepicker]="picker" placeholder="Report Date" [(ngModel)]="ReportDate">
+          <button mdSuffix [mdDatepickerToggle]="picker"></button>
+        </md-input-container>
+        <md-datepicker #picker></md-datepicker>
+      </td>
+    </tr>
+    <tr class="rightRow">
+      <td>
+        <button md-fab [disabled]="!ReportDate" (click)="ReportView()" mdTooltip="View report" mdTooltipPosition="above"><i class="material-icons">pageview</i></button>
+      </td>
+    </tr>
+  </table>
 </div>

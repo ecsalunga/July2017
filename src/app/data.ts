@@ -1,7 +1,7 @@
 import { Injectable, ComponentFactory, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 import { Core } from './core';
-import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, QueryInfo, ReportInfo } from './models';
+import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, ReportInfo } from './models';
 import 'rxjs/add/operator/first';
 
 @Injectable()
@@ -17,13 +17,14 @@ export class DataLayer {
 
     Transaction: TransactionInfo;
     Transactions: Array<TransactionInfo>;
+    TransactionSelected: Array<TransactionInfo>;
+    ReportSelected: ReportInfo;
 
     SellInfos: Array<SellInfo>;
     SellInfosAmount: number = 0;
     SellInfosCount: number = 0;
 
     Date: Date = new Date();
-    QueryToday: QueryInfo;
     ReportToday: ReportInfo;
 }
 
@@ -36,18 +37,16 @@ export class DataAccess {
     REPORTS: string;
 
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) { 
-        this.DL.QueryToday = new QueryInfo();
         this.DL.ReportToday = new ReportInfo();
+        this.DL.ReportSelected = new ReportInfo();
 
-        this.DL.QueryToday.KeyDay = this.core.dateToKeyDay(this.DL.Date);
-        this.DL.QueryToday.KeyMonth = this.core.dateToKeyMonth(this.DL.Date);
-        this.DL.QueryToday.KeyYear = this.DL.Date.getFullYear();
+        this.DL.ReportToday.KeyDay = this.core.dateToKeyDay(this.DL.Date);
+        this.DL.ReportToday.KeyMonth = this.core.dateToKeyMonth(this.DL.Date);
+        this.DL.ReportToday.KeyYear = this.DL.Date.getFullYear();
+        this.DL.ReportSelected = this.DL.ReportToday;
 
-        this.DL.ReportToday.KeyDay = this.DL.QueryToday.KeyDay;
-        this.DL.ReportToday.KeyMonth = this.DL.QueryToday.KeyMonth;
-
-        this.TRANSACTIONS = "/transactions/" + this.DL.QueryToday.KeyYear + "/" + this.DL.QueryToday.KeyMonth;
-        this.REPORTS = "/reports/" + this.DL.QueryToday.KeyYear;
+        this.TRANSACTIONS = "/transactions/" + this.DL.ReportToday.KeyYear + "/" + this.DL.ReportToday.KeyMonth;
+        this.REPORTS = "/reports/" + this.DL.ReportToday.KeyYear;
     }
 
     public LoadData(): void {
@@ -87,21 +86,19 @@ export class DataAccess {
             });
         });
 
-        this.af.list(this.TRANSACTIONS, {query: {  orderByChild: 'KeyDay', equalTo: this.DL.QueryToday.KeyDay}}).subscribe(snapshots => {
+        this.af.list(this.TRANSACTIONS, {query: {  orderByChild: 'KeyDay', equalTo: this.DL.ReportToday.KeyDay}}).subscribe(snapshots => {
             this.DL.Transactions = new Array<TransactionInfo>();
-            this.DL.QueryToday.Count = 0;
-            this.DL.QueryToday.Amount = 0;
+            this.DL.ReportToday.Count = 0;
+            this.DL.ReportToday.Amount = 0;
 
             snapshots.forEach(snapshot => {
                 this.DL.Transactions.push(snapshot);
 
-                this.DL.QueryToday.Count += snapshot.Count;
-                this.DL.QueryToday.Amount += snapshot.Amount;
+                this.DL.ReportToday.Count += snapshot.Count;
+                this.DL.ReportToday.Amount += snapshot.Amount;
             });
 
             // update daily report
-            this.DL.ReportToday.Count = this.DL.QueryToday.Count;
-            this.DL.ReportToday.Amount = this.DL.QueryToday.Amount;
             this.ReportInfoSave();
 
             this.DL.Transactions.reverse();
@@ -131,8 +128,25 @@ export class DataAccess {
         });
     }
 
+    LoadTransactionSelected(report: ReportInfo) {
+        this.af.list("/transactions/" + report.KeyYear + "/" + report.KeyMonth, {query: {  orderByChild: 'KeyDay', equalTo: report.KeyDay}}).subscribe(snapshots => {
+            this.DL.TransactionSelected = new Array<TransactionInfo>();
+            this.DL.ReportSelected.Count = 0;
+            this.DL.ReportSelected.Amount = 0;
+
+            snapshots.forEach(snapshot => {
+                this.DL.TransactionSelected.push(snapshot);
+
+                this.DL.ReportSelected.Count += snapshot.Count;
+                this.DL.ReportSelected.Amount += snapshot.Amount;
+            });
+
+            this.DL.TransactionSelected.reverse();
+        });
+    }
+
     LoadReportToday() {
-        this.af.list(this.REPORTS, {query: {  orderByChild: 'KeyDay', equalTo: this.DL.QueryToday.KeyDay}}).first().subscribe(snapshots => {
+        this.af.list(this.REPORTS, {query: {  orderByChild: 'KeyDay', equalTo: this.DL.ReportToday.KeyDay}}).first().subscribe(snapshots => {
             snapshots.forEach(snapshot => {
                 this.DL.ReportToday =  snapshot;
                 this.DL.ReportToday.key =  snapshot.$key;

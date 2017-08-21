@@ -40,18 +40,11 @@ export class TransactionInfo {
     KeyDay: number;
 }
 
-export class QueryInfo {
-    KeyDay: number;
-    KeyMonth: number;
-    KeyYear: number;
-    Count: number;
-    Amount: number;
-}
-
 export class ReportInfo {
     key: string;
     KeyDay: number;
     KeyMonth: number;
+    KeyYear: number;
     Count: number;
     Amount: number;
 }

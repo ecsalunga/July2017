@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Core } from './core';
-import { DataAccess } from './data';
+import { DataAccess, DataLayer } from './data';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +12,16 @@ export class AppComponent implements OnInit {
   @ViewChild('viewChild', {read: ViewContainerRef})
   viewChild: ViewContainerRef;
 
-  constructor(public core: Core, private DA: DataAccess) { }
+  constructor(public core: Core, private DA: DataAccess, private DL: DataLayer) { }
 
   loadTester(name: string) {
+    this.core.loadComponent(name);
+  }
+
+  loadTransaction(name: string) {
+    this.DL.TransactionSelected = this.DL.Transactions;
+    this.DL.ReportSelected = this.DL.ReportToday;
+    
     this.core.loadComponent(name);
   }
 
