@@ -19,15 +19,14 @@ export class AppComponent implements OnInit {
   }
 
   loadTransaction(name: string) {
-    this.DL.TransactionSelected = this.DL.Transactions;
+    this.DL.TransactionSelected = this.DL.TransactionsToday;
     this.DL.ReportSelected = this.DL.ReportToday;
     
     this.core.loadComponent(name);
   }
 
   loadExpense(name: string) {
-    this.DL.ExpenseSelected = this.DL.Expenses;
-    this.DL.ReportSelected = this.DL.ReportToday;
+    
     this.core.loadComponent(name);
   }
 

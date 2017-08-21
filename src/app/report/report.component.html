@@ -1,0 +1,78 @@
+<div>
+  <fieldset>
+    <legend>Reports</legend>
+    <table>
+      <thead>
+        <tr>
+          <th class="totalColumn">
+            Sales Count
+          </th>
+          <th class="totalColumn">
+            Sales Amount
+          </th>
+          <th class="totalColumn">
+            Expenses Amount
+          </th>
+          <th class="totalColumn">
+            Expenses Amount
+          </th>
+        </tr>
+      </thead>
+      <ng-container *ngIf="DL.ReportSelected.Count < 1;else showReport">
+        <tr class="blankCell">
+          <td colspan="4">
+            [ no item to show ]
+          </td>
+        </tr>
+      </ng-container>
+      <ng-template #showReport>
+        <ng-container *ngFor="let info of DL.Reports">
+          <tr>
+            <td class="totalColumn">
+              {{info.Count | number:'1.2-2'}}
+            </td>
+            <td class="totalColumn">
+              {{info.Amount | number:'1.2-2'}}
+            </td>
+            <td class="totalColumn">
+              {{info.ExpenseCount | number:'1.2-2'}}
+            </td>
+            <td class="totalColumn">
+              {{info.ExpenseAmount | number:'1.2-2'}}
+            </td>
+          </tr>
+        </ng-container>
+        <tr class="blankCell">
+          <td class="totalColumn">
+            {{DL.ReportSelected.Count | number:'1.2-2'}}
+          </td>
+          <td class="totalColumn">
+            {{DL.ReportSelected.Amount | number:'1.2-2'}}
+          </td>
+          <td class="totalColumn">
+            {{DL.ReportSelected.ExpenseCount | number:'1.2-2'}}
+          </td>
+          <td class="totalColumn">
+            {{DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
+          </td>
+        </tr>
+      </ng-template>
+    </table>
+  </fieldset>
+  <table>
+    <tr class="rightRow">
+      <td class="selectionRow">
+        <md-select placeholder="Year" [(ngModel)]="yearSelected">
+          <md-option *ngFor="let year of this.DL.ReportYears" [value]="year">
+            {{year}}
+          </md-option>
+        </md-select>
+      </td>
+    </tr>
+    <tr class="rightRow">
+      <td>
+        <button md-fab (click)="ReportView()" mdTooltip="View reports" mdTooltipPosition="above"><i class="material-icons">pageview</i></button>
+      </td>
+    </tr>
+  </table>
+</div>

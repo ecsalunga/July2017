@@ -16,6 +16,8 @@ export class ExpenseComponent implements OnInit {
   isToday: boolean;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) { 
+    this.DL.ExpenseSelected = this.DL.ExpensesToday;
+    this.DL.ReportSelected = this.DL.ReportToday;
     this.ReportDate = this.core.numberToDate(parseInt(this.DL.ReportSelected.KeyDay + '000000'));
     this.isToday = true;
   }
@@ -24,14 +26,14 @@ export class ExpenseComponent implements OnInit {
     this.DA.ExpenseInfoSave(this.description, this.amount);
     this.amount = 0;
     this.description = "";
-    this.ReportView();
+    this.ExpenseView();
   }
 
   private setIsToday() {
     this.isToday = (this.core.dateToKeyDay(new Date()) == this.core.dateToKeyDay(this.ReportDate));
   }
 
-  ReportView() {
+  ExpenseView() {
     this.DL.ReportSelected = new ReportInfo();
     this.DL.ReportSelected.KeyDay = this.core.dateToKeyDay(this.ReportDate);
     this.DL.ReportSelected.KeyMonth = this.core.dateToKeyMonth(this.ReportDate);

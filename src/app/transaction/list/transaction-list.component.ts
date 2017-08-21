@@ -21,7 +21,7 @@ export class TransactionListComponent implements OnInit {
     this.core.loadComponent("transaction-detail");
   }
 
-  ReportView() {
+  TransactionView() {
     this.DL.ReportSelected = new ReportInfo();
     this.DL.ReportSelected.KeyDay = this.core.dateToKeyDay(this.ReportDate);
     this.DL.ReportSelected.KeyMonth = this.core.dateToKeyMonth(this.ReportDate);

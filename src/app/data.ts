@@ -16,20 +16,23 @@ export class DataLayer {
     MemberWalkIn: MemberInfo;
 
     Transaction: TransactionInfo;
-    Transactions: Array<TransactionInfo>;
+    TransactionsToday: Array<TransactionInfo>;
     TransactionSelected: Array<TransactionInfo>;
 
     SellInfos: Array<SellInfo>;
     SellInfosAmount: number = 0;
     SellInfosCount: number = 0;
 
-    Expenses: Array<ExpenseInfo>;
+    ExpensesToday: Array<ExpenseInfo>;
     ExpenseSelected: Array<ExpenseInfo>;
     ExpensesAmount: number = 0;
 
-    Date: Date = new Date();
+    Reports: Array<ReportInfo>;
     ReportToday: ReportInfo;
     ReportSelected: ReportInfo;
+    ReportYears: Array<number>;
+    
+    Date: Date = new Date();
 }
 
 @Injectable()
@@ -38,22 +41,31 @@ export class DataAccess {
     MEMBERS: string = "/members";
     SELL_INFOS: string = "/sellInfos";
     TRANSACTIONS: string;
-    SALES: string;
+    REPORTS: string;
     EXPENSES: string;
     KEYDAY: string = "KeyDay";
 
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) { 
         this.DL.ReportToday = new ReportInfo();
         this.DL.ReportSelected = new ReportInfo();
+        this.DL.ReportYears = new Array<number>();
 
         this.DL.ReportToday.KeyDay = this.core.dateToKeyDay(this.DL.Date);
         this.DL.ReportToday.KeyMonth = this.core.dateToKeyMonth(this.DL.Date);
         this.DL.ReportToday.KeyYear = this.DL.Date.getFullYear();
         this.DL.ReportSelected = this.DL.ReportToday;
 
+        for(let x = this.DL.ReportToday.KeyYear - 5; x <= this.DL.ReportToday.KeyYear; x++){
+            this.DL.ReportYears.push(x);
+        }
+
+        this.DL.MemberWalkIn = new MemberInfo();
+        this.DL.MemberWalkIn.Name = "Walk-In";
+        this.DL.MemberWalkIn.key = "Walk-In";
+
         this.TRANSACTIONS = "/transactions/" + this.DL.ReportToday.KeyYear + "/" + this.DL.ReportToday.KeyMonth;
         this.EXPENSES = "/expenses/" + this.DL.ReportToday.KeyYear + "/" + this.DL.ReportToday.KeyMonth;
-        this.SALES = "/reports/" + this.DL.ReportToday.KeyYear;
+        this.REPORTS = "/reports/" + this.DL.ReportToday.KeyYear;
     }
 
     public DataLoad(): void {
@@ -94,31 +106,31 @@ export class DataAccess {
         });
 
         this.af.list(this.TRANSACTIONS, {query: {  orderByChild: this.KEYDAY, equalTo: this.DL.ReportToday.KeyDay}}).subscribe(snapshots => {
-            this.DL.Transactions = new Array<TransactionInfo>();
+            this.DL.TransactionsToday = new Array<TransactionInfo>();
             this.DL.ReportToday.Count = 0;
             this.DL.ReportToday.Amount = 0;
 
             snapshots.forEach(snapshot => {
-                this.DL.Transactions.push(snapshot);
+                this.DL.TransactionsToday.push(snapshot);
 
                 this.DL.ReportToday.Count += snapshot.Count;
                 this.DL.ReportToday.Amount += snapshot.Amount;
             });
-            this.DL.Transactions.reverse();
+            this.DL.TransactionsToday.reverse();
         });
 
         this.af.list(this.EXPENSES, {query: {  orderByChild: this.KEYDAY, equalTo: this.DL.ReportToday.KeyDay}}).subscribe(snapshots => {
-            this.DL.Expenses = new Array<ExpenseInfo>();
+            this.DL.ExpensesToday = new Array<ExpenseInfo>();
             this.DL.ReportToday.ExpenseAmount = 0;
             this.DL.ReportToday.ExpenseCount = 0;
 
             snapshots.forEach(snapshot => {
-                this.DL.Expenses.push(snapshot);
+                this.DL.ExpensesToday.push(snapshot);
 
                 this.DL.ReportToday.ExpenseCount++;
                 this.DL.ReportToday.ExpenseAmount += snapshot.Amount;
             });
-            this.DL.Expenses.reverse();
+            this.DL.ExpensesToday.reverse();
         });
     }
 
@@ -135,9 +147,6 @@ export class DataAccess {
             });
 
             // add walk-in
-            this.DL.MemberWalkIn = new MemberInfo();
-            this.DL.MemberWalkIn.Name = "Walk-In";
-            this.DL.MemberWalkIn.key = "Walk-In";
             this.DL.MemberSelections.push(this.DL.MemberWalkIn);
             this.DL.MemberSelections = this.DL.MemberSelections.concat(this.DL.Members);
         });
@@ -160,6 +169,27 @@ export class DataAccess {
         });
     }
 
+    ReportMonthlyLoad(keyYear: number, keyMonth: number) {
+        this.af.list("/reports/" + keyYear + "/" + keyMonth, {query: {  orderByChild: "KeyMonth", equalTo: keyMonth}}).subscribe(snapshots => {
+            this.DL.Reports = new Array<ReportInfo>();
+            this.DL.ReportSelected = new ReportInfo();
+            this.DL.ReportSelected.Count = 0;
+            this.DL.ReportSelected.Amount = 0;
+            this.DL.ReportSelected.ExpenseCount = 0;
+            this.DL.ReportSelected.ExpenseAmount = 0;
+
+            snapshots.forEach(snapshot => {
+                this.DL.Reports.push(snapshot);
+                this.DL.ReportSelected.Count += snapshot.Count;
+                this.DL.ReportSelected.Amount += snapshot.Amount;
+                this.DL.ReportSelected.ExpenseCount += snapshot.ExpenseCount;
+                this.DL.ReportSelected.ExpenseAmount += snapshot.ExpenseAmount;
+            });
+
+            this.DL.Reports.reverse();
+        });
+    }
+
     ExpenseSelectedLoad(report: ReportInfo) {
         this.af.list("/expenses/" + report.KeyYear + "/" + report.KeyMonth, {query: {  orderByChild: this.KEYDAY, equalTo: report.KeyDay}}).subscribe(snapshots => {
             this.DL.ExpenseSelected = new Array<ExpenseInfo>();
@@ -177,7 +207,7 @@ export class DataAccess {
     }
 
     ReportTodayLoad() {
-        this.af.list(this.SALES, {query: {  orderByChild: this.KEYDAY, equalTo: this.DL.ReportToday.KeyDay}}).first().subscribe(snapshots => {
+        this.af.list(this.REPORTS, {query: {  orderByChild: this.KEYDAY, equalTo: this.DL.ReportToday.KeyDay}}).first().subscribe(snapshots => {
             snapshots.forEach(snapshot => {
                 this.DL.ReportToday =  snapshot;
                 this.DL.ReportToday.key =  snapshot.$key;
@@ -264,11 +294,10 @@ export class DataAccess {
 
     public ReportTodaySave() {
         if (this.DL.ReportToday.key)
-            this.af.list(this.SALES).update(this.DL.ReportToday.key, this.DL.ReportToday);
+            this.af.list(this.REPORTS).update(this.DL.ReportToday.key, this.DL.ReportToday);
         else { 
-            this.af.list(this.SALES).push(this.DL.ReportToday);
+            this.af.list(this.REPORTS).push(this.DL.ReportToday);
             this.ReportTodayLoad();
-        }
-        
+        } 
     }
 }
