@@ -56,13 +56,13 @@ export class DataAccess {
         this.SALES = "/reports/" + this.DL.ReportToday.KeyYear;
     }
 
-    public LoadData(): void {
-        this.LoadReportToday();
-        this.LoadMemberData();
-        this.LoadActiveData();
+    public DataLoad(): void {
+        this.ReportTodayLoad();
+        this.MemberLoad();
+        this.ActiveDataLoad();
     }
 
-    LoadActiveData() {
+    ActiveDataLoad() {
         this.af.list(this.PRODUCTS, {query: {  orderByChild: 'Description'}}).subscribe(snapshots => {
             this.DL.Products = new Array<ProductInfo>();
             this.DL.ProductSelections = new Array<ProductInfo>();
@@ -122,28 +122,28 @@ export class DataAccess {
         });
     }
 
-    LoadMemberData() {
+    MemberLoad() {
         this.af.list(this.MEMBERS, {query: {  orderByChild: 'Name'}}).first().subscribe(snapshots => {
             this.DL.Members = new Array<MemberInfo>();
             this.DL.MemberSelections = new Array<MemberInfo>();
-
-            // add walk-in
-            this.DL.MemberWalkIn = new MemberInfo();
-            this.DL.MemberWalkIn.Name = "Walk-In";
-            this.DL.MemberWalkIn.key = "Walk-In";
-            this.DL.MemberSelections.push(this.DL.MemberWalkIn);
 
             snapshots.forEach(snapshot => {
                 let info = new MemberInfo();
                 info = snapshot;
                 info.key = snapshot.$key;
                 this.DL.Members.push(info);
-                this.DL.MemberSelections.push(info);
             });
+
+            // add walk-in
+            this.DL.MemberWalkIn = new MemberInfo();
+            this.DL.MemberWalkIn.Name = "Walk-In";
+            this.DL.MemberWalkIn.key = "Walk-In";
+            this.DL.MemberSelections.push(this.DL.MemberWalkIn);
+            this.DL.MemberSelections = this.DL.MemberSelections.concat(this.DL.Members);
         });
     }
 
-    LoadTransactionSelected(report: ReportInfo) {
+    TransactionSelectedLoad(report: ReportInfo) {
         this.af.list("/transactions/" + report.KeyYear + "/" + report.KeyMonth, {query: {  orderByChild: this.KEYDAY, equalTo: report.KeyDay}}).subscribe(snapshots => {
             this.DL.TransactionSelected = new Array<TransactionInfo>();
             this.DL.ReportSelected.Count = 0;
@@ -160,7 +160,7 @@ export class DataAccess {
         });
     }
 
-    LoadExpenseSelected(report: ReportInfo) {
+    ExpenseSelectedLoad(report: ReportInfo) {
         this.af.list("/expenses/" + report.KeyYear + "/" + report.KeyMonth, {query: {  orderByChild: this.KEYDAY, equalTo: report.KeyDay}}).subscribe(snapshots => {
             this.DL.ExpenseSelected = new Array<ExpenseInfo>();
             this.DL.ReportSelected.ExpenseAmount = 0;
@@ -176,7 +176,7 @@ export class DataAccess {
         });
     }
 
-    LoadReportToday() {
+    ReportTodayLoad() {
         this.af.list(this.SALES, {query: {  orderByChild: this.KEYDAY, equalTo: this.DL.ReportToday.KeyDay}}).first().subscribe(snapshots => {
             snapshots.forEach(snapshot => {
                 this.DL.ReportToday =  snapshot;
@@ -267,7 +267,7 @@ export class DataAccess {
             this.af.list(this.SALES).update(this.DL.ReportToday.key, this.DL.ReportToday);
         else { 
             this.af.list(this.SALES).push(this.DL.ReportToday);
-            this.LoadReportToday();
+            this.ReportTodayLoad();
         }
         
     }

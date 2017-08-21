@@ -36,7 +36,7 @@ export class ExpenseComponent implements OnInit {
     this.DL.ReportSelected.KeyDay = this.core.dateToKeyDay(this.ReportDate);
     this.DL.ReportSelected.KeyMonth = this.core.dateToKeyMonth(this.ReportDate);
     this.DL.ReportSelected.KeyYear = this.ReportDate.getFullYear();
-    this.DA.LoadExpenseSelected(this.DL.ReportSelected);
+    this.DA.ExpenseSelectedLoad(this.DL.ReportSelected);
     this.setIsToday();
   }
 

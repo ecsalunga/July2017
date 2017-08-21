@@ -33,6 +33,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.core.viewChild = this.viewChild;
-    this.DA.LoadData();
+    this.DA.DataLoad();
   }
 }
