@@ -11,7 +11,7 @@ import { ProductInfo, MemberInfo, SellInfo } from '../models';
 })
 export class SellComponent implements OnInit {
   model: ProductInfo;
-  selectedQuantity: number = 0;
+  selectedQuantity: number = 1;
   quantities: Array<number>;
   selectedMember: MemberInfo = this.DL.MemberWalkIn;
 
