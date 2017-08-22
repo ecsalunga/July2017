@@ -36,10 +36,6 @@ body {
     width: 100%;
     text-align: center;
 }
-
-.main {
-    margin: 10px;
-}
   
 .main md-card {
     margin-bottom: 20px;
@@ -54,7 +50,7 @@ table {
 }
 
 td, th {
-    padding: 5px;
+    padding: 3px;
     text-align: left;
 }
 

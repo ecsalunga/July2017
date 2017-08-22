@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "july2017"
+    "name": "TEMP System"
   },
   "apps": [
     {

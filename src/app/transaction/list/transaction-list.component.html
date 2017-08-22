@@ -8,7 +8,7 @@
             Buyer
           </th>
           <th>
-            Date
+            Time
           </th>
           <th class="totalColumn">
             Count
@@ -28,7 +28,7 @@
             {{ tran.BuyerName }}
           </td>
           <td>
-            {{ this.core.numberToDate(tran.ActionDate) | date : 'short' }}
+            {{ this.core.numberToDate(tran.ActionDate) | date : 'hh:mm a' }}
           </td>
           <td class="totalColumn">
             {{ tran.Count }}
