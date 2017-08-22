@@ -16,6 +16,7 @@ import {
   MdAutocompleteModule,
   MdMenuModule,
   MdToolbarModule,
+  MdIconModule,
   DateAdapter
  } from '@angular/material';
 
@@ -67,6 +68,7 @@ import { ReportComponent } from './report/report.component';
     MdToolbarModule,
     MdDatepickerModule,
     MdNativeDateModule,
+    MdIconModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
