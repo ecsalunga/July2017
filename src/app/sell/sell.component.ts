@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Core } from '../core';
 import { DataAccess, DataLayer } from '../data';
-import { ProductInfo, MemberInfo, SellInfo } from '../models';
+import { ProductInfo, MemberInfo, SellInfo, Permission } from '../models';
 
 @Component({
   selector: 'sell',
@@ -10,12 +10,19 @@ import { ProductInfo, MemberInfo, SellInfo } from '../models';
   styleUrls: ['./sell.component.css']
 })
 export class SellComponent implements OnInit {
+  permission: Permission;
+
   model: ProductInfo;
   selectedQuantity: number = 1;
   quantities: Array<number>;
   selectedMember: MemberInfo = this.DL.MemberWalkIn;
 
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) { }
+  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
+    this.DL.Permissions.forEach(per => {
+      if(per.Name == this.DL.SELL)
+        this.permission = per;
+    });
+  }
 
   AddProduct() {
     let duplicate: SellInfo;

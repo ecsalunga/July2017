@@ -58,6 +58,33 @@ export class ExpenseInfo {
     KeyDay: number;
 }
 
+export class UserInfo {
+    Name: string;
+    Username: string;
+    UID: string;
+    ImageURL: string;
+    AccessTypeID: number;
+}
+
+export class Permission {
+    Name: string;
+    View: boolean;
+    Modify: boolean;
+    Delete: boolean;
+
+    constructor(name: string, view: boolean, modify: boolean, del: boolean) {
+        this.Name = name;
+        this.View = view;
+        this.Modify = modify;
+        this.Delete = del;
+    }
+}
+
+export class AccessType {
+    AccessTypeID: number;
+    Permissions: Array<Permission>;
+}
+
 export class NameValue {
     Name: string;
     Value: any;

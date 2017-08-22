@@ -1,11 +1,18 @@
 import { Injectable, ComponentFactory, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 import { Core } from './core';
-import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, ReportInfo, ExpenseInfo, NameValue } from './models';
+import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, ReportInfo, ExpenseInfo, NameValue, UserInfo, AccessType, Permission } from './models';
 import 'rxjs/add/operator/first';
 
 @Injectable()
 export class DataLayer {
+    PRODUCT: string = "PRODUCT";
+    MEMBER: string = "MEMBER";
+    SELL: string = "SELL";
+    TRANSACTION: string = "TRANSACTION";
+    EXPENSE: string = "EXPENSE";
+    REPORT: string = "REPORT";
+
     Product: ProductInfo;
     Products: Array<ProductInfo>;
     ProductSelections: Array<ProductInfo>;
@@ -33,23 +40,22 @@ export class DataLayer {
     ReportYears: Array<number>;
     Months: Array<NameValue>;
     Date: Date = new Date();
-}
 
-@Injectable()
-export class DataAccess {
-    PRODUCTS: string = "/products";
-    MEMBERS: string = "/members";
-    SELL_INFOS: string = "/sellInfos";
-    TRANSACTIONS: string;
-    REPORTS: string;
-    EXPENSES: string;
-    KEYDAY: string = "KeyDay";
+    User: UserInfo;
+    Permissions: Array<Permission>;
+    AccessTypes: Array<AccessType>;
 
-    constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) { 
-        this.DL.ReportToday = new ReportInfo();
-        this.DL.ReportSelected = new ReportInfo();
-        this.DL.ReportYears = new Array<number>();
-        this.DL.Months = [ 
+    constructor(private core: Core) {
+        this.ReportToday = new ReportInfo();
+        this.ReportSelected = new ReportInfo();
+        this.ReportYears = new Array<number>();
+
+        this.ReportToday.KeyDay = this.core.dateToKeyDay(this.Date);
+        this.ReportToday.KeyMonth = this.core.dateToKeyMonth(this.Date);
+        this.ReportToday.KeyYear = this.Date.getFullYear();
+        this.ReportSelected = this.ReportToday;
+
+        this.Months = [ 
             new NameValue("January", 1), 
             new NameValue("February", 2), 
             new NameValue("March", 3), 
@@ -64,19 +70,64 @@ export class DataAccess {
             new NameValue("December", 12)
         ];
 
-        this.DL.ReportToday.KeyDay = this.core.dateToKeyDay(this.DL.Date);
-        this.DL.ReportToday.KeyMonth = this.core.dateToKeyMonth(this.DL.Date);
-        this.DL.ReportToday.KeyYear = this.DL.Date.getFullYear();
-        this.DL.ReportSelected = this.DL.ReportToday;
-
-        for(let x = this.DL.ReportToday.KeyYear - 5; x <= this.DL.ReportToday.KeyYear; x++){
-            this.DL.ReportYears.push(x);
+        for(let x = this.ReportToday.KeyYear - 5; x <= this.ReportToday.KeyYear; x++) {
+            this.ReportYears.push(x);
         }
 
-        this.DL.MemberWalkIn = new MemberInfo();
-        this.DL.MemberWalkIn.Name = "Walk-In";
-        this.DL.MemberWalkIn.key = "Walk-In";
+        this.MemberWalkIn = new MemberInfo();
+        this.MemberWalkIn.Name = "Walk-In";
+        this.MemberWalkIn.key = "Walk-In";
 
+        this.User = new UserInfo();
+        this.User.Name = "Emmanuel Salunga";
+        this.User.Username = "ecsalunga";
+        this.User.AccessTypeID = 1;
+
+        // access 1
+        this.AccessTypes = new Array<AccessType>();
+        let access = new AccessType();
+        access.AccessTypeID = 1;
+        access.Permissions = new Array<Permission>();
+        access.Permissions.push(new Permission(this.PRODUCT, true, true, true));
+        access.Permissions.push(new Permission(this.MEMBER, true, true, true));
+        access.Permissions.push(new Permission(this.SELL, true, true, true));
+        access.Permissions.push(new Permission(this.TRANSACTION, true, true, true));
+        access.Permissions.push(new Permission(this.EXPENSE, true, true, true));
+        access.Permissions.push(new Permission(this.REPORT, true, true, true));
+        this.AccessTypes.push(access);
+
+        // access 2
+        access = new AccessType();
+        access.AccessTypeID = 2;
+        access.Permissions = new Array<Permission>();
+        access.Permissions.push(new Permission(this.PRODUCT, true, true, false));
+        access.Permissions.push(new Permission(this.MEMBER, true, true, false));
+        access.Permissions.push(new Permission(this.SELL, true, true, false));
+        access.Permissions.push(new Permission(this.TRANSACTION, false, false, false));
+        access.Permissions.push(new Permission(this.EXPENSE, true, true, false));
+        access.Permissions.push(new Permission(this.REPORT, false, false, false));
+        this.AccessTypes.push(access);
+    }
+
+    public SetPermission(accessTypeID: number) {
+        this.AccessTypes.forEach(access =>  {
+            if(access.AccessTypeID == accessTypeID) 
+                this.Permissions = access.Permissions;
+        });
+    }
+}
+
+@Injectable()
+export class DataAccess {
+    PRODUCTS: string = "/products";
+    MEMBERS: string = "/members";
+    SELL_INFOS: string = "/sellInfos";
+    TRANSACTIONS: string;
+    REPORTS: string;
+    EXPENSES: string;
+    KEYDAY: string = "KeyDay";
+
+    constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) { 
         this.TRANSACTIONS = "/transactions/" + this.DL.ReportToday.KeyYear + "/" + this.DL.ReportToday.KeyMonth;
         this.EXPENSES = "/expenses/" + this.DL.ReportToday.KeyYear + "/" + this.DL.ReportToday.KeyMonth;
         this.REPORTS = "/reports/" + this.DL.ReportToday.KeyYear;
@@ -86,6 +137,8 @@ export class DataAccess {
         this.ReportTodayLoad();
         this.MemberLoad();
         this.ActiveDataLoad();
+
+        this.DL.SetPermission(this.DL.User.AccessTypeID);
     }
 
     ActiveDataLoad() {
