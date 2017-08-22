@@ -57,3 +57,13 @@ export class ExpenseInfo {
     ActionDate: number;
     KeyDay: number;
 }
+
+export class NameValue {
+    Name: string;
+    Value: any;
+
+    constructor(name: string, value: any){
+        this.Name = name;
+        this.Value = value;
+    }
+}

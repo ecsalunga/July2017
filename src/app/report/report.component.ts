@@ -11,15 +11,20 @@ import { ExpenseInfo, ReportInfo } from '../models';
 })
 export class ReportComponent implements OnInit {
   yearSelected: number;
-  month: number;
+  monthSelected: number;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) { 
     this.yearSelected = this.DL.Date.getFullYear();
-    this.month = this.DL.Date.getMonth()+1;
+    this.monthSelected = this.DL.Date.getMonth()+1;
+    this.ReportView();
   }
 
   ReportView() {
-    this.DA.ReportMonthlyLoad(this.yearSelected, this.month)
+    this.DA.ReportMonthlyLoad(this.yearSelected, this.monthSelected)
+  }
+
+  getDate(keyDay: number): Date {
+    return this.core.numberToDate(parseInt(keyDay + '000000'))
   }
 
   ngOnInit() {

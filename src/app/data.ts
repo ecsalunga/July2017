@@ -1,7 +1,7 @@
 import { Injectable, ComponentFactory, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 import { Core } from './core';
-import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, ReportInfo, ExpenseInfo } from './models';
+import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, ReportInfo, ExpenseInfo, NameValue } from './models';
 import 'rxjs/add/operator/first';
 
 @Injectable()
@@ -31,7 +31,7 @@ export class DataLayer {
     ReportToday: ReportInfo;
     ReportSelected: ReportInfo;
     ReportYears: Array<number>;
-    
+    Months: Array<NameValue>;
     Date: Date = new Date();
 }
 
@@ -49,6 +49,20 @@ export class DataAccess {
         this.DL.ReportToday = new ReportInfo();
         this.DL.ReportSelected = new ReportInfo();
         this.DL.ReportYears = new Array<number>();
+        this.DL.Months = [ 
+            new NameValue("January", 1), 
+            new NameValue("February", 2), 
+            new NameValue("March", 3), 
+            new NameValue("April", 4),
+            new NameValue("May", 5),
+            new NameValue("June", 6),
+            new NameValue("July", 7),
+            new NameValue("August", 8),
+            new NameValue("September", 9),
+            new NameValue("October", 10),
+            new NameValue("November", 11),
+            new NameValue("December", 12)
+        ];
 
         this.DL.ReportToday.KeyDay = this.core.dateToKeyDay(this.DL.Date);
         this.DL.ReportToday.KeyMonth = this.core.dateToKeyMonth(this.DL.Date);
@@ -169,8 +183,8 @@ export class DataAccess {
         });
     }
 
-    ReportMonthlyLoad(keyYear: number, keyMonth: number) {
-        this.af.list("/reports/" + keyYear + "/" + keyMonth, {query: {  orderByChild: "KeyMonth", equalTo: keyMonth}}).subscribe(snapshots => {
+    ReportMonthlyLoad(selectedYear: number, selectedMonth: number) {
+        this.af.list("/reports/" + selectedYear, {query: {  orderByChild: "KeyMonth", equalTo: parseInt(selectedYear + this.core.az(selectedMonth))}}).subscribe(snapshots => {
             this.DL.Reports = new Array<ReportInfo>();
             this.DL.ReportSelected = new ReportInfo();
             this.DL.ReportSelected.Count = 0;

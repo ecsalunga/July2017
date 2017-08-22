@@ -59,7 +59,7 @@ export class Core {
         return new Date(year, month-1, day, hour, minute, second);
     }
 
-    private az(val: number) : string {
+    public az(val: number) : string {
         let num = val.toString();
         if(num.length < 2)
             num = "0" + num;

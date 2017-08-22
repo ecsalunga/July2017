@@ -4,17 +4,17 @@
     <table>
       <thead>
         <tr>
-          <th class="totalColumn">
-            Sales Count
+          <th>
+            Date
           </th>
           <th class="totalColumn">
-            Sales Amount
+            Sales
           </th>
           <th class="totalColumn">
-            Expenses Amount
+            Expenses
           </th>
           <th class="totalColumn">
-            Expenses Amount
+              Diff
           </th>
         </tr>
       </thead>
@@ -28,32 +28,30 @@
       <ng-template #showReport>
         <ng-container *ngFor="let info of DL.Reports">
           <tr>
-            <td class="totalColumn">
-              {{info.Count | number:'1.2-2'}}
+            <td>
+                {{ getDate(info.KeyDay) | date : 'yyyy-MM-dd' }}
             </td>
             <td class="totalColumn">
               {{info.Amount | number:'1.2-2'}}
             </td>
             <td class="totalColumn">
-              {{info.ExpenseCount | number:'1.2-2'}}
+              {{info.ExpenseAmount | number:'1.2-2'}}
             </td>
             <td class="totalColumn">
-              {{info.ExpenseAmount | number:'1.2-2'}}
+              {{info.Amount - info.ExpenseAmount | number:'1.2-2'}}
             </td>
           </tr>
         </ng-container>
         <tr class="blankCell">
-          <td class="totalColumn">
-            {{DL.ReportSelected.Count | number:'1.2-2'}}
-          </td>
+          <td>Total</td>
           <td class="totalColumn">
             {{DL.ReportSelected.Amount | number:'1.2-2'}}
           </td>
           <td class="totalColumn">
-            {{DL.ReportSelected.ExpenseCount | number:'1.2-2'}}
+            {{DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
           </td>
           <td class="totalColumn">
-            {{DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
+            {{DL.ReportSelected.Amount - DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
           </td>
         </tr>
       </ng-template>
@@ -63,8 +61,13 @@
     <tr class="rightRow">
       <td class="selectionRow">
         <md-select placeholder="Year" [(ngModel)]="yearSelected">
-          <md-option *ngFor="let year of this.DL.ReportYears" [value]="year">
+          <md-option *ngFor="let year of DL.ReportYears" [value]="year">
             {{year}}
+          </md-option>
+        </md-select>
+        <md-select placeholder="Month" [(ngModel)]="monthSelected">
+          <md-option *ngFor="let month of DL.Months" [value]="month.Value">
+            {{month.Name}}
           </md-option>
         </md-select>
       </td>
