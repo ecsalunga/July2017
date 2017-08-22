@@ -86,10 +86,10 @@
     </tr>
     <tr class="rightRow">
       <td>
-        <button md-fab [disabled]="!selectedQuantity" (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
+        <button md-fab [disabled]="!model || !selectedQuantity" (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
       </td>
       <td>
-        <button md-fab [disabled]="!DL.SellInfosCount" (click)="Done()" mdTooltip="Done" mdTooltipPosition="above"><i class="material-icons">payment</i></button>
+        <button md-fab [disabled]="!DL.SellInfosCount" (click)="Done()" mdTooltip="Done" mdTooltipPosition="above"><i class="material-icons">done_all</i></button>
       </td>
     </tr>
   </table>

@@ -13,12 +13,17 @@ export class TransactionListComponent implements OnInit {
   ReportDate: Date;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
+    if (this.DL.SOURCE == this.DL.MENU) {
+      this.DL.TransactionSelected = this.DL.TransactionsToday;
+      this.DL.ReportSelected = this.DL.ReportToday;
+    }
+    
     this.ReportDate = this.core.numberToDate(parseInt(this.DL.ReportSelected.KeyDay + '000000'));
   }
 
   SelectTransaction(info: TransactionInfo) {
     this.DL.Transaction = info;
-    this.core.loadComponent("transaction-detail");
+    this.DL.LoadFromLink("transaction-detail");
   }
 
   TransactionView() {
@@ -28,7 +33,7 @@ export class TransactionListComponent implements OnInit {
     this.DL.ReportSelected.KeyYear = this.ReportDate.getFullYear();
     this.DA.TransactionSelectedLoad(this.DL.ReportSelected);
   }
-  
+
   ngOnInit() {
   }
 

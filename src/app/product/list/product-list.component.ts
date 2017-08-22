@@ -22,12 +22,12 @@ export class ProductListComponent implements OnInit {
 
   SelectProduct(product: ProductInfo) {
     this.DL.Product = product;
-    this.core.loadComponent("product-detail");
+    this.DL.LoadFromLink("product-detail");
   }
 
   AddProduct(){
     this.DL.Product = null;
-    this.core.loadComponent("product-detail");
+    this.DL.LoadFromLink("product-detail");
   }
 
   productSelected() {

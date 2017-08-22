@@ -11,7 +11,6 @@ import { ProductInfo, MemberInfo, SellInfo, Permission } from '../models';
 })
 export class SellComponent implements OnInit {
   permission: Permission;
-
   model: ProductInfo;
   selectedQuantity: number = 1;
   quantities: Array<number>;
@@ -57,7 +56,7 @@ export class SellComponent implements OnInit {
   }
 
   clearSelection() {
-    this.model = new ProductInfo();
+    this.model = null;
     this.quantities = new Array<number>();
     this.selectedQuantity = 1;
   }

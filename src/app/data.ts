@@ -13,6 +13,10 @@ export class DataLayer {
     EXPENSE: string = "EXPENSE";
     REPORT: string = "REPORT";
 
+    MENU: string = "MENU";
+    LINK: string = "LINK";
+    SOURCE: string;
+
     Product: ProductInfo;
     Products: Array<ProductInfo>;
     ProductSelections: Array<ProductInfo>;
@@ -114,6 +118,16 @@ export class DataLayer {
             if(access.AccessTypeID == accessTypeID) 
                 this.Permissions = access.Permissions;
         });
+    }
+
+    LoadFromMenu(name: string) {
+        this.SOURCE = this.MENU;
+        this.core.loadComponent(name);
+    }
+
+    LoadFromLink(name: string) {
+        this.SOURCE = this.LINK;
+        this.core.loadComponent(name);
     }
 }
 

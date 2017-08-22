@@ -24,7 +24,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   LoadList() {
-    this.core.loadComponent("product-list");
+    this.DL.LoadFromLink("product-list");
   }
 
   ngOnInit() {

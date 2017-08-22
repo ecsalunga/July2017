@@ -14,7 +14,7 @@ export class TransactionDetailComponent implements OnInit {
   constructor(private core: Core, private DL: DataLayer) { }
   
   LoadList() {
-    this.core.loadComponent("transaction-list");
+    this.DL.LoadFromLink("transaction-list");
   }
 
   ngOnInit() {

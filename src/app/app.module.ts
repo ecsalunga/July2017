@@ -14,6 +14,8 @@ import {
   MdDatepickerModule,
   MdNativeDateModule,
   MdAutocompleteModule,
+  MdMenuModule,
+  MdToolbarModule,
   DateAdapter
  } from '@angular/material';
 
@@ -61,6 +63,8 @@ import { ReportComponent } from './report/report.component';
     MdTooltipModule,
     MdAutocompleteModule,
     MdSelectModule,
+    MdMenuModule,
+    MdToolbarModule,
     MdDatepickerModule,
     MdNativeDateModule,
     FormsModule,

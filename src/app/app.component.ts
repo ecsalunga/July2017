@@ -14,24 +14,13 @@ export class AppComponent implements OnInit {
 
   constructor(public core: Core, private DA: DataAccess, private DL: DataLayer) { }
 
-  loadTester(name: string) {
-    this.core.loadComponent(name);
-  }
-
-  loadTransaction(name: string) {
-    this.DL.TransactionSelected = this.DL.TransactionsToday;
-    this.DL.ReportSelected = this.DL.ReportToday;
-    
-    this.core.loadComponent(name);
-  }
-
-  loadExpense(name: string) {
-    
-    this.core.loadComponent(name);
+  LoadPage(name: string) {
+    this.DL.LoadFromMenu(name);
   }
 
   ngOnInit() {
     this.core.viewChild = this.viewChild;
     this.DA.DataLoad();
+    this.LoadPage('sell');
   }
 }

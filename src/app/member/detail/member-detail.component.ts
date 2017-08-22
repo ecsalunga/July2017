@@ -31,7 +31,7 @@ export class MemberDetailComponent implements OnInit {
   }
 
   LoadList() {
-    this.core.loadComponent("member-list");
+    this.DL.LoadFromLink("member-list");
   }
 
   ngOnInit() {

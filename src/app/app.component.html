@@ -1,9 +1,56 @@
-<div>
-  <button md-raised-button (click)="loadTester('product-list')">Product</button>
-  <button md-raised-button (click)="loadTester('member-list')">Member</button>
-  <button md-raised-button (click)="loadTester('sell')">Sell</button>
-  <button md-raised-button (click)="loadTransaction('transaction-list')">Transaction</button>
-  <button md-raised-button (click)="loadExpense('expense')">Expense</button>
-  <button md-raised-button (click)="loadExpense('report')">Report</button>
+<md-toolbar color="primary">
+  <div>TEMP System</div>
+  <div class="h-spacer"></div>
+  <button md-icon-button [mdMenuTriggerFor]="menu">
+    <i class="material-icons">more_vert</i>
+  </button>
+  <md-menu #menu="mdMenu">
+    <button md-menu-item (click)="LoadPage('product-list')">
+      <i class="material-icons">note</i>
+      <span>Product</span>
+    </button>
+    <button md-menu-item>
+      <i class="material-icons">fingerprint</i>
+      <span>Login</span>
+    </button>
+  </md-menu>
+</md-toolbar>
+<div class="root">
+  <div class="object">
+    <md-toolbar>
+      <div class="tools">
+        <button class="objectActive" md-button (click)="LoadPage('product-list')" mdTooltip="Products" mdTooltipPosition="above">
+        <i class="material-icons">book</i>
+        <span>Product</span>
+      </button>
+        <button class="objectActive" md-button (click)="LoadPage('member-list')" mdTooltip="Members" mdTooltipPosition="above">
+        <i class="material-icons">card_membership</i>
+        <span>Member</span>
+      </button>
+        <button class="objectActive" md-button (click)="LoadPage('sell')" mdTooltip="Sell" mdTooltipPosition="above">
+        <i class="material-icons">shopping_cart</i>
+        <span>Sell</span>
+      </button>
+        <button class="objectActive" md-button (click)="LoadPage('transaction-list')" mdTooltip="Transaction" mdTooltipPosition="above">
+        <i class="material-icons">payment</i>
+        <span>Transaction</span>
+      </button>
+        <button class="objectActive" md-button (click)="LoadPage('expense')" mdTooltip="Expense" mdTooltipPosition="above">
+        <i class="material-icons">broken_image</i>
+        <span>Expense</span>
+      </button>
+        <button class="objectActive" md-button (click)="LoadPage('report')" mdTooltip="Report" mdTooltipPosition="above">
+        <i class="material-icons">note</i>
+        <span>Report</span>
+      </button>
+      </div>
+    </md-toolbar>
+    <md-card>
+      <md-card-content>
+        <div class="main">
+          <ng-container #viewChild></ng-container>
+        </div>
+      </md-card-content>
+    </md-card>
+  </div>
 </div>
-<ng-container #viewChild></ng-container>

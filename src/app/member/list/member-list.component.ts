@@ -14,12 +14,12 @@ export class MemberListComponent implements OnInit {
 
   SelectMember(member: MemberInfo) {
     this.DL.Member = member;
-    this.core.loadComponent("member-detail");
+    this.DL.LoadFromLink("member-detail");
   }
 
   AddMember(){
     this.DL.Member = null;
-    this.core.loadComponent("member-detail");
+    this.DL.LoadFromLink("member-detail");
   }
 
   ngOnInit() { }
