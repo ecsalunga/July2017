@@ -34,6 +34,7 @@ export class DataLayer {
     SellInfosAmount: number = 0;
     SellInfosCount: number = 0;
 
+    ExpenseTypes: Array<string>;
     ExpensesToday: Array<ExpenseInfo>;
     ExpenseSelected: Array<ExpenseInfo>;
     ExpensesAmount: number = 0;
@@ -139,6 +140,7 @@ export class DataAccess {
     TRANSACTIONS: string;
     REPORTS: string;
     EXPENSES: string;
+    EXPENSE_TYPES: string = "/expenses/types";
     KEYDAY: string = "KeyDay";
 
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) { 
@@ -150,6 +152,7 @@ export class DataAccess {
     public DataLoad(): void {
         this.ReportTodayLoad();
         this.MemberLoad();
+        this.ExpensesTypeLoad();
         this.ActiveDataLoad();
 
         this.DL.SetPermission(this.DL.User.AccessTypeID);
@@ -230,6 +233,15 @@ export class DataAccess {
             // add walk-in
             this.DL.MemberSelections.push(this.DL.MemberWalkIn);
             this.DL.MemberSelections = this.DL.MemberSelections.concat(this.DL.Members);
+        });
+    }
+
+    ExpensesTypeLoad() {
+        this.af.object(this.EXPENSE_TYPES).first().subscribe(snapshots => {
+            this.DL.ExpenseTypes = new Array<string>();
+            snapshots.forEach(snapshot => {
+                this.DL.ExpenseTypes.push(snapshot);
+            });
         });
     }
 
@@ -371,6 +383,13 @@ export class DataAccess {
         info.KeyDay = this.core.dateToKeyDay(this.DL.Date);
         this.af.list(this.EXPENSES).push(info);
         this.ReportTodaySave();
+
+        // add record for auto complete
+        if(this.DL.ExpenseTypes.indexOf(description) === -1) {
+            this.DL.ExpenseTypes.push(description);
+            this.af.object(this.EXPENSE_TYPES).update(this.DL.ExpenseTypes);
+            this.ExpensesTypeLoad();
+        }
     }
 
     public ReportTodaySave() {

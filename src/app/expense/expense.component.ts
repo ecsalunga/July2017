@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl} from '@angular/forms';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
 
 import { Core } from '../core';
 import { DataAccess, DataLayer } from '../data';
@@ -10,6 +13,9 @@ import { ExpenseInfo, ReportInfo } from '../models';
   styleUrls: ['./expense.component.css']
 })
 export class ExpenseComponent implements OnInit {
+  ctrl: FormControl;
+  filteredExpenses: any;
+
   description: string;
   amount: number;
   ReportDate: Date;
@@ -20,11 +26,20 @@ export class ExpenseComponent implements OnInit {
     this.DL.ReportSelected = this.DL.ReportToday;
     this.ReportDate = this.core.numberToDate(parseInt(this.DL.ReportSelected.KeyDay + '000000'));
     this.isToday = true;
+
+    this.ctrl = new FormControl();
+    this.filteredExpenses = this.ctrl.valueChanges
+        .startWith(null)
+        .map(name => this.filterExpenses(name));
+  }
+
+  filterExpenses(val: string) {
+    return val ? this.DL.ExpenseTypes.filter(s => s.toLowerCase().indexOf(val.toLowerCase()) === 0) : this.DL.ExpenseTypes;
   }
 
   AddExpense() {
     this.DA.ExpenseInfoSave(this.description, this.amount);
-    this.amount = 0;
+    this.amount = null;
     this.description = "";
     this.ExpenseView();
   }

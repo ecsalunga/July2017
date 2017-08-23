@@ -53,8 +53,13 @@
     <tr class="rightRow">
       <td class="selectionRow" style="width: 60%" [hidden]="!isToday">
         <md-input-container>
-          <input id="txtDescription" mdInput placeholder="Description" [(ngModel)]="description" />
+          <input id="txtDescription" mdInput placeholder="Description" [mdAutocomplete]="auto" [formControl]="ctrl" [(ngModel)]="description">
         </md-input-container>
+        <md-autocomplete #auto="mdAutocomplete">
+          <md-option *ngFor="let expense of filteredExpenses | async" [value]="expense">
+            {{ expense }}
+          </md-option>
+        </md-autocomplete>
         <md-input-container>
           <input id="txtAmount" type="number" mdInput placeholder="Amount" [(ngModel)]="amount" />
         </md-input-container>
