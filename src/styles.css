@@ -8,8 +8,12 @@ body {
     font-variant: normal;
 }
 
-.object {
-    margin: 10px;
+.main {
+    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    min-width: 345px;
     background: #fff;
     border-radius: 2px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -28,10 +32,6 @@ body {
 legend {
     font-size: 16px;
     font-weight: bold;
-}
-
-.main md-card {
-    margin-bottom: 20px;
 }
 
 .h-spacer {
