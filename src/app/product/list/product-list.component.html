@@ -1,66 +1,64 @@
 <div>
-  <fieldset>
-    <legend>Product List</legend>
-    <table>
-      <thead>
-        <tr>
-          <th>
-            Description
-          </th>
-          <th>
-            Price
-          </th>
-          <th>
-            Quantity
-          </th>
-          <th></th>
-          <th>
-            Action
-          </th>
-        </tr>
-      </thead>
-      <ng-container *ngFor="let product of DL.Products">
-        <tr>
-          <td>
-            {{product.Description}}
-          </td>
-          <td>
-            {{product.SellPrice | number:'1.2-2'}}
-          </td>
-          <td class="{{ (product.Quantity > product.QuantityNotify) ?  'quantityOK' : 'quantityNotify' }}">
-            {{product.Quantity}}
-          </td>
-          <td></td>
-          <td>
-            <button md-mini-fab (click)="SelectProduct(product)" mdTooltip="View"><i class="material-icons">pageview</i></button>
-          </td>
-        </tr>
-      </ng-container>
-    </table>
-  </fieldset>
   <table>
-      <tr class="rightRow">
-        <td class="selectionRow" style="width: 60%">
-          <md-select class="product" placeholder="Product" [(ngModel)]="model" (change)="productSelected()">
-            <md-option *ngFor="let product of DL.Products" [value]="product">
-              {{ product.Description }} ({{ product.Code }})
-            </md-option>
-          </md-select>
-          <md-select placeholder="Quantity" [(ngModel)]="selectedQuantity">
-            <md-option *ngFor="let quantity of quantities" [value]="quantity">
-              {{quantity}}
-            </md-option>
-          </md-select>
+    <thead>
+      <tr>
+        <th>
+          Description
+        </th>
+        <th>
+          Price
+        </th>
+        <th>
+          Quantity
+        </th>
+        <th></th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <ng-container *ngFor="let product of DL.Products">
+      <tr>
+        <td>
+          {{product.Description}}
+        </td>
+        <td>
+          {{product.SellPrice | number:'1.2-2'}}
+        </td>
+        <td class="{{ (product.Quantity > product.QuantityNotify) ?  'quantityOK' : 'quantityNotify' }}">
+          {{product.Quantity}}
         </td>
         <td></td>
-      </tr>
-      <tr class="rightRow">
         <td>
-          <button md-fab [disabled]="!selectedQuantity || !model" (click)="SuppyProduct()" mdTooltip="Add to suppy" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
-        </td>
-        <td>
-          <button md-fab (click)="AddProduct()" mdTooltip="Add" mdTooltipPosition="above"><i class="material-icons">note_add</i></button>
+          <button md-mini-fab (click)="SelectProduct(product)" mdTooltip="View"><i class="material-icons">pageview</i></button>
         </td>
       </tr>
-    </table>
+    </ng-container>
+  </table>
+  <div class="hSpacer"></div>
+  <table [hidden]="!DL.ProductPermission.Modify">
+    <tr class="rightRow">
+      <td class="selectionRow" style="width: 60%">
+        <md-select class="product" placeholder="Product" [(ngModel)]="model" (change)="productSelected()">
+          <md-option *ngFor="let product of DL.Products" [value]="product">
+            {{ product.Description }} ({{ product.Code }})
+          </md-option>
+        </md-select>
+        <md-select placeholder="Quantity" [(ngModel)]="selectedQuantity">
+          <md-option *ngFor="let quantity of quantities" [value]="quantity">
+            {{quantity}}
+          </md-option>
+        </md-select>
+      </td>
+      <td></td>
+    </tr>
+    <tr class="rightRow">
+      <td>
+        <button md-fab [disabled]="!selectedQuantity || !model" (click)="SuppyProduct()" mdTooltip="Add to suppy" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
+      </td>
+      <td>
+        <button md-fab (click)="AddProduct()" mdTooltip="Add" mdTooltipPosition="above"><i class="material-icons">note_add</i></button>
+      </td>
+    </tr>
+  </table>
 </div>

@@ -58,6 +58,6 @@ export class ExpenseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.DL.TITLE = "Expenses";
   }
-
 }

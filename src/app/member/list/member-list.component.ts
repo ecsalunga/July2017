@@ -22,6 +22,7 @@ export class MemberListComponent implements OnInit {
     this.DL.LoadFromLink("member-detail");
   }
 
-  ngOnInit() { }
-
+  ngOnInit() { 
+    this.DL.TITLE = "Member List";
+  }
 }

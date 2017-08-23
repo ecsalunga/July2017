@@ -1,62 +1,60 @@
 <div>
-  <fieldset>
-    <legend>Reports</legend>
-    <table>
-      <thead>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Date
+        </th>
+        <th class="totalColumn">
+          Sales
+        </th>
+        <th class="totalColumn">
+          Expenses
+        </th>
+        <th class="totalColumn">
+          Diff
+        </th>
+      </tr>
+    </thead>
+    <ng-container *ngIf="DL.ReportSelected.Count < 1;else showReport">
+      <tr class="blankCell">
+        <td colspan="4">
+          [ no item to show ]
+        </td>
+      </tr>
+    </ng-container>
+    <ng-template #showReport>
+      <ng-container *ngFor="let info of DL.Reports">
         <tr>
-          <th>
-            Date
-          </th>
-          <th class="totalColumn">
-            Sales
-          </th>
-          <th class="totalColumn">
-            Expenses
-          </th>
-          <th class="totalColumn">
-              Diff
-          </th>
-        </tr>
-      </thead>
-      <ng-container *ngIf="DL.ReportSelected.Count < 1;else showReport">
-        <tr class="blankCell">
-          <td colspan="4">
-            [ no item to show ]
+          <td>
+            {{ getDate(info.KeyDay) | date : 'yyyy-MM-dd' }}
+          </td>
+          <td class="totalColumn">
+            {{info.Amount | number:'1.2-2'}}
+          </td>
+          <td class="totalColumn">
+            {{info.ExpenseAmount | number:'1.2-2'}}
+          </td>
+          <td class="totalColumn">
+            {{info.Amount - info.ExpenseAmount | number:'1.2-2'}}
           </td>
         </tr>
       </ng-container>
-      <ng-template #showReport>
-        <ng-container *ngFor="let info of DL.Reports">
-          <tr>
-            <td>
-                {{ getDate(info.KeyDay) | date : 'yyyy-MM-dd' }}
-            </td>
-            <td class="totalColumn">
-              {{info.Amount | number:'1.2-2'}}
-            </td>
-            <td class="totalColumn">
-              {{info.ExpenseAmount | number:'1.2-2'}}
-            </td>
-            <td class="totalColumn">
-              {{info.Amount - info.ExpenseAmount | number:'1.2-2'}}
-            </td>
-          </tr>
-        </ng-container>
-        <tr class="blankCell">
-          <td>Total</td>
-          <td class="totalColumn">
-            {{DL.ReportSelected.Amount | number:'1.2-2'}}
-          </td>
-          <td class="totalColumn">
-            {{DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
-          </td>
-          <td class="totalColumn">
-            {{DL.ReportSelected.Amount - DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
-          </td>
-        </tr>
-      </ng-template>
-    </table>
-  </fieldset>
+      <tr class="blankCell">
+        <td>Total</td>
+        <td class="totalColumn">
+          {{DL.ReportSelected.Amount | number:'1.2-2'}}
+        </td>
+        <td class="totalColumn">
+          {{DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
+        </td>
+        <td class="totalColumn">
+          {{DL.ReportSelected.Amount - DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
+        </td>
+      </tr>
+    </ng-template>
+  </table>
+  <div class="hSpacer"></div>
   <table>
     <tr class="rightRow">
       <td class="selectionRow">

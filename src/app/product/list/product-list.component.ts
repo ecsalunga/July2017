@@ -42,6 +42,7 @@ export class ProductListComponent implements OnInit {
     this.selectedQuantity = 0;
   }
 
-  ngOnInit() { }
-
+  ngOnInit() { 
+    this.DL.TITLE = "Product List";
+  }
 }

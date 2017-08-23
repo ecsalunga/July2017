@@ -1,68 +1,66 @@
 <div>
-  <fieldset>
-    <legend>Cart Items</legend>
-    <table>
-      <thead>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Description
+        </th>
+        <th class="totalColumn">
+          Price / QTY
+        </th>
+        <th class="totalColumn">
+          Total
+        </th>
+        <th></th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <ng-container *ngIf="DL.SellInfosCount < 1;else showCart">
+      <tr class="blankCell">
+        <td colspan="5">
+          [ no item to show ]
+        </td>
+      </tr>
+    </ng-container>
+    <ng-template #showCart>
+      <ng-container *ngFor="let info of DL.SellInfos">
         <tr>
-          <th>
-            Description
-          </th>
-          <th class="totalColumn">
-            Price / QTY
-          </th>
-          <th class="totalColumn">
-            Total
-          </th>
-          <th></th>
-          <th>
-            Action
-          </th>
-        </tr>
-      </thead>
-      <ng-container *ngIf="DL.SellInfosCount < 1;else showCart">
-        <tr class="blankCell">
-          <td colspan="5">
-            [ no item to show ]
+          <td>
+            {{info.Description}}
+          </td>
+          <td class="totalColumn">
+            {{ info.Price | number:'1.2-2' }} x {{ info.Quantity }}
+          </td>
+          <td class="totalColumn">
+            {{info.Total | number:'1.2-2'}}
+          </td>
+          <td></td>
+          <td>
+            <ng-container *ngIf="info.Price">
+              <button md-mini-fab [disabled]="!DL.SellPermission.Delete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><i class="material-icons">delete</i></button>
+            </ng-container>
           </td>
         </tr>
       </ng-container>
-      <ng-template #showCart>
-        <ng-container *ngFor="let info of DL.SellInfos">
-          <tr>
-            <td>
-              {{info.Description}}
-            </td>
-            <td class="totalColumn">
-              {{ info.Price | number:'1.2-2' }} x {{ info.Quantity }}
-            </td>
-            <td class="totalColumn">
-              {{info.Total | number:'1.2-2'}}
-            </td>
-            <td></td>
-            <td>
-              <ng-container *ngIf="info.Price">
-                <button md-mini-fab [disabled]="!permission.Delete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><i class="material-icons">delete</i></button>
-              </ng-container>
-            </td>
-          </tr>
-        </ng-container>
-        <tr class="blankCell">
-          <td>
-            Total
-          </td>
-          <td class="totalColumn">
-            {{ DL.SellInfosCount }}
-          </td>
-          <td class="totalColumn">
-            {{ DL.SellInfosAmount | number:'1.2-2'}}
-          </td>
-          <td></td>
-          <td></td>
-        </tr>
-      </ng-template>
-    </table>
-  </fieldset>
-  <table>
+      <tr class="blankCell">
+        <td>
+          Total
+        </td>
+        <td class="totalColumn">
+          {{ DL.SellInfosCount }}
+        </td>
+        <td class="totalColumn">
+          {{ DL.SellInfosAmount | number:'1.2-2'}}
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
+    </ng-template>
+  </table>
+  <div class="hSpacer"></div>
+  <table [hidden]="!DL.SellPermission.Modify">
     <tr class="rightRow">
       <td class="selectionRow" style="width: 60%">
         <md-select class="product" placeholder="Product" [(ngModel)]="model" (change)="productSelected()">

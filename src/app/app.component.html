@@ -5,19 +5,27 @@
     <md-icon>more_vert</md-icon>
   </button>
   <md-menu #menu="mdMenu">
-    <button md-menu-item (click)="LoadPage('expense')">
+    <button md-menu-item (click)="LoadPage('sell')" [disabled]="!DL.SellPermission.View">
+      <md-icon>shopping_cart</md-icon>
+      <span>Sell</span>
+    </button>
+    <button md-menu-item (click)="LoadPage('transaction-list')" [disabled]="!DL.TransactionPermission.View">
+      <md-icon>payment</md-icon>
+      <span>Transaction</span>
+    </button>
+    <button md-menu-item (click)="LoadPage('expense')" [disabled]="!DL.ExpensePermission.View">
       <md-icon>broken_image</md-icon>
       <span>Expense</span>
     </button>
-    <button md-menu-item (click)="LoadPage('product-list')">
+    <button md-menu-item (click)="LoadPage('product-list')" [disabled]="!DL.ProductPermission.View">
       <md-icon>book</md-icon>
       <span>Product</span>
     </button>
-    <button md-menu-item (click)="LoadPage('member-list')">
+    <button md-menu-item (click)="LoadPage('member-list')" [disabled]="!DL.MemberPermission.View">
       <md-icon>card_membership</md-icon>
       <span>Member</span>
     </button>
-    <button md-menu-item (click)="LoadPage('report')">
+    <button md-menu-item (click)="LoadPage('report')" [disabled]="!DL.ReportPermission.View">
       <md-icon>note</md-icon>
       <span>Report</span>
     </button>
@@ -29,16 +37,7 @@
 </md-toolbar>
 <div class="main">
   <md-toolbar>
-    <div>
-      <button class="objectActive" md-button (click)="LoadPage('sell')" mdTooltip="Sell" mdTooltipPosition="above">
-        <i class="material-icons">shopping_cart</i>
-        <span>Sell</span>
-      </button>
-      <button class="objectActive" md-button (click)="LoadPage('transaction-list')" mdTooltip="Transaction" mdTooltipPosition="above">
-        <i class="material-icons">payment</i>
-        <span>Transaction</span>
-      </button>
-    </div>
+    <div class="header">{{ DL.TITLE }}</div>
   </md-toolbar>
   <md-card>
     <md-card-content>

@@ -28,6 +28,6 @@ export class ReportComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.DL.TITLE = "Reports";
   }
-
 }

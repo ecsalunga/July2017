@@ -8,7 +8,6 @@ import { DataAccess, DataLayer } from './data';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
   @ViewChild('viewChild', {read: ViewContainerRef})
   viewChild: ViewContainerRef;
 
@@ -21,6 +20,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.core.viewChild = this.viewChild;
     this.DA.DataLoad();
-    this.LoadPage('sell');
+    this.DL.LoadFromMenu("sell");
   }
 }

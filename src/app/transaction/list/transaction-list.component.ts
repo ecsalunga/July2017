@@ -35,6 +35,6 @@ export class TransactionListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.DL.TITLE = "Transaction List";
   }
-
 }

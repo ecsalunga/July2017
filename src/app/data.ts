@@ -1,54 +1,53 @@
 import { Injectable, ComponentFactory, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 import { Core } from './core';
-import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, ReportInfo, ExpenseInfo, NameValue, UserInfo, AccessType, Permission } from './models';
+import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, ReportInfo, ExpenseInfo, NameValue, UserInfo, Permission } from './models';
 import 'rxjs/add/operator/first';
 
 @Injectable()
 export class DataLayer {
-    PRODUCT: string = "PRODUCT";
-    MEMBER: string = "MEMBER";
-    SELL: string = "SELL";
-    TRANSACTION: string = "TRANSACTION";
-    EXPENSE: string = "EXPENSE";
-    REPORT: string = "REPORT";
-
     MENU: string = "MENU";
     LINK: string = "LINK";
     SOURCE: string;
 
+    TITLE: string;
+
     Product: ProductInfo;
     Products: Array<ProductInfo>;
     ProductSelections: Array<ProductInfo>;
+    ProductPermission: Permission;
 
     Member: MemberInfo;
     Members: Array<MemberInfo>;
     MemberSelections: Array<MemberInfo>;
     MemberWalkIn: MemberInfo;
+    MemberPermission: Permission;
 
     Transaction: TransactionInfo;
     TransactionsToday: Array<TransactionInfo>;
     TransactionSelected: Array<TransactionInfo>;
+    TransactionPermission: Permission;
 
     SellInfos: Array<SellInfo>;
     SellInfosAmount: number = 0;
     SellInfosCount: number = 0;
+    SellPermission: Permission;
 
     ExpenseTypes: Array<string>;
     ExpensesToday: Array<ExpenseInfo>;
     ExpenseSelected: Array<ExpenseInfo>;
-    ExpensesAmount: number = 0;
+    ExpenseAmount: number = 0;
+    ExpensePermission: Permission;
 
     Reports: Array<ReportInfo>;
     ReportToday: ReportInfo;
     ReportSelected: ReportInfo;
     ReportYears: Array<number>;
+    ReportPermission: Permission;
+
     Months: Array<NameValue>;
     Date: Date = new Date();
-
     User: UserInfo;
-    Permissions: Array<Permission>;
-    AccessTypes: Array<AccessType>;
 
     constructor(private core: Core) {
         this.ReportToday = new ReportInfo();
@@ -87,38 +86,32 @@ export class DataLayer {
         this.User.Name = "Emmanuel Salunga";
         this.User.Username = "ecsalunga";
         this.User.AccessTypeID = 1;
-
-        // access 1
-        this.AccessTypes = new Array<AccessType>();
-        let access = new AccessType();
-        access.AccessTypeID = 1;
-        access.Permissions = new Array<Permission>();
-        access.Permissions.push(new Permission(this.PRODUCT, true, true, true));
-        access.Permissions.push(new Permission(this.MEMBER, true, true, true));
-        access.Permissions.push(new Permission(this.SELL, true, true, true));
-        access.Permissions.push(new Permission(this.TRANSACTION, true, true, true));
-        access.Permissions.push(new Permission(this.EXPENSE, true, true, true));
-        access.Permissions.push(new Permission(this.REPORT, true, true, true));
-        this.AccessTypes.push(access);
-
-        // access 2
-        access = new AccessType();
-        access.AccessTypeID = 2;
-        access.Permissions = new Array<Permission>();
-        access.Permissions.push(new Permission(this.PRODUCT, true, true, false));
-        access.Permissions.push(new Permission(this.MEMBER, true, true, false));
-        access.Permissions.push(new Permission(this.SELL, true, true, false));
-        access.Permissions.push(new Permission(this.TRANSACTION, false, false, false));
-        access.Permissions.push(new Permission(this.EXPENSE, true, true, false));
-        access.Permissions.push(new Permission(this.REPORT, false, false, false));
-        this.AccessTypes.push(access);
     }
 
     public SetPermission(accessTypeID: number) {
-        this.AccessTypes.forEach(access =>  {
-            if(access.AccessTypeID == accessTypeID) 
-                this.Permissions = access.Permissions;
-        });
+        if(accessTypeID == 1) {
+            this.SellPermission = new Permission(true, true, true);
+            this.MemberPermission = new Permission(true, true, true);
+            this.ProductPermission = new Permission(true, true, true);
+            this.ExpensePermission = new Permission(true, true, true);
+            this.ReportPermission = new Permission(true, true, true);
+            this.TransactionPermission = new Permission(true, true, true);
+        }
+        else if(accessTypeID == 2) {
+            this.SellPermission = new Permission(true, true, false)
+            this.MemberPermission = new Permission(true, false, false);
+            this.ProductPermission = new Permission(true, false, false);
+            this.ExpensePermission = new Permission(true, false, false);
+            this.ReportPermission = new Permission(false, false, false);
+            this.TransactionPermission = new Permission(true, false, false);
+        } else {
+            this.SellPermission = new Permission(false, false, false)
+            this.MemberPermission = new Permission(false, false, false);
+            this.ProductPermission = new Permission(false, false, false);
+            this.ExpensePermission = new Permission(false, false, false);
+            this.ReportPermission = new Permission(false, false, false);
+            this.TransactionPermission = new Permission(false, false, false);
+        }
     }
 
     LoadFromMenu(name: string) {

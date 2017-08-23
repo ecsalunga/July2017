@@ -35,7 +35,7 @@ export class MemberDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.DL.TITLE = "Member Details";
   }
 
 }

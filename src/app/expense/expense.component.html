@@ -1,57 +1,55 @@
 <div>
-  <fieldset>
-    <legend>Expenses</legend>
-    <table>
-      <thead>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Description
+        </th>
+        <th>
+          Time
+        </th>
+        <th class="totalColumn">
+          Amount
+        </th>
+      </tr>
+    </thead>
+    <ng-container *ngIf="DL.ReportSelected.ExpenseCount < 1;else showExpense">
+      <tr class="blankCell">
+        <td colspan="3">
+          [ no item to show ]
+        </td>
+      </tr>
+    </ng-container>
+    <ng-template #showExpense>
+      <ng-container *ngFor="let info of DL.ExpenseSelected">
         <tr>
-          <th>
-            Description
-          </th>
-          <th>
-            Time
-          </th>
-          <th class="totalColumn">
-            Amount
-          </th>
-        </tr>
-      </thead>
-      <ng-container *ngIf="DL.ReportSelected.ExpenseCount < 1;else showExpense">
-        <tr class="blankCell">
-          <td colspan="3">
-            [ no item to show ]
+          <td>
+            {{info.Description}}
+          </td>
+          <td>
+            {{ this.core.numberToDate(info.ActionDate) | date : 'hh:mm a' }}
+          </td>
+          <td class="totalColumn">
+            {{info.Amount | number:'1.2-2'}}
           </td>
         </tr>
       </ng-container>
-      <ng-template #showExpense>
-        <ng-container *ngFor="let info of DL.ExpenseSelected">
-          <tr>
-            <td>
-              {{info.Description}}
-            </td>
-            <td>
-              {{ this.core.numberToDate(info.ActionDate) | date : 'hh:mm a' }}
-            </td>
-            <td class="totalColumn">
-              {{info.Amount | number:'1.2-2'}}
-            </td>
-          </tr>
-        </ng-container>
-        <tr class="blankCell">
-          <td>
-            Total
-          </td>
-          <td></td>
-          <td class="totalColumn">
-            {{ DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
-          </td>
-          <td></td>
-        </tr>
-      </ng-template>
-    </table>
-  </fieldset>
+      <tr class="blankCell">
+        <td>
+          Total
+        </td>
+        <td></td>
+        <td class="totalColumn">
+          {{ DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
+        </td>
+        <td></td>
+      </tr>
+    </ng-template>
+  </table>
+  <div class="hSpacer"></div>
   <table>
     <tr class="rightRow">
-      <td class="selectionRow" style="width: 60%" [hidden]="!isToday">
+      <td class="selectionRow" style="width: 60%" [hidden]="!isToday || !DL.ExpensePermission.Modify">
         <md-input-container>
           <input id="txtDescription" mdInput placeholder="Description" [mdAutocomplete]="auto" [formControl]="ctrl" [(ngModel)]="description">
         </md-input-container>
@@ -73,7 +71,7 @@
       </td>
     </tr>
     <tr class="rightRow">
-      <td [hidden]="!isToday">
+      <td [hidden]="!isToday || !DL.ExpensePermission.Modify">
         <button md-fab [disabled]="!description || !amount" (click)="AddExpense()" mdTooltip="Add to expenses" mdTooltipPosition="above"><i class="material-icons">note_add</i></button>
       </td>
       <td>

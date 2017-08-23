@@ -1,72 +1,69 @@
 <div>
-  <fieldset>
-    <legend>Transaction List</legend>
-    <table>
-      <thead>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Buyer
+        </th>
+        <th>
+          Time
+        </th>
+        <th class="totalColumn">
+          Count
+        </th>
+        <th class="totalColumn">
+          Amount
+        </th>
+        <th></th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <ng-container *ngIf="DL.ReportSelected.Count < 1;else showReport">
+      <tr class="blankCell">
+        <td colspan="6">
+          [ no item to show ]
+        </td>
+      </tr>
+    </ng-container>
+    <ng-template #showReport>
+      <ng-container *ngFor="let tran of DL.TransactionSelected">
         <tr>
-          <th>
-            Buyer
-          </th>
-          <th>
-            Time
-          </th>
-          <th class="totalColumn">
-            Count
-          </th>
-          <th class="totalColumn">
-            Amount
-          </th>
-          <th></th>
-          <th>
-            Action
-          </th>
-        </tr>
-      </thead>
-      <ng-container *ngIf="DL.ReportSelected.Count < 1;else showReport">
-        <tr class="blankCell">
-          <td colspan="6">
-            [ no item to show ]
+          <td>
+            {{ tran.BuyerName }}
+          </td>
+          <td>
+            {{ this.core.numberToDate(tran.ActionDate) | date : 'hh:mm a' }}
+          </td>
+          <td class="totalColumn">
+            {{ tran.Count }}
+          </td>
+          <td class="totalColumn">
+            {{ tran.Amount | number:'1.2-2' }}
+          </td>
+          <td></td>
+          <td>
+            <button md-mini-fab (click)="SelectTransaction(tran)" mdTooltip="View"><i class="material-icons">pageview</i></button>
           </td>
         </tr>
       </ng-container>
-      <ng-template #showReport>
-        <ng-container *ngFor="let tran of DL.TransactionSelected">
-          <tr>
-            <td>
-              {{ tran.BuyerName }}
-            </td>
-            <td>
-              {{ this.core.numberToDate(tran.ActionDate) | date : 'hh:mm a' }}
-            </td>
-            <td class="totalColumn">
-              {{ tran.Count }}
-            </td>
-            <td class="totalColumn">
-              {{ tran.Amount | number:'1.2-2' }}
-            </td>
-            <td></td>
-            <td>
-              <button md-mini-fab (click)="SelectTransaction(tran)" mdTooltip="View"><i class="material-icons">pageview</i></button>
-            </td>
-          </tr>
-        </ng-container>
-        <tr class="blankCell">
-          <td>
-            Total
-          </td>
-          <td></td>
-          <td class="totalColumn">
-            {{ DL.ReportSelected.Count }}
-          </td>
-          <td class="totalColumn">
-            {{ DL.ReportSelected.Amount | number:'1.2-2' }}
-          </td>
-          <td></td>
-          <td></td>
-        </tr>
-      </ng-template>
-    </table>
-  </fieldset>
+      <tr class="blankCell">
+        <td>
+          Total
+        </td>
+        <td></td>
+        <td class="totalColumn">
+          {{ DL.ReportSelected.Count }}
+        </td>
+        <td class="totalColumn">
+          {{ DL.ReportSelected.Amount | number:'1.2-2' }}
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
+    </ng-template>
+  </table>
   <div class="hSpacer"></div>
   <table>
     <tr class="rightRow">

@@ -1,52 +1,50 @@
 <div>
-  <fieldset>
-    <legend>Member Detail</legend>
-    <div>
-      <md-input-container class="longText">
-        <input id="txtName" mdInput placeholder="Name" [(ngModel)]="model.Name" />
-      </md-input-container>
-    </div>
-    <div>
-      <md-input-container>
-        <input id="txtAddress" mdInput placeholder="Address #1" [(ngModel)]="model.Address1" />
-      </md-input-container>
-    </div>
-    <div>
-      <md-input-container>
-        <input id="txtAddress" mdInput placeholder="Address #2" [(ngModel)]="model.Address2" />
-      </md-input-container>
-    </div>
-    <div>
-      <md-input-container>
-        <input id="txtAddress" mdInput placeholder="Address #3" [(ngModel)]="model.Address3" />
-      </md-input-container>
-    </div>
-    <div>
-      <md-input-container>
-        <input id="txtContact1" mdInput placeholder="Contact #1" [(ngModel)]="model.Contact1" />
-      </md-input-container>
-    </div>
-    <div>
-      <md-input-container>
-        <input id="txtContact2" mdInput placeholder="Contact #2" [(ngModel)]="model.Contact2" />
-      </md-input-container>
-    </div>
-    <div>
-      <md-input-container>
-        <input id="txtContact3" mdInput placeholder="Contact #3" [(ngModel)]="model.Contact3" />
-      </md-input-container>
-    </div>
-    <div>
-      <md-input-container>
-        <input (click)="picker.open()" mdInput [mdDatepicker]="picker" placeholder="Join Date" [(ngModel)]="joinDate">
-        <button mdSuffix [mdDatepickerToggle]="picker"></button>
-      </md-input-container>
-      <md-datepicker #picker></md-datepicker>
-    </div>
-  </fieldset>
+
+  <div>
+    <md-input-container class="longText">
+      <input id="txtName" mdInput placeholder="Name" [(ngModel)]="model.Name" />
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <input id="txtAddress" mdInput placeholder="Address #1" [(ngModel)]="model.Address1" />
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <input id="txtAddress" mdInput placeholder="Address #2" [(ngModel)]="model.Address2" />
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <input id="txtAddress" mdInput placeholder="Address #3" [(ngModel)]="model.Address3" />
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <input id="txtContact1" mdInput placeholder="Contact #1" [(ngModel)]="model.Contact1" />
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <input id="txtContact2" mdInput placeholder="Contact #2" [(ngModel)]="model.Contact2" />
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <input id="txtContact3" mdInput placeholder="Contact #3" [(ngModel)]="model.Contact3" />
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <input (click)="picker.open()" mdInput [mdDatepicker]="picker" placeholder="Join Date" [(ngModel)]="joinDate">
+      <button mdSuffix [mdDatepickerToggle]="picker"></button>
+    </md-input-container>
+    <md-datepicker #picker></md-datepicker>
+  </div>
   <div class="hSpacer"></div>
   <div class="rightRow">
-    <button md-fab (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><i class="material-icons">save</i></button>
+    <button md-fab (click)="Save()" [disabled]="!DL.MemberPermission.Modify" mdTooltip="Save" mdTooltipPosition="above"><i class="material-icons">save</i></button>
     <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><i class="material-icons">assignment_return</i></button>
   </div>
 </div>

@@ -10,18 +10,12 @@ import { ProductInfo, MemberInfo, SellInfo, Permission } from '../models';
   styleUrls: ['./sell.component.css']
 })
 export class SellComponent implements OnInit {
-  permission: Permission;
   model: ProductInfo;
   selectedQuantity: number = 1;
   quantities: Array<number>;
   selectedMember: MemberInfo = this.DL.MemberWalkIn;
 
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
-    this.DL.Permissions.forEach(per => {
-      if(per.Name == this.DL.SELL)
-        this.permission = per;
-    });
-  }
+  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) { }
 
   AddProduct() {
     let duplicate: SellInfo;
@@ -78,6 +72,6 @@ export class SellComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.DL.TITLE = "Sell Product";
   }
-
 }

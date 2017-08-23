@@ -28,7 +28,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.DL.TITLE = "Product Details";
   }
-
 }

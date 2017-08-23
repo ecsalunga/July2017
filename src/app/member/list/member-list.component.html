@@ -1,47 +1,44 @@
 <div>
-  <fieldset>
-    <legend>Member List</legend>
-    <table>
-      <thead>
-        <tr>
-          <th>
-            Name
-          </th>
-          <th>
-            Address
-          </th>
-          <th>
-            Contact #
-          </th>
-          <th>
-          </th>
-          <th>
-            Action
-          </th>
-        </tr>
-      </thead>
-      <ng-container *ngFor="let member of DL.Members">
-        <tr>
-          <td>
-            {{member.Name}}
-          </td>
-          <td>
-            {{member.Address1}}
-          </td>
-          <td>
-            {{member.Contact1}}
-          </td>
-          <td>
-          </td>
-          <td>
-            <button md-mini-fab (click)="SelectMember(member)" mdTooltip="View" mdTooltipPosition="above"><i class="material-icons">pageview</i></button>
-          </td>
-        </tr>
-      </ng-container>
-    </table>
-  </fieldset>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Address
+        </th>
+        <th>
+          Contact #
+        </th>
+        <th>
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+    </thead>
+    <ng-container *ngFor="let member of DL.Members">
+      <tr>
+        <td>
+          {{member.Name}}
+        </td>
+        <td>
+          {{member.Address1}}
+        </td>
+        <td>
+          {{member.Contact1}}
+        </td>
+        <td>
+        </td>
+        <td>
+          <button md-mini-fab (click)="SelectMember(member)" mdTooltip="View" mdTooltipPosition="above"><i class="material-icons">pageview</i></button>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
   <div class="hSpacer"></div>
   <div class="rightRow">
-    <button md-fab (click)="AddMember()" mdTooltip="Add" mdTooltipPosition="above"><i class="material-icons">note_add</i></button>
+    <button md-fab (click)="AddMember()" [disabled]="!DL.MemberPermission.Modify" mdTooltip="Add" mdTooltipPosition="above"><i class="material-icons">note_add</i></button>
   </div>
 </div>

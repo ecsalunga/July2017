@@ -18,6 +18,6 @@ export class TransactionDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.DL.TITLE = "Transaction Details";
   }
-
 }
