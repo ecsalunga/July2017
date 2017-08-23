@@ -27,10 +27,9 @@
     </button>
   </md-menu>
 </md-toolbar>
-<div class="root">
-  <div class="object">
-    <md-toolbar>
-      <div class="tools">
+<div class="object">
+  <md-toolbar>
+    <div>
       <button class="objectActive" md-button (click)="LoadPage('sell')" mdTooltip="Sell" mdTooltipPosition="above">
         <i class="material-icons">shopping_cart</i>
         <span>Sell</span>
@@ -39,14 +38,13 @@
         <i class="material-icons">payment</i>
         <span>Transaction</span>
       </button>
+    </div>
+  </md-toolbar>
+  <md-card>
+    <md-card-content>
+      <div class="main">
+        <ng-container #viewChild></ng-container>
       </div>
-    </md-toolbar>
-    <md-card>
-      <md-card-content>
-        <div class="main">
-          <ng-container #viewChild></ng-container>
-        </div>
-      </md-card-content>
-    </md-card>
-  </div>
+    </md-card-content>
+  </md-card>
 </div>
