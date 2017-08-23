@@ -60,7 +60,6 @@ export class ExpenseInfo {
 
 export class UserInfo {
     Name: string;
-    Username: string;
     UID: string;
     ImageURL: string;
     AccessTypeID: number;

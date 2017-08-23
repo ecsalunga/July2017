@@ -1,5 +1,13 @@
 <md-toolbar color="primary">
-  <div>TEMP System</div>
+  <button md-button class="title" mdTooltip="{{DL.User.Name}}" mdTooltipPosition="below">
+    <ng-container *ngIf="DL.User.ImageURL;else showGeneric">
+      <img md-card-avatar src="{{DL.User.ImageURL}}"> 
+    </ng-container>
+    <ng-template #showGeneric>
+      <md-icon>face</md-icon>
+    </ng-template>
+    TEMP System
+  </button>
   <div class="h-spacer"></div>
   <button md-icon-button [mdMenuTriggerFor]="menu">
     <md-icon>more_vert</md-icon>
@@ -29,10 +37,18 @@
       <md-icon>note</md-icon>
       <span>Report</span>
     </button>
-    <button md-menu-item>
-      <md-icon>fingerprint</md-icon>
-      <span>Login</span>
-    </button>
+    <ng-container *ngIf="DL.User.UID;else showSignOut">
+      <button md-menu-item (click)="DA.SignOut()">
+        <md-icon>fingerprint</md-icon>
+        <span>SignOut</span>
+      </button>
+    </ng-container>
+    <ng-template #showSignOut>
+      <button md-menu-item (click)="DA.SignInWithFacebook()">
+        <md-icon>fingerprint</md-icon>
+          <span>SignIn</span>
+        </button>
+    </ng-template>
   </md-menu>
 </md-toolbar>
 <div class="main">

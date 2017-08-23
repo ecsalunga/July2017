@@ -1,5 +1,7 @@
 import { Injectable, ComponentFactory, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
-import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Core } from './core';
 import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, ReportInfo, ExpenseInfo, NameValue, UserInfo, Permission } from './models';
 import 'rxjs/add/operator/first';
@@ -82,9 +84,7 @@ export class DataLayer {
         this.MemberWalkIn.key = "Walk-In";
 
         this.User = new UserInfo();
-        this.User.Name = "Emmanuel Salunga";
-        this.User.Username = "ecsalunga";
-        this.User.AccessTypeID = 1;
+        this.SetPermission(0);
     }
 
     public SetPermission(accessTypeID: number) {
@@ -135,19 +135,43 @@ export class DataAccess {
     EXPENSE_TYPES: string = "/expenses/types";
     KEYDAY: string = "KeyDay";
 
-    constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) { 
+    constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase, private afAuth: AngularFireAuth) { 
         this.TRANSACTIONS = "/transactions/" + this.DL.ReportToday.KeyYear + "/" + this.DL.ReportToday.KeyMonth;
         this.EXPENSES = "/expenses/" + this.DL.ReportToday.KeyYear + "/" + this.DL.ReportToday.KeyMonth;
         this.REPORTS = "/reports/" + this.DL.ReportToday.KeyYear;
     }
 
-    public DataLoad(): void {
+    public SignInWithFacebook() {
+        this.afAuth.auth
+          .signInWithPopup(new firebase.auth.FacebookAuthProvider());
+    }
+    
+    public SignOut() {
+        this.afAuth.auth.signOut();
+    }
+
+    public DataLoad() {
+        this.afAuth.authState.subscribe(user => {
+            if (!user) {
+                this.DL.User.Name = "GUEST";
+                this.DL.User.ImageURL = null;
+                this.DL.User.UID = null;
+                this.DL.User.AccessTypeID = 0;
+                this.DL.SetPermission(this.DL.User.AccessTypeID);
+                return;
+            }
+
+            this.DL.User.Name = user.displayName;
+            this.DL.User.ImageURL = user.photoURL;
+            this.DL.User.UID = user.uid;
+            this.DL.User.AccessTypeID = 1;
+            this.DL.SetPermission(this.DL.User.AccessTypeID);
+        });
+
         this.ReportTodayLoad();
         this.MemberLoad();
         this.ExpensesTypeLoad();
         this.ActiveDataLoad();
-
-        this.DL.SetPermission(this.DL.User.AccessTypeID);
     }
 
     ActiveDataLoad() {
