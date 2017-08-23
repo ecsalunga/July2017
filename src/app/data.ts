@@ -9,7 +9,6 @@ export class DataLayer {
     MENU: string = "MENU";
     LINK: string = "LINK";
     SOURCE: string;
-
     TITLE: string;
 
     Product: ProductInfo;
@@ -230,11 +229,11 @@ export class DataAccess {
     }
 
     ExpensesTypeLoad() {
-        this.af.object(this.EXPENSE_TYPES).first().subscribe(snapshots => {
-            this.DL.ExpenseTypes = new Array<string>();
-            snapshots.forEach(snapshot => {
-                this.DL.ExpenseTypes.push(snapshot);
-            });
+        this.af.object(this.EXPENSE_TYPES).first().subscribe(snapshot => {
+            if(snapshot.length)
+                this.DL.ExpenseTypes = snapshot;
+            else
+                this.DL.ExpenseTypes = new Array<string>();
         });
     }
 
