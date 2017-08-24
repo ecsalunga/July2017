@@ -48,9 +48,11 @@ export class DataLayer {
 
     Months: Array<NameValue>;
     Date: Date = new Date();
-    FirebaseUser: firebase.User;
     User: UserInfo;
     Users: Array<UserInfo>;
+    UserPermission: Permission;
+
+    AccessTypes: Array<NameValue>;
     IsAuthenticating: boolean = false;
 
     constructor(private core: Core) {
@@ -78,6 +80,13 @@ export class DataLayer {
             new NameValue("December", 12)
         ];
 
+        this.AccessTypes = [
+            new NameValue("Administrator", 1), 
+            new NameValue("Staff", 2),
+            new NameValue("Member", 3),
+            new NameValue("GUEST", 0)
+        ];
+
         for(let x = this.ReportToday.KeyYear - 5; x <= this.ReportToday.KeyYear; x++) {
             this.ReportYears.push(x);
         }
@@ -98,6 +107,7 @@ export class DataLayer {
             this.ExpensePermission = new Permission(true, true, true);
             this.ReportPermission = new Permission(true, true, true);
             this.TransactionPermission = new Permission(true, true, true);
+            this.UserPermission = new Permission(true, true, true);
         }
         else if(accessTypeID == 2) {
             this.SellPermission = new Permission(true, true, false)
@@ -106,6 +116,7 @@ export class DataLayer {
             this.ExpensePermission = new Permission(true, false, false);
             this.ReportPermission = new Permission(false, false, false);
             this.TransactionPermission = new Permission(true, false, false);
+            this.UserPermission = new Permission(false, false, false);
         } else {
             this.SellPermission = new Permission(false, false, false)
             this.MemberPermission = new Permission(false, false, false);
@@ -113,6 +124,7 @@ export class DataLayer {
             this.ExpensePermission = new Permission(false, false, false);
             this.ReportPermission = new Permission(false, false, false);
             this.TransactionPermission = new Permission(false, false, false);
+            this.UserPermission = new Permission(false, false, false);
         }
     }
 
@@ -145,12 +157,11 @@ export class DataAccess {
         this.REPORTS = "/reports/" + this.DL.ReportToday.KeyYear;
     }
 
-    public SignInWithFacebook() {
-        this.afAuth.auth
-          .signInWithPopup(new firebase.auth.FacebookAuthProvider());
+    public LogInWithFacebook() {
+        this.afAuth.auth.signInWithRedirect(new firebase.auth.FacebookAuthProvider());
     }
     
-    public SignOut() {
+    public LogOut() {
         this.afAuth.auth.signOut();
     }
 
@@ -228,12 +239,10 @@ export class DataAccess {
 
             if (!user) {
                 this.DL.User.Name = "GUEST";
-                this.DL.FirebaseUser = null;
                 this.DL.SetPermission(0);
                 return;
             }
             
-            this.DL.FirebaseUser = user;
             this.DL.Users.forEach(u => {
                 if(u.UID == user.uid)
                     this.DL.User = u;
@@ -284,7 +293,6 @@ export class DataAccess {
                 this.DL.IsAuthenticating = true;
                 this.UserAuthenticate();
             }
-            
         });
     }
 

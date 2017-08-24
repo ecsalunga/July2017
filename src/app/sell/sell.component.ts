@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Core } from '../core';
 import { DataAccess, DataLayer } from '../data';
-import { ProductInfo, MemberInfo, SellInfo, Permission } from '../models';
+import { ProductInfo, MemberInfo, SellInfo } from '../models';
 
 @Component({
   selector: 'sell',

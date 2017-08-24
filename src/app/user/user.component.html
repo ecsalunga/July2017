@@ -1,0 +1,50 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>
+          Name
+        </th>
+        <th>
+          Access
+        </th>
+      </tr>
+    </thead>
+    <ng-container *ngFor="let info of DL.Users">
+      <tr>
+        <td>
+          <img md-card-avatar src="{{info.ImageURL}}">
+        </td>
+        <td>
+          {{ info.Name }}
+        </td>
+        <td>
+          {{ GetAccessName(info.AccessTypeID) }}
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+  <div class="hSpacer"></div>
+  <table [hidden]="!DL.UserPermission.Modify">
+    <tr class="rightRow">
+      <td class="selectionRow">
+        <md-select placeholder="User" [(ngModel)]="selectedUser">
+          <md-option *ngFor="let user of DL.Users" [value]="user">
+            {{user.Name}}
+          </md-option>
+        </md-select>
+        <md-select placeholder="Access" [(ngModel)]="selectedAccess">
+          <md-option *ngFor="let access of DL.AccessTypes" [value]="access">
+            {{access.Name}}
+          </md-option>
+        </md-select>
+      </td>
+    </tr>
+    <tr class="rightRow">
+      <td>
+        <button md-fab [disabled]="!selectedUser || !selectedAccess" (click)="SetAccess()" mdTooltip="Set access" mdTooltipPosition="above"><i class="material-icons">accessibility</i></button>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -37,16 +37,20 @@
       <md-icon>note</md-icon>
       <span>Report</span>
     </button>
+    <button md-menu-item (click)="LoadPage('user')" [disabled]="!DL.UserPermission.View">
+      <md-icon>accessibility</md-icon>
+      <span>User</span>
+    </button>
     <ng-container *ngIf="DL.User.UID;else showSignOut">
-      <button md-menu-item (click)="DA.SignOut()">
+      <button md-menu-item (click)="DA.LogOut()">
         <md-icon>fingerprint</md-icon>
-        <span>SignOut</span>
+        <span>Log Out</span>
       </button>
     </ng-container>
     <ng-template #showSignOut>
-      <button md-menu-item (click)="DA.SignInWithFacebook()">
+      <button md-menu-item (click)="DA.LogInWithFacebook()">
         <md-icon>fingerprint</md-icon>
-          <span>SignIn</span>
+          <span>Log In</span>
         </button>
     </ng-template>
   </md-menu>
