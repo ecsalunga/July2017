@@ -163,6 +163,7 @@ export class DataAccess {
     
     public LogOut() {
         this.afAuth.auth.signOut();
+        this.DL.LoadFromMenu("home");
     }
 
     public DataLoad() {
@@ -256,6 +257,7 @@ export class DataAccess {
             this.DL.SetPermission(this.DL.User.AccessTypeID);
 
             this.UserSave(this.DL.User);
+            this.DL.LoadFromMenu("dashboard");
         });
     }
 

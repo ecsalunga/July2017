@@ -20,6 +20,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.core.viewChild = this.viewChild;
     this.DA.DataLoad();
-    this.DL.LoadFromMenu("sell");
+    this.DL.LoadFromMenu("home");
   }
 }
