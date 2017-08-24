@@ -14,7 +14,7 @@ export class MemberDetailComponent implements OnInit {
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
     if (this.DL.Member) {
-      this.model = this.DL.Member;
+      this.model = Object.assign({}, this.DL.Member);
       this.joinDate = this.core.numberToDate(this.model.JoinDate);
     }
     else {

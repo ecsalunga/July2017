@@ -11,7 +11,7 @@ import { ProductInfo } from '../../models';
 export class ProductListComponent implements OnInit {
   model: ProductInfo;
   quantities: Array<number>;
-  selectedQuantity: number = 0;
+  quantitySelected: number = 0;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
     this.quantities = new Array<number>();
@@ -32,14 +32,14 @@ export class ProductListComponent implements OnInit {
 
   productSelected() {
     if(this.model)
-      this.selectedQuantity = 1;
+      this.quantitySelected = 1;
   }
 
   SuppyProduct() {
-    this.model.Quantity += this.selectedQuantity;
+    this.model.Quantity += this.quantitySelected;
     this.DA.ProductSave(this.model);
     this.model = null;
-    this.selectedQuantity = 0;
+    this.quantitySelected = null;
   }
 
   ngOnInit() { 

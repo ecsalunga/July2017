@@ -82,9 +82,10 @@ export class DataLayer {
 
         this.AccessTypes = [
             new NameValue("Administrator", 1), 
-            new NameValue("Staff", 2),
-            new NameValue("Member", 3),
-            new NameValue("GUEST", 0)
+            new NameValue("Manager", 2),
+            new NameValue("Staff", 3),
+            new NameValue("User", 4),
+            new NameValue("Guest", 0)
         ];
 
         for(let x = this.ReportToday.KeyYear - 5; x <= this.ReportToday.KeyYear; x++) {
@@ -110,14 +111,24 @@ export class DataLayer {
             this.UserPermission = new Permission(true, true, true);
         }
         else if(accessTypeID == 2) {
+            this.SellPermission = new Permission(true, true, true);
+            this.MemberPermission = new Permission(true, true, true);
+            this.ProductPermission = new Permission(true, true, true);
+            this.ExpensePermission = new Permission(true, true, true);
+            this.ReportPermission = new Permission(true, true, true);
+            this.TransactionPermission = new Permission(true, true, true);
+            this.UserPermission = new Permission(false, false, false);
+        }
+        else if(accessTypeID == 3) {
             this.SellPermission = new Permission(true, true, false)
             this.MemberPermission = new Permission(true, false, false);
             this.ProductPermission = new Permission(true, false, false);
-            this.ExpensePermission = new Permission(true, false, false);
+            this.ExpensePermission = new Permission(false, false, false);
             this.ReportPermission = new Permission(false, false, false);
             this.TransactionPermission = new Permission(true, false, false);
             this.UserPermission = new Permission(false, false, false);
-        } else {
+        }
+        else {
             this.SellPermission = new Permission(false, false, false)
             this.MemberPermission = new Permission(false, false, false);
             this.ProductPermission = new Permission(false, false, false);
@@ -391,7 +402,7 @@ export class DataAccess {
             });
         });
 
-        // do the actual database udate
+        // do the actual database update
         items.forEach(item => {
             this.ProductSave(item);
         });

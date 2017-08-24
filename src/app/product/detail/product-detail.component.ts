@@ -13,7 +13,7 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
     if (this.DL.Product)
-      this.model = this.DL.Product;
+      this.model = Object.assign({}, this.DL.Product);
     else
       this.model = new ProductInfo();
   }
