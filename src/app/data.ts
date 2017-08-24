@@ -48,7 +48,10 @@ export class DataLayer {
 
     Months: Array<NameValue>;
     Date: Date = new Date();
+    FirebaseUser: firebase.User;
     User: UserInfo;
+    Users: Array<UserInfo>;
+    IsAuthenticating: boolean = false;
 
     constructor(private core: Core) {
         this.ReportToday = new ReportInfo();
@@ -134,6 +137,7 @@ export class DataAccess {
     EXPENSES: string;
     EXPENSE_TYPES: string = "/expenses/types";
     KEYDAY: string = "KeyDay";
+    USERS: string = "/users";
 
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase, private afAuth: AngularFireAuth) { 
         this.TRANSACTIONS = "/transactions/" + this.DL.ReportToday.KeyYear + "/" + this.DL.ReportToday.KeyMonth;
@@ -151,26 +155,10 @@ export class DataAccess {
     }
 
     public DataLoad() {
-        this.afAuth.authState.subscribe(user => {
-            if (!user) {
-                this.DL.User.Name = "GUEST";
-                this.DL.User.ImageURL = null;
-                this.DL.User.UID = null;
-                this.DL.User.AccessTypeID = 0;
-                this.DL.SetPermission(this.DL.User.AccessTypeID);
-                return;
-            }
-
-            this.DL.User.Name = user.displayName;
-            this.DL.User.ImageURL = user.photoURL;
-            this.DL.User.UID = user.uid;
-            this.DL.User.AccessTypeID = 1;
-            this.DL.SetPermission(this.DL.User.AccessTypeID);
-        });
-
-        this.ReportTodayLoad();
+        this.UserLoad();
         this.MemberLoad();
         this.ExpensesTypeLoad();
+        this.ReportTodayLoad();
         this.ActiveDataLoad();
     }
 
@@ -234,6 +222,34 @@ export class DataAccess {
         });
     }
 
+    UserAuthenticate() {
+        this.afAuth.authState.subscribe(user => {
+            this.DL.User = new UserInfo();
+
+            if (!user) {
+                this.DL.User.Name = "GUEST";
+                this.DL.FirebaseUser = null;
+                this.DL.SetPermission(0);
+                return;
+            }
+            
+            this.DL.FirebaseUser = user;
+            this.DL.Users.forEach(u => {
+                if(u.UID == user.uid)
+                    this.DL.User = u;
+            });
+            if(!this.DL.User.AccessTypeID)
+                this.DL.User.AccessTypeID = 0;
+
+            this.DL.User.Name = user.displayName;
+            this.DL.User.ImageURL = user.photoURL;
+            this.DL.User.UID = user.uid;
+            this.DL.SetPermission(this.DL.User.AccessTypeID);
+
+            this.UserSave(this.DL.User);
+        });
+    }
+
     MemberLoad() {
         this.af.list(this.MEMBERS, {query: {  orderByChild: 'Name'}}).first().subscribe(snapshots => {
             this.DL.Members = new Array<MemberInfo>();
@@ -249,6 +265,26 @@ export class DataAccess {
             // add walk-in
             this.DL.MemberSelections.push(this.DL.MemberWalkIn);
             this.DL.MemberSelections = this.DL.MemberSelections.concat(this.DL.Members);
+        });
+    }
+
+    UserLoad() {
+        this.af.list(this.USERS, {query: {  orderByChild: 'Name'}}).first().subscribe(snapshots => {
+            this.DL.Users = new Array<UserInfo>();
+
+            snapshots.forEach(snapshot => {
+                let info = new UserInfo();
+                info = snapshot;
+                info.key = snapshot.$key;
+                this.DL.Users.push(info);
+            });
+
+            // single subscription
+            if(!this.DL.IsAuthenticating) {
+                this.DL.IsAuthenticating = true;
+                this.UserAuthenticate();
+            }
+            
         });
     }
 
@@ -356,6 +392,16 @@ export class DataAccess {
             this.af.list(this.MEMBERS).update(item.key, item);
         else { 
             this.af.list(this.MEMBERS).push(item);
+            this.MemberLoad();
+        }
+    }
+
+    public UserSave(item: UserInfo) {
+        if (item.key)
+            this.af.list(this.USERS).update(item.key, item);
+        else {
+            this.af.list(this.USERS).push(item);
+            this.UserLoad();
         }
     }
 

@@ -15,6 +15,11 @@
       ".write": "true",
       ".indexOn": "id"
     },
+    "users": {
+      ".read": "true",
+      ".write": "true",
+      ".indexOn": "UID"
+    },
     "expenses": {
       ".read": "true",
       ".write": "true"

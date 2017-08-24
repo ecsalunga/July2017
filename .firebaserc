@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "temp-system"
+    "default": "temp-system",
+    "temp-system": "temp-system"
   }
 }

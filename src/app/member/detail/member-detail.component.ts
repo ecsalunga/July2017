@@ -26,7 +26,6 @@ export class MemberDetailComponent implements OnInit {
   Save() {
     this.model.JoinDate = this.core.dateToNumber(this.joinDate);
     this.DA.MemberSave(this.model);
-    this.DA.MemberLoad();
     this.LoadList();
   }
 
@@ -37,5 +36,4 @@ export class MemberDetailComponent implements OnInit {
   ngOnInit() {
     this.DL.TITLE = "Member Details";
   }
-
 }

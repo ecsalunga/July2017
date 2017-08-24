@@ -59,6 +59,7 @@ export class ExpenseInfo {
 }
 
 export class UserInfo {
+    key: string;
     Name: string;
     UID: string;
     ImageURL: string;
