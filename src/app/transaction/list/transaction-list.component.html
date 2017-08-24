@@ -14,15 +14,14 @@
         <th class="totalColumn">
           Amount
         </th>
-        <th></th>
-        <th>
+        <th class="rightRow">
           Action
         </th>
       </tr>
     </thead>
     <ng-container *ngIf="DL.ReportSelected.Count < 1;else showReport">
       <tr class="blankCell">
-        <td colspan="6">
+        <td colspan="5">
           [ no item to show ]
         </td>
       </tr>
@@ -42,8 +41,7 @@
           <td class="totalColumn">
             {{ tran.Amount | number:'1.2-2' }}
           </td>
-          <td></td>
-          <td>
+          <td class="rightRow">
             <button md-mini-fab (click)="SelectTransaction(tran)" mdTooltip="View"><i class="material-icons">pageview</i></button>
           </td>
         </tr>

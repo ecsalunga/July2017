@@ -11,8 +11,7 @@
         <th>
           Quantity
         </th>
-        <th></th>
-        <th>
+        <th class="rightRow">
           Action
         </th>
       </tr>
@@ -28,8 +27,7 @@
         <td class="{{ (product.Quantity > product.QuantityNotify) ?  'quantityOK' : 'quantityNotify' }}">
           {{product.Quantity}}
         </td>
-        <td></td>
-        <td>
+        <td class="rightRow">
           <button md-mini-fab (click)="SelectProduct(product)" mdTooltip="View"><i class="material-icons">pageview</i></button>
         </td>
       </tr>

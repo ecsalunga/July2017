@@ -411,19 +411,17 @@ export class DataAccess {
     public MemberSave(item: MemberInfo) {
         if (item.key)
             this.af.list(this.MEMBERS).update(item.key, item);
-        else { 
+        else 
             this.af.list(this.MEMBERS).push(item);
-            this.MemberLoad();
-        }
+        this.MemberLoad();
     }
 
     public UserSave(item: UserInfo) {
         if (item.key)
             this.af.list(this.USERS).update(item.key, item);
-        else {
-            this.af.list(this.USERS).push(item);
-            this.UserLoad();
-        }
+        else
+            this.af.list(this.USERS).push(item); 
+        this.UserLoad();
     }
 
     public SellInfoSave(item: SellInfo) {

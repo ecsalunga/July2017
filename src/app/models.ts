@@ -13,10 +13,8 @@ export class MemberInfo {
     Name: string;
     Address1: string;
     Address2: string;
-    Address3: string;
     Contact1: string;
     Contact2: string;
-    Contact3: string;
     JoinDate: number;
 }
 

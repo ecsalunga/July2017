@@ -50,7 +50,7 @@
   <table>
     <tr class="rightRow">
       <td class="selectionRow" style="width: 60%" [hidden]="!isToday || !DL.ExpensePermission.Modify">
-        <md-input-container>
+        <md-input-container class="longText">
           <input id="txtDescription" mdInput placeholder="Description" [mdAutocomplete]="auto" [formControl]="ctrl" [(ngModel)]="description">
         </md-input-container>
         <md-autocomplete #auto="mdAutocomplete">
