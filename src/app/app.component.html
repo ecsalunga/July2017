@@ -1,6 +1,6 @@
 <md-toolbar color="primary">
-  <button md-button class="title" mdTooltip="{{DL.User.Name}}" mdTooltipPosition="below">
-    <ng-container *ngIf="DL.User.ImageURL;else showGeneric">
+  <button md-button (click)="DL.User.UID ? LoadPage('dashboard') : LoadPage('home')" class="title" mdTooltip="{{DL.User.Name}}" mdTooltipPosition="below">
+    <ng-container *ngIf="DL.User.UID;else showGeneric">
       <img md-card-avatar src="{{DL.User.ImageURL}}"> 
     </ng-container>
     <ng-template #showGeneric>
