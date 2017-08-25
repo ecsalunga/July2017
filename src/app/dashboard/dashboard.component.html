@@ -1,6 +1,5 @@
 <p>
   task here...
 </p>
-<input id="file" name="file" type="file" >
-<button (click)="upload()" type="button">Upload</button>
-<img src="{{imageURL}}" />
+<input #fileSelector id="file" [hidden]="true" type="file" >
+<img style="cursor:pointer;" src="{{imageURL}}" (click)="selectFile()" />
