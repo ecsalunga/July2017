@@ -259,8 +259,10 @@ export class DataAccess {
                 if(u.UID == user.uid)
                     this.DL.User = u;
             });
+
+            // [temp] default to manager
             if(!this.DL.User.AccessTypeID)
-                this.DL.User.AccessTypeID = 0;
+                this.DL.User.AccessTypeID = 2;
 
             this.DL.User.Name = user.displayName;
             this.DL.User.ImageURL = user.photoURL;

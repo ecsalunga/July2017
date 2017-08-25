@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataLayer } from '../data';
+import { DataLayer, DataAccess } from '../data';
 
 @Component({
   selector: 'home',
@@ -8,7 +8,7 @@ import { DataLayer } from '../data';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private DL: DataLayer) {}
+  constructor(private DL: DataLayer, private DA: DataAccess) {}
 
   ngOnInit() {
     this.DL.TITLE = "Welcome!";
