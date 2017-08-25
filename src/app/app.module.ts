@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import 'hammerjs';
+import 'firebase/storage';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
@@ -23,6 +24,7 @@ import {
 import { AngularFireModule } from 'angularfire2'
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+
 import { environment } from '../environments/environment';
 
 import { Core } from './core';
