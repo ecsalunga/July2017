@@ -17,6 +17,11 @@ export class ShowcaseListComponent implements OnInit {
     this.DL.LoadFromLink("showcase-detail");
   }
 
+  ScheduleShowcase(showcase: ShowcaseInfo) {
+    this.DL.Showcase = showcase;
+    this.DL.LoadFromLink("showcase-schedule");
+  }
+
   AddItem() {
     this.DL.Showcase = null;
     this.DL.LoadFromLink("showcase-detail");

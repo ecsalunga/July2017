@@ -42,7 +42,7 @@
             {{ product.Description }} ({{ product.Code }})
           </md-option>
         </md-select>
-        <md-select placeholder="Quantity" [(ngModel)]="selectedQuantity">
+        <md-select placeholder="Quantity" [(ngModel)]="quantitySelected">
           <md-option *ngFor="let quantity of quantities" [value]="quantity">
             {{quantity}}
           </md-option>
@@ -52,7 +52,7 @@
     </tr>
     <tr class="rightRow">
       <td>
-        <button md-fab [disabled]="!selectedQuantity || !model" (click)="SuppyProduct()" mdTooltip="Add to suppy" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
+        <button md-fab [disabled]="!quantitySelected || !model" (click)="SuppyProduct()" mdTooltip="Add to suppy" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
       </td>
       <td>
         <button md-fab (click)="AddProduct()" mdTooltip="Add" mdTooltipPosition="above"><i class="material-icons">note_add</i></button>

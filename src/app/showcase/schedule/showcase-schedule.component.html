@@ -1,0 +1,57 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          From
+        </th>
+        <th class="totalColumn">
+          To
+        </th>
+        <th class="rightRow">
+          Action
+        </th>
+      </tr>
+    </thead>
+    <ng-container *ngFor="let info of model.Schedules">
+      <tr>
+        <td>
+          {{ getDate(info.From) | date : 'yyyy-MM-dd' }}
+        </td>
+        <td class="totalColumn">
+          {{ getDate(info.To) | date : 'yyyy-MM-dd' }}
+        </td>
+        <td class="rightRow">
+          <button md-mini-fab (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><i class="material-icons">delete</i></button>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+  <div class="hSpacer"></div>
+  <table>
+    <tr class="rightRow">
+      <td class="selectionRow" style="width: 60%">
+        <md-input-container>
+          <input (click)="from.open()" mdInput [mdDatepicker]="from" placeholder="From Date" [(ngModel)]="FromDate">
+          <button mdSuffix [mdDatepickerToggle]="from"></button>
+        </md-input-container>
+        <md-datepicker #from></md-datepicker>
+        <md-input-container>
+          <input (click)="to.open()" mdInput [mdDatepicker]="to" placeholder="To Date" [(ngModel)]="ToDate">
+          <button mdSuffix [mdDatepickerToggle]="to"></button>
+        </md-input-container>
+        <md-datepicker #to></md-datepicker>
+      </td>
+      <td></td>
+    </tr>
+    <tr class="rightRow">
+      <td>
+        <button md-fab [disabled]="!FromDate || !ToDate" (click)="AddSchedule()" mdTooltip="Add schedule" mdTooltipPosition="above"><i class="material-icons">note_add</i></button>
+      </td>
+      <td>
+          <button md-fab (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><i class="material-icons">save</i></button>
+          <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><i class="material-icons">assignment_return</i></button>
+      </td>
+    </tr>
+  </table>
+</div>

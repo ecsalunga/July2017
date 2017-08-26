@@ -48,6 +48,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ShowcaseListComponent } from './showcase/list/showcase-list.component';
 import { ShowcaseDetailComponent } from './showcase/detail/showcase-detail.component';
 import { ShowcaseWidgetComponent } from './showcase/widget/showcase-widget.component';
+import { ShowcaseScheduleComponent } from './showcase/schedule/showcase-schedule.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { ShowcaseWidgetComponent } from './showcase/widget/showcase-widget.compo
     DashboardComponent,
     ShowcaseListComponent,
     ShowcaseDetailComponent,
-    ShowcaseWidgetComponent
+    ShowcaseWidgetComponent,
+    ShowcaseScheduleComponent
   ],
   imports: [
     BrowserModule,
@@ -107,7 +109,8 @@ import { ShowcaseWidgetComponent } from './showcase/widget/showcase-widget.compo
     DashboardComponent,
     ShowcaseListComponent,
     ShowcaseDetailComponent,
-    ShowcaseWidgetComponent
+    ShowcaseWidgetComponent,
+    ShowcaseScheduleComponent
   ]
 })
 export class AppModule {

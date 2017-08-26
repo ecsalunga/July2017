@@ -77,6 +77,10 @@ td, th {
     text-align: right;
 }
 
+.centerRow, .centerRow td {
+    text-align: center;
+}
+
 .selectionRow {
     vertical-align: bottom;
 }

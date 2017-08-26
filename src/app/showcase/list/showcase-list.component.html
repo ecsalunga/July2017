@@ -22,6 +22,7 @@
           {{item.Price | number:'1.2-2'}}
         </td>
         <td class="rightRow">
+          <button md-mini-fab (click)="ScheduleShowcase(item)" mdTooltip="Schedule"><i class="material-icons">schedule</i></button>
           <button md-mini-fab (click)="SelectShowcase(item)" mdTooltip="View"><i class="material-icons">pageview</i></button>
         </td>
       </tr>
