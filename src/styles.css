@@ -90,11 +90,11 @@ td, th {
 }
 
 md-input-container {
-    width: 100px;
+    width: 120px;
 }
 
 .longText {
-    width: 220px;
+    width: 180px;
 }
 
 .fullWidth {
