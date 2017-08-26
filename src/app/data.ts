@@ -3,7 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Core } from './core';
-import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, ReportInfo, ExpenseInfo, NameValue, UserInfo, Permission } from './models';
+import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, ReportInfo, ExpenseInfo, NameValue, UserInfo, Permission, ShowcaseInfo } from './models';
 import 'rxjs/add/operator/first';
 
 @Injectable()
@@ -46,12 +46,15 @@ export class DataLayer {
     ReportYears: Array<number>;
     ReportPermission: Permission;
 
-    Months: Array<NameValue>;
-    Date: Date = new Date();
     User: UserInfo;
     Users: Array<UserInfo>;
     UserPermission: Permission;
+    
+    Showcase: ShowcaseInfo;
+    Showcases: Array<ShowcaseInfo>;
 
+    Months: Array<NameValue>;
+    Date: Date = new Date();
     AccessTypes: Array<NameValue>;
     IsAuthenticating: boolean = false;
 
@@ -161,6 +164,8 @@ export class DataAccess {
     EXPENSE_TYPES: string = "/expenses/types";
     KEYDAY: string = "KeyDay";
     USERS: string = "/users";
+    SHOWCASES: string = "/showcases";
+    StorageRef: firebase.storage.Reference = firebase.storage().ref();
 
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase, private afAuth: AngularFireAuth) { 
         this.TRANSACTIONS = "/transactions/" + this.DL.ReportToday.KeyYear + "/" + this.DL.ReportToday.KeyMonth;
@@ -180,6 +185,7 @@ export class DataAccess {
     public DataLoad() {
         this.UserLoad();
         this.MemberLoad();
+        this.ShowcasesLoad();
         this.ExpensesTypeLoad();
         this.ReportTodayLoad();
         this.ActiveDataLoad();
@@ -320,6 +326,18 @@ export class DataAccess {
         });
     }
 
+    ShowcasesLoad() {
+        this.af.list(this.SHOWCASES, {query: {  orderByChild: 'Name'}}).first().subscribe(snapshots => {
+            this.DL.Showcases = new Array<ShowcaseInfo>();
+
+            snapshots.forEach(snapshot => {
+                let info: ShowcaseInfo = snapshot;
+                info.key = snapshot.$key;
+                this.DL.Showcases.push(info);
+            });
+        });
+    }
+
     TransactionSelectedLoad(report: ReportInfo) {
         this.af.list("/transactions/" + report.KeyYear + "/" + report.KeyMonth, {query: {  orderByChild: this.KEYDAY, equalTo: report.KeyDay}}).subscribe(snapshots => {
             this.DL.TransactionSelected = new Array<TransactionInfo>();
@@ -424,6 +442,14 @@ export class DataAccess {
         else
             this.af.list(this.USERS).push(item); 
         this.UserLoad();
+    }
+
+    public ShowcaseSave(item: ShowcaseInfo) {
+        if (item.key)
+            this.af.list(this.SHOWCASES).update(item.key, item);
+        else
+            this.af.list(this.SHOWCASES).push(item); 
+        this.ShowcasesLoad();
     }
 
     public SellInfoSave(item: SellInfo) {

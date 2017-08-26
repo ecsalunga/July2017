@@ -45,6 +45,8 @@ import { ReportComponent } from './report/report.component';
 import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ShowcaseListComponent } from './showcase/list/showcase-list.component';
+import { ShowcaseDetailComponent } from './showcase/detail/showcase-detail.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ReportComponent,
     UserComponent,
     HomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    ShowcaseListComponent,
+    ShowcaseDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +102,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ReportComponent,
     UserComponent,
     HomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    ShowcaseListComponent,
+    ShowcaseDetailComponent
   ]
 })
 export class AppModule {

@@ -96,3 +96,7 @@ td, th {
 .longText {
     width: 250px;
 }
+
+.fullWidth {
+    width: 100%;
+}

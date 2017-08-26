@@ -34,6 +34,12 @@
         <span>Product</span>
       </button>
     </ng-container>
+    <ng-container *ngIf="DL.ProductPermission.View">
+      <button md-menu-item (click)="LoadPage('showcase-list')">
+        <md-icon>pages</md-icon>
+        <span>Showcase</span>
+      </button>
+    </ng-container>
     <ng-container *ngIf="DL.MemberPermission.View">
       <button md-menu-item (click)="LoadPage('member-list')">
         <md-icon>card_membership</md-icon>

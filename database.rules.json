@@ -5,6 +5,11 @@
       ".write": "true",
       ".indexOn": "Code"
     },
+    "showcases": {
+      ".read": "true",
+      ".write": "true",
+      ".indexOn": "Code"
+    },
     "members": {
       ".read": "true",
       ".write": "true",
