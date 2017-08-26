@@ -22,12 +22,14 @@ export class ShowcaseScheduleComponent implements OnInit {
     this.model.ImageURL = this.DL.Showcase.ImageURL;
     this.model.Price = this.DL.Showcase.Price;
     this.model.key = this.DL.Showcase.key;
-    this.DL.Showcase.Schedules.forEach(s => {
-      let item = new ScheduleInfo();
-      item.From = s.From;
-      item.To = s.To;
-      this.model.Schedules.push(item);
-    });
+    if(this.DL.Showcase.Schedules) {
+      this.DL.Showcase.Schedules.forEach(s => {
+        let item = new ScheduleInfo();
+        item.From = s.From;
+        item.To = s.To;
+        this.model.Schedules.push(item);
+      });
+    }
   }
 
   getDate(keyDay: number): Date {

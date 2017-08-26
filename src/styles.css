@@ -42,6 +42,14 @@ td, th {
     text-align: left;
 }
 
+textarea {
+    height: 70px;
+}
+
+md-input-container {
+    width: 120px;
+}
+
 .title {
    height: 50px;
    font-size: 20px;
@@ -89,12 +97,8 @@ td, th {
     padding-top: 25px;
 }
 
-md-input-container {
-    width: 120px;
-}
-
 .longText {
-    width: 180px;
+    width: 185px;
 }
 
 .fullWidth {
