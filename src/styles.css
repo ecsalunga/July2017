@@ -89,16 +89,12 @@ td, th {
     padding-top: 25px;
 }
 
-.product {
-    width: 170px;
-}
-
-.member {
-    width: 140px;
+md-input-container {
+    width: 100px;
 }
 
 .longText {
-    width: 250px;
+    width: 220px;
 }
 
 .fullWidth {

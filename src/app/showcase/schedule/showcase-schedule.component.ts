@@ -14,7 +14,20 @@ export class ShowcaseScheduleComponent implements OnInit {
   model: ShowcaseInfo;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
-    this.model = Object.assign({}, this.DL.Showcase);
+    // workaround for schedules deep clone issue
+    this.model = new ShowcaseInfo();
+    this.model.Name = this.DL.Showcase.Name;
+    this.model.Code = this.DL.Showcase.Code;
+    this.model.Description = this.DL.Showcase.Description;
+    this.model.ImageURL = this.DL.Showcase.ImageURL;
+    this.model.Price = this.DL.Showcase.Price;
+    this.model.key = this.DL.Showcase.key;
+    this.DL.Showcase.Schedules.forEach(s => {
+      let item = new ScheduleInfo();
+      item.From = s.From;
+      item.To = s.To;
+      this.model.Schedules.push(item);
+    });
   }
 
   getDate(keyDay: number): Date {
