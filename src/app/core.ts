@@ -3,7 +3,7 @@ import { Injectable, ComponentFactory, ComponentFactoryResolver, ViewContainerRe
 @Injectable()
 export class Core {
     viewChild: ViewContainerRef;
-    component: any;
+    components: Array<any> = new Array<any>();
     selector: string;
 
     constructor(private resolver: ComponentFactoryResolver) { }
@@ -16,15 +16,28 @@ export class Core {
             this.selector = selector;
             let factory = this.resolver.resolveComponentFactory(component.componentType);
             let created = this.viewChild.createComponent(factory);
-            this.component = created;
+            this.components.push(created);
         }
+    }
+
+    loadComponents(selectors: Array<string>) {
+        this.selector = "Multiple";
+        selectors.forEach(selector => {
+            let factories = Array.from(this.resolver['_factories'].values());
+            let component = <ComponentFactory<any>> factories.find((item: ComponentFactory<any>) => item.selector === selector);
+            if(component) {
+                let factory = this.resolver.resolveComponentFactory(component.componentType);
+                let created = this.viewChild.createComponent(factory);
+                this.components.push(created);
+            }
+        });
     }
 
     clearComponent() {
         this.selector = "";
-        if(this.component) {
-            this.component.destroy();
-        }
+        this.components.forEach(component => {
+            component.destroy();
+        });
     }
 
     dateToNumber(date: Date): number

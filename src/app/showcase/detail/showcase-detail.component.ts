@@ -11,7 +11,6 @@ import { ShowcaseInfo } from '../../models';
 export class ShowcaseDetailComponent implements OnInit {
   @ViewChild('fileSelector', {read: ViewContainerRef })
   fileSelector: ViewContainerRef;
-
   model: ShowcaseInfo;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer, private renderer: Renderer) {

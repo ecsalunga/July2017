@@ -12,5 +12,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.DL.TITLE = "Welcome!";
+    this.DL.LoadComponentsFromLink(['showcase-widget']);
   }
 }

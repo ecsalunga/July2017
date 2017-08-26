@@ -1,0 +1,10 @@
+<md-card *ngFor="let item of DL.Showcases">
+  <md-card-header>
+    <md-card-title>{{ item.Name }}</md-card-title>
+    <md-card-subtitle>{{ item.Description }}</md-card-subtitle>
+  </md-card-header>
+  <img md-card-image src="{{ item.ImageURL }}">
+  <md-card-content>
+      {{ item.Price | number:'1.2-2' }}
+  </md-card-content>
+</md-card>

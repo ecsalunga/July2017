@@ -151,6 +151,11 @@ export class DataLayer {
         this.SOURCE = this.LINK;
         this.core.loadComponent(name);
     }
+
+    LoadComponentsFromLink(names: Array<string>) {
+        this.SOURCE = this.LINK;
+        this.core.loadComponents(names);
+    }
 }
 
 @Injectable()
