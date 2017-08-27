@@ -2,8 +2,7 @@
   <md-toolbar color="primary">
     <button md-icon-button (click)="sidenav.toggle()" mdTooltip="Open menu" mdTooltipPosition="below">
       <md-icon>menu</md-icon>
-    </button>
-    TEMP System
+    </button> TEMP System
     <div class="h-spacer"></div>
     <ng-container *ngIf="DL.User.UID">
       <button md-button (click)="LoadPage('dashboard')" class="title" mdTooltip="Dashboard" mdTooltipPosition="below">
@@ -13,72 +12,76 @@
   </md-toolbar>
 </div>
 <md-sidenav-container class="navContainer">
-  <md-sidenav #sidenav class="navSide" (click)="sidenav.toggle()">
-    <div class="navSideHSpacer"><md-menu #menu="mdMenu"></md-menu></div>
-    <button md-menu-item (click)="LoadPage('home')">
-      <md-icon>home</md-icon>
-      <span>Home</span>
-    </button>
-    <ng-container *ngIf="DL.SellPermission.View">
-      <button md-menu-item (click)="LoadPage('sell')">
-        <md-icon>shopping_cart</md-icon>
-        <span>Sell</span>
+  <md-sidenav #sidenav (click)="sidenav.toggle()">
+    <div class="navSide">
+      <div class="navSideHSpacer">
+        <md-menu #menu="mdMenu"></md-menu>
+      </div>
+      <button md-menu-item (click)="LoadPage('home')">
+        <md-icon>home</md-icon>
+        <span>Home</span>
       </button>
-    </ng-container>
-    <ng-container *ngIf="DL.TransactionPermission.View">
-      <button md-menu-item (click)="LoadPage('transaction-list')">
-        <md-icon>payment</md-icon>
-        <span>Transaction</span>
-      </button>
-    </ng-container>
-    <ng-container *ngIf="DL.ExpensePermission.View">
-      <button md-menu-item (click)="LoadPage('expense')">
-        <md-icon>broken_image</md-icon>
-        <span>Expense</span>
-      </button>
-    </ng-container>
-    <ng-container *ngIf="DL.ProductPermission.View">
-      <button md-menu-item (click)="LoadPage('product-list')">
-        <md-icon>book</md-icon>
-        <span>Product</span>
-      </button>
-    </ng-container>
-    <ng-container *ngIf="DL.ProductPermission.View">
-      <button md-menu-item (click)="LoadPage('showcase-list')">
-        <md-icon>pages</md-icon>
-        <span>Showcase</span>
-      </button>
-    </ng-container>
-    <ng-container *ngIf="DL.MemberPermission.View">
-      <button md-menu-item (click)="LoadPage('member-list')">
-        <md-icon>card_membership</md-icon>
-        <span>Member</span>
-      </button>
-    </ng-container>
-    <ng-container *ngIf="DL.ReportPermission.View">
-      <button md-menu-item (click)="LoadPage('report')">
-        <md-icon>note</md-icon>
-        <span>Report</span>
-      </button>
-    </ng-container>
-    <ng-container *ngIf="DL.UserPermission.View">
-      <button md-menu-item (click)="LoadPage('user')">
-        <md-icon>accessibility</md-icon>
-        <span>User</span>
-      </button>
-    </ng-container>
-    <ng-container *ngIf="DL.User.UID;else showSignOut">
-      <button md-menu-item (click)="DA.LogOut()">
-        <md-icon>fingerprint</md-icon>
-        <span>Log Out</span>
-      </button>
-    </ng-container>
-    <ng-template #showSignOut>
-      <button md-menu-item (click)="DA.LogInWithFacebook()">
-        <md-icon>fingerprint</md-icon>
-        <span>Log In</span>
-      </button>
-    </ng-template>
+      <ng-container *ngIf="DL.SellPermission.View">
+        <button md-menu-item (click)="LoadPage('sell')">
+          <md-icon>shopping_cart</md-icon>
+          <span>Sell</span>
+        </button>
+      </ng-container>
+      <ng-container *ngIf="DL.TransactionPermission.View">
+        <button md-menu-item (click)="LoadPage('transaction-list')">
+          <md-icon>payment</md-icon>
+          <span>Transaction</span>
+        </button>
+      </ng-container>
+      <ng-container *ngIf="DL.ExpensePermission.View">
+        <button md-menu-item (click)="LoadPage('expense')">
+          <md-icon>broken_image</md-icon>
+          <span>Expense</span>
+        </button>
+      </ng-container>
+      <ng-container *ngIf="DL.ProductPermission.View">
+        <button md-menu-item (click)="LoadPage('product-list')">
+          <md-icon>book</md-icon>
+          <span>Product</span>
+        </button>
+      </ng-container>
+      <ng-container *ngIf="DL.ProductPermission.View">
+        <button md-menu-item (click)="LoadPage('showcase-list')">
+          <md-icon>pages</md-icon>
+          <span>Showcase</span>
+        </button>
+      </ng-container>
+      <ng-container *ngIf="DL.MemberPermission.View">
+        <button md-menu-item (click)="LoadPage('member-list')">
+          <md-icon>card_membership</md-icon>
+          <span>Member</span>
+        </button>
+      </ng-container>
+      <ng-container *ngIf="DL.ReportPermission.View">
+        <button md-menu-item (click)="LoadPage('report')">
+          <md-icon>note</md-icon>
+          <span>Report</span>
+        </button>
+      </ng-container>
+      <ng-container *ngIf="DL.UserPermission.View">
+        <button md-menu-item (click)="LoadPage('user')">
+          <md-icon>accessibility</md-icon>
+          <span>User</span>
+        </button>
+      </ng-container>
+      <ng-container *ngIf="DL.User.UID;else showSignOut">
+        <button md-menu-item (click)="DA.LogOut()">
+          <md-icon>fingerprint</md-icon>
+          <span>Log Out</span>
+        </button>
+      </ng-container>
+      <ng-template #showSignOut>
+        <button md-menu-item (click)="DA.LogInWithFacebook()">
+          <md-icon>fingerprint</md-icon>
+          <span>Log In</span>
+        </button>
+      </ng-template>
+    </div>
   </md-sidenav>
   <div class="content">
     <div class="main">
