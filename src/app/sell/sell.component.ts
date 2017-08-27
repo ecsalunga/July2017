@@ -14,6 +14,7 @@ export class SellComponent implements OnInit {
   selectedQuantity: number = 1;
   quantities: Array<number>;
   selectedMember: MemberInfo = this.DL.MemberWalkIn;
+  isPaying: boolean = false;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) { }
 
@@ -64,11 +65,21 @@ export class SellComponent implements OnInit {
 
   Delete(info: SellInfo) {
      this.DA.SellInfoDelete(info);
+     this.isPaying = false;
+  }
+  
+  Cancel() {
+    this.isPaying = false;
+  }
+
+  Paying() {
+    this.isPaying = true;
   }
 
   Done() {
     this.DA.SellInfoDone(this.selectedMember.key, this.selectedMember.Name);
     this.selectedMember = this.DL.MemberWalkIn;
+    this.isPaying = false;
   }
 
   ngOnInit() {

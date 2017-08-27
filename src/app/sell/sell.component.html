@@ -57,35 +57,54 @@
     </ng-template>
   </table>
   <div class="hSpacer"></div>
-  <table [hidden]="!DL.SellPermission.Modify">
-    <tr class="rightRow">
-      <td class="selectionRow" style="width: 60%">
-        <md-select class="longText" placeholder="Product" [(ngModel)]="model" (change)="productSelected()">
-          <md-option *ngFor="let product of DL.ProductSelections" [value]="product">
-            {{ product.Description }} ({{ product.Code }})
-          </md-option>
-        </md-select>
-        <md-select placeholder="Quantity" [(ngModel)]="selectedQuantity">
-          <md-option *ngFor="let quantity of quantities" [value]="quantity">
-            {{quantity}}
-          </md-option>
-        </md-select>
-      </td>
-      <td class="selectionRow">
-        <md-select placeholder="Member" [(ngModel)]="selectedMember">
-          <md-option *ngFor="let member of this.DL.MemberSelections" [value]="member">
-            {{ member.Name }}
-          </md-option>
-        </md-select>
-      </td>
-    </tr>
-    <tr class="rightRow">
-      <td>
-        <button md-fab [disabled]="!model || !selectedQuantity" (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
-      </td>
-      <td>
-        <button md-fab [disabled]="!DL.SellInfosCount" (click)="Done()" mdTooltip="Done" mdTooltipPosition="above"><i class="material-icons">done_all</i></button>
-      </td>
-    </tr>
-  </table>
+  <ng-container *ngIf="!isPaying;else showPaying">
+    <table [hidden]="!DL.SellPermission.Modify">
+      <tr class="rightRow">
+        <td class="selectionRow" style="width: 60%">
+          <md-select class="longText" placeholder="Product" [(ngModel)]="model" (change)="productSelected()">
+            <md-option *ngFor="let product of DL.ProductSelections" [value]="product">
+              {{ product.Description }} ({{ product.Code }})
+            </md-option>
+          </md-select>
+          <md-select placeholder="Quantity" [(ngModel)]="selectedQuantity">
+            <md-option *ngFor="let quantity of quantities" [value]="quantity">
+              {{quantity}}
+            </md-option>
+          </md-select>
+        </td>
+        <td class="selectionRow">
+          <md-select placeholder="Member" [(ngModel)]="selectedMember">
+            <md-option *ngFor="let member of this.DL.MemberSelections" [value]="member">
+              {{ member.Name }}
+            </md-option>
+          </md-select>
+        </td>
+      </tr>
+      <tr class="rightRow">
+        <td>
+          <button md-fab [disabled]="!model || !selectedQuantity" (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
+        </td>
+        <td>
+          <button md-fab [disabled]="!DL.SellInfosCount" (click)="Paying()" mdTooltip="Close Cart" mdTooltipPosition="above"><i class="material-icons">done</i></button>
+        </td>
+      </tr>
+    </table>
+  </ng-container>
+  <ng-template #showPaying>
+      <table [hidden]="!DL.SellPermission.Modify">
+          <tr class="rightRow">
+            <td class="selectionRow">
+              <md-input-container class="longText">
+                <input mdInput placeholder="Member" disabled value="{{ selectedMember.Name }}">
+              </md-input-container>
+            </td>
+          </tr>
+          <tr class="rightRow">
+            <td>
+                <button md-fab (click)="Cancel()" mdTooltip="Modify Cart" mdTooltipPosition="above"><i class="material-icons">assignment_return</i></button>
+              <button md-fab [disabled]="!DL.SellInfosCount" (click)="Done()" mdTooltip="Done" mdTooltipPosition="above"><i class="material-icons">done_all</i></button>
+            </td>
+          </tr>
+        </table>
+  </ng-template>
 </div>
