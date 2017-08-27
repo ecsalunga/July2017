@@ -19,7 +19,7 @@ export class MemberDetailComponent implements OnInit {
     }
     else {
       this.model = new MemberInfo();
-      this.joinDate = new Date();
+      this.joinDate = this.DL.Date;
     }
   }
 

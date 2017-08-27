@@ -52,6 +52,7 @@ export class DataLayer {
     
     Showcase: ShowcaseInfo;
     Showcases: Array<ShowcaseInfo>;
+    ShowcaseToday: Array<ShowcaseInfo>;
 
     Months: Array<NameValue>;
     Date: Date = new Date();
@@ -205,8 +206,7 @@ export class DataAccess {
             this.DL.ProductSelections = new Array<ProductInfo>();
 
             snapshots.forEach(snapshot => {
-                let info = new ProductInfo();
-                info = snapshot;
+                let info: ProductInfo = snapshot;
                 info.key = snapshot.$key;
                 this.DL.Products.push(info);
                 if(info.Quantity > 0)
@@ -220,8 +220,7 @@ export class DataAccess {
             this.DL.SellInfosCount = 0;
 
             snapshots.forEach(snapshot => {
-                let info = new SellInfo();
-                info = snapshot;
+                let info: SellInfo = snapshot;
                 info.key = snapshot.$key;
                 this.DL.SellInfos.push(info);
 
@@ -294,8 +293,7 @@ export class DataAccess {
             this.DL.MemberSelections = new Array<MemberInfo>();
 
             snapshots.forEach(snapshot => {
-                let info = new MemberInfo();
-                info = snapshot;
+                let info: MemberInfo = snapshot;
                 info.key = snapshot.$key;
                 this.DL.Members.push(info);
             });
@@ -311,8 +309,7 @@ export class DataAccess {
             this.DL.Users = new Array<UserInfo>();
 
             snapshots.forEach(snapshot => {
-                let info = new UserInfo();
-                info = snapshot;
+                let info: UserInfo = snapshot;
                 info.key = snapshot.$key;
                 this.DL.Users.push(info);
             });
@@ -337,11 +334,25 @@ export class DataAccess {
     ShowcasesLoad() {
         this.af.list(this.SHOWCASES, {query: {  orderByChild: 'Name'}}).first().subscribe(snapshots => {
             this.DL.Showcases = new Array<ShowcaseInfo>();
+            this.DL.ShowcaseToday = new Array<ShowcaseInfo>();
 
             snapshots.forEach(snapshot => {
                 let info: ShowcaseInfo = snapshot;
                 info.key = snapshot.$key;
                 this.DL.Showcases.push(info);
+
+                // get showcase for today
+                let keyToday: number = this.core.dateToKeyDay(this.DL.Date);
+                if(info.Schedules) {
+                    let hasToday: boolean = false;
+                    info.Schedules.forEach(item => {
+                        if(item.From <= keyToday && item.To >= keyToday)
+                            hasToday = true;
+                    });
+
+                    if(hasToday)
+                        this.DL.ShowcaseToday.push(info);
+                }
             });
         });
     }

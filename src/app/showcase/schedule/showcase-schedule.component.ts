@@ -30,6 +30,9 @@ export class ShowcaseScheduleComponent implements OnInit {
         this.model.Schedules.push(item);
       });
     }
+
+    this.FromDate = this.DL.Date;
+    this.ToDate = this.DL.Date;
   }
 
   getDate(keyDay: number): Date {
@@ -57,6 +60,6 @@ export class ShowcaseScheduleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Showcase Schedule";
+    this.DL.TITLE = "Showcase Schedule (" + this.model.Name + ")";
   }
 }
