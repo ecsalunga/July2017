@@ -68,15 +68,15 @@ export class SellComponent implements OnInit {
      this.isPaying = false;
   }
   
-  Cancel() {
+  CartOpen() {
     this.isPaying = false;
   }
 
-  Paying() {
+  CartClose() {
     this.isPaying = true;
   }
 
-  Done() {
+  CartDone() {
     this.DA.SellInfoDone(this.selectedMember.key, this.selectedMember.Name);
     this.selectedMember = this.DL.MemberWalkIn;
     this.isPaying = false;

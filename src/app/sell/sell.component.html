@@ -85,7 +85,7 @@
           <button md-fab [disabled]="!model || !selectedQuantity" (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
         </td>
         <td>
-          <button md-fab [disabled]="!DL.SellInfosCount" (click)="Paying()" mdTooltip="Close Cart" mdTooltipPosition="above"><i class="material-icons">done</i></button>
+          <button md-fab [disabled]="!DL.SellInfosCount" (click)="CartClose()" mdTooltip="Close Cart" mdTooltipPosition="above"><i class="material-icons">done</i></button>
         </td>
       </tr>
     </table>
@@ -101,8 +101,8 @@
           </tr>
           <tr class="rightRow">
             <td>
-                <button md-fab (click)="Cancel()" mdTooltip="Modify Cart" mdTooltipPosition="above"><i class="material-icons">assignment_return</i></button>
-              <button md-fab [disabled]="!DL.SellInfosCount" (click)="Done()" mdTooltip="Done" mdTooltipPosition="above"><i class="material-icons">done_all</i></button>
+                <button md-fab (click)="CartOpen()" mdTooltip="Modify Cart" mdTooltipPosition="above"><i class="material-icons">assignment_return</i></button>
+              <button md-fab [disabled]="!DL.SellInfosCount" (click)="CartDone()" mdTooltip="Done" mdTooltipPosition="above"><i class="material-icons">done_all</i></button>
             </td>
           </tr>
         </table>
