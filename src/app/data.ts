@@ -143,16 +143,19 @@ export class DataLayer {
     }
 
     LoadFromMenu(name: string) {
+        window.scrollTo(0, 0);
         this.SOURCE = this.MENU;
         this.core.loadComponent(name);
     }
 
     LoadFromLink(name: string) {
+        window.scrollTo(0, 0);
         this.SOURCE = this.LINK;
         this.core.loadComponent(name);
     }
 
     LoadComponentsFromLink(names: Array<string>) {
+        window.scrollTo(0, 0);
         this.SOURCE = this.LINK;
         this.core.loadComponents(names);
     }

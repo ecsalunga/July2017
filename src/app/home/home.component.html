@@ -1,4 +1,4 @@
-<button md-button (click)="DA.LogInWithFacebook()">
+<button *ngIf="!DL.User.UID" md-button (click)="DA.LogInWithFacebook()">
   <md-icon>fingerprint</md-icon>
-  <span>Log In to Buy</span>
+  <span>Log In</span>
 </button>
