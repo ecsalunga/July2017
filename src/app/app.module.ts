@@ -18,6 +18,7 @@ import {
   MdMenuModule,
   MdToolbarModule,
   MdIconModule,
+  MdSidenavModule,
   DateAdapter
  } from '@angular/material';
 
@@ -86,6 +87,7 @@ import { ShowcaseScheduleComponent } from './showcase/schedule/showcase-schedule
     MdDatepickerModule,
     MdNativeDateModule,
     MdIconModule,
+    MdSidenavModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),

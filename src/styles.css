@@ -6,6 +6,19 @@ body {
 	font-size: 12px;
 	font-style: normal;
     font-variant: normal;
+    min-height: 700px;
+}
+
+.navContainer {
+    min-height: 700px;
+}
+
+.navSide {
+    width: 250px;
+}
+
+.content {
+    height: 100%;
 }
 
 .main {
