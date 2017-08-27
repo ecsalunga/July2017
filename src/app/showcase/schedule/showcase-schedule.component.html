@@ -32,12 +32,12 @@
     <tr class="rightRow">
       <td class="selectionRow" style="width: 60%">
         <md-input-container>
-          <input (click)="from.open()" mdInput [mdDatepicker]="from" placeholder="From Date" [(ngModel)]="FromDate">
+          <input mdInput [mdDatepicker]="from" placeholder="From Date" [(ngModel)]="FromDate">
           <button mdSuffix [mdDatepickerToggle]="from"></button>
         </md-input-container>
         <md-datepicker #from></md-datepicker>
         <md-input-container>
-          <input (click)="to.open()" mdInput [mdDatepicker]="to" placeholder="To Date" [(ngModel)]="ToDate">
+          <input mdInput [mdDatepicker]="to" placeholder="To Date" [(ngModel)]="ToDate">
           <button mdSuffix [mdDatepickerToggle]="to"></button>
         </md-input-container>
         <md-datepicker #to></md-datepicker>
