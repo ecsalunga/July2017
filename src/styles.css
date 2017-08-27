@@ -17,6 +17,10 @@ body {
     width: 250px;
 }
 
+.navSideHSpacer {
+    height: 80px;
+}
+
 .content {
     height: 100%;
 }

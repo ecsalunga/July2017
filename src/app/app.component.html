@@ -1,35 +1,49 @@
+<div class="navbar">
+  <md-toolbar color="primary">
+    <button md-icon-button (click)="sidenav.open()" mdTooltip="Open menu" mdTooltipPosition="below">
+      <md-icon>menu</md-icon>
+    </button>
+    TEMP System
+    <div class="h-spacer"></div>
+    <ng-container *ngIf="DL.User.UID">
+      <button md-button (click)="LoadPage('dashboard')" class="title" mdTooltip="Dashboard" mdTooltipPosition="below">
+        <img md-card-avatar src="{{DL.User.ImageURL}}"> 
+      </button>
+    </ng-container>
+  </md-toolbar>
+</div>
 <md-sidenav-container class="navContainer">
   <md-sidenav #sidenav class="navSide" (click)="sidenav.toggle()">
-      <md-menu #menu="mdMenu"></md-menu>
-      <button md-menu-item (click)="LoadPage('home')">
-        <md-icon>home</md-icon>
-        <span>Home</span>
+    <div class="navSideHSpacer"><md-menu #menu="mdMenu"></md-menu></div>
+    <button md-menu-item (click)="LoadPage('home')">
+      <md-icon>home</md-icon>
+      <span>Home</span>
+    </button>
+    <ng-container *ngIf="DL.SellPermission.View">
+      <button md-menu-item (click)="LoadPage('sell')">
+        <md-icon>shopping_cart</md-icon>
+        <span>Sell</span>
       </button>
-      <ng-container *ngIf="DL.SellPermission.View">
-        <button md-menu-item (click)="LoadPage('sell')">
-          <md-icon>shopping_cart</md-icon>
-          <span>Sell</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.TransactionPermission.View">
-        <button md-menu-item (click)="LoadPage('transaction-list')">
-          <md-icon>payment</md-icon>
-          <span>Transaction</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.ExpensePermission.View">
-        <button md-menu-item (click)="LoadPage('expense')">
-          <md-icon>broken_image</md-icon>
-          <span>Expense</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.ProductPermission.View">
-        <button md-menu-item (click)="LoadPage('product-list')">
-          <md-icon>book</md-icon>
-          <span>Product</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.ProductPermission.View">
+    </ng-container>
+    <ng-container *ngIf="DL.TransactionPermission.View">
+      <button md-menu-item (click)="LoadPage('transaction-list')">
+        <md-icon>payment</md-icon>
+        <span>Transaction</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.ExpensePermission.View">
+      <button md-menu-item (click)="LoadPage('expense')">
+        <md-icon>broken_image</md-icon>
+        <span>Expense</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.ProductPermission.View">
+      <button md-menu-item (click)="LoadPage('product-list')">
+        <md-icon>book</md-icon>
+        <span>Product</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.ProductPermission.View">
       <button md-menu-item (click)="LoadPage('showcase-list')">
         <md-icon>pages</md-icon>
         <span>Showcase</span>
@@ -66,20 +80,6 @@
       </button>
     </ng-template>
   </md-sidenav>
-  <div class="navbar">
-    <md-toolbar color="primary">
-      <button md-icon-button (click)="sidenav.open()" mdTooltip="Open menu" mdTooltipPosition="below">
-        <md-icon>menu</md-icon>
-      </button>
-      TEMP System
-      <div class="h-spacer"></div>
-      <ng-container *ngIf="DL.User.UID">
-        <button md-button (click)="LoadPage('dashboard')" class="title" mdTooltip="Dashboard" mdTooltipPosition="below">
-          <img md-card-avatar src="{{DL.User.ImageURL}}"> 
-        </button>
-      </ng-container>
-    </md-toolbar>
-  </div>
   <div class="content">
     <div class="main">
       <md-toolbar>
