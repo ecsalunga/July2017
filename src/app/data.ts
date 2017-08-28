@@ -3,7 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Core } from './core';
-import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, ReportInfo, ExpenseInfo, NameValue, UserInfo, Permission, ShowcaseInfo, Access } from './models';
+import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, ReportInfo, ExpenseInfo, NameValue, UserInfo, ShowcaseInfo, Access } from './models';
 import 'rxjs/add/operator/first';
 
 @Injectable()
@@ -16,39 +16,33 @@ export class DataLayer {
     Product: ProductInfo;   
     Products: Array<ProductInfo>;
     ProductSelections: Array<ProductInfo>;
-    ProductPermission: Permission;
 
     Member: MemberInfo;
     Members: Array<MemberInfo>;
     MemberSelections: Array<MemberInfo>;
     MemberWalkIn: MemberInfo;
-    MemberPermission: Permission;
 
     Transaction: TransactionInfo;
     TransactionsToday: Array<TransactionInfo>;
     TransactionSelected: Array<TransactionInfo>;
-    TransactionPermission: Permission;
 
     SellInfos: Array<SellInfo>;
     SellInfosAmount: number = 0;
     SellInfosCount: number = 0;
-    SellPermission: Permission;
 
     ExpenseTypes: Array<string>;
     ExpensesToday: Array<ExpenseInfo>;
     ExpenseSelected: Array<ExpenseInfo>;
     ExpenseAmount: number = 0;
-    ExpensePermission: Permission;
 
     Reports: Array<ReportInfo>;
     ReportToday: ReportInfo;
     ReportSelected: ReportInfo;
     ReportYears: Array<number>;
-    ReportPermission: Permission;
 
     User: UserInfo;
     Users: Array<UserInfo>;
-    UserPermission: Permission;
+    UserAccess: Access;
 
     Access: Access;
     Accesses: Array<Access>;
@@ -104,46 +98,16 @@ export class DataLayer {
         this.MemberWalkIn.key = "Walk-In";
 
         this.User = new UserInfo();
-        this.SetPermission(0);
+        this.UserAccess = new Access();
     }
 
-    public SetPermission(accessTypeID: number) {
-        if(accessTypeID == 1) {
-            this.SellPermission = new Permission(true, true, true);
-            this.MemberPermission = new Permission(true, true, true);
-            this.ProductPermission = new Permission(true, true, true);
-            this.ExpensePermission = new Permission(true, true, true);
-            this.ReportPermission = new Permission(true, true, true);
-            this.TransactionPermission = new Permission(true, true, true);
-            this.UserPermission = new Permission(true, true, true);
-        }
-        else if(accessTypeID == 2) {
-            this.SellPermission = new Permission(true, true, true);
-            this.MemberPermission = new Permission(true, true, true);
-            this.ProductPermission = new Permission(true, true, true);
-            this.ExpensePermission = new Permission(true, true, true);
-            this.ReportPermission = new Permission(true, true, true);
-            this.TransactionPermission = new Permission(true, true, true);
-            this.UserPermission = new Permission(false, false, false);
-        }
-        else if(accessTypeID == 3) {
-            this.SellPermission = new Permission(true, true, false)
-            this.MemberPermission = new Permission(true, false, false);
-            this.ProductPermission = new Permission(true, false, false);
-            this.ExpensePermission = new Permission(false, false, false);
-            this.ReportPermission = new Permission(false, false, false);
-            this.TransactionPermission = new Permission(true, false, false);
-            this.UserPermission = new Permission(false, false, false);
-        }
-        else {
-            this.SellPermission = new Permission(false, false, false)
-            this.MemberPermission = new Permission(false, false, false);
-            this.ProductPermission = new Permission(false, false, false);
-            this.ExpensePermission = new Permission(false, false, false);
-            this.ReportPermission = new Permission(false, false, false);
-            this.TransactionPermission = new Permission(false, false, false);
-            this.UserPermission = new Permission(false, false, false);
-        }
+    public SetPermission() {
+        if(this.User && this.Accesses) {
+            this.Accesses.forEach(access => {
+                if(this.User.AccessKey == access.key)
+                    this.UserAccess = access;
+            });
+        } 
     }
 
     LoadFromMenu(name: string) {
@@ -192,13 +156,14 @@ export class DataAccess {
     
     public LogOut() {
         this.afAuth.auth.signOut();
+        this.DL.UserAccess = new Access();
         this.DL.LoadFromMenu("home");
     }
 
     public DataLoad() {
+        this.AccessLoad();
         this.UserLoad();
         this.MemberLoad();
-        this.AccessLoad();
         this.ShowcasesLoad();
         this.ExpensesTypeLoad();
         this.ReportTodayLoad();
@@ -269,7 +234,6 @@ export class DataAccess {
 
             if (!user) {
                 this.DL.User.Name = "GUEST";
-                this.DL.SetPermission(0);
                 return;
             }
             
@@ -279,13 +243,15 @@ export class DataAccess {
             });
 
             // [temp] default to manager
-            if(!this.DL.User.AccessTypeID)
-                this.DL.User.AccessTypeID = 2;
+            if(!this.DL.User.AccessKey) {
+                this.DL.User.AccessKey = "-KsasLernU2_JWOO90Bz";
+                this.DL.User.AccessName = "DEMO";
+            }
 
             this.DL.User.Name = user.displayName;
             this.DL.User.ImageURL = user.photoURL;
             this.DL.User.UID = user.uid;
-            this.DL.SetPermission(this.DL.User.AccessTypeID);
+            this.DL.SetPermission();
 
             this.UserSave(this.DL.User);
             this.DL.LoadFromMenu("dashboard");

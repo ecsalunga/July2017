@@ -20,13 +20,13 @@
           {{ info.Name }}
         </td>
         <td>
-          {{ GetAccessName(info.AccessTypeID) }}
+          {{ info.AccessName }}
         </td>
       </tr>
     </ng-container>
   </table>
   <div class="hSpacer"></div>
-  <table [hidden]="!DL.UserPermission.Modify">
+  <table [hidden]="!DL.UserAccess.UserEdit">
     <tr class="rightRow">
       <td class="selectionRow">
         <md-select placeholder="User" [(ngModel)]="selectedUser">
@@ -35,7 +35,7 @@
           </md-option>
         </md-select>
         <md-select placeholder="Access" [(ngModel)]="selectedAccess">
-          <md-option *ngFor="let access of DL.AccessTypes" [value]="access">
+          <md-option *ngFor="let access of DL.Accesses" [value]="access">
             {{access.Name}}
           </md-option>
         </md-select>

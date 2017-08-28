@@ -21,55 +21,55 @@
         <md-icon>home</md-icon>
         <span>Home</span>
       </button>
-      <ng-container *ngIf="DL.SellPermission.View">
+      <ng-container *ngIf="DL.UserAccess.SellView">
         <button md-menu-item (click)="LoadPage('sell')">
           <md-icon>shopping_cart</md-icon>
           <span>Sell</span>
         </button>
       </ng-container>
-      <ng-container *ngIf="DL.TransactionPermission.View">
+      <ng-container *ngIf="DL.UserAccess.TransactionView">
         <button md-menu-item (click)="LoadPage('transaction-list')">
           <md-icon>payment</md-icon>
           <span>Transaction</span>
         </button>
       </ng-container>
-      <ng-container *ngIf="DL.ExpensePermission.View">
+      <ng-container *ngIf="DL.UserAccess.ExpenseView">
         <button md-menu-item (click)="LoadPage('expense')">
           <md-icon>broken_image</md-icon>
           <span>Expense</span>
         </button>
       </ng-container>
-      <ng-container *ngIf="DL.ProductPermission.View">
+      <ng-container *ngIf="DL.UserAccess.ProductView">
         <button md-menu-item (click)="LoadPage('product-list')">
           <md-icon>book</md-icon>
           <span>Product</span>
         </button>
       </ng-container>
-      <ng-container *ngIf="DL.ProductPermission.View">
+      <ng-container *ngIf="DL.UserAccess.ShowcaseView">
         <button md-menu-item (click)="LoadPage('showcase-list')">
           <md-icon>pages</md-icon>
           <span>Showcase</span>
         </button>
       </ng-container>
-      <ng-container *ngIf="DL.MemberPermission.View">
+      <ng-container *ngIf="DL.UserAccess.MemberView">
         <button md-menu-item (click)="LoadPage('member-list')">
           <md-icon>card_membership</md-icon>
           <span>Member</span>
         </button>
       </ng-container>
-      <ng-container *ngIf="DL.ReportPermission.View">
+      <ng-container *ngIf="DL.UserAccess.ReportView">
         <button md-menu-item (click)="LoadPage('report')">
           <md-icon>note</md-icon>
           <span>Report</span>
         </button>
       </ng-container>
-      <ng-container *ngIf="DL.UserPermission.View">
+      <ng-container *ngIf="DL.UserAccess.UserView">
         <button md-menu-item (click)="LoadPage('user-list')">
           <md-icon>accessibility</md-icon>
           <span>User</span>
         </button>
       </ng-container>
-      <ng-container *ngIf="DL.UserPermission.View">
+      <ng-container *ngIf="DL.UserAccess.AccessView">
         <button md-menu-item (click)="LoadPage('access-list')">
           <md-icon>settings_applications</md-icon>
           <span>Access</span>

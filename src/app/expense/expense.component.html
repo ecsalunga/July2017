@@ -49,7 +49,7 @@
   <div class="hSpacer"></div>
   <table>
     <tr class="rightRow">
-      <td class="selectionRow" style="width: 60%" [hidden]="!isToday || !DL.ExpensePermission.Modify">
+      <td class="selectionRow" style="width: 60%" [hidden]="!isToday || !DL.UserAccess.ExpenseAdd">
         <md-input-container class="longText">
           <input id="txtDescription" mdInput placeholder="Description" [mdAutocomplete]="auto" [formControl]="ctrl" [(ngModel)]="description">
         </md-input-container>
@@ -64,18 +64,18 @@
       </td>
       <td class="selectionRow">
         <md-input-container>
-          <input mdInput [mdDatepicker]="picker" placeholder="Report Date" [(ngModel)]="ReportDate">
-          <button mdSuffix [mdDatepickerToggle]="picker"></button>
+          <input mdInput [disabled]="!DL.UserAccess.ExpenseSearch" [mdDatepicker]="picker" placeholder="Report Date" [(ngModel)]="ReportDate">
+          <button mdSuffix [disabled]="!DL.UserAccess.ExpenseSearch" [mdDatepickerToggle]="picker"></button>
         </md-input-container>
         <md-datepicker #picker></md-datepicker>
       </td>
     </tr>
     <tr class="rightRow">
-      <td [hidden]="!isToday || !DL.ExpensePermission.Modify">
+      <td [hidden]="!isToday || !DL.UserAccess.ExpenseAdd">
         <button md-fab [disabled]="!description || !amount" (click)="AddExpense()" mdTooltip="Add to expenses" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
       </td>
       <td>
-        <button md-fab [disabled]="!ReportDate" (click)="ExpenseView()" mdTooltip="View expenses" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
+        <button md-fab [disabled]="!ReportDate || !DL.UserAccess.ExpenseSearch" (click)="ExpenseView()" mdTooltip="View expenses" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
       </td>
     </tr>
   </table>

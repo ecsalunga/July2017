@@ -21,7 +21,7 @@
   </div>
   <div>
     <md-input-container>
-      <input id="txtQuantity" type="number" mdInput placeholder="Quantity" [(ngModel)]="model.Quantity" />
+      <input id="txtQuantity" [disabled]="!DL.UserAccess.ProductIn" type="number" mdInput placeholder="Quantity" [(ngModel)]="model.Quantity" />
     </md-input-container>
   </div>
   <div>
@@ -31,7 +31,7 @@
   </div>
   <div class="hSpacer"></div>
   <div class="rightRow">
-    <button md-fab (click)="Save()" [disabled]="!DL.ProductPermission.Modify" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+    <button md-fab (click)="Save()" [disabled]="(!DL.UserAccess.ProductEdit && model.key) || (!DL.UserAccess.ProductAdd && !model.key)" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
     <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
   </div>
 </div>

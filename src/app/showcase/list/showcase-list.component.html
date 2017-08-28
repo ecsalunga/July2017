@@ -22,7 +22,7 @@
           {{item.Price | number:'1.2-2'}}
         </td>
         <td class="rightRow">
-          <button md-mini-fab (click)="ScheduleShowcase(item)" mdTooltip="Schedule"><md-icon>schedule</md-icon></button>
+          <button md-mini-fab [disabled]="!DL.UserAccess.ShowcaseScheduleView" (click)="ScheduleShowcase(item)" mdTooltip="Schedule"><md-icon>schedule</md-icon></button>
           <button md-mini-fab (click)="SelectShowcase(item)" mdTooltip="View"><md-icon>pageview</md-icon></button>
         </td>
       </tr>
@@ -30,6 +30,6 @@
   </table>
   <div class="hSpacer"></div>
   <div class="rightRow">
-    <button md-fab (click)="AddItem()" mdTooltip="Add" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+    <button md-fab [disabled]="!DL.UserAccess.ShowcaseAdd" (click)="AddItem()" mdTooltip="Add" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
   </div>
 </div>

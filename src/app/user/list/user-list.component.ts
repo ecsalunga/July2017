@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { UserInfo, NameValue } from '../../models';
+import { UserInfo, Access } from '../../models';
 
 @Component({
   selector: 'user-list',
@@ -10,29 +9,21 @@ import { UserInfo, NameValue } from '../../models';
 })
 export class UserListComponent implements OnInit {
   selectedUser: UserInfo;
-  selectedAccess: NameValue;
+  selectedAccess: Access;
 
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {}
+  constructor(private DA: DataAccess, private DL: DataLayer) {}
   
-    GetAccessName(accessTypeID: number) : string {
-      let access:string = "GUEST";
-      this.DL.AccessTypes.forEach(a => {
-        if(a.Value == accessTypeID)
-          access = a.Name;
-      });    
-  
-      return access;
-    }
-  
-    AccessSet() {
-      this.selectedUser.AccessTypeID = this.selectedAccess.Value;
-      this.DA.UserSave(this.selectedUser);
-      
-      this.selectedUser = null;
-      this.selectedAccess = null;
-    }
+  AccessSet() {
+    this.selectedUser.AccessKey = this.selectedAccess.key;
+    this.selectedUser.AccessName = this.selectedAccess.Name;
 
-    ngOnInit() {
-      this.DL.TITLE = "User List";
-    }
+    this.DA.UserSave(this.selectedUser);
+    
+    this.selectedUser = null;
+    this.selectedAccess = null;
+  }
+
+  ngOnInit() {
+    this.DL.TITLE = "User List";
+  }
 }

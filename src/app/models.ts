@@ -61,7 +61,8 @@ export class UserInfo {
     Name: string;
     UID: string;
     ImageURL: string;
-    AccessTypeID: number;
+    AccessKey: string;
+    AccessName: string;
 }
 
 export class ShowcaseInfo {
@@ -76,18 +77,6 @@ export class ShowcaseInfo {
     constructor() {
         this.Schedules = new Array<ScheduleInfo>();
         this.ImageURL = "https://firebasestorage.googleapis.com/v0/b/temp-system.appspot.com/o/images%2FNoImage.png?alt=media&token=40823113-df0a-4412-8026-d501036b9d78";
-    }
-}
-
-export class Permission {
-    View: boolean;
-    Modify: boolean;
-    Delete: boolean;
-
-    constructor(view: boolean, modify: boolean, del: boolean) {
-        this.View = view;
-        this.Modify = modify;
-        this.Delete = del;
     }
 }
 
@@ -128,6 +117,7 @@ export class Access {
     ShowcaseScheduleDelete: boolean;
 
     TransactionView: boolean;
+    TransactionDetail: boolean;
     TransactionSearch: boolean;
 
     UserView: boolean;

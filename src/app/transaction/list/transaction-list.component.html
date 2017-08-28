@@ -42,7 +42,7 @@
             {{ tran.Amount | number:'1.2-2' }}
           </td>
           <td class="rightRow">
-            <button md-mini-fab (click)="SelectTransaction(tran)" mdTooltip="View"><md-icon>pageview</md-icon></button>
+            <button md-mini-fab [disabled]="!DL.UserAccess.TransactionDetail" (click)="SelectTransaction(tran)" mdTooltip="View"><md-icon>pageview</md-icon></button>
           </td>
         </tr>
       </ng-container>
@@ -63,7 +63,7 @@
     </ng-template>
   </table>
   <div class="hSpacer"></div>
-  <table>
+  <table [hidden]="!DL.UserAccess.TransactionSearch">
     <tr class="rightRow">
       <td class="selectionRow">
         <md-input-container>

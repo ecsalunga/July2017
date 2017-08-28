@@ -58,12 +58,12 @@
   <table>
     <tr class="rightRow">
       <td class="selectionRow">
-        <md-select placeholder="Year" [(ngModel)]="yearSelected">
+        <md-select [disabled]="!DL.UserAccess.ReportSearch" placeholder="Year" [(ngModel)]="yearSelected">
           <md-option *ngFor="let year of DL.ReportYears" [value]="year">
             {{year}}
           </md-option>
         </md-select>
-        <md-select placeholder="Month" [(ngModel)]="monthSelected">
+        <md-select [disabled]="!DL.UserAccess.ReportSearch" placeholder="Month" [(ngModel)]="monthSelected">
           <md-option *ngFor="let month of DL.Months" [value]="month.Value">
             {{month.Name}}
           </md-option>
@@ -72,7 +72,7 @@
     </tr>
     <tr class="rightRow">
       <td>
-        <button md-fab (click)="ReportView()" mdTooltip="View reports" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
+        <button md-fab [disabled]="!DL.UserAccess.ReportSearch" (click)="ReportView()" mdTooltip="View reports" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
       </td>
     </tr>
   </table>
