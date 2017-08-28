@@ -1,40 +1,222 @@
 <div>
-    <div>
-      <md-input-container>
-        <input id="txtName" mdInput placeholder="Name" [(ngModel)]="model.Name" />
-      </md-input-container>
-    </div>
-    <div>
-      <md-input-container class="longText">
-        <input id="txtDescription" mdInput placeholder="Description" [(ngModel)]="model.Description" />
-      </md-input-container>
-    </div>
-    <div class="hSpacer"></div>
-    <table>
-        <tr>
-          <td colspan="3">Expenses</td>
-        </tr>
-        <tr>
-          <td>
-            <md-slide-toggle [(ngModel)]="model.ExpenseView">
-              View
-            </md-slide-toggle>
-          </td>
-          <td>
-            <md-slide-toggle [(ngModel)]="model.ExpenseAdd">
-              Add
-            </md-slide-toggle>
-          </td>
-          <td>
-            <md-slide-toggle [(ngModel)]="model.ExpenseSearch">
-              Search
-            </md-slide-toggle>
-          </td>
-        </tr>
-    </table>
-    <div class="hSpacer"></div>
-    <div class="rightRow">
-      <button md-fab (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
-      <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
-    </div>
+  <div>
+    <md-input-container>
+      <input id="txtName" mdInput placeholder="Name" [(ngModel)]="model.Name" />
+    </md-input-container>
   </div>
+  <div>
+    <md-input-container class="fullWidth">
+      <textarea id="txtDescrption" mdInput placeholder="Description" [(ngModel)]="model.Description"></textarea>
+    </md-input-container>
+  </div>
+  <table>
+    <tr>
+      <td colspan="3" class="accessLabel">Access</td>
+    </tr>
+    <tr>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.AccessView">
+          View
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.AccessAdd">
+          Add
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.AccessEdit">
+          Edit
+        </md-slide-toggle>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" class="accessLabel">Expense</td>
+    </tr>
+    <tr>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.ExpenseView">
+          View
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.ExpenseAdd">
+          Add
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.ExpenseSearch">
+          Search
+        </md-slide-toggle>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" class="accessLabel">Member</td>
+    </tr>
+    <tr>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.MemberView">
+          View
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.MemberAdd">
+          Add
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.MemberEdit">
+          Edit
+        </md-slide-toggle>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" class="accessLabel">Product</td>
+    </tr>
+    <tr>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.ProductView">
+          View
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.ProductAdd">
+          Add
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.ProductEdit">
+          Edit
+        </md-slide-toggle>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.ProductIn">
+          Stock In
+        </md-slide-toggle>
+      </td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td colspan="3" class="accessLabel">Report</td>
+    </tr>
+    <tr>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.ReportView">
+          View
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.ReportSearch">
+          Search
+        </md-slide-toggle>
+      </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td colspan="3" class="accessLabel">Sell</td>
+    </tr>
+    <tr>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.SellView">
+          View
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.SellAdd">
+          Add
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.SellDelete">
+          Delete
+        </md-slide-toggle>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" class="accessLabel">Showcase</td>
+    </tr>
+    <tr>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.ShowcaseView">
+          View
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.ShowcaseAdd">
+          Add
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.ShowcaseEdit">
+          Edit
+        </md-slide-toggle>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table style="margin-left: 10px;">
+          <tr>
+            <td colspan="3" class="accessLabel">Schedule</td>
+          </tr>
+          <tr>
+            <td>
+              <md-slide-toggle [(ngModel)]="model.ShowcaseScheduleView">
+                View
+              </md-slide-toggle>
+            </td>
+            <td>
+              <md-slide-toggle [(ngModel)]="model.ShowcaseScheduleAdd">
+                Add
+              </md-slide-toggle>
+            </td>
+            <td>
+              <md-slide-toggle [(ngModel)]="model.ShowcaseScheduleDelete">
+                Delete
+              </md-slide-toggle>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" class="accessLabel">Transaction</td>
+    </tr>
+    <tr>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.TransactionView">
+          View
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.TransactionSearch">
+          Search
+        </md-slide-toggle>
+      </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td colspan="3" class="accessLabel">User</td>
+    </tr>
+    <tr>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.UserView">
+          View
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.UserEdit">
+          Edit
+        </md-slide-toggle>
+      </td>
+      <td></td>
+    </tr>
+  </table>
+  <div class="hSpacer"></div>
+  <div class="rightRow">
+    <button md-fab (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+    <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+  </div>
+</div>

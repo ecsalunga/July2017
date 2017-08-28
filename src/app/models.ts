@@ -96,6 +96,10 @@ export class Access {
     Name: string;
     Description: string;
     
+    AccessView: boolean;
+    AccessAdd: boolean;
+    AccessEdit: boolean;
+
     ExpenseView: boolean;
     ExpenseAdd: boolean;
     ExpenseSearch: boolean;
