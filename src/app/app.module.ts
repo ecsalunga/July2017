@@ -19,6 +19,7 @@ import {
   MdToolbarModule,
   MdIconModule,
   MdSidenavModule,
+  MdSlideToggleModule,
   DateAdapter
  } from '@angular/material';
 
@@ -92,6 +93,7 @@ import { AccessDetailComponent } from './access/detail/access-detail.component';
     MdNativeDateModule,
     MdIconModule,
     MdSidenavModule,
+    MdSlideToggleModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),

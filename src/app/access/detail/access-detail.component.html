@@ -10,6 +10,29 @@
       </md-input-container>
     </div>
     <div class="hSpacer"></div>
+    <table>
+        <tr>
+          <td colspan="3">Expenses</td>
+        </tr>
+        <tr>
+          <td>
+            <md-slide-toggle [(ngModel)]="model.ExpenseView">
+              View
+            </md-slide-toggle>
+          </td>
+          <td>
+            <md-slide-toggle [(ngModel)]="model.ExpenseAdd">
+              Add
+            </md-slide-toggle>
+          </td>
+          <td>
+            <md-slide-toggle [(ngModel)]="model.ExpenseSearch">
+              Search
+            </md-slide-toggle>
+          </td>
+        </tr>
+    </table>
+    <div class="hSpacer"></div>
     <div class="rightRow">
       <button md-fab (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
       <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
