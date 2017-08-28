@@ -1,0 +1,17 @@
+<div>
+    <div>
+      <md-input-container>
+        <input id="txtName" mdInput placeholder="Name" [(ngModel)]="model.Name" />
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container class="longText">
+        <input id="txtDescription" mdInput placeholder="Description" [(ngModel)]="model.Description" />
+      </md-input-container>
+    </div>
+    <div class="hSpacer"></div>
+    <div class="rightRow">
+      <button md-fab (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+      <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+    </div>
+  </div>

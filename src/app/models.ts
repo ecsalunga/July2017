@@ -91,6 +91,45 @@ export class Permission {
     }
 }
 
+export class Access {
+    key: string;
+    Name: string;
+    Description: string;
+    
+    ExpenseView: boolean;
+    ExpenseAdd: boolean;
+    ExpenseSearch: boolean;
+
+    MemberView: boolean;
+    MemberAdd: boolean;
+    MemberEdit: boolean;
+
+    ProductView: boolean;
+    ProductAdd: boolean;
+    ProductEdit: boolean;
+    ProductIn: boolean;
+
+    ReportView: boolean;
+    ReportSearch: boolean;
+
+    SellView: boolean;
+    SellAdd: boolean;
+    SellDelete: boolean;
+
+    ShowcaseView: boolean;
+    ShowcaseAdd: boolean;
+    ShowcaseEdit: boolean;
+    ShowcaseScheduleView: boolean;
+    ShowcaseScheduleAdd: boolean;
+    ShowcaseScheduleDelete: boolean;
+
+    TransactionView: boolean;
+    TransactionSearch: boolean;
+
+    UserView: boolean;
+    UserEdit: boolean;
+}
+
 export class ScheduleInfo {
     From: number;
     To: number;

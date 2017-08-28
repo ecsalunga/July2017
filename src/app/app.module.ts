@@ -43,13 +43,15 @@ import { TransactionListComponent } from './transaction/list/transaction-list.co
 import { TransactionDetailComponent } from './transaction/detail/transaction-detail.component';
 import { ExpenseComponent } from './expense/expense.component';
 import { ReportComponent } from './report/report.component';
-import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ShowcaseListComponent } from './showcase/list/showcase-list.component';
 import { ShowcaseDetailComponent } from './showcase/detail/showcase-detail.component';
 import { ShowcaseWidgetComponent } from './showcase/widget/showcase-widget.component';
 import { ShowcaseScheduleComponent } from './showcase/schedule/showcase-schedule.component';
+import { UserListComponent } from './user/list/user-list.component';
+import { AccessListComponent } from './access/list/access-list.component';
+import { AccessDetailComponent } from './access/detail/access-detail.component';
 
 @NgModule({
   declarations: [
@@ -63,13 +65,15 @@ import { ShowcaseScheduleComponent } from './showcase/schedule/showcase-schedule
     TransactionDetailComponent,
     ExpenseComponent,
     ReportComponent,
-    UserComponent,
     HomeComponent,
     DashboardComponent,
     ShowcaseListComponent,
     ShowcaseDetailComponent,
     ShowcaseWidgetComponent,
-    ShowcaseScheduleComponent
+    ShowcaseScheduleComponent,
+    UserListComponent,
+    AccessListComponent,
+    AccessDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -106,13 +110,15 @@ import { ShowcaseScheduleComponent } from './showcase/schedule/showcase-schedule
     TransactionDetailComponent,
     ExpenseComponent,
     ReportComponent,
-    UserComponent,
     HomeComponent,
     DashboardComponent,
     ShowcaseListComponent,
     ShowcaseDetailComponent,
     ShowcaseWidgetComponent,
-    ShowcaseScheduleComponent
+    ShowcaseScheduleComponent,
+    UserListComponent,
+    AccessListComponent,
+    AccessDetailComponent
   ]
 })
 export class AppModule {

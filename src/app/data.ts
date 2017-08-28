@@ -3,7 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Core } from './core';
-import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, ReportInfo, ExpenseInfo, NameValue, UserInfo, Permission, ShowcaseInfo } from './models';
+import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, ReportInfo, ExpenseInfo, NameValue, UserInfo, Permission, ShowcaseInfo, Access } from './models';
 import 'rxjs/add/operator/first';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class DataLayer {
     SOURCE: string;
     TITLE: string;
 
-    Product: ProductInfo;
+    Product: ProductInfo;   
     Products: Array<ProductInfo>;
     ProductSelections: Array<ProductInfo>;
     ProductPermission: Permission;
@@ -49,6 +49,9 @@ export class DataLayer {
     User: UserInfo;
     Users: Array<UserInfo>;
     UserPermission: Permission;
+
+    Access: Access;
+    Accesses: Array<Access>;
     
     Showcase: ShowcaseInfo;
     Showcases: Array<ShowcaseInfo>;
@@ -144,21 +147,21 @@ export class DataLayer {
     }
 
     LoadFromMenu(name: string) {
-        window.scrollTo(0, 0);
         this.SOURCE = this.MENU;
         this.core.loadComponent(name);
+        window.scrollTo(0, 0);
     }
 
     LoadFromLink(name: string) {
-        window.scrollTo(0, 0);
         this.SOURCE = this.LINK;
         this.core.loadComponent(name);
+        window.scrollTo(0, 0);
     }
 
     LoadComponentsFromLink(names: Array<string>) {
-        window.scrollTo(0, 0);
         this.SOURCE = this.LINK;
         this.core.loadComponents(names);
+        window.scrollTo(0, 0);
     }
 }
 
@@ -174,6 +177,7 @@ export class DataAccess {
     KEYDAY: string = "KeyDay";
     USERS: string = "/users";
     SHOWCASES: string = "/showcases";
+    ACCESS: string = "/accesses";
     StorageRef: firebase.storage.Reference = firebase.storage().ref();
 
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase, private afAuth: AngularFireAuth) { 
@@ -194,6 +198,7 @@ export class DataAccess {
     public DataLoad() {
         this.UserLoad();
         this.MemberLoad();
+        this.AccessLoad();
         this.ShowcasesLoad();
         this.ExpensesTypeLoad();
         this.ReportTodayLoad();
@@ -420,12 +425,22 @@ export class DataAccess {
         });
     }
 
+    AccessLoad() {
+        this.af.list(this.ACCESS, {query: {  orderByChild: 'Name'}}).first().subscribe(snapshots => {
+            this.DL.Accesses = new Array<Access>();
+            snapshots.forEach(snapshot => {
+                let info: Access = snapshot;
+                info.key = snapshot.$key;
+                this.DL.Accesses.push(info);
+            });
+        });
+    }
+
     public ProductSave(item: ProductInfo) {
         if (item.key)
             this.af.list(this.PRODUCTS).update(item.key, item);
-        else {
+        else
             this.af.list(this.PRODUCTS).push(item);
-        }
     }
 
     public ProductUpdateFromSellInfo() {
@@ -469,6 +484,14 @@ export class DataAccess {
         else
             this.af.list(this.SHOWCASES).push(item); 
         this.ShowcasesLoad();
+    }
+
+    public AccessSave(item: Access) {
+        if (item.key)
+            this.af.list(this.ACCESS).update(item.key, item);
+        else
+            this.af.list(this.ACCESS).push(item); 
+        this.AccessLoad();
     }
 
     public SellInfoSave(item: SellInfo) {

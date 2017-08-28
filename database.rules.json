@@ -25,6 +25,11 @@
       ".write": "true",
       ".indexOn": "UID"
     },
+    "accesses": {
+      ".read": "true",
+      ".write": "true",
+      ".indexOn": "Name"
+    },
     "expenses": {
       ".read": "true",
       ".write": "true"
