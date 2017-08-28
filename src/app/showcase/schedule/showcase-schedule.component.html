@@ -22,7 +22,7 @@
           {{ getDate(info.To) | date : 'yyyy-MM-dd' }}
         </td>
         <td class="rightRow">
-          <button md-mini-fab (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><i class="material-icons">delete</i></button>
+          <button md-mini-fab (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
         </td>
       </tr>
     </ng-container>
@@ -46,11 +46,11 @@
     </tr>
     <tr class="rightRow">
       <td>
-        <button md-fab [disabled]="!FromDate || !ToDate" (click)="AddSchedule()" mdTooltip="Add schedule" mdTooltipPosition="above"><i class="material-icons">note_add</i></button>
+        <button md-fab [disabled]="!FromDate || !ToDate" (click)="AddSchedule()" mdTooltip="Add schedule" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
       </td>
       <td>
-          <button md-fab (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><i class="material-icons">save</i></button>
-          <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><i class="material-icons">assignment_return</i></button>
+        <button md-fab (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+        <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
       </td>
     </tr>
   </table>

@@ -37,7 +37,7 @@
           </td>
           <td class="rightRow">
             <ng-container *ngIf="info.Price">
-              <button md-mini-fab [disabled]="!DL.SellPermission.Delete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><i class="material-icons">delete</i></button>
+              <button md-mini-fab [disabled]="!DL.SellPermission.Delete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
             </ng-container>
           </td>
         </tr>
@@ -82,29 +82,29 @@
       </tr>
       <tr class="rightRow">
         <td>
-          <button md-fab [disabled]="!model || !selectedQuantity" (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
+          <button md-fab [disabled]="!model || !selectedQuantity" (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><md-icon>add_shopping_cart</md-icon></button>
         </td>
         <td>
-          <button md-fab [disabled]="!DL.SellInfosCount" (click)="CartClose()" mdTooltip="Close Cart" mdTooltipPosition="above"><i class="material-icons">done</i></button>
+          <button md-fab [disabled]="!DL.SellInfosCount" (click)="CartClose()" mdTooltip="Close Cart" mdTooltipPosition="above"><md-icon>done</md-icon></button>
         </td>
       </tr>
     </table>
   </ng-container>
   <ng-template #showPaying>
-      <table [hidden]="!DL.SellPermission.Modify">
-          <tr class="rightRow">
-            <td class="selectionRow">
-              <md-input-container class="longText">
-                <input mdInput placeholder="Member" disabled value="{{ selectedMember.Name }}">
-              </md-input-container>
-            </td>
-          </tr>
-          <tr class="rightRow">
-            <td>
-                <button md-fab (click)="CartOpen()" mdTooltip="Modify Cart" mdTooltipPosition="above"><i class="material-icons">assignment_return</i></button>
-              <button md-fab [disabled]="!DL.SellInfosCount" (click)="CartDone()" mdTooltip="Done" mdTooltipPosition="above"><i class="material-icons">done_all</i></button>
-            </td>
-          </tr>
-        </table>
+    <table [hidden]="!DL.SellPermission.Modify">
+      <tr class="rightRow">
+        <td class="selectionRow">
+          <md-input-container class="longText">
+            <input mdInput placeholder="Member" disabled value="{{ selectedMember.Name }}">
+          </md-input-container>
+        </td>
+      </tr>
+      <tr class="rightRow">
+        <td>
+          <button md-fab (click)="CartOpen()" mdTooltip="Modify Cart" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+          <button md-fab [disabled]="!DL.SellInfosCount" (click)="CartDone()" mdTooltip="Done" mdTooltipPosition="above"><md-icon>done_all</md-icon></button>
+        </td>
+      </tr>
+    </table>
   </ng-template>
 </div>

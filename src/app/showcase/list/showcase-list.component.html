@@ -22,14 +22,14 @@
           {{item.Price | number:'1.2-2'}}
         </td>
         <td class="rightRow">
-          <button md-mini-fab (click)="ScheduleShowcase(item)" mdTooltip="Schedule"><i class="material-icons">schedule</i></button>
-          <button md-mini-fab (click)="SelectShowcase(item)" mdTooltip="View"><i class="material-icons">pageview</i></button>
+          <button md-mini-fab (click)="ScheduleShowcase(item)" mdTooltip="Schedule"><md-icon>schedule</md-icon></button>
+          <button md-mini-fab (click)="SelectShowcase(item)" mdTooltip="View"><md-icon>pageview</md-icon></button>
         </td>
       </tr>
     </ng-container>
   </table>
   <div class="hSpacer"></div>
   <div class="rightRow">
-    <button md-fab (click)="AddItem()" mdTooltip="Add" mdTooltipPosition="above"><i class="material-icons">note_add</i></button>
+    <button md-fab (click)="AddItem()" mdTooltip="Add" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
   </div>
 </div>

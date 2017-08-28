@@ -72,10 +72,10 @@
     </tr>
     <tr class="rightRow">
       <td [hidden]="!isToday || !DL.ExpensePermission.Modify">
-        <button md-fab [disabled]="!description || !amount" (click)="AddExpense()" mdTooltip="Add to expenses" mdTooltipPosition="above"><i class="material-icons">note_add</i></button>
+        <button md-fab [disabled]="!description || !amount" (click)="AddExpense()" mdTooltip="Add to expenses" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
       </td>
       <td>
-        <button md-fab [disabled]="!ReportDate" (click)="ExpenseView()" mdTooltip="View expenses" mdTooltipPosition="above"><i class="material-icons">pageview</i></button>
+        <button md-fab [disabled]="!ReportDate" (click)="ExpenseView()" mdTooltip="View expenses" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
       </td>
     </tr>
   </table>

@@ -28,7 +28,7 @@
           {{product.Quantity}}
         </td>
         <td class="rightRow">
-          <button md-mini-fab (click)="SelectProduct(product)" mdTooltip="View"><i class="material-icons">pageview</i></button>
+          <button md-mini-fab (click)="SelectProduct(product)" mdTooltip="View"><md-icon>pageview</md-icon></button>
         </td>
       </tr>
     </ng-container>
@@ -52,10 +52,10 @@
     </tr>
     <tr class="rightRow">
       <td>
-        <button md-fab [disabled]="!quantitySelected || !model" (click)="SuppyProduct()" mdTooltip="Add to suppy" mdTooltipPosition="above"><i class="material-icons">add_shopping_cart</i></button>
+        <button md-fab [disabled]="!quantitySelected || !model" (click)="SuppyProduct()" mdTooltip="Add to suppy" mdTooltipPosition="above"><md-icon>add_shopping_cart</md-icon></button>
       </td>
       <td>
-        <button md-fab (click)="AddProduct()" mdTooltip="Add" mdTooltipPosition="above"><i class="material-icons">note_add</i></button>
+        <button md-fab (click)="AddProduct()" mdTooltip="Add" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
       </td>
     </tr>
   </table>
