@@ -3,7 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Core } from './core';
-import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, ReportInfo, ExpenseInfo, NameValue, UserInfo, ShowcaseInfo, Access } from './models';
+import { ProductInfo, MemberInfo, SellInfo, TransactionInfo, ReportInfo, ExpenseInfo, NameValue, UserInfo, ShowcaseInfo, Access, CancelInfo } from './models';
 import 'rxjs/add/operator/first';
 
 @Injectable()
@@ -25,6 +25,7 @@ export class DataLayer {
     Transaction: TransactionInfo;
     TransactionsToday: Array<TransactionInfo>;
     TransactionSelected: Array<TransactionInfo>;
+    TransactionCancels: Array<CancelInfo>;
 
     SellInfos: Array<SellInfo>;
     SellInfosAmount: number = 0;
@@ -107,7 +108,7 @@ export class DataLayer {
                 if(this.User.AccessKey == access.key)
                     this.UserAccess = access;
             });
-        } 
+        }
     }
 
     LoadFromMenu(name: string) {
@@ -141,7 +142,8 @@ export class DataAccess {
     KEYDAY: string = "KeyDay";
     USERS: string = "/users";
     SHOWCASES: string = "/showcases";
-    ACCESS: string = "/accesses";
+    ACCESSES: string = "/accesses";
+    CANCELS: string = "/cancels";
     StorageRef: firebase.storage.Reference = firebase.storage().ref();
 
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase, private afAuth: AngularFireAuth) { 
@@ -205,7 +207,9 @@ export class DataAccess {
             this.DL.ReportToday.Amount = 0;
 
             snapshots.forEach(snapshot => {
-                this.DL.TransactionsToday.push(snapshot);
+                let info: TransactionInfo = snapshot;
+                info.key = snapshot.$key;
+                this.DL.TransactionsToday.push(info);
 
                 this.DL.ReportToday.Count += snapshot.Count;
                 this.DL.ReportToday.Amount += snapshot.Amount;
@@ -302,6 +306,16 @@ export class DataAccess {
         });
     }
 
+    CancelMonthlyLoad(selectedYear: number, selectedMonth: number) {
+        this.af.list(this.CANCELS, {query: {  orderByChild: "KeyMonth", equalTo: parseInt(selectedYear + this.core.az(selectedMonth))}}).subscribe(snapshots => {
+            this.DL.TransactionCancels = new Array<CancelInfo>();
+            snapshots.forEach(snapshot => {
+                let info: CancelInfo = snapshot;
+                this.DL.TransactionCancels.push(info);
+            });
+        });
+    }
+
     ShowcasesLoad() {
         this.af.list(this.SHOWCASES, {query: {  orderByChild: 'Name'}}).first().subscribe(snapshots => {
             this.DL.Showcases = new Array<ShowcaseInfo>();
@@ -335,7 +349,9 @@ export class DataAccess {
             this.DL.ReportSelected.Amount = 0;
 
             snapshots.forEach(snapshot => {
-                this.DL.TransactionSelected.push(snapshot);
+                let info: TransactionInfo = snapshot;
+                info.key = snapshot.$key;
+                this.DL.TransactionSelected.push(info);
 
                 this.DL.ReportSelected.Count += snapshot.Count;
                 this.DL.ReportSelected.Amount += snapshot.Amount;
@@ -392,7 +408,7 @@ export class DataAccess {
     }
 
     AccessLoad() {
-        this.af.list(this.ACCESS, {query: {  orderByChild: 'Name'}}).first().subscribe(snapshots => {
+        this.af.list(this.ACCESSES, {query: {  orderByChild: 'Name'}}).first().subscribe(snapshots => {
             this.DL.Accesses = new Array<Access>();
             snapshots.forEach(snapshot => {
                 let info: Access = snapshot;
@@ -454,9 +470,9 @@ export class DataAccess {
 
     public AccessSave(item: Access) {
         if (item.key)
-            this.af.list(this.ACCESS).update(item.key, item);
+            this.af.list(this.ACCESSES).update(item.key, item);
         else
-            this.af.list(this.ACCESS).push(item); 
+            this.af.list(this.ACCESSES).push(item); 
         this.AccessLoad();
     }
 
@@ -488,8 +504,49 @@ export class DataAccess {
         this.SellInfoClear();
     }
 
+    public TransactionCancel(description: string, item: TransactionInfo) {
+        let items = Array<ProductInfo>();
+
+        // update in memory first to prevent data sync issue
+        item.Items.forEach(sell => {
+            this.DL.Products.forEach(product => {
+                if(sell.Code == product.Code) {
+                    product.Quantity += sell.Quantity;
+                    items.push(product);
+                }
+            });
+        });
+
+        // do the actual database update
+        items.forEach(item => {
+            this.ProductSave(item);
+        });
+
+        // save cancel info
+        let info = new CancelInfo();
+        info.Description = description;
+        info.Amount = item.Amount;
+        info.ActionDate = this.core.dateToNumber(new Date());
+        info.KeyMonth = this.core.dateToKeyMonth(this.DL.Date);
+        this.CancelInfoSave(info);
+
+        // delete transaction
+        this.TransactionInfoDelete(this.DL.ReportSelected, item.key);
+
+        // reload transaction
+        this.TransactionSelectedLoad(this.DL.ReportSelected);
+    }
+
     public TransactionInfoSave(item: TransactionInfo) {
         this.af.list(this.TRANSACTIONS).push(item);
+    }
+
+    public CancelInfoSave(item: CancelInfo) {
+        this.af.list(this.CANCELS).push(item);
+    }
+
+    public TransactionInfoDelete(report: ReportInfo, key: string) {
+        this.af.object("/transactions/" + report.KeyYear + "/" + report.KeyMonth + "/" + key).remove();
     }
 
     public ExpenseInfoSave(description: string, amount: number) {

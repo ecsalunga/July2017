@@ -53,6 +53,7 @@ import { ShowcaseScheduleComponent } from './showcase/schedule/showcase-schedule
 import { UserListComponent } from './user/list/user-list.component';
 import { AccessListComponent } from './access/list/access-list.component';
 import { AccessDetailComponent } from './access/detail/access-detail.component';
+import { TransactionCancelComponent } from './transaction/cancel/transaction-cancel.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { AccessDetailComponent } from './access/detail/access-detail.component';
     ShowcaseScheduleComponent,
     UserListComponent,
     AccessListComponent,
-    AccessDetailComponent
+    AccessDetailComponent,
+    TransactionCancelComponent
   ],
   imports: [
     BrowserModule,
@@ -120,7 +122,8 @@ import { AccessDetailComponent } from './access/detail/access-detail.component';
     ShowcaseScheduleComponent,
     UserListComponent,
     AccessListComponent,
-    AccessDetailComponent
+    AccessDetailComponent,
+    TransactionCancelComponent
   ]
 })
 export class AppModule {

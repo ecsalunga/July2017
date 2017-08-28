@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-
 
 @Component({
   selector: 'transaction-detail',
@@ -10,9 +8,15 @@ import { DataAccess, DataLayer } from '../../data';
   styleUrls: ['./transaction-detail.component.css']
 })
 export class TransactionDetailComponent implements OnInit {
+  description: string;
 
-  constructor(private core: Core, private DL: DataLayer) { }
+  constructor(private core: Core, private DL: DataLayer, private DA: DataAccess) { }
   
+  Cancel() {
+    this.DA.TransactionCancel(this.description, this.DL.Transaction);
+    this.LoadList();
+  }
+
   LoadList() {
     this.DL.LoadFromLink("transaction-list");
   }

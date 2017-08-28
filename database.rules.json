@@ -41,6 +41,11 @@
     "reports": {
       ".read": "true",
       ".write": "true"
+    },
+    "cancels": {
+      ".read": "true",
+      ".write": "true",
+      ".indexOn": "KeyMonth"
     }
   }
 }

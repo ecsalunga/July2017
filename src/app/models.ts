@@ -101,6 +101,8 @@ export class Access {
     ProductAdd: boolean;
     ProductEdit: boolean;
     ProductIn: boolean;
+    ProductCancel: boolean;
+    ProductCancelView: boolean;
 
     ReportView: boolean;
     ReportSearch: boolean;
@@ -137,4 +139,11 @@ export class NameValue {
         this.Name = name;
         this.Value = value;
     }
+}
+
+export class CancelInfo {
+    Description: string;
+    Amount: number;
+    ActionDate: number;
+    KeyMonth: number;
 }

@@ -34,7 +34,7 @@
     </ng-container>
   </table>
   <div class="hSpacer"></div>
-  <table [hidden]="!DL.ProductPermission.Modify">
+  <table>
     <tr class="rightRow">
       <td class="selectionRow" style="width: 60%" [hidden]="!DL.UserAccess.ProductIn">
         <md-select class="longText" placeholder="Product" [(ngModel)]="model" (change)="productSelected()">

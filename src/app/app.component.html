@@ -33,6 +33,12 @@
           <span>Transaction</span>
         </button>
       </ng-container>
+      <ng-container *ngIf="DL.UserAccess.ProductCancelView">
+        <button md-menu-item (click)="LoadPage('transaction-cancel')">
+          <md-icon>restore</md-icon>
+          <span>Cancelled Transaction</span>
+        </button>
+      </ng-container>
       <ng-container *ngIf="DL.UserAccess.ExpenseView">
         <button md-menu-item (click)="LoadPage('expense')">
           <md-icon>broken_image</md-icon>

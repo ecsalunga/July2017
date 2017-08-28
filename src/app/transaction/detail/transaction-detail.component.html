@@ -46,7 +46,22 @@
     </tr>
   </table>
   <div class="hSpacer"></div>
-  <div class="rightRow">
-    <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
-  </div>
+  <table [hidden]="!DL.UserAccess.ReportSearch">
+    <tr class="rightRow">
+      <td class="selectionRow">
+        <md-input-container class="longText">
+          <input id="txtDescription" [disabled]="!DL.UserAccess.ProductCancel" mdInput placeholder="Reason for cancel" [(ngModel)]="description" />
+        </md-input-container>
+      </td>
+      <td></td>
+    </tr>
+    <tr class="rightRow">
+      <td>
+        <button md-fab [disabled]="!description || !DL.UserAccess.ProductCancel" (click)="Cancel()" mdTooltip="Cancel transaction" mdTooltipPosition="above"><md-icon>restore</md-icon></button>
+      </td>
+      <td>
+        <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+      </td>
+    </tr>
+  </table>
 </div>

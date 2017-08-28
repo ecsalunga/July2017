@@ -1,0 +1,52 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Date
+        </th>
+        <th>
+          Description
+        </th>
+        <th class="totalColumn">
+          Amount
+        </th>
+      </tr>
+    </thead>
+    <ng-container *ngFor="let info of DL.TransactionCancels">
+      <tr>
+        <td>
+          {{ getDate(info.ActionDate) | date : 'yyyy-MM-dd hh:mm a' }}
+        </td>
+        <td>
+          {{ info.Description }}
+        </td>
+        <td class="totalColumn">
+          {{info.Amount | number:'1.2-2'}}
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+  <div class="hSpacer"></div>
+  <table [hidden]="!DL.UserAccess.ReportSearch">
+    <tr class="rightRow">
+      <td class="selectionRow">
+        <md-select placeholder="Year" [(ngModel)]="yearSelected">
+          <md-option *ngFor="let year of DL.ReportYears" [value]="year">
+            {{year}}
+          </md-option>
+        </md-select>
+        <md-select placeholder="Month" [(ngModel)]="monthSelected">
+          <md-option *ngFor="let month of DL.Months" [value]="month.Value">
+            {{month.Name}}
+          </md-option>
+        </md-select>
+      </td>
+    </tr>
+    <tr class="rightRow">
+      <td>
+        <button md-fab (click)="Filter()" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
+      </td>
+    </tr>
+  </table>
+</div>
