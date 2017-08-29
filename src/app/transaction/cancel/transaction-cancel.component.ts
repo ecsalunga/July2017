@@ -15,11 +15,12 @@ export class TransactionCancelComponent implements OnInit {
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
     this.yearSelected = this.DL.Date.getFullYear();
     this.monthSelected = this.DL.Date.getMonth()+1;
-    this.Filter();
+    this.DL.TransactionCancelSelected = this.DL.TransactionCancels;
   }
 
   Filter() {
-    this.DA.CancelMonthlyLoad(this.yearSelected, this.monthSelected)
+    let keyMonth = parseInt(this.yearSelected + this.core.az(this.monthSelected));
+    this.DA.TransactionCancelLoad(keyMonth);
   }
 
   getDate(keyDay: number): Date {

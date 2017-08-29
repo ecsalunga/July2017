@@ -13,7 +13,7 @@
         </th>
       </tr>
     </thead>
-    <ng-container *ngFor="let info of DL.TransactionCancels">
+    <ng-container *ngFor="let info of DL.TransactionCancelSelected">
       <tr>
         <td>
           {{ getDate(info.ActionDate) | date : 'yyyy-MM-dd hh:mm a' }}

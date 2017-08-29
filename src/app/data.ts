@@ -26,6 +26,7 @@ export class DataLayer {
     TransactionsToday: Array<TransactionInfo>;
     TransactionSelected: Array<TransactionInfo>;
     TransactionCancels: Array<CancelInfo>;
+    TransactionCancelSelected: Array<CancelInfo>;
 
     SellInfos: Array<SellInfo>;
     SellInfosAmount: number = 0;
@@ -140,6 +141,7 @@ export class DataAccess {
     EXPENSES: string;
     EXPENSE_TYPES: string = "/expenses/types";
     KEYDAY: string = "KeyDay";
+    KEYMONTH: string = "KeyMonth";
     USERS: string = "/users";
     SHOWCASES: string = "/showcases";
     ACCESSES: string = "/accesses";
@@ -169,6 +171,7 @@ export class DataAccess {
         this.ShowcasesLoad();
         this.ExpensesTypeLoad();
         this.ReportTodayLoad();
+        this.TransactionCancelCurrentLoad();
         this.ActiveDataLoad();
     }
 
@@ -263,7 +266,7 @@ export class DataAccess {
     }
 
     MemberLoad() {
-        this.af.list(this.MEMBERS, { query: { orderByChild: 'Name' } }).first().subscribe(snapshots => {
+        this.af.list(this.MEMBERS, { query: { orderByChild: 'Name' }}).first().subscribe(snapshots => {
             this.DL.Members = new Array<MemberInfo>();
             this.DL.MemberSelections = new Array<MemberInfo>();
 
@@ -280,7 +283,7 @@ export class DataAccess {
     }
 
     UserLoad() {
-        this.af.list(this.USERS, { query: { orderByChild: 'Name' } }).first().subscribe(snapshots => {
+        this.af.list(this.USERS, { query: { orderByChild: 'Name' }}).first().subscribe(snapshots => {
             this.DL.Users = new Array<UserInfo>();
 
             snapshots.forEach(snapshot => {
@@ -306,14 +309,32 @@ export class DataAccess {
         });
     }
 
-    CancelMonthlyLoad(selectedYear: number, selectedMonth: number) {
-        this.af.list(this.CANCELS, { query: { orderByChild: "KeyMonth", equalTo: parseInt(selectedYear + this.core.az(selectedMonth)) } }).first().subscribe(snapshots => {
+    TransactionCancelCurrentLoad() {
+        this.af.list(this.CANCELS, { query: { orderByChild: this.KEYMONTH, equalTo: this.DL.ReportToday.KeyMonth }}).first().subscribe(snapshots => {
             this.DL.TransactionCancels = new Array<CancelInfo>();
             snapshots.forEach(snapshot => {
                 let info: CancelInfo = snapshot;
                 this.DL.TransactionCancels.push(info);
             });
+
+            this.DL.TransactionCancels.reverse();
         });
+    }
+
+    TransactionCancelLoad(keyMonth: number) {
+        if(this.DL.ReportToday.KeyMonth == keyMonth)
+            this.DL.TransactionCancelSelected = this.DL.TransactionCancels;
+        else {
+            this.af.list(this.CANCELS, { query: { orderByChild: this.KEYMONTH, equalTo: keyMonth }}).first().subscribe(snapshots => {
+                this.DL.TransactionCancelSelected = new Array<CancelInfo>();
+                snapshots.forEach(snapshot => {
+                    let info: CancelInfo = snapshot;
+                    this.DL.TransactionCancelSelected.push(info);
+                });
+
+                this.DL.TransactionCancelSelected.reverse();
+            });
+        }
     }
 
     ShowcasesLoad() {
@@ -362,7 +383,7 @@ export class DataAccess {
     }
 
     ReportMonthlyLoad(selectedYear: number, selectedMonth: number) {
-        this.af.list("/reports/" + selectedYear, { query: { orderByChild: "KeyMonth", equalTo: parseInt(selectedYear + this.core.az(selectedMonth)) } }).first().subscribe(snapshots => {
+        this.af.list("/reports/" + selectedYear, { query: { orderByChild: this.KEYMONTH, equalTo: parseInt(selectedYear + this.core.az(selectedMonth)) } }).first().subscribe(snapshots => {
             this.DL.Reports = new Array<ReportInfo>();
             this.DL.ReportSelected = new ReportInfo();
             this.DL.ReportSelected.Count = 0;
