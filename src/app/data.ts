@@ -13,7 +13,7 @@ export class DataLayer {
     SOURCE: string;
     TITLE: string;
 
-    Product: ProductInfo;   
+    Product: ProductInfo;
     Products: Array<ProductInfo>;
     ProductSelections: Array<ProductInfo>;
 
@@ -47,7 +47,7 @@ export class DataLayer {
 
     Access: Access;
     Accesses: Array<Access>;
-    
+
     Showcase: ShowcaseInfo;
     Showcases: Array<ShowcaseInfo>;
     ShowcaseToday: Array<ShowcaseInfo>;
@@ -67,10 +67,10 @@ export class DataLayer {
         this.ReportToday.KeyYear = this.Date.getFullYear();
         this.ReportSelected = this.ReportToday;
 
-        this.Months = [ 
-            new NameValue("January", 1), 
-            new NameValue("February", 2), 
-            new NameValue("March", 3), 
+        this.Months = [
+            new NameValue("January", 1),
+            new NameValue("February", 2),
+            new NameValue("March", 3),
             new NameValue("April", 4),
             new NameValue("May", 5),
             new NameValue("June", 6),
@@ -83,14 +83,14 @@ export class DataLayer {
         ];
 
         this.AccessTypes = [
-            new NameValue("Administrator", 1), 
+            new NameValue("Administrator", 1),
             new NameValue("Manager", 2),
             new NameValue("Staff", 3),
             new NameValue("User", 4),
             new NameValue("Guest", 0)
         ];
 
-        for(let x = this.ReportToday.KeyYear - 5; x <= this.ReportToday.KeyYear; x++) {
+        for (let x = this.ReportToday.KeyYear - 5; x <= this.ReportToday.KeyYear; x++) {
             this.ReportYears.push(x);
         }
 
@@ -103,9 +103,9 @@ export class DataLayer {
     }
 
     public SetPermission() {
-        if(this.User && this.Accesses) {
+        if (this.User && this.Accesses) {
             this.Accesses.forEach(access => {
-                if(this.User.AccessKey == access.key)
+                if (this.User.AccessKey == access.key)
                     this.UserAccess = access;
             });
         }
@@ -146,7 +146,7 @@ export class DataAccess {
     CANCELS: string = "/cancels";
     StorageRef: firebase.storage.Reference = firebase.storage().ref();
 
-    constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase, private afAuth: AngularFireAuth) { 
+    constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase, private afAuth: AngularFireAuth) {
         this.TRANSACTIONS = "/transactions/" + this.DL.ReportToday.KeyYear + "/" + this.DL.ReportToday.KeyMonth;
         this.EXPENSES = "/expenses/" + this.DL.ReportToday.KeyYear + "/" + this.DL.ReportToday.KeyMonth;
         this.REPORTS = "/reports/" + this.DL.ReportToday.KeyYear;
@@ -155,7 +155,7 @@ export class DataAccess {
     public LogInWithFacebook() {
         this.afAuth.auth.signInWithRedirect(new firebase.auth.FacebookAuthProvider());
     }
-    
+
     public LogOut() {
         this.afAuth.auth.signOut();
         this.DL.UserAccess = new Access();
@@ -173,7 +173,7 @@ export class DataAccess {
     }
 
     ActiveDataLoad() {
-        this.af.list(this.PRODUCTS, {query: {  orderByChild: 'Description'}}).subscribe(snapshots => {
+        this.af.list(this.PRODUCTS, { query: { orderByChild: 'Description' } }).subscribe(snapshots => {
             this.DL.Products = new Array<ProductInfo>();
             this.DL.ProductSelections = new Array<ProductInfo>();
 
@@ -181,7 +181,7 @@ export class DataAccess {
                 let info: ProductInfo = snapshot;
                 info.key = snapshot.$key;
                 this.DL.Products.push(info);
-                if(info.Quantity > 0)
+                if (info.Quantity > 0)
                     this.DL.ProductSelections.push(info);
             });
         });
@@ -196,12 +196,12 @@ export class DataAccess {
                 info.key = snapshot.$key;
                 this.DL.SellInfos.push(info);
 
-                this.DL.SellInfosCount+= info.Quantity;
-                this.DL.SellInfosAmount+= info.Total;
+                this.DL.SellInfosCount += info.Quantity;
+                this.DL.SellInfosAmount += info.Total;
             });
         });
 
-        this.af.list(this.TRANSACTIONS, {query: {  orderByChild: this.KEYDAY, equalTo: this.DL.ReportToday.KeyDay}}).subscribe(snapshots => {
+        this.af.list(this.TRANSACTIONS, { query: { orderByChild: this.KEYDAY, equalTo: this.DL.ReportToday.KeyDay } }).subscribe(snapshots => {
             this.DL.TransactionsToday = new Array<TransactionInfo>();
             this.DL.ReportToday.Count = 0;
             this.DL.ReportToday.Amount = 0;
@@ -217,7 +217,7 @@ export class DataAccess {
             this.DL.TransactionsToday.reverse();
         });
 
-        this.af.list(this.EXPENSES, {query: {  orderByChild: this.KEYDAY, equalTo: this.DL.ReportToday.KeyDay}}).subscribe(snapshots => {
+        this.af.list(this.EXPENSES, { query: { orderByChild: this.KEYDAY, equalTo: this.DL.ReportToday.KeyDay } }).subscribe(snapshots => {
             this.DL.ExpensesToday = new Array<ExpenseInfo>();
             this.DL.ReportToday.ExpenseAmount = 0;
             this.DL.ReportToday.ExpenseCount = 0;
@@ -240,14 +240,14 @@ export class DataAccess {
                 this.DL.User.Name = "GUEST";
                 return;
             }
-            
+
             this.DL.Users.forEach(u => {
-                if(u.UID == user.uid)
+                if (u.UID == user.uid)
                     this.DL.User = u;
             });
 
             // [temp] default to manager
-            if(!this.DL.User.AccessKey) {
+            if (!this.DL.User.AccessKey) {
                 this.DL.User.AccessKey = "-KsasLernU2_JWOO90Bz";
                 this.DL.User.AccessName = "DEMO";
             }
@@ -263,7 +263,7 @@ export class DataAccess {
     }
 
     MemberLoad() {
-        this.af.list(this.MEMBERS, {query: {  orderByChild: 'Name'}}).first().subscribe(snapshots => {
+        this.af.list(this.MEMBERS, { query: { orderByChild: 'Name' } }).first().subscribe(snapshots => {
             this.DL.Members = new Array<MemberInfo>();
             this.DL.MemberSelections = new Array<MemberInfo>();
 
@@ -280,7 +280,7 @@ export class DataAccess {
     }
 
     UserLoad() {
-        this.af.list(this.USERS, {query: {  orderByChild: 'Name'}}).first().subscribe(snapshots => {
+        this.af.list(this.USERS, { query: { orderByChild: 'Name' } }).first().subscribe(snapshots => {
             this.DL.Users = new Array<UserInfo>();
 
             snapshots.forEach(snapshot => {
@@ -290,7 +290,7 @@ export class DataAccess {
             });
 
             // single subscription
-            if(!this.DL.IsAuthenticating) {
+            if (!this.DL.IsAuthenticating) {
                 this.DL.IsAuthenticating = true;
                 this.UserAuthenticate();
             }
@@ -299,7 +299,7 @@ export class DataAccess {
 
     ExpensesTypeLoad() {
         this.af.object(this.EXPENSE_TYPES).first().subscribe(snapshot => {
-            if(snapshot.length)
+            if (snapshot.length)
                 this.DL.ExpenseTypes = snapshot;
             else
                 this.DL.ExpenseTypes = new Array<string>();
@@ -307,7 +307,7 @@ export class DataAccess {
     }
 
     CancelMonthlyLoad(selectedYear: number, selectedMonth: number) {
-        this.af.list(this.CANCELS, {query: {  orderByChild: "KeyMonth", equalTo: parseInt(selectedYear + this.core.az(selectedMonth))}}).subscribe(snapshots => {
+        this.af.list(this.CANCELS, { query: { orderByChild: "KeyMonth", equalTo: parseInt(selectedYear + this.core.az(selectedMonth)) } }).subscribe(snapshots => {
             this.DL.TransactionCancels = new Array<CancelInfo>();
             snapshots.forEach(snapshot => {
                 let info: CancelInfo = snapshot;
@@ -317,7 +317,7 @@ export class DataAccess {
     }
 
     ShowcasesLoad() {
-        this.af.list(this.SHOWCASES, {query: {  orderByChild: 'Name'}}).first().subscribe(snapshots => {
+        this.af.list(this.SHOWCASES, { query: { orderByChild: 'Name' } }).first().subscribe(snapshots => {
             this.DL.Showcases = new Array<ShowcaseInfo>();
             this.DL.ShowcaseToday = new Array<ShowcaseInfo>();
 
@@ -328,14 +328,14 @@ export class DataAccess {
 
                 // get showcase for today
                 let keyToday: number = this.core.dateToKeyDay(this.DL.Date);
-                if(info.Schedules) {
+                if (info.Schedules) {
                     let hasToday: boolean = false;
                     info.Schedules.forEach(item => {
-                        if(item.From <= keyToday && item.To >= keyToday)
+                        if (item.From <= keyToday && item.To >= keyToday)
                             hasToday = true;
                     });
 
-                    if(hasToday)
+                    if (hasToday)
                         this.DL.ShowcaseToday.push(info);
                 }
             });
@@ -343,7 +343,7 @@ export class DataAccess {
     }
 
     TransactionSelectedLoad(report: ReportInfo) {
-        this.af.list("/transactions/" + report.KeyYear + "/" + report.KeyMonth, {query: {  orderByChild: this.KEYDAY, equalTo: report.KeyDay}}).subscribe(snapshots => {
+        this.af.list("/transactions/" + report.KeyYear + "/" + report.KeyMonth, { query: { orderByChild: this.KEYDAY, equalTo: report.KeyDay } }).subscribe(snapshots => {
             this.DL.TransactionSelected = new Array<TransactionInfo>();
             this.DL.ReportSelected.Count = 0;
             this.DL.ReportSelected.Amount = 0;
@@ -362,7 +362,7 @@ export class DataAccess {
     }
 
     ReportMonthlyLoad(selectedYear: number, selectedMonth: number) {
-        this.af.list("/reports/" + selectedYear, {query: {  orderByChild: "KeyMonth", equalTo: parseInt(selectedYear + this.core.az(selectedMonth))}}).subscribe(snapshots => {
+        this.af.list("/reports/" + selectedYear, { query: { orderByChild: "KeyMonth", equalTo: parseInt(selectedYear + this.core.az(selectedMonth)) } }).subscribe(snapshots => {
             this.DL.Reports = new Array<ReportInfo>();
             this.DL.ReportSelected = new ReportInfo();
             this.DL.ReportSelected.Count = 0;
@@ -383,7 +383,7 @@ export class DataAccess {
     }
 
     ExpenseSelectedLoad(report: ReportInfo) {
-        this.af.list("/expenses/" + report.KeyYear + "/" + report.KeyMonth, {query: {  orderByChild: this.KEYDAY, equalTo: report.KeyDay}}).subscribe(snapshots => {
+        this.af.list("/expenses/" + report.KeyYear + "/" + report.KeyMonth, { query: { orderByChild: this.KEYDAY, equalTo: report.KeyDay } }).subscribe(snapshots => {
             this.DL.ExpenseSelected = new Array<ExpenseInfo>();
             this.DL.ReportSelected.ExpenseAmount = 0;
             this.DL.ReportSelected.ExpenseCount = 0;
@@ -399,16 +399,16 @@ export class DataAccess {
     }
 
     ReportTodayLoad() {
-        this.af.list(this.REPORTS, {query: {  orderByChild: this.KEYDAY, equalTo: this.DL.ReportToday.KeyDay}}).first().subscribe(snapshots => {
+        this.af.list(this.REPORTS, { query: { orderByChild: this.KEYDAY, equalTo: this.DL.ReportToday.KeyDay } }).first().subscribe(snapshots => {
             snapshots.forEach(snapshot => {
-                this.DL.ReportToday =  snapshot;
-                this.DL.ReportToday.key =  snapshot.$key;
+                this.DL.ReportToday = snapshot;
+                this.DL.ReportToday.key = snapshot.$key;
             });
         });
     }
 
     AccessLoad() {
-        this.af.list(this.ACCESSES, {query: {  orderByChild: 'Name'}}).first().subscribe(snapshots => {
+        this.af.list(this.ACCESSES, { query: { orderByChild: 'Name' } }).first().subscribe(snapshots => {
             this.DL.Accesses = new Array<Access>();
             snapshots.forEach(snapshot => {
                 let info: Access = snapshot;
@@ -431,7 +431,7 @@ export class DataAccess {
         // update in memory first to prevent data sync issue
         this.DL.SellInfos.forEach(sell => {
             this.DL.Products.forEach(product => {
-                if(sell.Code == product.Code) {
+                if (sell.Code == product.Code) {
                     product.Quantity -= sell.Quantity;
                     items.push(product);
                 }
@@ -447,7 +447,7 @@ export class DataAccess {
     public MemberSave(item: MemberInfo) {
         if (item.key)
             this.af.list(this.MEMBERS).update(item.key, item);
-        else 
+        else
             this.af.list(this.MEMBERS).push(item);
         this.MemberLoad();
     }
@@ -456,7 +456,7 @@ export class DataAccess {
         if (item.key)
             this.af.list(this.USERS).update(item.key, item);
         else
-            this.af.list(this.USERS).push(item); 
+            this.af.list(this.USERS).push(item);
         this.UserLoad();
     }
 
@@ -464,7 +464,7 @@ export class DataAccess {
         if (item.key)
             this.af.list(this.SHOWCASES).update(item.key, item);
         else
-            this.af.list(this.SHOWCASES).push(item); 
+            this.af.list(this.SHOWCASES).push(item);
         this.ShowcasesLoad();
     }
 
@@ -472,7 +472,7 @@ export class DataAccess {
         if (item.key)
             this.af.list(this.ACCESSES).update(item.key, item);
         else
-            this.af.list(this.ACCESSES).push(item); 
+            this.af.list(this.ACCESSES).push(item);
         this.AccessLoad();
     }
 
@@ -510,7 +510,7 @@ export class DataAccess {
         // update in memory first to prevent data sync issue
         item.Items.forEach(sell => {
             this.DL.Products.forEach(product => {
-                if(sell.Code == product.Code) {
+                if (sell.Code == product.Code) {
                     product.Quantity += sell.Quantity;
                     items.push(product);
                 }
@@ -559,19 +559,28 @@ export class DataAccess {
         this.ReportTodaySave();
 
         // add record for auto complete
-        if(this.DL.ExpenseTypes.indexOf(description) === -1) {
+        if (this.DL.ExpenseTypes.indexOf(description) === -1) {
             this.DL.ExpenseTypes.push(description);
             this.af.object(this.EXPENSE_TYPES).update(this.DL.ExpenseTypes);
             this.ExpensesTypeLoad();
         }
     }
 
+    ReportGenerate(year: number, keyMonth: number) {
+        // get report for that day
+        // get transactions
+        // get expenses
+
+        //compute
+
+        //save
+    }
+
     public ReportTodaySave() {
         if (this.DL.ReportToday.key)
             this.af.list(this.REPORTS).update(this.DL.ReportToday.key, this.DL.ReportToday);
-        else { 
+        else
             this.af.list(this.REPORTS).push(this.DL.ReportToday);
-            this.ReportTodayLoad();
-        } 
+        this.ReportTodayLoad();
     }
 }
