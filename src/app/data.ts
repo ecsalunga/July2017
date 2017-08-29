@@ -362,7 +362,7 @@ export class DataAccess {
     }
 
     ReportMonthlyLoad(selectedYear: number, selectedMonth: number) {
-        this.af.list("/reports/" + selectedYear, { query: { orderByChild: "KeyMonth", equalTo: parseInt(selectedYear + this.core.az(selectedMonth)) } }).subscribe(snapshots => {
+        this.af.list("/reports/" + selectedYear, { query: { orderByChild: "KeyMonth", equalTo: parseInt(selectedYear + this.core.az(selectedMonth)) } }).first().subscribe(snapshots => {
             this.DL.Reports = new Array<ReportInfo>();
             this.DL.ReportSelected = new ReportInfo();
             this.DL.ReportSelected.Count = 0;
@@ -535,9 +535,6 @@ export class DataAccess {
 
         // report recompute
         this.ReportGenerate(this.DL.ReportSelected.KeyYear, this.DL.ReportSelected.KeyMonth, this.DL.ReportSelected.KeyDay);
-
-        // reload transaction
-        this.TransactionSelectedLoad(this.DL.ReportSelected);
     }
 
     public TransactionInfoSave(item: TransactionInfo) {
@@ -569,23 +566,23 @@ export class DataAccess {
         }
     }
 
-    ReportGenerate(year: number, keyMonth: number, KeyDay: number) {
+    ReportGenerate(year: number, keyMonth: number, keyDay: number) {
         // get report for that day
         let report = new ReportInfo();
         report.KeyYear = year;
         report.KeyMonth = keyMonth;
-        report.KeyDay = KeyDay;
+        report.KeyDay = keyDay;
 
         let transaction = new TransactionInfo();
         let expense = new ExpenseInfo();
 
-        this.af.list(this.REPORTS, { query: { orderByChild: this.KEYDAY, equalTo: KeyDay } }).first().subscribe(snapshots => {
+        this.af.list("/reports/" + year, { query: { orderByChild: this.KEYDAY, equalTo: keyDay } }).first().subscribe(snapshots => {
             snapshots.forEach(snapshot => {
                 report.key = snapshot.$key;
             });
 
             // get transactions
-            this.af.list("/transactions/" + year + "/" + keyMonth, { query: { orderByChild: this.KEYDAY, equalTo: KeyDay } }).first().subscribe(snapshots => {
+            this.af.list("/transactions/" + year + "/" + keyMonth, { query: { orderByChild: this.KEYDAY, equalTo: keyDay } }).first().subscribe(snapshots => {
                 report.Count = 0;
                 report.Amount = 0;
 
@@ -595,7 +592,7 @@ export class DataAccess {
                 });
 
                 // get expenses
-                this.af.list("/expenses/" + year + "/" + keyMonth, { query: { orderByChild: this.KEYDAY, equalTo: KeyDay } }).first().subscribe(snapshots => {
+                this.af.list("/expenses/" + year + "/" + keyMonth, { query: { orderByChild: this.KEYDAY, equalTo: keyDay } }).first().subscribe(snapshots => {
                     report.ExpenseAmount = 0;
                     report.ExpenseCount = 0;
 
@@ -605,13 +602,12 @@ export class DataAccess {
                     });
 
                     // save
-                    if (this.DL.ReportToday.key)
+                    if (report.key)
                         this.af.list("/reports/" + year).update(report.key, report);
                     else
                         this.af.list("/reports/" + year).push(report);
 
-                    if(this.DL.ReportToday.KeyDay == KeyDay)
-                        this.ReportTodayLoad();
+                    this.TransactionSelectedLoad(report);
                 });
             });
         });
