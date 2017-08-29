@@ -83,13 +83,13 @@
       </ng-container>
       <ng-container *ngIf="DL.User.UID;else showSignOut">
         <button md-menu-item (click)="DA.LogOut()">
-          <md-icon>fingerprint</md-icon>
+          <md-icon>lock</md-icon>
           <span>Log Out</span>
         </button>
       </ng-container>
       <ng-template #showSignOut>
         <button md-menu-item (click)="DA.LogInWithFacebook()">
-          <md-icon>fingerprint</md-icon>
+          <md-icon>lock_open</md-icon>
           <span>Log In</span>
         </button>
       </ng-template>
