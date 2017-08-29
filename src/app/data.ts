@@ -504,11 +504,11 @@ export class DataAccess {
         this.SellInfoClear();
     }
 
-    public TransactionCancel(description: string, item: TransactionInfo) {
+    public TransactionSelectedCancel(description: string) {
         let items = Array<ProductInfo>();
 
         // update in memory first to prevent data sync issue
-        item.Items.forEach(sell => {
+        this.DL.Transaction.Items.forEach(sell => {
             this.DL.Products.forEach(product => {
                 if (sell.Code == product.Code) {
                     product.Quantity += sell.Quantity;
@@ -525,13 +525,16 @@ export class DataAccess {
         // save cancel info
         let info = new CancelInfo();
         info.Description = description;
-        info.Amount = item.Amount;
+        info.Amount = this.DL.Transaction.Amount;
         info.ActionDate = this.core.dateToNumber(new Date());
         info.KeyMonth = this.core.dateToKeyMonth(this.DL.Date);
         this.CancelInfoSave(info);
 
         // delete transaction
-        this.TransactionInfoDelete(this.DL.ReportSelected, item.key);
+        this.TransactionInfoDelete(this.DL.ReportSelected, this.DL.Transaction.key);
+
+        // report recompute
+        this.ReportGenerate(this.DL.ReportSelected.KeyYear, this.DL.ReportSelected.KeyMonth, this.DL.ReportSelected.KeyDay);
 
         // reload transaction
         this.TransactionSelectedLoad(this.DL.ReportSelected);
@@ -580,33 +583,38 @@ export class DataAccess {
             snapshots.forEach(snapshot => {
                 report.key = snapshot.$key;
             });
-        });
 
-        // get transactions
-        this.af.list("/transactions/" + year + "/" + keyMonth, { query: { orderByChild: this.KEYDAY, equalTo: KeyDay } }).first().subscribe(snapshots => {
-            report.Count = 0;
-            report.Amount = 0;
+            // get transactions
+            this.af.list("/transactions/" + year + "/" + keyMonth, { query: { orderByChild: this.KEYDAY, equalTo: KeyDay } }).first().subscribe(snapshots => {
+                report.Count = 0;
+                report.Amount = 0;
 
-            snapshots.forEach(snapshot => {
-                report.Count += snapshot.Count;
-                report.Amount += snapshot.Amount;
+                snapshots.forEach(snapshot => {
+                    report.Count += snapshot.Count;
+                    report.Amount += snapshot.Amount;
+                });
+
+                // get expenses
+                this.af.list("/expenses/" + year + "/" + keyMonth, { query: { orderByChild: this.KEYDAY, equalTo: KeyDay } }).first().subscribe(snapshots => {
+                    report.ExpenseAmount = 0;
+                    report.ExpenseCount = 0;
+
+                    snapshots.forEach(snapshot => {
+                        report.ExpenseCount++;
+                        report.ExpenseAmount += snapshot.Amount;
+                    });
+
+                    // save
+                    if (this.DL.ReportToday.key)
+                        this.af.list("/reports/" + year).update(report.key, report);
+                    else
+                        this.af.list("/reports/" + year).push(report);
+
+                    if(this.DL.ReportToday.KeyDay == KeyDay)
+                        this.ReportTodayLoad();
+                });
             });
         });
-
-        // get expenses
-        this.af.list("/expenses/" + year + "/" + keyMonth, { query: { orderByChild: this.KEYDAY, equalTo: KeyDay } }).first().subscribe(snapshots => {
-            report.ExpenseAmount = 0;
-            report.ExpenseCount = 0;
-
-            snapshots.forEach(snapshot => {
-                report.ExpenseCount++;
-                report.ExpenseAmount += snapshot.Amount;
-            });
-        });
-
-        //compute
-
-        //save
     }
 
     public ReportTodaySave() {
