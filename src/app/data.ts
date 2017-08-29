@@ -566,10 +566,43 @@ export class DataAccess {
         }
     }
 
-    ReportGenerate(year: number, keyMonth: number) {
+    ReportGenerate(year: number, keyMonth: number, KeyDay: number) {
         // get report for that day
+        let report = new ReportInfo();
+        report.KeyYear = year;
+        report.KeyMonth = keyMonth;
+        report.KeyDay = KeyDay;
+
+        let transaction = new TransactionInfo();
+        let expense = new ExpenseInfo();
+
+        this.af.list(this.REPORTS, { query: { orderByChild: this.KEYDAY, equalTo: KeyDay } }).first().subscribe(snapshots => {
+            snapshots.forEach(snapshot => {
+                report.key = snapshot.$key;
+            });
+        });
+
         // get transactions
+        this.af.list("/transactions/" + year + "/" + keyMonth, { query: { orderByChild: this.KEYDAY, equalTo: KeyDay } }).first().subscribe(snapshots => {
+            report.Count = 0;
+            report.Amount = 0;
+
+            snapshots.forEach(snapshot => {
+                report.Count += snapshot.Count;
+                report.Amount += snapshot.Amount;
+            });
+        });
+
         // get expenses
+        this.af.list("/expenses/" + year + "/" + keyMonth, { query: { orderByChild: this.KEYDAY, equalTo: KeyDay } }).first().subscribe(snapshots => {
+            report.ExpenseAmount = 0;
+            report.ExpenseCount = 0;
+
+            snapshots.forEach(snapshot => {
+                report.ExpenseCount++;
+                report.ExpenseAmount += snapshot.Amount;
+            });
+        });
 
         //compute
 
