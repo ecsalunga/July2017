@@ -564,6 +564,10 @@ export class DataAccess {
 
     public CancelInfoSave(item: CancelInfo) {
         this.af.list(this.CANCELS).push(item);
+        if(this.DL.ReportToday.KeyMonth == item.KeyMonth)
+            this.TransactionCancelCurrentLoad();
+        else
+            this.TransactionCancelLoad(item.KeyMonth);
     }
 
     public TransactionInfoDelete(report: ReportInfo, key: string) {
@@ -582,6 +586,7 @@ export class DataAccess {
         // add record for auto complete
         if (this.DL.ExpenseTypes.indexOf(description) === -1) {
             this.DL.ExpenseTypes.push(description);
+            this.DL.ExpenseTypes.sort();
             this.af.object(this.EXPENSE_TYPES).update(this.DL.ExpenseTypes);
             this.ExpensesTypeLoad();
         }
