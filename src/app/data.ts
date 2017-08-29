@@ -307,7 +307,7 @@ export class DataAccess {
     }
 
     CancelMonthlyLoad(selectedYear: number, selectedMonth: number) {
-        this.af.list(this.CANCELS, { query: { orderByChild: "KeyMonth", equalTo: parseInt(selectedYear + this.core.az(selectedMonth)) } }).subscribe(snapshots => {
+        this.af.list(this.CANCELS, { query: { orderByChild: "KeyMonth", equalTo: parseInt(selectedYear + this.core.az(selectedMonth)) } }).first().subscribe(snapshots => {
             this.DL.TransactionCancels = new Array<CancelInfo>();
             snapshots.forEach(snapshot => {
                 let info: CancelInfo = snapshot;
@@ -343,7 +343,7 @@ export class DataAccess {
     }
 
     TransactionSelectedLoad(report: ReportInfo) {
-        this.af.list("/transactions/" + report.KeyYear + "/" + report.KeyMonth, { query: { orderByChild: this.KEYDAY, equalTo: report.KeyDay } }).subscribe(snapshots => {
+        this.af.list("/transactions/" + report.KeyYear + "/" + report.KeyMonth, { query: { orderByChild: this.KEYDAY, equalTo: report.KeyDay } }).first().subscribe(snapshots => {
             this.DL.TransactionSelected = new Array<TransactionInfo>();
             this.DL.ReportSelected.Count = 0;
             this.DL.ReportSelected.Amount = 0;
