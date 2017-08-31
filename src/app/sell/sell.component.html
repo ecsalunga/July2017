@@ -16,45 +16,36 @@
         </th>
       </tr>
     </thead>
-    <ng-container *ngIf="DL.SellInfosCount < 1;else showCart">
-      <tr class="blankCell">
-        <td colspan="4">
-          [ no item to show ]
+    <ng-container *ngFor="let info of DL.SellInfos">
+      <tr>
+        <td>
+          {{info.Description}}
+        </td>
+        <td class="totalColumn">
+          {{ info.Price | number:'1.2-2' }} x {{ info.Quantity }}
+        </td>
+        <td class="totalColumn">
+          {{info.Total | number:'1.2-2'}}
+        </td>
+        <td class="rightRow">
+          <ng-container *ngIf="info.Price">
+            <button md-mini-fab [disabled]="!DL.UserAccess.SellDelete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
+          </ng-container>
         </td>
       </tr>
     </ng-container>
-    <ng-template #showCart>
-      <ng-container *ngFor="let info of DL.SellInfos">
-        <tr>
-          <td>
-            {{info.Description}}
-          </td>
-          <td class="totalColumn">
-            {{ info.Price | number:'1.2-2' }} x {{ info.Quantity }}
-          </td>
-          <td class="totalColumn">
-            {{info.Total | number:'1.2-2'}}
-          </td>
-          <td class="rightRow">
-            <ng-container *ngIf="info.Price">
-              <button md-mini-fab [disabled]="!DL.UserAccess.SellDelete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
-            </ng-container>
-          </td>
-        </tr>
-      </ng-container>
-      <tr class="blankCell">
-        <td>
-          Total
-        </td>
-        <td class="totalColumn">
-          {{ DL.SellInfosCount }}
-        </td>
-        <td class="totalColumn">
-          {{ DL.SellInfosAmount | number:'1.2-2'}}
-        </td>
-        <td></td>
-      </tr>
-    </ng-template>
+    <tr class="blankCell">
+      <td>
+        Total
+      </td>
+      <td class="totalColumn">
+        {{ DL.SellInfosCount }}
+      </td>
+      <td class="totalColumn">
+        {{ DL.SellInfosAmount | number:'1.2-2'}}
+      </td>
+      <td></td>
+    </tr>
   </table>
   <div class="hSpacer"></div>
   <ng-container *ngIf="!isPaying;else showPaying">

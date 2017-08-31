@@ -13,38 +13,29 @@
         </th>
       </tr>
     </thead>
-    <ng-container *ngIf="DL.ReportSelected.ExpenseCount < 1;else showExpense">
-      <tr class="blankCell">
-        <td colspan="3">
-          [ no item to show ]
+    <ng-container *ngFor="let info of DL.ExpenseSelected">
+      <tr>
+        <td>
+          {{info.Description}}
+        </td>
+        <td>
+          {{ this.core.numberToDate(info.ActionDate) | date : 'hh:mm a' }}
+        </td>
+        <td class="totalColumn">
+          {{info.Amount | number:'1.2-2'}}
         </td>
       </tr>
     </ng-container>
-    <ng-template #showExpense>
-      <ng-container *ngFor="let info of DL.ExpenseSelected">
-        <tr>
-          <td>
-            {{info.Description}}
-          </td>
-          <td>
-            {{ this.core.numberToDate(info.ActionDate) | date : 'hh:mm a' }}
-          </td>
-          <td class="totalColumn">
-            {{info.Amount | number:'1.2-2'}}
-          </td>
-        </tr>
-      </ng-container>
-      <tr class="blankCell">
-        <td>
-          Total
-        </td>
-        <td></td>
-        <td class="totalColumn">
-          {{ DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
-        </td>
-        <td></td>
-      </tr>
-    </ng-template>
+    <tr class="blankCell">
+      <td>
+        Total
+      </td>
+      <td></td>
+      <td class="totalColumn">
+        {{ DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
+      </td>
+      <td></td>
+    </tr>
   </table>
   <div class="hSpacer"></div>
   <table>

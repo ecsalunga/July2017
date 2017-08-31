@@ -19,48 +19,39 @@
         </th>
       </tr>
     </thead>
-    <ng-container *ngIf="DL.ReportSelected.Count < 1;else showReport">
-      <tr class="blankCell">
-        <td colspan="5">
-          [ no item to show ]
+    <ng-container *ngFor="let tran of DL.TransactionSelected">
+      <tr>
+        <td>
+          {{ tran.BuyerName }}
+        </td>
+        <td>
+          {{ this.core.numberToDate(tran.ActionDate) | date : 'hh:mm a' }}
+        </td>
+        <td class="totalColumn">
+          {{ tran.Count }}
+        </td>
+        <td class="totalColumn">
+          {{ tran.Amount | number:'1.2-2' }}
+        </td>
+        <td class="rightRow">
+          <button md-mini-fab [disabled]="!DL.UserAccess.TransactionDetail" (click)="SelectTransaction(tran)" mdTooltip="View"><md-icon>pageview</md-icon></button>
         </td>
       </tr>
     </ng-container>
-    <ng-template #showReport>
-      <ng-container *ngFor="let tran of DL.TransactionSelected">
-        <tr>
-          <td>
-            {{ tran.BuyerName }}
-          </td>
-          <td>
-            {{ this.core.numberToDate(tran.ActionDate) | date : 'hh:mm a' }}
-          </td>
-          <td class="totalColumn">
-            {{ tran.Count }}
-          </td>
-          <td class="totalColumn">
-            {{ tran.Amount | number:'1.2-2' }}
-          </td>
-          <td class="rightRow">
-            <button md-mini-fab [disabled]="!DL.UserAccess.TransactionDetail" (click)="SelectTransaction(tran)" mdTooltip="View"><md-icon>pageview</md-icon></button>
-          </td>
-        </tr>
-      </ng-container>
-      <tr class="blankCell">
-        <td>
-          Total
-        </td>
-        <td></td>
-        <td class="totalColumn">
-          {{ DL.ReportSelected.Count }}
-        </td>
-        <td class="totalColumn">
-          {{ DL.ReportSelected.Amount | number:'1.2-2' }}
-        </td>
-        <td></td>
-        <td></td>
-      </tr>
-    </ng-template>
+    <tr class="blankCell">
+      <td>
+        Total
+      </td>
+      <td></td>
+      <td class="totalColumn">
+        {{ DL.ReportSelected.Count }}
+      </td>
+      <td class="totalColumn">
+        {{ DL.ReportSelected.Amount | number:'1.2-2' }}
+      </td>
+      <td></td>
+      <td></td>
+    </tr>
   </table>
   <div class="hSpacer"></div>
   <table [hidden]="!DL.UserAccess.TransactionSearch">

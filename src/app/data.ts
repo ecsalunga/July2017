@@ -57,6 +57,7 @@ export class DataLayer {
     Date: Date = new Date();
     AccessTypes: Array<NameValue>;
     IsAuthenticating: boolean = false;
+    IsDataActiveLoaded: boolean = false;
 
     constructor(private core: Core) {
         this.ReportToday = new ReportInfo();
@@ -135,7 +136,7 @@ export class DataLayer {
 export class DataAccess {
     PRODUCTS: string = "/products";
     MEMBERS: string = "/members";
-    SELL_INFOS: string = "/sellInfos";
+    SELL_INFOS: string = "/transactions/sellInfos";
     TRANSACTIONS: string;
     REPORTS: string;
     EXPENSES: string;
@@ -166,9 +167,12 @@ export class DataAccess {
 
     public DataLoad() {
         this.AccessLoad();
-        this.UserLoad();
-        this.MemberLoad();
+        this.UserLoad(); 
         this.ShowcasesLoad();
+    }
+
+    public DataSystemLoad() {
+        this.MemberLoad();
         this.ExpensesTypeLoad();
         this.ReportTodayLoad();
         this.TransactionCancelCurrentLoad();
@@ -176,63 +180,67 @@ export class DataAccess {
     }
 
     ActiveDataLoad() {
-        this.af.list(this.PRODUCTS, { query: { orderByChild: 'Description' } }).subscribe(snapshots => {
-            this.DL.Products = new Array<ProductInfo>();
-            this.DL.ProductSelections = new Array<ProductInfo>();
+        if(!this.DL.IsDataActiveLoaded) {
+            this.af.list(this.PRODUCTS, { query: { orderByChild: 'Description' } }).subscribe(snapshots => {
+                this.DL.Products = new Array<ProductInfo>();
+                this.DL.ProductSelections = new Array<ProductInfo>();
 
-            snapshots.forEach(snapshot => {
-                let info: ProductInfo = snapshot;
-                info.key = snapshot.$key;
-                this.DL.Products.push(info);
-                if (info.Quantity > 0)
-                    this.DL.ProductSelections.push(info);
+                snapshots.forEach(snapshot => {
+                    let info: ProductInfo = snapshot;
+                    info.key = snapshot.$key;
+                    this.DL.Products.push(info);
+                    if (info.Quantity > 0)
+                        this.DL.ProductSelections.push(info);
+                });
             });
-        });
 
-        this.af.list(this.SELL_INFOS).subscribe(snapshots => {
-            this.DL.SellInfos = new Array<SellInfo>();
-            this.DL.SellInfosAmount = 0;
-            this.DL.SellInfosCount = 0;
+            this.af.list(this.SELL_INFOS).subscribe(snapshots => {
+                this.DL.SellInfos = new Array<SellInfo>();
+                this.DL.SellInfosAmount = 0;
+                this.DL.SellInfosCount = 0;
 
-            snapshots.forEach(snapshot => {
-                let info: SellInfo = snapshot;
-                info.key = snapshot.$key;
-                this.DL.SellInfos.push(info);
+                snapshots.forEach(snapshot => {
+                    let info: SellInfo = snapshot;
+                    info.key = snapshot.$key;
+                    this.DL.SellInfos.push(info);
 
-                this.DL.SellInfosCount += info.Quantity;
-                this.DL.SellInfosAmount += info.Total;
+                    this.DL.SellInfosCount += info.Quantity;
+                    this.DL.SellInfosAmount += info.Total;
+                });
             });
-        });
 
-        this.af.list(this.TRANSACTIONS, { query: { orderByChild: this.KEYDAY, equalTo: this.DL.ReportToday.KeyDay } }).subscribe(snapshots => {
-            this.DL.TransactionsToday = new Array<TransactionInfo>();
-            this.DL.ReportToday.Count = 0;
-            this.DL.ReportToday.Amount = 0;
+            this.af.list(this.TRANSACTIONS, { query: { orderByChild: this.KEYDAY, equalTo: this.DL.ReportToday.KeyDay } }).subscribe(snapshots => {
+                this.DL.TransactionsToday = new Array<TransactionInfo>();
+                this.DL.ReportToday.SaleCount = 0;
+                this.DL.ReportToday.SaleAmount = 0;
 
-            snapshots.forEach(snapshot => {
-                let info: TransactionInfo = snapshot;
-                info.key = snapshot.$key;
-                this.DL.TransactionsToday.push(info);
+                snapshots.forEach(snapshot => {
+                    let info: TransactionInfo = snapshot;
+                    info.key = snapshot.$key;
+                    this.DL.TransactionsToday.push(info);
 
-                this.DL.ReportToday.Count += snapshot.Count;
-                this.DL.ReportToday.Amount += snapshot.Amount;
+                    this.DL.ReportToday.SaleCount += snapshot.Count;
+                    this.DL.ReportToday.SaleAmount += snapshot.Amount;
+                });
+                this.DL.TransactionsToday.reverse();
             });
-            this.DL.TransactionsToday.reverse();
-        });
 
-        this.af.list(this.EXPENSES, { query: { orderByChild: this.KEYDAY, equalTo: this.DL.ReportToday.KeyDay } }).subscribe(snapshots => {
-            this.DL.ExpensesToday = new Array<ExpenseInfo>();
-            this.DL.ReportToday.ExpenseAmount = 0;
-            this.DL.ReportToday.ExpenseCount = 0;
+            this.af.list(this.EXPENSES, { query: { orderByChild: this.KEYDAY, equalTo: this.DL.ReportToday.KeyDay } }).subscribe(snapshots => {
+                this.DL.ExpensesToday = new Array<ExpenseInfo>();
+                this.DL.ReportToday.ExpenseAmount = 0;
+                this.DL.ReportToday.ExpenseCount = 0;
 
-            snapshots.forEach(snapshot => {
-                this.DL.ExpensesToday.push(snapshot);
+                snapshots.forEach(snapshot => {
+                    this.DL.ExpensesToday.push(snapshot);
 
-                this.DL.ReportToday.ExpenseCount++;
-                this.DL.ReportToday.ExpenseAmount += snapshot.Amount;
+                    this.DL.ReportToday.ExpenseCount++;
+                    this.DL.ReportToday.ExpenseAmount += snapshot.Amount;
+                });
+                this.DL.ExpensesToday.reverse();
             });
-            this.DL.ExpensesToday.reverse();
-        });
+
+            this.DL.IsDataActiveLoaded = true;
+        }
     }
 
     UserAuthenticate() {
@@ -250,6 +258,7 @@ export class DataAccess {
             });
 
             // [temp] default to manager
+            this.DataSystemLoad();
             if (!this.DL.User.AccessKey) {
                 this.DL.User.AccessKey = "-KsasLernU2_JWOO90Bz";
                 this.DL.User.AccessName = "DEMO";
@@ -366,16 +375,16 @@ export class DataAccess {
     TransactionSelectedLoad(report: ReportInfo) {
         this.af.list("/transactions/" + report.KeyYear + "/" + report.KeyMonth, { query: { orderByChild: this.KEYDAY, equalTo: report.KeyDay } }).first().subscribe(snapshots => {
             this.DL.TransactionSelected = new Array<TransactionInfo>();
-            this.DL.ReportSelected.Count = 0;
-            this.DL.ReportSelected.Amount = 0;
+            this.DL.ReportSelected.SaleCount = 0;
+            this.DL.ReportSelected.SaleAmount = 0;
 
             snapshots.forEach(snapshot => {
                 let info: TransactionInfo = snapshot;
                 info.key = snapshot.$key;
                 this.DL.TransactionSelected.push(info);
 
-                this.DL.ReportSelected.Count += snapshot.Count;
-                this.DL.ReportSelected.Amount += snapshot.Amount;
+                this.DL.ReportSelected.SaleCount += snapshot.SaleCount;
+                this.DL.ReportSelected.SaleAmount += snapshot.SaleAmount;
             });
 
             this.DL.TransactionSelected.reverse();
@@ -386,15 +395,15 @@ export class DataAccess {
         this.af.list("/reports/" + selectedYear, { query: { orderByChild: this.KEYMONTH, equalTo: parseInt(selectedYear + this.core.az(selectedMonth)) } }).first().subscribe(snapshots => {
             this.DL.Reports = new Array<ReportInfo>();
             this.DL.ReportSelected = new ReportInfo();
-            this.DL.ReportSelected.Count = 0;
-            this.DL.ReportSelected.Amount = 0;
+            this.DL.ReportSelected.SaleCount = 0;
+            this.DL.ReportSelected.SaleAmount = 0;
             this.DL.ReportSelected.ExpenseCount = 0;
             this.DL.ReportSelected.ExpenseAmount = 0;
 
             snapshots.forEach(snapshot => {
                 this.DL.Reports.push(snapshot);
-                this.DL.ReportSelected.Count += snapshot.Count;
-                this.DL.ReportSelected.Amount += snapshot.Amount;
+                this.DL.ReportSelected.SaleCount += snapshot.SaleCount;
+                this.DL.ReportSelected.SaleAmount += snapshot.SaleAmount;
                 this.DL.ReportSelected.ExpenseCount += snapshot.ExpenseCount;
                 this.DL.ReportSelected.ExpenseAmount += snapshot.ExpenseAmount;
             });
@@ -609,12 +618,12 @@ export class DataAccess {
 
             // get transactions
             this.af.list("/transactions/" + year + "/" + keyMonth, { query: { orderByChild: this.KEYDAY, equalTo: keyDay } }).first().subscribe(snapshots => {
-                report.Count = 0;
-                report.Amount = 0;
+                report.SaleCount = 0;
+                report.SaleAmount = 0;
 
                 snapshots.forEach(snapshot => {
-                    report.Count += snapshot.Count;
-                    report.Amount += snapshot.Amount;
+                    report.SaleCount += snapshot.SaleCount;
+                    report.SaleAmount += snapshot.SaleAmount;
                 });
 
                 // get expenses

@@ -43,10 +43,13 @@ export class ReportInfo {
     KeyDay: number;
     KeyMonth: number;
     KeyYear: number;
-    Count: number;
-    Amount: number;
+    SaleCount: number;
+    SaleAmount: number;
     ExpenseAmount: number;
     ExpenseCount: number;
+    COHStarting: number;
+    COHComputed: number;
+    COHActual: number;
 }
 
 export class ExpenseInfo {
