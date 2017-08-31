@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Core } from '../core';
-import { DataAccess, DataLayer } from '../data';
-import { ExpenseInfo, ReportInfo } from '../models';
+import { Core } from '../../core';
+import { DataAccess, DataLayer } from '../../data';
+import { ReportInfo } from '../../models';
 
 @Component({
-  selector: 'report',
-  templateUrl: './report.component.html',
-  styleUrls: ['./report.component.css']
+  selector: 'report-list',
+  templateUrl: './report-list.component.html',
+  styleUrls: ['./report-list.component.css']
 })
-export class ReportComponent implements OnInit {
+export class ReportListComponent implements OnInit {
   yearSelected: number;
   monthSelected: number;
 
@@ -23,11 +22,15 @@ export class ReportComponent implements OnInit {
     this.DA.ReportMonthlyLoad(this.yearSelected, this.monthSelected)
   }
 
+  SelectItem(item: ReportInfo) {
+
+  }
+
   getDate(keyDay: number): Date {
     return this.core.numberToDate(parseInt(keyDay + '000000'))
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Reports";
+    this.DL.TITLE = "Report List";
   }
 }

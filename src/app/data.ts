@@ -270,7 +270,7 @@ export class DataAccess {
             this.DL.SetPermission();
 
             this.UserSave(this.DL.User);
-            this.DL.LoadFromMenu("dashboard");
+            this.DL.LoadFromMenu("report-list");
         });
     }
 

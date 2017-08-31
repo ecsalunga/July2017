@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { DataLayer, DataAccess } from '../data';
+import { DataLayer, DataAccess } from '../../data';
 
 @Component({
-  selector: 'home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'dashboard-home',
+  templateUrl: './dashboard-home.component.html',
+  styleUrls: ['./dashboard-home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class DashboardHomeComponent implements OnInit {
 
   constructor(private DL: DataLayer, private DA: DataAccess) {}
-
+  
   ngOnInit() {
     this.DL.TITLE = "Welcome!";
     this.DL.LoadComponentsFromLink(['showcase-widget']);

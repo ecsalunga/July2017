@@ -2,17 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
-
-import { Core } from '../core';
-import { DataAccess, DataLayer } from '../data';
-import { ExpenseInfo, ReportInfo } from '../models';
+import { Core } from '../../core';
+import { DataAccess, DataLayer } from '../../data';
+import { ExpenseInfo, ReportInfo } from '../../models';
 
 @Component({
-  selector: 'expense',
-  templateUrl: './expense.component.html',
-  styleUrls: ['./expense.component.css']
+  selector: 'report-expense',
+  templateUrl: './report-expense.component.html',
+  styleUrls: ['./report-expense.component.css']
 })
-export class ExpenseComponent implements OnInit {
+export class ReportExpenseComponent implements OnInit {
   ctrl: FormControl;
   filteredExpenses: any;
 

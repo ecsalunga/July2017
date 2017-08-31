@@ -17,14 +17,38 @@
       <div class="vSpacer">
         <md-menu #menu="mdMenu"></md-menu>
       </div>
-      <button md-menu-item (click)="LoadPage('home')">
+      <button md-menu-item (click)="LoadPage('dashboard-home')">
         <md-icon>home</md-icon>
         <span>Home</span>
       </button>
+      <ng-container *ngIf="DL.UserAccess.ProductView">
+        <button md-menu-item (click)="LoadPage('product-list')">
+          <md-icon>book</md-icon>
+          <span>Product</span>
+        </button>
+      </ng-container>
       <ng-container *ngIf="DL.UserAccess.SellView">
-        <button md-menu-item (click)="LoadPage('sell')">
+        <button md-menu-item (click)="LoadPage('product-sell')">
           <md-icon>shopping_cart</md-icon>
-          <span>Transact</span>
+          <span>Sell</span>
+        </button>
+      </ng-container>
+      <ng-container *ngIf="DL.UserAccess.MemberView">
+        <button md-menu-item (click)="LoadPage('member-list')">
+          <md-icon>card_membership</md-icon>
+          <span>Member</span>
+        </button>
+      </ng-container>
+      <ng-container *ngIf="DL.UserAccess.ExpenseView">
+        <button md-menu-item (click)="LoadPage('report-expense')">
+          <md-icon>broken_image</md-icon>
+          <span>Expense</span>
+        </button>
+      </ng-container>
+      <ng-container *ngIf="DL.UserAccess.ShowcaseView">
+        <button md-menu-item (click)="LoadPage('showcase-list')">
+          <md-icon>pages</md-icon>
+          <span>Showcase</span>
         </button>
       </ng-container>
       <ng-container *ngIf="DL.UserAccess.TransactionView">
@@ -39,32 +63,8 @@
           <span>Cancelled</span>
         </button>
       </ng-container>
-      <ng-container *ngIf="DL.UserAccess.ExpenseView">
-        <button md-menu-item (click)="LoadPage('expense')">
-          <md-icon>broken_image</md-icon>
-          <span>Expense</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.UserAccess.ProductView">
-        <button md-menu-item (click)="LoadPage('product-list')">
-          <md-icon>book</md-icon>
-          <span>Product</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.UserAccess.ShowcaseView">
-        <button md-menu-item (click)="LoadPage('showcase-list')">
-          <md-icon>pages</md-icon>
-          <span>Showcase</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.UserAccess.MemberView">
-        <button md-menu-item (click)="LoadPage('member-list')">
-          <md-icon>card_membership</md-icon>
-          <span>Member</span>
-        </button>
-      </ng-container>
       <ng-container *ngIf="DL.UserAccess.ReportView">
-        <button md-menu-item (click)="LoadPage('report')">
+        <button md-menu-item (click)="LoadPage('report-list')">
           <md-icon>note</md-icon>
           <span>Report</span>
         </button>

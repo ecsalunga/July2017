@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Core } from '../core';
-import { DataAccess, DataLayer } from '../data';
-import { ProductInfo, MemberInfo, SellInfo } from '../models';
+import { Core } from '../../core';
+import { DataAccess, DataLayer } from '../../data';
+import { ProductInfo, MemberInfo, SellInfo } from '../../models';
 
 @Component({
-  selector: 'sell',
-  templateUrl: './sell.component.html',
-  styleUrls: ['./sell.component.css']
+  selector: 'product-sell',
+  templateUrl: './product-sell.component.html',
+  styleUrls: ['./product-sell.component.css']
 })
-export class SellComponent implements OnInit {
+export class ProductSellComponent implements OnInit {
   model: ProductInfo;
   selectedQuantity: number = 1;
   quantities: Array<number>;

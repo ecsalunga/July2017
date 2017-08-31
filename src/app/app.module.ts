@@ -34,18 +34,12 @@ import { DataAccess, DataLayer } from './data';
 
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { AppComponent } from './app.component';
-
 import { ProductListComponent } from './product/list/product-list.component';
 import { ProductDetailComponent } from './product/detail/product-detail.component';
 import { MemberListComponent } from './member/list/member-list.component';
 import { MemberDetailComponent } from './member/detail/member-detail.component';
-import { SellComponent } from './sell/sell.component';
 import { TransactionListComponent } from './transaction/list/transaction-list.component';
 import { TransactionDetailComponent } from './transaction/detail/transaction-detail.component';
-import { ExpenseComponent } from './expense/expense.component';
-import { ReportComponent } from './report/report.component';
-import { HomeComponent } from './home/home.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ShowcaseListComponent } from './showcase/list/showcase-list.component';
 import { ShowcaseDetailComponent } from './showcase/detail/showcase-detail.component';
 import { ShowcaseWidgetComponent } from './showcase/widget/showcase-widget.component';
@@ -54,6 +48,10 @@ import { UserListComponent } from './user/list/user-list.component';
 import { AccessListComponent } from './access/list/access-list.component';
 import { AccessDetailComponent } from './access/detail/access-detail.component';
 import { TransactionCancelComponent } from './transaction/cancel/transaction-cancel.component';
+import { ReportListComponent } from './report/list/report-list.component';
+import { ReportExpenseComponent } from './report/expense/report-expense.component';
+import { ProductSellComponent } from './product/sell/product-sell.component';
+import { DashboardHomeComponent } from './dashboard/home/dashboard-home.component';
 
 @NgModule({
   declarations: [
@@ -62,13 +60,8 @@ import { TransactionCancelComponent } from './transaction/cancel/transaction-can
     ProductDetailComponent,
     MemberListComponent,
     MemberDetailComponent,
-    SellComponent,
     TransactionListComponent,
     TransactionDetailComponent,
-    ExpenseComponent,
-    ReportComponent,
-    HomeComponent,
-    DashboardComponent,
     ShowcaseListComponent,
     ShowcaseDetailComponent,
     ShowcaseWidgetComponent,
@@ -76,7 +69,11 @@ import { TransactionCancelComponent } from './transaction/cancel/transaction-can
     UserListComponent,
     AccessListComponent,
     AccessDetailComponent,
-    TransactionCancelComponent
+    TransactionCancelComponent,
+    ReportListComponent,
+    ReportExpenseComponent,
+    ProductSellComponent,
+    DashboardHomeComponent
   ],
   imports: [
     BrowserModule,
@@ -109,13 +106,8 @@ import { TransactionCancelComponent } from './transaction/cancel/transaction-can
     ProductDetailComponent,
     MemberListComponent,
     MemberDetailComponent,
-    SellComponent,
     TransactionListComponent,
     TransactionDetailComponent,
-    ExpenseComponent,
-    ReportComponent,
-    HomeComponent,
-    DashboardComponent,
     ShowcaseListComponent,
     ShowcaseDetailComponent,
     ShowcaseWidgetComponent,
@@ -123,7 +115,11 @@ import { TransactionCancelComponent } from './transaction/cancel/transaction-can
     UserListComponent,
     AccessListComponent,
     AccessDetailComponent,
-    TransactionCancelComponent
+    TransactionCancelComponent,
+    ReportListComponent,
+    ReportExpenseComponent,
+    ProductSellComponent,
+    DashboardHomeComponent
   ]
 })
 export class AppModule {

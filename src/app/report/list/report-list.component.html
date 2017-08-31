@@ -14,21 +14,27 @@
         <th class="totalColumn">
           DIFF
         </th>
+        <th class="rightRow">
+          Action
+        </th>
       </tr>
     </thead>
-    <ng-container *ngFor="let info of DL.Reports">
+    <ng-container *ngFor="let item of DL.Reports">
       <tr>
         <td>
-          {{ getDate(info.KeyDay) | date : 'yyyy-MM-dd' }}
+          {{ getDate(item.KeyDay) | date : 'yyyy-MM-dd' }}
         </td>
         <td class="totalColumn">
-          {{info.SaleAmount | number:'1.2-2'}}
+          {{item.SaleAmount | number:'1.2-2'}}
         </td>
         <td class="totalColumn">
-          {{info.ExpenseAmount | number:'1.2-2'}}
+          {{item.ExpenseAmount | number:'1.2-2'}}
         </td>
         <td class="totalColumn">
-          {{info.SaleAmount - info.ExpenseAmount | number:'1.2-2'}}
+          {{item.SaleAmount - item.ExpenseAmount | number:'1.2-2'}}
+        </td>
+        <td class="rightRow">
+          <button md-mini-fab (click)="SelectItem(item)" mdTooltip="View"><md-icon>pageview</md-icon></button>
         </td>
       </tr>
     </ng-container>
@@ -43,6 +49,7 @@
       <td class="totalColumn">
         {{DL.ReportSelected.SaleAmount - DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
       </td>
+      <td></td>
     </tr>
   </table>
   <div class="hSpacer"></div>
