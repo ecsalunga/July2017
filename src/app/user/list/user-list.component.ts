@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataAccess, DataLayer } from '../../data';
-import { UserInfo, Access } from '../../models';
+import { UserInfo, AccessInfo } from '../../models';
 
 @Component({
   selector: 'user-list',
@@ -9,7 +9,7 @@ import { UserInfo, Access } from '../../models';
 })
 export class UserListComponent implements OnInit {
   selectedUser: UserInfo;
-  selectedAccess: Access;
+  selectedAccess: AccessInfo;
 
   constructor(private DA: DataAccess, private DL: DataLayer) {}
   

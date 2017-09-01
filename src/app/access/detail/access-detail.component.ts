@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { Access } from '../../models';
+import { AccessInfo } from '../../models';
 
 @Component({
   selector: 'access-detail',
@@ -9,13 +9,13 @@ import { Access } from '../../models';
   styleUrls: ['./access-detail.component.css']
 })
 export class AccessDetailComponent implements OnInit {
-  model: Access;
+  model: AccessInfo;
   
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
     if (this.DL.Access)
       this.model = Object.assign({}, this.DL.Access);
     else
-      this.model = new Access();
+      this.model = new AccessInfo();
   }
 
   Save() {

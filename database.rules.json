@@ -15,11 +15,6 @@
       ".write": "true",
       ".indexOn": "Name"
     },
-    "sellInfos": {
-      ".read": "true",
-      ".write": "true",
-      ".indexOn": "id"
-    },
     "users": {
       ".read": "true",
       ".write": "true",
@@ -36,16 +31,21 @@
     },
     "transactions": {
       ".read": "true",
-      ".write": "true"
+      ".write": "true",
+      "sellInfos": {
+        ".read": "true",
+        ".write": "true",
+        ".indexOn": "id"
+      },
+      "cancels": {
+        ".read": "true",
+        ".write": "true",
+        ".indexOn": "KeyMonth"
+      }
     },
     "reports": {
       ".read": "true",
       ".write": "true"
-    },
-    "cancels": {
-      ".read": "true",
-      ".write": "true",
-      ".indexOn": "KeyMonth"
     }
   }
 }
