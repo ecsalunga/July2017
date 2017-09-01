@@ -21,7 +21,10 @@
     </md-input-container>
   </div>
   <input #fileSelector id="file" [hidden]="true" type="file">
-  <img class="fullWidth" style="cursor:pointer;" src="{{model.ImageURL}}" (click)="selectFile()" />
+  <div class="imageContainer">
+    <img class="fullWidth" src="{{model.ImageURL}}">
+    <div class="imageEdit" (click)="selectFile()">Update Picture</div>
+  </div>
   <div class="hSpacer"></div>
   <div class="rightRow">
     <button md-fab [disabled]="(!DL.UserAccess.ShowcaseEdit && model.key) || (!DL.UserAccess.ShowcaseAdd && !model.key)" (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>

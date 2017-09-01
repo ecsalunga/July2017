@@ -3,10 +3,10 @@
     <thead>
       <tr>
         <th>
-          Date
+          Description
         </th>
         <th>
-          Description
+          Date
         </th>
         <th class="totalColumn">
           Amount
@@ -16,10 +16,10 @@
     <ng-container *ngFor="let info of DL.TransactionCancelSelected">
       <tr>
         <td>
-          {{ getDate(info.ActionDate) | date : 'yyyy-MM-dd hh:mm a' }}
+          {{ info.Description }}
         </td>
         <td>
-          {{ info.Description }}
+          {{ getDate(info.ActionDate) | date : 'yyyy-MM-dd hh:mm a' }}
         </td>
         <td class="totalColumn">
           {{info.Amount | number:'1.2-2'}}

@@ -2,7 +2,7 @@
 
 body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Roboto,Helvetica Neue,sans-serif;
 	font-size: 12px;
 	font-style: normal;
     font-variant: normal;
@@ -108,7 +108,6 @@ md-input-container {
 }
 
 .header {
-    font-family: Roboto,Helvetica Neue,sans-serif;
     font-size: 15px;
     font-weight: bold;
 }
@@ -125,11 +124,7 @@ md-input-container {
     vertical-align: bottom;
 }
 
-.totalColumn {
-    text-align: right;
-}
-
-.rightRow, .rightRow td {
+.totalColumn, .rightRow, .rightRow td {
     text-align: right;
 }
 
@@ -158,7 +153,6 @@ md-input-container {
     width: 100%;
     bottom: 0px;
     margin-bottom: 0px;
-    font-family: Roboto,Helvetica Neue,sans-serif;
     font-style: italic;
     color: gray;
     background-color: #fafafa;
