@@ -27,6 +27,23 @@ export class ShowcaseListComponent implements OnInit {
     this.DL.LoadFromLink("showcase-detail");
   }
 
+  Visibility(showcase: ShowcaseInfo): string {
+    let visible = "No";
+    let keyToday: number = this.core.dateToKeyDay(this.DL.Date);
+    if (showcase.Schedules) {
+      let hasToday: boolean = false;
+      showcase.Schedules.forEach(item => {
+          if (item.From <= keyToday && item.To >= keyToday)
+              hasToday = true;
+      });
+
+      if (hasToday)
+        visible = "Yes";
+    }
+
+    return visible;
+  }
+
   ngOnInit() {
     this.DL.TITLE = "Showcase List";
   }
