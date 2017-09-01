@@ -100,21 +100,24 @@
     <div class="divBody">
       <div class="vBigSpacer"></div>
       <div class="main">
-        <md-toolbar>
+        <div class="toolbar">
           <div class="header">{{ DL.TITLE }}</div>
-        </md-toolbar>
-        <md-card>
-          <md-card-content>
+        </div>
+        <div class="inside">
             <div class="vSmallSpacer"></div>
             <ng-container #viewChild></ng-container>
-            <div class="vMediumSpacer"></div>
-          </md-card-content>
-        </md-card>
+            <div class="vSmallSpacer"></div>
+        </div>
       </div>
-      <div class="vMediumSpacer"></div>
     </div>
     <div class="footer">
      <div><img md-card-avatar src="favicon-192x192.png"></div> <div>TEMP System Copyright © {{ DL.Date.getFullYear() }}</div>
     </div>
   </div>
 </md-sidenav-container>
+<div [hidden]="true">
+  <md-card>
+    <md-card-content>
+    </md-card-content>
+  </md-card>
+</div>

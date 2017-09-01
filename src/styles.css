@@ -13,7 +13,7 @@ body {
 }
 
 .navSide {
-    width: 250px;
+    width: 225px;
     height: 100vh;
     overflow: auto;
 }
@@ -35,18 +35,27 @@ body {
     overflow: auto;
 }
 
+.inside {
+    background-color: #ffffff;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    border: 1px dotted #eeeeee;
+}
+
 .divBody {
-    min-height: calc(100vh - 60px);;
+    min-height: calc(100vh - 90px);;
 }
 
 .main {
+    background-color: #f5f5f5;
     margin-bottom: 30px;
     margin-left: 10px;
     margin-right: 10px;
     min-width: 345px;
-    background: #fff;
-    border-radius: 2px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.24);
+    border: 1px solid #fafafa;
 }
 
 .navbar { 
@@ -87,20 +96,20 @@ md-input-container {
     width: 120px;
 }
 
+.toolbar {
+    padding: 15px;
+    background-color: #f5f5f5;
+}
+
 .title {
    height: 50px;
    font-size: 20px;
 }
 
-.title:hover {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 4px 2px rgba(0,0,0,0.22);
-}
-
 .header {
     font-family: Roboto,Helvetica Neue,sans-serif;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
-    vertical-align: middle;
 }
 
 .hSpacer {
