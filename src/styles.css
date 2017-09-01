@@ -10,7 +10,6 @@ body {
 
 .navContainer {
     width: 100%;
-    height: 100vh;
 }
 
 .navSide {
@@ -19,8 +18,16 @@ body {
     overflow: auto;
 }
 
-.vSpacer {
+.vBigSpacer {
     height: 80px;
+}
+
+.vMediumSpacer {
+    height: 30px;
+}
+
+.vSmallSpacer {
+    height: 15px;
 }
 
 .content {
@@ -28,9 +35,12 @@ body {
     overflow: auto;
 }
 
+.divBody {
+    min-height: calc(100vh - 60px);;
+}
+
 .main {
     margin-bottom: 30px;
-    margin-top: 80px;
     margin-left: 10px;
     margin-right: 10px;
     min-width: 345px;
@@ -131,4 +141,24 @@ md-input-container {
 
 .fullWidth {
     width: 100%;
+}
+
+.footer {
+    height: 38px;
+    width: 100%;
+    bottom: 0px;
+    margin-bottom: 0px;
+    font-family: Roboto,Helvetica Neue,sans-serif;
+    font-style: italic;
+    color: gray;
+    background-color: #fafafa;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid #eeeeee;
+}
+
+.footer div {
+    margin-left: 10px;
+    vertical-align: middle;
+    display: inline-block;
 }

@@ -5,7 +5,7 @@
     </button> TEMP System
     <div class="h-spacer"></div>
     <ng-container *ngIf="DL.User.UID">
-      <button md-button (click)="LoadPage('dashboard')" class="title" mdTooltip="Dashboard" mdTooltipPosition="below">
+      <button md-button (click)="LoadPage('report-list')" class="title" mdTooltip="Dashboard" mdTooltipPosition="below">
         <img md-card-avatar src="{{DL.User.ImageURL}}"> 
       </button>
     </ng-container>
@@ -14,7 +14,7 @@
 <md-sidenav-container class="navContainer">
   <md-sidenav #sidenav (click)="sidenav.toggle()">
     <div class="navSide">
-      <div class="vSpacer">
+      <div class="vBigSpacer">
         <md-menu #menu="mdMenu"></md-menu>
       </div>
       <button md-menu-item (click)="LoadPage('dashboard-home')">
@@ -93,18 +93,28 @@
           <span>Log In</span>
         </button>
       </ng-template>
+      <div class="vMediumSpacer"></div>
     </div>
   </md-sidenav>
   <div id="divMain" class="content">
-    <div class="main">
-      <md-toolbar>
-        <div class="header">{{ DL.TITLE }}</div>
-      </md-toolbar>
-      <md-card>
-        <md-card-content>
-          <ng-container #viewChild></ng-container>
-        </md-card-content>
-      </md-card>
+    <div class="divBody">
+      <div class="vBigSpacer"></div>
+      <div class="main">
+        <md-toolbar>
+          <div class="header">{{ DL.TITLE }}</div>
+        </md-toolbar>
+        <md-card>
+          <md-card-content>
+            <div class="vSmallSpacer"></div>
+            <ng-container #viewChild></ng-container>
+            <div class="vMediumSpacer"></div>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div class="vMediumSpacer"></div>
+    </div>
+    <div class="footer">
+     <div><img md-card-avatar src="favicon-192x192.png"></div> <div>TEMP System Copyright © {{ DL.Date.getFullYear() }}</div>
     </div>
   </div>
 </md-sidenav-container>

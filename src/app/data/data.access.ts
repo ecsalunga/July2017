@@ -61,9 +61,9 @@ export class DataAccess {
     }
 
     public LogOut() {
-        this.afAuth.auth.signOut();
         this.DL.UserAccess = new AccessInfo();
-        this.DL.LoadFromMenu("home");
+        this.DL.LoadFromMenu("dashboard-home");
+        this.afAuth.auth.signOut();
     }
 
     public DataLoad() {
