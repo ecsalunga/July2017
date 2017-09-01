@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.core.viewChild = this.viewChild;
+    this.DL.MainContent = document.getElementById('divMain');
     this.DA.DataLoad();
     this.DL.LoadFromMenu("dashboard-home");
   }

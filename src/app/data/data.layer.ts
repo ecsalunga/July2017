@@ -16,6 +16,8 @@ import {
 
 @Injectable()
 export class DataLayer {
+    MainContent: HTMLElement;
+
     KEYDAY: string = "KeyDay";
     KEYMONTH: string = "KeyMonth";
     
@@ -127,6 +129,7 @@ export class DataLayer {
     LoadFromMenu(name: string) {
         this.SOURCE = this.MENU;
         this.core.loadComponent(name);
+        this.MainContent.scrollTop = 0;
     }
 
     LoadFromLink(name: string) {
