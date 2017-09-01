@@ -22,8 +22,8 @@
   </div>
   <input #fileSelector id="file" [hidden]="true" type="file">
   <div class="imageContainer">
-    <img class="fullWidth" src="{{model.ImageURL}}">
-    <div class="imageEdit" (click)="selectFile()">Update Picture</div>
+    <img class="fullWidth" src="{{model.ImageURL}}" (load)="imageLoaded()">
+    <div class="imageEdit" [hidden]="!isLoaded" (click)="selectFile()">Update Picture</div>
   </div>
   <div class="hSpacer"></div>
   <div class="rightRow">
