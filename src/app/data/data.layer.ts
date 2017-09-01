@@ -135,10 +135,12 @@ export class DataLayer {
     LoadFromLink(name: string) {
         this.SOURCE = this.LINK;
         this.core.loadComponent(name);
+        this.MainContent.scrollTop = 0;
     }
 
     LoadComponentsFromLink(names: Array<string>) {
         this.SOURCE = this.LINK;
         this.core.loadComponents(names);
+        this.MainContent.scrollTop = 0;
     }
 }
