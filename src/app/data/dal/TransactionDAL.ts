@@ -38,8 +38,8 @@ export class TransactionDAL {
                 info.key = snapshot.$key;
                 this.DL.TransactionSelected.push(info);
 
-                this.DL.ReportSelected.SaleCount += snapshot.SaleCount;
-                this.DL.ReportSelected.SaleAmount += snapshot.SaleAmount;
+                this.DL.ReportSelected.SaleCount += snapshot.Count;
+                this.DL.ReportSelected.SaleAmount += snapshot.Amount;
             });
 
             this.DL.TransactionSelected.reverse();

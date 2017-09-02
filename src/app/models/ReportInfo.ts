@@ -11,6 +11,10 @@ export class ReportInfo {
     COHActual: number;
 
     constructor() {
+        this.SaleCount = 0;
+        this.SaleAmount = 0;
+        this.ExpenseCount = 0;
+        this.ExpenseAmount = 0;
         this.COHStart = 0;
         this.COHActual = 0;
     }

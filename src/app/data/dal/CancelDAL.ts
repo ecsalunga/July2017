@@ -87,9 +87,10 @@ export class CancelDAL {
         let transaction = new TransactionInfo();
         let expense = new ExpenseInfo();
 
-        this.af.list(this.PATH_REPORTS, { query: { orderByChild: this.DL.KEYDAY, equalTo: keyDay } }).first().subscribe(snapshots => {
+        this.af.list(this.PATH_REPORTS, { query: { orderByChild: this.DL.KEYMONTH, equalTo: keyMonth } }).first().subscribe(snapshots => {
             snapshots.forEach(snapshot => {
-                report.key = snapshot.$key;
+                if(snapshot.keyDay == keyDay)
+                    report.key = snapshot.$key;
             });
 
             // get transactions

@@ -16,10 +16,6 @@ export class ReportDAL {
         this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYMONTH, equalTo: parseInt(selectedYear + this.core.az(selectedMonth)) } }).first().subscribe(snapshots => {
             this.DL.Reports = new Array<ReportInfo>();
             this.DL.ReportSelected = new ReportInfo();
-            this.DL.ReportSelected.SaleCount = 0;
-            this.DL.ReportSelected.SaleAmount = 0;
-            this.DL.ReportSelected.ExpenseCount = 0;
-            this.DL.ReportSelected.ExpenseAmount = 0;
 
             snapshots.forEach(snapshot => {
                 // get today report
