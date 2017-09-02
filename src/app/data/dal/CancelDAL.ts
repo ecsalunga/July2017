@@ -87,17 +87,14 @@ export class CancelDAL {
         let transaction = new TransactionInfo();
         let expense = new ExpenseInfo();
 
-        this.af.list(this.PATH_REPORTS, { query: { orderByChild: this.DL.KEYMONTH, equalTo: keyMonth } }).first().subscribe(snapshots => {
+        this.af.list(this.PATH_REPORTS, { query: { orderByChild: this.DL.KEYMONTH, equalTo: report.KeyMonth } }).first().subscribe(snapshots => {
             snapshots.forEach(snapshot => {
-                if(snapshot.keyDay == keyDay)
+                if(snapshot.KeyDay == report.KeyDay)
                     report.key = snapshot.$key;
             });
 
             // get transactions
-            this.af.list(this.PATH_TRANSACTION, { query: { orderByChild: this.DL.KEYDAY, equalTo: keyDay } }).first().subscribe(snapshots => {
-                report.SaleCount = 0;
-                report.SaleAmount = 0;
-
+            this.af.list(this.PATH_TRANSACTION, { query: { orderByChild: this.DL.KEYDAY, equalTo: report.KeyDay } }).first().subscribe(snapshots => {
                 snapshots.forEach(snapshot => {
                     report.SaleCount += snapshot.Count;
                     report.SaleAmount += snapshot.Amount;
@@ -105,9 +102,6 @@ export class CancelDAL {
 
                 // get expenses
                 this.af.list(this.PATH_EXPENSE, { query: { orderByChild: this.DL.KEYDAY, equalTo: keyDay } }).first().subscribe(snapshots => {
-                    report.ExpenseAmount = 0;
-                    report.ExpenseCount = 0;
-
                     snapshots.forEach(snapshot => {
                         report.ExpenseCount++;
                         report.ExpenseAmount += snapshot.Amount;
