@@ -10,11 +10,6 @@
       ".write": "true",
       ".indexOn": "Code"
     },
-    "members": {
-      ".read": "true",
-      ".write": "true",
-      ".indexOn": "Name"
-    },
     "users": {
       ".read": "true",
       ".write": "true",

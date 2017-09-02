@@ -4,7 +4,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 
 export class AccessDAL {
     PATH: string = "/accesses";
-    constructor(private DL: DataLayer, private af: AngularFireDatabase) {}
+    constructor(private DL: DataLayer, private af: AngularFireDatabase) { }
 
     public Load() {
         this.af.list(this.PATH, { query: { orderByChild: 'Name' } }).first().subscribe(snapshots => {
@@ -13,6 +13,10 @@ export class AccessDAL {
                 let info: AccessInfo = snapshot;
                 info.key = snapshot.$key;
                 this.DL.Accesses.push(info);
+
+                // update current user access
+                if (this.DL.UserAccess && this.DL.UserAccess.key == info.key)
+                    this.DL.UserAccess = info;
             });
         });
     }

@@ -9,6 +9,9 @@
         <th>
           Access
         </th>
+        <th class="rightRow">
+          Action
+        </th>
       </tr>
     </thead>
     <ng-container *ngFor="let info of DL.Users">
@@ -21,6 +24,9 @@
         </td>
         <td>
           {{ info.AccessName }}
+        </td>
+        <td class="rightRow">
+          <button md-mini-fab (click)="SelectUser(info)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
         </td>
       </tr>
     </ng-container>

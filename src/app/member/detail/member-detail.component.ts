@@ -1,7 +1,7 @@
 import { Component, OnInit, ApplicationRef } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { MemberInfo } from '../../models';
+import { UserInfo } from '../../models';
 
 @Component({
   selector: 'member-detail',
@@ -10,22 +10,23 @@ import { MemberInfo } from '../../models';
 })
 export class MemberDetailComponent implements OnInit {
   joinDate: Date;
-  model: MemberInfo;
+  model: UserInfo;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
-    if (this.DL.Member) {
-      this.model = Object.assign({}, this.DL.Member);
+    if (this.DL.UserSelected) {
+      this.model = Object.assign({}, this.DL.UserSelected);
       this.joinDate = this.core.numberToDate(this.model.JoinDate);
     }
     else {
-      this.model = new MemberInfo();
+      this.model = new UserInfo();
+      this.model.IsMember = true;
       this.joinDate = this.DL.Date;
     }
   }
 
   Save() {
     this.model.JoinDate = this.core.dateToNumber(this.joinDate);
-    this.DA.MemberSave(this.model);
+    this.DA.UserSave(this.model);
     this.LoadList();
   }
 

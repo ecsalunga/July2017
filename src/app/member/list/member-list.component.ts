@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataLayer } from '../../data';
-import { MemberInfo } from '../../models';
+import { UserInfo } from '../../models';
 
 @Component({
   selector: 'member-list',
@@ -12,13 +12,13 @@ export class MemberListComponent implements OnInit {
 
   constructor(private core: Core, private DL: DataLayer) {}
 
-  SelectMember(member: MemberInfo) {
-    this.DL.Member = member;
+  SelectMember(member: UserInfo) {
+    this.DL.UserSelected = member;
     this.DL.LoadFromLink("member-detail");
   }
 
   AddMember(){
-    this.DL.Member = null;
+    this.DL.UserSelected = null;
     this.DL.LoadFromLink("member-detail");
   }
 

@@ -1,0 +1,47 @@
+<div>
+  <div>
+    <md-input-container class="longText">
+      <input id="txtName" mdInput placeholder="Name" [(ngModel)]="model.Name" />
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container class="longText">
+      <input id="txtAddress1" mdInput placeholder="Address #1" [(ngModel)]="model.Address1" />
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container class="longText">
+      <input id="txtAddress2" mdInput placeholder="Address #2" [(ngModel)]="model.Address2" />
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <input id="txtContact1" mdInput placeholder="Contact #1" [(ngModel)]="model.Contact1" />
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <input id="txtContact2" mdInput placeholder="Contact #2" [(ngModel)]="model.Contact2" />
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <input mdInput [mdDatepicker]="picker" placeholder="Join Date" [(ngModel)]="joinDate">
+      <button mdSuffix [mdDatepickerToggle]="picker"></button>
+    </md-input-container>
+    <md-datepicker #picker></md-datepicker>
+  </div>
+  <div>
+    <md-slide-toggle [(ngModel)]="model.IsSystemUser">
+      Sytem User
+    </md-slide-toggle>
+    <md-slide-toggle [(ngModel)]="model.IsMember">
+      Member
+    </md-slide-toggle>
+  </div>
+  <div class="hSpacer"></div>
+  <div class="rightRow">
+    <button md-fab (click)="Save()" [disabled]="(!DL.UserAccess.MemberEdit && model.key) || (!DL.UserAccess.MemberAdd && !model.key)" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+    <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+  </div>
+</div>

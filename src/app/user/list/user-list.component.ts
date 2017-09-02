@@ -23,6 +23,11 @@ export class UserListComponent implements OnInit {
     this.selectedAccess = null;
   }
 
+  SelectUser(item: UserInfo) {
+    this.DL.UserSelected = item;
+    this.DL.LoadFromLink("user-detail");
+  }
+
   ngOnInit() {
     this.DL.TITLE = "User List";
   }

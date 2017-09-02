@@ -1,3 +1,7 @@
+::ng-deep .mat-slide-toggle-content {
+    font-size: inherit;
+}
+
 .accessLabel {
     height: 25px;
     vertical-align: bottom;

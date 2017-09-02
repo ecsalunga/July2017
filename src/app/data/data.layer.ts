@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Core } from './../core';
 import { 
     ProductInfo, 
-    MemberInfo, 
     SellInfo, 
     TransactionInfo, 
     ReportInfo, 
@@ -30,11 +29,6 @@ export class DataLayer {
     Products: Array<ProductInfo>;
     ProductSelections: Array<ProductInfo>;
 
-    Member: MemberInfo;
-    Members: Array<MemberInfo>;
-    MemberSelections: Array<MemberInfo>;
-    MemberWalkIn: MemberInfo;
-
     Transaction: TransactionInfo;
     TransactionsToday: Array<TransactionInfo>;
     TransactionSelected: Array<TransactionInfo>;
@@ -57,8 +51,14 @@ export class DataLayer {
     ReportYears: Array<number>;
 
     User: UserInfo;
+    UserSelected: UserInfo;
     Users: Array<UserInfo>;
+    UserAll: Array<UserInfo>;
     UserAccess: AccessInfo;
+
+    Members: Array<UserInfo>;
+    MemberSelections: Array<UserInfo>;
+    MemberWalkIn: UserInfo;
 
     Access: AccessInfo;
     Accesses: Array<AccessInfo>;
@@ -108,7 +108,7 @@ export class DataLayer {
             new NameValue("Guest", 0)
         ];
 
-        this.MemberWalkIn = new MemberInfo();
+        this.MemberWalkIn = new UserInfo();
         this.MemberWalkIn.Name = "Walk-In";
         this.MemberWalkIn.key = "Walk-In";
 
@@ -117,6 +117,8 @@ export class DataLayer {
     }
 
     public SetPermission() {
+        this.UserAccess = new AccessInfo();
+        
         if (this.User && this.Accesses) {
             this.Accesses.forEach(access => {
                 if (this.User.AccessKey == access.key)

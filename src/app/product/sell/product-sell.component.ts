@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { ProductInfo, MemberInfo, SellInfo } from '../../models';
+import { ProductInfo, UserInfo, SellInfo } from '../../models';
 
 @Component({
   selector: 'product-sell',
@@ -12,7 +12,7 @@ export class ProductSellComponent implements OnInit {
   model: ProductInfo;
   selectedQuantity: number = 1;
   quantities: Array<number>;
-  selectedMember: MemberInfo = this.DL.MemberWalkIn;
+  selectedMember: UserInfo = this.DL.MemberWalkIn;
   isPaying: boolean = false;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) { }

@@ -7,7 +7,6 @@ import { DataLayer } from './data.layer';
 
 import { AccessDAL } from './dal/AccessDAL';
 import { ExpenseDAL } from './dal/ExpenseDAL';
-import { MemberDAL } from './dal/MemberDAL';
 import { ProductDAL } from './dal/ProductDAL';
 import { ShowcaseDAL } from './dal/ShowcaseDAL';
 import { ReportDAL } from './dal/ReportDAL';
@@ -17,7 +16,6 @@ import { TransactionDAL } from './dal/TransactionDAL';
 import 'rxjs/add/operator/first';
 import { 
     ProductInfo, 
-    MemberInfo, 
     SellInfo, 
     TransactionInfo, 
     ReportInfo, 
@@ -32,7 +30,6 @@ import {
 @Injectable()
 export class DataAccess {
     expenseDAL: ExpenseDAL;
-    memberDAL: MemberDAL;
     productDAL: ProductDAL;
     accessDAL: AccessDAL;
     showcaseDAL: ShowcaseDAL;
@@ -52,7 +49,6 @@ export class DataAccess {
 
         this.accessDAL = new AccessDAL(DL, af);
         this.productDAL = new ProductDAL(DL, af);
-        this.memberDAL = new MemberDAL(DL, af);
     }
 
     public LogInWithFacebook() {
@@ -72,7 +68,6 @@ export class DataAccess {
     }
 
     public DataSystemLoad() {
-        this.memberDAL.Load();
         this.expenseDAL.LoadTypes();
         this.reportDAL.Load();
         this.cancelDAL.Load();
@@ -98,23 +93,28 @@ export class DataAccess {
                 return;
             }
 
-            this.DL.Users.forEach(u => {
+            this.DL.UserAll.forEach(u => {
                 if (u.UID == user.uid)
                     this.DL.User = u;
             });
 
             // [temp] default to manager
-            this.DataSystemLoad();
             if (!this.DL.User.AccessKey) {
                 this.DL.User.AccessKey = "-KsasLernU2_JWOO90Bz";
                 this.DL.User.AccessName = "DEMO";
+                this.DL.User.IsSystemUser = true;
+                this.DL.User.IsMember = true
+                this.DL.User.JoinDate = this.core.dateToNumber(this.DL.Date);
             }
 
             this.DL.User.Name = user.displayName;
             this.DL.User.ImageURL = user.photoURL;
             this.DL.User.UID = user.uid;
-            this.DL.SetPermission();
+    
+            if(this.DL.User.IsSystemUser)
+                this.DataSystemLoad();
 
+            this.DL.SetPermission();
             this.UserSave(this.DL.User);
             this.DL.LoadFromMenu("report-list");
         });
@@ -123,12 +123,26 @@ export class DataAccess {
     UserLoad() {
         this.af.list(this.USERS, { query: { orderByChild: 'Name' }}).first().subscribe(snapshots => {
             this.DL.Users = new Array<UserInfo>();
+            this.DL.Members = new Array<UserInfo>();
+            this.DL.UserAll = new Array<UserInfo>();
+            this.DL.MemberSelections = new Array<UserInfo>();
 
             snapshots.forEach(snapshot => {
                 let info: UserInfo = snapshot;
                 info.key = snapshot.$key;
-                this.DL.Users.push(info);
+
+                if(info.IsSystemUser)
+                    this.DL.Users.push(info);
+                
+                if(info.IsMember)
+                    this.DL.Members.push(info);
+
+                this.DL.UserAll.push(info);
             });
+
+            // add walk-in for members
+            this.DL.MemberSelections.push(this.DL.MemberWalkIn);
+            this.DL.MemberSelections = this.DL.MemberSelections.concat(this.DL.Members);
 
             // single subscription
             if (!this.DL.IsAuthenticating) {
@@ -168,11 +182,6 @@ export class DataAccess {
 
     public ProductSave(item: ProductInfo) {
         this.productDAL.Save(item);
-    }
-
-    public MemberSave(item: MemberInfo) {
-        this.memberDAL.Save(item);
-        this.memberDAL.Load();
     }
 
     public UserSave(item: UserInfo) {
