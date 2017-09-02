@@ -40,6 +40,8 @@ export class AccessInfo {
     TransactionDetail: boolean;
     TransactionSearch: boolean;
 
+    DeliveryView: boolean;
+
     UserView: boolean;
     UserEdit: boolean;
     UserAccessEdit: boolean;
