@@ -27,11 +27,21 @@
     },
     "expenses": {
       ".read": "true",
-      ".write": "true"
+      ".write": "true",
+      "items": {
+        ".read": "true",
+        ".write": "true",
+        ".indexOn": "KeyDay"
+      }
     },
     "transactions": {
       ".read": "true",
       ".write": "true",
+      "items": {
+        ".read": "true",
+        ".write": "true",
+        ".indexOn": "KeyDay"
+      },
       "sellInfos": {
         ".read": "true",
         ".write": "true",
@@ -45,7 +55,8 @@
     },
     "reports": {
       ".read": "true",
-      ".write": "true"
+      ".write": "true",
+      ".indexOn": "KeyMonth"
     }
   }
 }

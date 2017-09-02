@@ -50,6 +50,7 @@ export class DataLayer {
     ExpenseSelected: Array<ExpenseInfo>;
     ExpenseAmount: number = 0;
 
+    Report: ReportInfo;
     Reports: Array<ReportInfo>;
     ReportToday: ReportInfo;
     ReportSelected: ReportInfo;
@@ -74,13 +75,15 @@ export class DataLayer {
 
     constructor(private core: Core) {
         this.ReportToday = new ReportInfo();
-        this.ReportSelected = new ReportInfo();
-        this.ReportYears = new Array<number>();
-
         this.ReportToday.KeyDay = this.core.dateToKeyDay(this.Date);
         this.ReportToday.KeyMonth = this.core.dateToKeyMonth(this.Date);
         this.ReportToday.KeyYear = this.Date.getFullYear();
-        this.ReportSelected = this.ReportToday;
+        this.ReportSelectedReset();
+        
+        this.ReportYears = new Array<number>();
+        for (let x = this.ReportToday.KeyYear - 5; x <= this.ReportToday.KeyYear; x++) {
+            this.ReportYears.push(x);
+        }
 
         this.Months = [
             new NameValue("January", 1),
@@ -105,10 +108,6 @@ export class DataLayer {
             new NameValue("Guest", 0)
         ];
 
-        for (let x = this.ReportToday.KeyYear - 5; x <= this.ReportToday.KeyYear; x++) {
-            this.ReportYears.push(x);
-        }
-
         this.MemberWalkIn = new MemberInfo();
         this.MemberWalkIn.Name = "Walk-In";
         this.MemberWalkIn.key = "Walk-In";
@@ -126,19 +125,26 @@ export class DataLayer {
         }
     }
 
-    LoadFromMenu(name: string) {
+    public ReportSelectedReset() {
+        this.ReportSelected = new ReportInfo();
+        this.ReportSelected.KeyDay = this.core.dateToKeyDay(this.Date);
+        this.ReportSelected.KeyMonth = this.core.dateToKeyMonth(this.Date);
+        this.ReportSelected.KeyYear = this.Date.getFullYear();
+    }
+
+    public LoadFromMenu(name: string) {
         this.SOURCE = this.MENU;
         this.core.loadComponent(name);
         this.MainContent.scrollTop = 0;
     }
 
-    LoadFromLink(name: string) {
+    public LoadFromLink(name: string) {
         this.SOURCE = this.LINK;
         this.core.loadComponent(name);
         this.MainContent.scrollTop = 0;
     }
 
-    LoadComponentsFromLink(names: Array<string>) {
+    public LoadComponentsFromLink(names: Array<string>) {
         this.SOURCE = this.LINK;
         this.core.loadComponents(names);
         this.MainContent.scrollTop = 0;

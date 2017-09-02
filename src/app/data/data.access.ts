@@ -39,8 +39,7 @@ export class DataAccess {
     reportDAL: ReportDAL;
     cancelDAL: CancelDAL;
     transactionDAL: TransactionDAL;
-    KEYDAY: string = "KeyDay";
-    KEYMONTH: string = "KeyMonth";
+    
     USERS: string = "/users";
     StorageRef: firebase.storage.Reference = firebase.storage().ref();
 

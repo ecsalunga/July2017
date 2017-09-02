@@ -4,12 +4,10 @@ import { ExpenseInfo, ReportInfo } from './../../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class ExpenseDAL {
-    PATH: string = "/members";
+    PATH: string = "/expenses/items";
     PATH_TYPES: string = "/expenses/types";
 
-    constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) {
-        this.PATH = "/expenses/" + this.DL.ReportToday.KeyYear + "/" + this.DL.ReportToday.KeyMonth;
-    }
+    constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) {}
 
     public Load() {
         this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYDAY, equalTo: this.DL.ReportToday.KeyDay } }).subscribe(snapshots => {
@@ -37,7 +35,7 @@ export class ExpenseDAL {
     }
 
     public LoadByReport(report: ReportInfo) {
-        this.af.list("/expenses/" + report.KeyYear + "/" + report.KeyMonth, { query: { orderByChild: this.DL.KEYDAY, equalTo: report.KeyDay } }).first().subscribe(snapshots => {
+        this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYDAY, equalTo: report.KeyDay } }).first().subscribe(snapshots => {
             this.DL.ExpenseSelected = new Array<ExpenseInfo>();
             this.DL.ReportSelected.ExpenseAmount = 0;
             this.DL.ReportSelected.ExpenseCount = 0;

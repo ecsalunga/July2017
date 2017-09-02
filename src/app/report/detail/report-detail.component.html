@@ -1,0 +1,37 @@
+<div>
+  <div>
+    <md-input-container>
+      <input id="txtCode" mdInput placeholder="Code" [(ngModel)]="model.Code" />
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container class="longText">
+      <input id="txtDescription" mdInput placeholder="Description" [(ngModel)]="model.Description" />
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <input id="txtBuy" type="number" mdInput placeholder="Buy Price" [(ngModel)]="model.BuyPrice" />
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <input id="txtSell" type="number" mdInput placeholder="Sell Price" [(ngModel)]="model.SellPrice" />
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <input id="txtQuantity" [disabled]="!DL.UserAccess.ProductIn" type="number" mdInput placeholder="Quantity" [(ngModel)]="model.Quantity" />
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <input id="txtNotifyQuantity" type="number" mdInput placeholder="Notify Quantity" [(ngModel)]="model.QuantityNotify" />
+    </md-input-container>
+  </div>
+  <div class="hSpacer"></div>
+  <div class="rightRow">
+    <button md-fab (click)="Save()" [disabled]="(!DL.UserAccess.ProductEdit && model.key) || (!DL.UserAccess.ProductAdd && !model.key)" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+    <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Date
+        </th>
+        <th class="totalColumn">
+          Sales
+        </th>
+        <th class="totalColumn">
+          Expenses
+        </th>
+        <th class="totalColumn">
+          DIFF
+        </th>
+      </tr>
+    </thead>
+    <ng-container *ngFor="let item of DL.Reports">
+      <tr>
+        <td>
+          {{ getDate(item.KeyDay) | date : 'yyyy-MM-dd' }}
+        </td>
+        <td class="totalColumn">
+          {{item.SaleAmount | number:'1.2-2'}}
+        </td>
+        <td class="totalColumn">
+          {{item.ExpenseAmount | number:'1.2-2'}}
+        </td>
+        <td class="totalColumn">
+          {{item.SaleAmount - item.ExpenseAmount | number:'1.2-2'}}
+        </td>
+      </tr>
+    </ng-container>
+    <tr class="blankCell">
+      <td>Total</td>
+      <td class="totalColumn">
+        {{DL.ReportSelected.SaleAmount | number:'1.2-2'}}
+      </td>
+      <td class="totalColumn">
+        {{DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
+      </td>
+      <td class="totalColumn">
+        {{DL.ReportSelected.SaleAmount - DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
+      </td>
+    </tr>
+  </table>
+  <div class="hSpacer"></div>
+  <table>
+    <tr class="rightRow">
+      <td class="selectionRow">
+        <md-select [disabled]="!DL.UserAccess.ReportSearch" placeholder="Year" [(ngModel)]="yearSelected">
+          <md-option *ngFor="let year of DL.ReportYears" [value]="year">
+            {{year}}
+          </md-option>
+        </md-select>
+        <md-select [disabled]="!DL.UserAccess.ReportSearch" placeholder="Month" [(ngModel)]="monthSelected">
+          <md-option *ngFor="let month of DL.Months" [value]="month.Value">
+            {{month.Name}}
+          </md-option>
+        </md-select>
+      </td>
+    </tr>
+    <tr class="rightRow">
+      <td>
+        <button md-fab [disabled]="!DL.UserAccess.ReportSearch" (click)="ReportView()" mdTooltip="View reports" mdTooltipPosition="above"><md-icon>search</md-icon></button>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -4,11 +4,11 @@ import { DataAccess, DataLayer } from '../../data';
 import { ReportInfo } from '../../models';
 
 @Component({
-  selector: 'report-list',
-  templateUrl: './report-list.component.html',
-  styleUrls: ['./report-list.component.css']
+  selector: 'report-balancing',
+  templateUrl: './report-balancing.component.html',
+  styleUrls: ['./report-balancing.component.css']
 })
-export class ReportListComponent implements OnInit {
+export class ReportBalancingComponent implements OnInit {
   yearSelected: number;
   monthSelected: number;
 
@@ -23,8 +23,7 @@ export class ReportListComponent implements OnInit {
   }
 
   SelectItem(item: ReportInfo) {
-    this.DL.Report = item;
-    this.DL.LoadFromLink("report-detail");
+
   }
 
   getDate(keyDay: number): Date {
@@ -32,6 +31,6 @@ export class ReportListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Report List";
+    this.DL.TITLE = "Cash Balancing Report";
   }
 }

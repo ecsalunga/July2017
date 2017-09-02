@@ -4,11 +4,9 @@ import { SellInfo, TransactionInfo, ReportInfo } from './../../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class TransactionDAL {
-    PATH: string;
+    PATH: string = "/transactions/items";
     PATH_SELL: string = "/transactions/sellInfos";
-    constructor(private core: Core, private DL: DataLayer, private DA: DataAccess, private af: AngularFireDatabase) {
-        this.PATH = "/transactions/" + this.DL.ReportToday.KeyYear + "/" + this.DL.ReportToday.KeyMonth;
-    }
+    constructor(private core: Core, private DL: DataLayer, private DA: DataAccess, private af: AngularFireDatabase) {}
 
     public Load() {
         this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYDAY, equalTo: this.DL.ReportToday.KeyDay } }).subscribe(snapshots => {
@@ -29,7 +27,7 @@ export class TransactionDAL {
     }
 
     LoadByReportInfo(report: ReportInfo) {
-        this.af.list("/transactions/" + report.KeyYear + "/" + report.KeyMonth, { query: { orderByChild: this.DL.KEYDAY, equalTo: report.KeyDay } }).first().subscribe(snapshots => {
+        this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYDAY, equalTo: report.KeyDay } }).first().subscribe(snapshots => {
             this.DL.TransactionSelected = new Array<TransactionInfo>();
             this.DL.ReportSelected.SaleCount = 0;
             this.DL.ReportSelected.SaleAmount = 0;

@@ -4,23 +4,16 @@ import { ReportInfo } from './../../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class ReportDAL {
-    PATH: string;
+    PATH: string = "/reports";
 
-    constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) {
-        this.PATH = "/reports/" + this.DL.ReportToday.KeyYear;
-    }
+    constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) { }
 
     public Load() {
-        this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYDAY, equalTo: this.DL.ReportToday.KeyDay } }).first().subscribe(snapshots => {
-            snapshots.forEach(snapshot => {
-                this.DL.ReportToday = snapshot;
-                this.DL.ReportToday.key = snapshot.$key;
-            });
-        });
+        this.LoadByYearAndMonth(this.DL.ReportToday.KeyYear, this.DL.ReportToday.KeyMonth);
     }
 
     LoadByYearAndMonth(selectedYear: number, selectedMonth: number) {
-        this.af.list("/reports/" + selectedYear, { query: { orderByChild: this.DL.KEYMONTH, equalTo: parseInt(selectedYear + this.core.az(selectedMonth)) } }).first().subscribe(snapshots => {
+        this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYMONTH, equalTo: parseInt(selectedYear + this.core.az(selectedMonth)) } }).first().subscribe(snapshots => {
             this.DL.Reports = new Array<ReportInfo>();
             this.DL.ReportSelected = new ReportInfo();
             this.DL.ReportSelected.SaleCount = 0;
@@ -29,6 +22,12 @@ export class ReportDAL {
             this.DL.ReportSelected.ExpenseAmount = 0;
 
             snapshots.forEach(snapshot => {
+                // get today report
+                if(snapshot.KeyDay == this.DL.ReportToday.KeyDay) {
+                    this.DL.ReportToday = snapshot;
+                    this.DL.ReportToday.key = snapshot.$key;
+                }
+
                 this.DL.Reports.push(snapshot);
                 this.DL.ReportSelected.SaleCount += snapshot.SaleCount;
                 this.DL.ReportSelected.SaleAmount += snapshot.SaleAmount;

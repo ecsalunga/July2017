@@ -65,8 +65,14 @@
       </ng-container>
       <ng-container *ngIf="DL.UserAccess.ReportView">
         <button md-menu-item (click)="LoadPage('report-list')">
-          <md-icon>note</md-icon>
+          <md-icon>assignment</md-icon>
           <span>Report</span>
+        </button>
+      </ng-container>
+      <ng-container *ngIf="DL.UserAccess.ReportView">
+        <button md-menu-item (click)="LoadPage('report-balancing')">
+          <md-icon>assignment</md-icon>
+          <span>Balancing</span>
         </button>
       </ng-container>
       <ng-container *ngIf="DL.UserAccess.UserView">
