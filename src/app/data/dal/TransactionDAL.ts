@@ -1,11 +1,12 @@
 import { Core } from './../../core';
 import { DataLayer, DataAccess } from './../../data';
-import { SellInfo, TransactionInfo, ReportInfo } from './../../models';
+import { SellInfo, TransactionInfo, ReportInfo, DeliveryInfo, NameValue } from './../../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class TransactionDAL {
     PATH: string = "/transactions/items";
     PATH_SELL: string = "/transactions/sellInfos";
+    PATH_DELIVERY: string = "/transactions/deliveryInfos";
     constructor(private core: Core, private DL: DataLayer, private DA: DataAccess, private af: AngularFireDatabase) {}
 
     public Load() {
@@ -62,6 +63,18 @@ export class TransactionDAL {
         });
     }
 
+    public LoadDelivery() {
+        this.af.list(this.PATH_DELIVERY).subscribe(snapshots => {
+            this.DL.DeliveryInfos = new Array<DeliveryInfo>();
+
+            snapshots.forEach(snapshot => {
+                let info: DeliveryInfo = snapshot;
+                info.key = snapshot.$key;
+                this.DL.DeliveryInfos.push(info);
+            });
+        });
+    }
+
     public Save(item: TransactionInfo) {
         this.af.list(this.PATH).push(item);
     }
@@ -70,20 +83,52 @@ export class TransactionDAL {
         this.af.list(this.PATH_SELL).push(item);
     }
 
-    public SellDone(memberKey: string, buyerName: string) {
+
+    public SellDone(memberKey: string, buyerName: string, isDelivery: boolean) {
         let info = new TransactionInfo();
         info.MemberKey = memberKey
         info.BuyerName = buyerName;
         info.Items = this.DL.SellInfos;
         info.Count = this.DL.SellInfosCount;
         info.Amount = this.DL.SellInfosAmount;
-        info.ActionDate = this.core.dateToNumber(new Date());
-        info.KeyDay = this.core.dateToKeyDay(this.DL.Date);
+        info.ActionDate = this.DL.GetActionDate();
+        info.KeyDay = this.DL.GetKeyDay();
+        info.IsDelivery = isDelivery;
 
-        this.Save(info);
-        this.DA.ProductUpdteFromSellInfo();
-        this.DA.ReportTodaySave();
+        if(info.IsDelivery)
+            this.DeliveryStart(info);
+        else {
+            this.Save(info);
+            this.DA.ProductUpdteFromSellInfo();
+            this.DA.ReportTodaySave();
+        }
+
         this.DA.SellInfoClear();
+    }
+
+    public DeliveryStart(info: TransactionInfo) {
+        let item = new DeliveryInfo();
+        item.UserKey = this.DL.UserPending.key;
+        item.UserName = this.DL.UserPending.Name;
+        item.Transaction = info;
+        item.ActionStart = this.DL.GetActionDate();
+
+        this.UpdateDeliveryStatus(item, this.DL.STATUS_CREATED);
+        this.DeliverySave(item);
+    }
+
+    public UpdateDeliveryStatus(item: DeliveryInfo, status: string) {
+        item.Status = status;
+        item.ActionLast = this.DL.GetActionDate();
+        let action = new NameValue(item.Status, item.ActionLast);
+        item.Actions.push(action);
+    }
+
+    public DeliverySave(item: DeliveryInfo) {
+        if (item.key)
+            this.af.list(this.PATH_DELIVERY).update(item.key, item);
+        else
+            this.af.list(this.PATH_DELIVERY).push(item);
     }
 
     public SellDelete(item: SellInfo) {

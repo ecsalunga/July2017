@@ -5,5 +5,5 @@ export { NameValue } from './NameValue';
 export { ProductInfo } from './ProductInfo';
 export { ReportInfo } from './ReportInfo';
 export { ScheduleInfo, ShowcaseInfo } from './ShowcaseInfo';
-export { SellInfo, TransactionInfo } from './TransactionInfo';
+export { SellInfo, TransactionInfo, DeliveryInfo } from './TransactionInfo';
 export { UserInfo } from './UserInfo';

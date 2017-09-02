@@ -55,6 +55,7 @@ import { DashboardHomeComponent } from './dashboard/home/dashboard-home.componen
 import { ReportBalancingComponent } from './report/balancing/report-balancing.component';
 import { ReportDetailComponent } from './report/detail/report-detail.component';
 import { UserDetailComponent } from './user/detail/user-detail.component';
+import { DeliveryListComponent } from './delivery/list/delivery-list.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { UserDetailComponent } from './user/detail/user-detail.component';
     DashboardHomeComponent,
     ReportBalancingComponent,
     ReportDetailComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    DeliveryListComponent
   ],
   imports: [
     BrowserModule,
@@ -128,7 +130,8 @@ import { UserDetailComponent } from './user/detail/user-detail.component';
     DashboardHomeComponent,
     ReportBalancingComponent,
     ReportDetailComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    DeliveryListComponent
   ]
 })
 export class AppModule {

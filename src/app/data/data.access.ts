@@ -79,6 +79,7 @@ export class DataAccess {
             this.productDAL.Load();
             this.transactionDAL.Load();
             this.transactionDAL.LoadSell();
+            this.transactionDAL.LoadDelivery();
             this.expenseDAL.Load();
             this.DL.IsDataActiveLoaded = true;
         }
@@ -123,8 +124,10 @@ export class DataAccess {
     UserLoad() {
         this.af.list(this.USERS, { query: { orderByChild: 'Name' }}).first().subscribe(snapshots => {
             this.DL.Users = new Array<UserInfo>();
-            this.DL.Members = new Array<UserInfo>();
             this.DL.UserAll = new Array<UserInfo>();
+            this.DL.UserSelections = new Array<UserInfo>();
+
+            this.DL.Members = new Array<UserInfo>();
             this.DL.MemberSelections = new Array<UserInfo>();
 
             snapshots.forEach(snapshot => {
@@ -143,6 +146,10 @@ export class DataAccess {
             // add walk-in for members
             this.DL.MemberSelections.push(this.DL.MemberWalkIn);
             this.DL.MemberSelections = this.DL.MemberSelections.concat(this.DL.Members);
+
+            // add pending for users
+            this.DL.UserSelections.push(this.DL.UserPending);
+            this.DL.UserSelections = this.DL.UserSelections.concat(this.DL.Users);
 
             // single subscription
             if (!this.DL.IsAuthenticating) {
@@ -214,8 +221,8 @@ export class DataAccess {
         this.transactionDAL.SellClear();
     }
 
-    public SellInfoDone(memberKey: string, buyerName: string) {
-        this.transactionDAL.SellDone(memberKey, buyerName);
+    public SellInfoDone(memberKey: string, buyerName: string, isDelivery: boolean) {
+        this.transactionDAL.SellDone(memberKey, buyerName, isDelivery);
     }
 
     public ProductUpdteFromSellInfo() {

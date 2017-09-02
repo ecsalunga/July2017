@@ -14,6 +14,7 @@ export class ProductSellComponent implements OnInit {
   quantities: Array<number>;
   selectedMember: UserInfo = this.DL.MemberWalkIn;
   isPaying: boolean = false;
+  isDelivery: boolean = false;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) { }
 
@@ -76,9 +77,10 @@ export class ProductSellComponent implements OnInit {
   }
 
   CartDone() {
-    this.DA.SellInfoDone(this.selectedMember.key, this.selectedMember.Name);
+    this.DA.SellInfoDone(this.selectedMember.key, this.selectedMember.Name, this.isDelivery);
     this.selectedMember = this.DL.MemberWalkIn;
     this.isPaying = false;
+    this.isDelivery = false;
   }
 
   ngOnInit() {

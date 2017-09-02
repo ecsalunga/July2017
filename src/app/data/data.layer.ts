@@ -10,7 +10,8 @@ import {
     UserInfo, 
     ShowcaseInfo, 
     AccessInfo, 
-    CancelInfo
+    CancelInfo,
+    DeliveryInfo
 } from './../models';
 
 @Injectable()
@@ -25,6 +26,11 @@ export class DataLayer {
     SOURCE: string;
     TITLE: string;
 
+    STATUS_CREATED: string = "Created";
+    STATUS_ASSIGNED: string = "Assigned";
+    STATUS_IN_PROGRESS: string = "In-Progress";
+    STATUS_DONE: string = "Done";
+
     Product: ProductInfo;
     Products: Array<ProductInfo>;
     ProductSelections: Array<ProductInfo>;
@@ -38,6 +44,9 @@ export class DataLayer {
     SellInfos: Array<SellInfo>;
     SellInfosAmount: number = 0;
     SellInfosCount: number = 0;
+
+    Delivery: DeliveryInfo;
+    DeliveryInfos: Array<DeliveryInfo>;
 
     ExpenseTypes: Array<string>;
     ExpensesToday: Array<ExpenseInfo>;
@@ -54,7 +63,9 @@ export class DataLayer {
     UserSelected: UserInfo;
     Users: Array<UserInfo>;
     UserAll: Array<UserInfo>;
+    UserSelections: Array<UserInfo>;
     UserAccess: AccessInfo;
+    UserPending: UserInfo;
 
     Members: Array<UserInfo>;
     MemberSelections: Array<UserInfo>;
@@ -112,6 +123,10 @@ export class DataLayer {
         this.MemberWalkIn.Name = "Walk-In";
         this.MemberWalkIn.key = "Walk-In";
 
+        this.UserPending = new UserInfo();
+        this.UserPending.Name = "Pending";
+        this.UserPending.key = "Pending";
+
         this.User = new UserInfo();
         this.UserAccess = new AccessInfo();
     }
@@ -125,6 +140,18 @@ export class DataLayer {
                     this.UserAccess = access;
             });
         }
+    }
+
+    public GetActionDate(): number {
+        return this.core.dateToNumber(new Date());
+    }
+
+    public GetKeyDay(): number {
+        return this.core.dateToKeyDay(this.Date);
+    }
+
+    public GetKeyMonth(): number {
+        return this.core.dateToKeyMonth(this.Date);
     }
 
     public LoadFromMenu(name: string) {

@@ -1,3 +1,7 @@
 ::ng-deep .mat-select-trigger {
     font-size: inherit;
 }
+
+md-checkbox {
+    margin-right: 20px;
+}

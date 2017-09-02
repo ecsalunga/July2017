@@ -1,0 +1,42 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Start
+        </th>
+        <th>
+          Last Update
+        </th>
+        <th>
+          Status
+        </th>
+        <th>
+          Assigned
+        </th>
+        <th class="rightRow">
+          Action
+        </th>
+      </tr>
+    </thead>
+    <ng-container *ngFor="let item of DL.DeliveryInfos">
+      <tr>
+        <td>
+          {{ item.ActionStart | date : 'hh:mm a' }}
+        </td>
+        <td>
+          {{ item.ActionLast | date : 'hh:mm a' }}
+        </td>
+        <td>
+          {{ item.Status }}
+        </td>
+        <td>
+          {{ item.UserName }}
+        </td>
+        <td class="rightRow">
+          <button md-mini-fab (click)="Select(item)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+</div>

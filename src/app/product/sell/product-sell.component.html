@@ -64,6 +64,7 @@
           </md-select>
         </td>
         <td class="selectionRow">
+          <md-checkbox [(ngModel)]="isDelivery">Delivery</md-checkbox>
           <md-select placeholder="Member" [(ngModel)]="selectedMember">
             <md-option *ngFor="let member of this.DL.MemberSelections" [value]="member">
               {{ member.Name }}
@@ -85,8 +86,9 @@
     <table [hidden]="!DL.UserAccess.SellAdd">
       <tr class="rightRow">
         <td class="selectionRow">
+          <md-checkbox disabled [(ngModel)]="isDelivery">Delivery</md-checkbox>
           <md-input-container class="longText">
-            <input mdInput placeholder="Member" [readonly]="true" value="{{ selectedMember.Name }}">
+            <input mdInput placeholder="Member" readonly value="{{ selectedMember.Name }}">
           </md-input-container>
         </td>
       </tr>
