@@ -26,13 +26,13 @@
           {{ info.AccessName }}
         </td>
         <td class="rightRow">
-          <button md-mini-fab (click)="SelectUser(info)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
+          <button md-mini-fab [disabled]="!DL.UserAccess.UserEdit" (click)="SelectUser(info)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
         </td>
       </tr>
     </ng-container>
   </table>
   <div class="hSpacer"></div>
-  <table [hidden]="!DL.UserAccess.UserEdit">
+  <table [hidden]="!DL.UserAccess.UserAccessEdit">
     <tr class="rightRow">
       <td class="selectionRow">
         <md-select placeholder="User" [(ngModel)]="selectedUser">

@@ -24,7 +24,7 @@
         <td>
           {{product.SellPrice | number:'1.2-2'}}
         </td>
-        <td class="{{ (product.Quantity > product.QuantityNotify) ?  'quantityOK' : 'quantityNotify' }}">
+        <td class="{{ (product.Quantity > product.QuantityNotify) ?  'good' : 'bad' }}">
           {{product.Quantity}}
         </td>
         <td class="rightRow">

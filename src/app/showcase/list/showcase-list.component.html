@@ -24,7 +24,7 @@
         <td>
           {{item.Price | number:'1.2-2'}}
         </td>
-        <td>
+        <td class="{{ (Visibility(item) == 'Yes') ?  'good' : 'bad' }}">
           {{ Visibility(item) }}
         </td>
         <td class="rightRow">

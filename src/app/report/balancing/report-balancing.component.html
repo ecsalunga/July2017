@@ -6,13 +6,16 @@
           Date
         </th>
         <th class="totalColumn">
+          Start CoH
+        </th>
+        <th class="totalColumn">
           Sales
         </th>
         <th class="totalColumn">
           Expenses
         </th>
         <th class="totalColumn">
-          DIFF
+          Comp/Actual CoH
         </th>
       </tr>
     </thead>
@@ -22,28 +25,19 @@
           {{ getDate(item.KeyDay) | date : 'yyyy-MM-dd' }}
         </td>
         <td class="totalColumn">
+          {{item.COHStart | number:'1.2-2'}}
+        </td>
+        <td class="totalColumn">
           {{item.SaleAmount | number:'1.2-2'}}
         </td>
         <td class="totalColumn">
           {{item.ExpenseAmount | number:'1.2-2'}}
         </td>
-        <td class="totalColumn">
-          {{item.SaleAmount - item.ExpenseAmount | number:'1.2-2'}}
+        <td class="totalColumn {{ (getComputed(item) == getActual(item)) ?  'good' : 'bad' }}">
+          {{ getComputed(item) | number:'1.2-2' }} / {{ getActual(item) | number:'1.2-2'}}
         </td>
       </tr>
     </ng-container>
-    <tr class="blankCell">
-      <td>Total</td>
-      <td class="totalColumn">
-        {{DL.ReportSelected.SaleAmount | number:'1.2-2'}}
-      </td>
-      <td class="totalColumn">
-        {{DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
-      </td>
-      <td class="totalColumn">
-        {{DL.ReportSelected.SaleAmount - DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
-      </td>
-    </tr>
   </table>
   <div class="hSpacer"></div>
   <table>

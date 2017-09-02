@@ -24,6 +24,13 @@ export class ReportDetailComponent implements OnInit {
     this.DL.LoadFromLink("report-list");
   }
 
+  getComputed() : number {
+    if(!this.model.COHStart)
+      this.model.COHStart = 0;
+
+    return ((this.model.COHStart + this.model.SaleAmount) - this.model.ExpenseAmount)
+  }
+
   getDate(keyDay: number): Date {
     return this.core.numberToDate(parseInt(keyDay + '000000'))
   }

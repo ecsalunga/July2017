@@ -22,8 +22,17 @@ export class ReportBalancingComponent implements OnInit {
     this.DA.ReportMonthlyLoad(this.yearSelected, this.monthSelected)
   }
 
-  SelectItem(item: ReportInfo) {
+  getComputed(item: ReportInfo) : number {
+    if(!item.COHStart)
+      item.COHStart = 0;
 
+    return ((item.COHStart + item.SaleAmount) - item.ExpenseAmount)
+  }
+
+  getActual(item: ReportInfo) : number {
+    if(!item.COHActual)
+      item.COHActual = 0;
+    return item.COHActual;
   }
 
   getDate(keyDay: number): Date {

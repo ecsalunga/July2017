@@ -11,10 +11,6 @@ export class AccessInfo {
     ExpenseAdd: boolean;
     ExpenseSearch: boolean;
 
-    MemberView: boolean;
-    MemberAdd: boolean;
-    MemberEdit: boolean;
-
     ProductView: boolean;
     ProductAdd: boolean;
     ProductEdit: boolean;
@@ -24,9 +20,10 @@ export class AccessInfo {
 
     ReportView: boolean;
     ReportSearch: boolean;
-    ReportBalanceView: boolean; 
+    ReportBalanceView: boolean;
     ReportBalanceStartEdit: boolean;
     ReportBalanceActualEdit: boolean;
+    ReportBalanceSummaryView: boolean;
 
     SellView: boolean;
     SellAdd: boolean;
@@ -45,4 +42,10 @@ export class AccessInfo {
 
     UserView: boolean;
     UserEdit: boolean;
+    UserAccessEdit: boolean;
+    UserGroupEdit: boolean;
+
+    MemberView: boolean;
+    MemberAdd: boolean;
+    MemberEdit: boolean;
 }

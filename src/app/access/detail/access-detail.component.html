@@ -113,31 +113,38 @@
       </td>
     </tr>
     <tr>
-        <td colspan="3">
-          <table style="margin-left: 10px;">
-            <tr>
-              <td colspan="3" class="accessLabel">Balancing</td>
-            </tr>
-            <tr>
-              <td>
-                <md-slide-toggle [(ngModel)]="model.ReportBalanceView">
-                  View
-                </md-slide-toggle>
-              </td>
-              <td>
-                <md-slide-toggle [(ngModel)]="model.ReportBalanceStartEdit">
-                  Edit Start
-                </md-slide-toggle>
-              </td>
-              <td>
-                <md-slide-toggle [(ngModel)]="model.ReportBalanceActualEdit">
-                  Edit Actual
-                </md-slide-toggle>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
+      <td colspan="3">
+        <table style="margin-left: 10px;">
+          <tr>
+            <td colspan="3" class="accessLabel">Balancing</td>
+          </tr>
+          <tr>
+            <td class="subAccess">
+              <md-slide-toggle [(ngModel)]="model.ReportBalanceView">
+                View
+              </md-slide-toggle>
+            </td>
+            <td class="subAccess">
+              <md-slide-toggle [(ngModel)]="model.ReportBalanceStartEdit">
+                Edit Start
+              </md-slide-toggle>
+            </td>
+            <td>
+              <md-slide-toggle [(ngModel)]="model.ReportBalanceActualEdit">
+                Edit Actual
+              </md-slide-toggle>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <md-slide-toggle [(ngModel)]="model.ReportBalanceSummaryView">
+                View Summary
+              </md-slide-toggle>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
     <tr>
       <td colspan="3" class="accessLabel">Sell</td>
     </tr>
@@ -185,12 +192,12 @@
             <td colspan="3" class="accessLabel">Schedule</td>
           </tr>
           <tr>
-            <td>
+            <td class="subAccess">
               <md-slide-toggle [(ngModel)]="model.ShowcaseScheduleView">
                 View
               </md-slide-toggle>
             </td>
-            <td>
+            <td class="subAccess">
               <md-slide-toggle [(ngModel)]="model.ShowcaseScheduleAdd">
                 Add
               </md-slide-toggle>
@@ -251,10 +258,33 @@
         </md-slide-toggle>
       </td>
     </tr>
+    <tr>
+      <td colspan="3">
+        <table style="margin-left: 10px;">
+          <tr>
+            <td colspan="3" class="accessLabel">Access</td>
+          </tr>
+          <tr>
+            <td class="subAccess">
+              <md-slide-toggle [(ngModel)]="model.UserAccessEdit">
+                Edit
+              </md-slide-toggle>
+            </td>
+            <td class="subAccess">
+              <md-slide-toggle [(ngModel)]="model.UserGroupEdit">
+                Edit Group
+              </md-slide-toggle>
+            </td>
+            <td></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
   </table>
   <div class="hSpacer"></div>
   <div class="rightRow">
-    <button md-fab (click)="Save()" [disabled]="(!DL.UserAccess.AccessEdit && model.key) || (!DL.UserAccess.AccessAdd && !model.key)" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+    <button md-fab (click)="Save()" [disabled]="(!DL.UserAccess.AccessEdit && model.key) || (!DL.UserAccess.AccessAdd && !model.key)"
+      mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
     <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
   </div>
 </div>

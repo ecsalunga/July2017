@@ -166,3 +166,11 @@ md-input-container {
     vertical-align: middle;
     display: inline-block;
 }
+
+.bad {
+    color: red;
+}
+
+.good {
+    color: green;
+}
