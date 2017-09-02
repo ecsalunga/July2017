@@ -39,10 +39,17 @@ export class ReportDAL {
         });
     }
 
-    public Save() {
+    public SaveTodayReport() {
         if (this.DL.ReportToday.key)
             this.af.list(this.PATH).update(this.DL.ReportToday.key, this.DL.ReportToday);
         else
             this.af.list(this.PATH).push(this.DL.ReportToday);
+    } 
+
+    public Save(item: ReportInfo) {
+        if (item.key)
+            this.af.list(this.PATH).update(item.key, item);
+        else
+            this.af.list(this.PATH).push(item);
     }
 }

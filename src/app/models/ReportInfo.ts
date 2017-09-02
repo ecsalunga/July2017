@@ -7,7 +7,11 @@ export class ReportInfo {
     SaleAmount: number;
     ExpenseAmount: number;
     ExpenseCount: number;
-    COHStarting: number;
-    COHComputed: number;
+    COHStart: number;
     COHActual: number;
+
+    constructor() {
+        this.COHStart = 0;
+        this.COHActual = 0;
+    }
 }

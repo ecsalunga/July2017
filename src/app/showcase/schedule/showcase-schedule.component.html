@@ -1,4 +1,15 @@
 <div>
+  <div>
+    <md-input-container class="longText">
+      <input id="txtName" mdInput [readonly]="true" placeholder="Name" [(ngModel)]="model.Name" />
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container class="fullWidth">
+      <textarea id="txtDescrption" mdInput [readonly]="true" placeholder="Description" [(ngModel)]="model.Description">
+      </textarea>
+    </md-input-container>
+  </div>
   <table>
     <thead>
       <tr>

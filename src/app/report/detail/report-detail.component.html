@@ -1,37 +1,27 @@
 <div>
   <div>
     <md-input-container>
-      <input id="txtCode" mdInput placeholder="Code" [(ngModel)]="model.Code" />
+      <input id="txtDate" mdInput [readonly]="true" placeholder="Cashflow Date" value="{{ getDate(model.KeyDay) | date : 'yyyy-MM-dd' }}" />
     </md-input-container>
   </div>
   <div>
     <md-input-container class="longText">
-      <input id="txtDescription" mdInput placeholder="Description" [(ngModel)]="model.Description" />
+      <input id="txtCOHStart" [disabled]="!DL.UserAccess.ReportBalanceStartEdit" type="number" mdInput placeholder="Starting cash on-hand" [(ngModel)]="model.COHStart" />
     </md-input-container>
   </div>
   <div>
-    <md-input-container>
-      <input id="txtBuy" type="number" mdInput placeholder="Buy Price" [(ngModel)]="model.BuyPrice" />
+    <md-input-container class="longText">
+      <input id="txtCOHComputed" [readonly]="true" mdInput placeholder="Computed cash on-hand" value="{{ ((model.COHStart + model.SaleAmount) - model.ExpenseAmount) | number:'1.2-2'}}" />
     </md-input-container>
   </div>
   <div>
-    <md-input-container>
-      <input id="txtSell" type="number" mdInput placeholder="Sell Price" [(ngModel)]="model.SellPrice" />
-    </md-input-container>
-  </div>
-  <div>
-    <md-input-container>
-      <input id="txtQuantity" [disabled]="!DL.UserAccess.ProductIn" type="number" mdInput placeholder="Quantity" [(ngModel)]="model.Quantity" />
-    </md-input-container>
-  </div>
-  <div>
-    <md-input-container>
-      <input id="txtNotifyQuantity" type="number" mdInput placeholder="Notify Quantity" [(ngModel)]="model.QuantityNotify" />
+    <md-input-container class="longText">
+      <input id="txtCOHActual"  [disabled]="!DL.UserAccess.ReportBalanceActualEdit" type="number" mdInput placeholder="Actual cash on-hand" [(ngModel)]="model.COHActual" />
     </md-input-container>
   </div>
   <div class="hSpacer"></div>
   <div class="rightRow">
-    <button md-fab (click)="Save()" [disabled]="(!DL.UserAccess.ProductEdit && model.key) || (!DL.UserAccess.ProductAdd && !model.key)" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+    <button md-fab (click)="Save()" [disabled]="!DL.UserAccess.ProductEdit" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
     <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
   </div>
 </div>

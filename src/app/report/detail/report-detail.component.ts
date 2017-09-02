@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { ProductInfo } from '../../models';
+import { ReportInfo } from '../../models';
 
 @Component({
   selector: 'report-detail',
@@ -9,25 +9,26 @@ import { ProductInfo } from '../../models';
   styleUrls: ['./report-detail.component.css']
 })
 export class ReportDetailComponent implements OnInit {
-  model: ProductInfo;
+  model: ReportInfo;
   
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
-    if (this.DL.Product)
-      this.model = Object.assign({}, this.DL.Product);
-    else
-      this.model = new ProductInfo();
+      this.model = Object.assign({}, this.DL.Report);
   }
 
   Save() {
-    this.DA.ProductSave(this.model);
+    this.DA.ReportSave(this.model);
     this.LoadList();
   }
 
   LoadList() {
-    this.DL.LoadFromLink("product-list");
+    this.DL.LoadFromLink("report-list");
+  }
+
+  getDate(keyDay: number): Date {
+    return this.core.numberToDate(parseInt(keyDay + '000000'))
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Product Details";
+    this.DL.TITLE = "Cash Balancing Details";
   }
 }

@@ -86,7 +86,7 @@
       <tr class="rightRow">
         <td class="selectionRow">
           <md-input-container class="longText">
-            <input mdInput placeholder="Member" disabled value="{{ selectedMember.Name }}">
+            <input mdInput placeholder="Member" [readonly]="true" value="{{ selectedMember.Name }}">
           </md-input-container>
         </td>
       </tr>

@@ -231,7 +231,11 @@ export class DataAccess {
     }
 
     public ReportTodaySave() {
-        this.reportDAL.Save();
+        this.reportDAL.SaveTodayReport();
         this.reportDAL.Load();
+    }
+    
+    public ReportSave(item: ReportInfo) {
+        this.reportDAL.Save(item);
     }
 }

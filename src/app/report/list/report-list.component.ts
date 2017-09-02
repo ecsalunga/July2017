@@ -32,6 +32,6 @@ export class ReportListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Report List";
+    this.DL.TITLE = "Daily Cashflows";
   }
 }

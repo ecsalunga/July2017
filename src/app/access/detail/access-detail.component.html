@@ -113,6 +113,32 @@
       </td>
     </tr>
     <tr>
+        <td colspan="3">
+          <table style="margin-left: 10px;">
+            <tr>
+              <td colspan="3" class="accessLabel">Balancing</td>
+            </tr>
+            <tr>
+              <td>
+                <md-slide-toggle [(ngModel)]="model.ReportBalanceView">
+                  View
+                </md-slide-toggle>
+              </td>
+              <td>
+                <md-slide-toggle [(ngModel)]="model.ReportBalanceStartEdit">
+                  Edit Start
+                </md-slide-toggle>
+              </td>
+              <td>
+                <md-slide-toggle [(ngModel)]="model.ReportBalanceActualEdit">
+                  Edit Actual
+                </md-slide-toggle>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    <tr>
       <td colspan="3" class="accessLabel">Sell</td>
     </tr>
     <tr>

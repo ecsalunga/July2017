@@ -60,6 +60,6 @@ export class ShowcaseScheduleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Showcase Schedule (" + this.model.Name + ")";
+    this.DL.TITLE = "Showcase Schedule";
   }
 }

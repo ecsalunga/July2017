@@ -78,7 +78,7 @@ export class DataLayer {
         this.ReportToday.KeyDay = this.core.dateToKeyDay(this.Date);
         this.ReportToday.KeyMonth = this.core.dateToKeyMonth(this.Date);
         this.ReportToday.KeyYear = this.Date.getFullYear();
-        this.ReportSelectedReset();
+        this.ReportSelected = this.ReportToday;
         
         this.ReportYears = new Array<number>();
         for (let x = this.ReportToday.KeyYear - 5; x <= this.ReportToday.KeyYear; x++) {
@@ -123,13 +123,6 @@ export class DataLayer {
                     this.UserAccess = access;
             });
         }
-    }
-
-    public ReportSelectedReset() {
-        this.ReportSelected = new ReportInfo();
-        this.ReportSelected.KeyDay = this.core.dateToKeyDay(this.Date);
-        this.ReportSelected.KeyMonth = this.core.dateToKeyMonth(this.Date);
-        this.ReportSelected.KeyYear = this.Date.getFullYear();
     }
 
     public LoadFromMenu(name: string) {
