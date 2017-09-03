@@ -29,7 +29,8 @@ export class DataLayer {
     STATUS_CREATED: string = "Created";
     STATUS_ASSIGNED: string = "Assigned";
     STATUS_IN_PROGRESS: string = "In-Progress";
-    STATUS_DONE: string = "Done";
+    STATUS_DELIVERED: string = "Delivered";
+    STATUS_CANCELLED: string = "Cancelled";
 
     Product: ProductInfo;
     Products: Array<ProductInfo>;
@@ -47,6 +48,7 @@ export class DataLayer {
 
     Delivery: DeliveryInfo;
     DeliveryInfos: Array<DeliveryInfo>;
+    DeliveryStatuses: Array<string>;
 
     ExpenseTypes: Array<string>;
     ExpensesToday: Array<ExpenseInfo>;
@@ -119,6 +121,14 @@ export class DataLayer {
             new NameValue("Guest", 0)
         ];
 
+        this.DeliveryStatuses = [
+            this.STATUS_CREATED,
+            this.STATUS_ASSIGNED,
+            this.STATUS_IN_PROGRESS,
+            this.STATUS_DELIVERED,
+            this.STATUS_CANCELLED
+        ];
+
         this.MemberWalkIn = new UserInfo();
         this.MemberWalkIn.Name = "Walk-In";
         this.MemberWalkIn.key = "Walk-In";
@@ -147,6 +157,22 @@ export class DataLayer {
         item.ActionLast = this.GetActionDate();
         let action = new NameValue(item.Status, item.ActionLast);
         item.Actions.push(action);
+    }
+
+    public DeliveryGetInfo(item: DeliveryInfo) {
+        this.Members.forEach(info => {
+            if(item.Transaction.MemberKey == info.key) {
+                item.Address = info.Address1 + this.appendIfSet(info.Address2);
+                item.Contact = info.Contact1 + this.appendIfSet(info.Contact2);
+            }
+        });
+    }
+    
+    private appendIfSet(value: string): string {
+        if(value)
+            return ", " + value;
+        
+        return "";
     }
 
     public GetActionDate(): number {

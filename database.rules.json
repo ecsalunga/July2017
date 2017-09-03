@@ -39,8 +39,11 @@
       },
       "sellInfos": {
         ".read": "true",
-        ".write": "true",
-        ".indexOn": "id"
+        ".write": "true"
+      },
+      "deliveryInfos": {
+        ".read": "true",
+        ".write": "true"
       },
       "cancels": {
         ".read": "true",

@@ -169,9 +169,26 @@
       <td colspan="3" class="accessLabel">Delivery</td>
     </tr>
     <tr>
-      <td colspan="3">
+      <td>
         <md-slide-toggle [(ngModel)]="model.DeliveryView">
           View
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.DeliveryEdit">
+          Edit
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.DeliveryDelete">
+          Delete
+        </md-slide-toggle>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <md-slide-toggle [(ngModel)]="model.DeliveryDoneView">
+          View Done
         </md-slide-toggle>
       </td>
     </tr>

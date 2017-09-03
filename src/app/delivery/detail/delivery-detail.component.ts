@@ -11,13 +11,15 @@ import { DeliveryInfo, UserInfo } from '../../models';
 export class DeliveryDetailComponent implements OnInit {
   model: DeliveryInfo;
   selectedUser: UserInfo;
+  selectedStatus: string;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
-      this.model = Object.assign({}, this.DL.Delivery);
-      this.DL.UserSelections.forEach(item => {
-        if(item.key == this.model.UserKey)
-          this.selectedUser = item;
-      });
+    this.model = Object.assign({}, this.DL.Delivery);
+    this.selectedStatus = this.model.Status;
+    this.DL.UserSelections.forEach(item => {
+      if(item.key == this.model.UserKey)
+        this.selectedUser = item;
+    });
   }
 
   Assign() {
@@ -27,8 +29,14 @@ export class DeliveryDetailComponent implements OnInit {
   }
 
   Save() {
-    if(this.selectedUser.key != this.DL.Delivery.UserKey)
+    let isAssign = false;
+    if(this.selectedUser.key != this.DL.Delivery.UserKey) {
+      isAssign = true;
       this.Assign();
+    }
+
+    if(this.selectedStatus != this.DL.Delivery.Status && !(isAssign && this.selectedStatus == this.DL.STATUS_ASSIGNED))
+      this.DL.DeliveryUpdateStatus(this.model, this.selectedStatus);
 
     this.DA.DeliverySave(this.model);
     this.LoadList();

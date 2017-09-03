@@ -41,6 +41,9 @@ export class AccessInfo {
     TransactionSearch: boolean;
 
     DeliveryView: boolean;
+    DeliveryDoneView: boolean;
+    DeliveryEdit: boolean;
+    DeliveryDelete: boolean; 
 
     UserView: boolean;
     UserEdit: boolean;

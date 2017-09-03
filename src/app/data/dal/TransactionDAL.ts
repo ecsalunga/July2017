@@ -93,9 +93,8 @@ export class TransactionDAL {
         info.Amount = this.DL.SellInfosAmount;
         info.ActionDate = this.DL.GetActionDate();
         info.KeyDay = this.DL.GetKeyDay();
-        info.IsDelivery = isDelivery;
 
-        if(info.IsDelivery)
+        if(isDelivery)
             this.DeliveryStart(info);
         else {
             this.Save(info);
@@ -112,7 +111,8 @@ export class TransactionDAL {
         item.UserName = this.DL.UserPending.Name;
         item.Transaction = info;
         item.ActionStart = this.DL.GetActionDate();
-
+        
+        this.DL.DeliveryGetInfo(item);
         this.DL.DeliveryUpdateStatus(item, this.DL.STATUS_CREATED);
         this.DeliverySave(item);
     }

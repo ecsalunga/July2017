@@ -74,38 +74,37 @@
       </tr>
     </table>
   </div>
-  <div>
-    <md-input-container>
-      <input id="txtStart" mdInput readonly placeholder="Start" value="{{ getDate(model.ActionStart) | date : 'shortTime' }}" />
-    </md-input-container>
-  </div>
-  <div>
-    <md-input-container>
-      <input id="txtLast" mdInput readonly placeholder="Last Update" value="{{ getDate(model.ActionLast) | date : 'shortTime' }}" />
-    </md-input-container>
-  </div>
   <div> 
     <md-input-container class="longText">
       <input id="txtBuyer" mdInput readonly placeholder="Member" [(ngModel)]="model.Transaction.BuyerName"  />
     </md-input-container>
   </div>
-  <div>
-    <md-input-container>
-      <input id="txtStatus" mdInput readonly placeholder="Status" [(ngModel)]="model.Status" />
+  <div> 
+    <md-input-container class="fullWidth">
+      <input id="txtContact" mdInput readonly placeholder="Contact" [(ngModel)]="model.Contact"  />
+    </md-input-container>
+  </div>
+  <div> 
+    <md-input-container class="fullWidth">
+      <input id="txtAddress" mdInput readonly placeholder="Address" [(ngModel)]="model.Address"  />
     </md-input-container>
   </div>
   <div class="vSmallSpacer"></div>
   <div>
     <md-select placeholder="Assigned" class="longText" [(ngModel)]="selectedUser">
-      <md-option *ngFor="let item of this.DL.UserSelections" [value]="item">
+      <md-option *ngFor="let item of DL.UserSelections" [value]="item">
         {{ item.Name }}
+      </md-option>
+    </md-select>
+    <md-select placeholder="Status" class="longText" [(ngModel)]="selectedStatus">
+      <md-option *ngFor="let status of DL.DeliveryStatuses" [value]="status">
+        {{ status }}
       </md-option>
     </md-select>
   </div>
   <div class="hSpacer"></div>
   <div class="rightRow">
-    <button md-fab (click)="Save()" [disabled]="!DL.UserAccess.ReportBalanceStartEdit && !DL.UserAccess.ReportBalanceActualEdit"
-      mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+    <button md-fab (click)="Save()" [disabled]="!DL.UserAccess.DeliveryEdit" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
     <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
   </div>
 </div>

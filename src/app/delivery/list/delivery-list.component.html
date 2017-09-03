@@ -20,23 +20,25 @@
       </tr>
     </thead>
     <ng-container *ngFor="let item of DL.DeliveryInfos">
-      <tr>
-        <td>
-          {{ getDate(item.ActionStart) | date : 'shortTime' }}
-        </td>
-        <td>
-          {{ getDate(item.ActionLast) | date : 'shortTime' }}
-        </td>
-        <td>
-          {{ item.Status }}
-        </td>
-        <td>
-          {{ item.UserName }}
-        </td>
-        <td class="rightRow">
-          <button md-mini-fab (click)="Select(item)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
-        </td>
-      </tr>
+      <ng-container *ngIf="Visible(item)">
+        <tr>
+          <td>
+            {{ getDate(item.ActionStart) | date : 'shortTime' }}
+          </td>
+          <td>
+            {{ getDate(item.ActionLast) | date : 'shortTime' }}
+          </td>
+          <td>
+            {{ item.Status }}
+          </td>
+          <td>
+            {{ item.UserName }}
+          </td>
+          <td class="rightRow">
+            <button md-mini-fab (click)="Select(item)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
+          </td>
+        </tr>
+      </ng-container>
     </ng-container>
   </table>
 </div>

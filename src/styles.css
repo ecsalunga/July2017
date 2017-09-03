@@ -93,6 +93,10 @@ th {
     vertical-align: text-top;
 }
 
+.tdSeparator {
+    border-right: 1px solid #eeeeee;
+}
+
 textarea {
     height: 70px;
 }

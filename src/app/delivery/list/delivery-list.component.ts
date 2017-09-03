@@ -16,6 +16,14 @@ export class DeliveryListComponent implements OnInit {
     this.DL.LoadFromLink("delivery-detail");
   }
 
+  Visible(item: DeliveryInfo): boolean {
+    let view = true;
+    if(!this.DL.UserAccess.DeliveryDoneView && (item.Status == this.DL.STATUS_DELIVERED || item.Status == this.DL.STATUS_CANCELLED))
+      view = false;
+
+    return view;
+  }
+
   getDate(actionDate: number): Date {
     return this.core.numberToDate(actionDate);
   }

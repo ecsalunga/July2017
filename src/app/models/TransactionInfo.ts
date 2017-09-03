@@ -18,7 +18,6 @@ export class TransactionInfo {
     Amount: number;
     ActionDate: number;
     KeyDay: number;
-    IsDelivery: boolean;
 }
 
 export class DeliveryInfo {
@@ -26,6 +25,8 @@ export class DeliveryInfo {
     UserKey: string;
     UserName: string;
     Transaction: TransactionInfo;
+    Address: string;
+    Contact: string;
     ActionStart: number;
     ActionLast: number;
     Status: string;
