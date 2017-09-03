@@ -23,19 +23,19 @@
       </button>
       <ng-container *ngIf="DL.UserAccess.MemberView">
         <button md-menu-item (click)="LoadPage('member-list')">
-          <md-icon>card_membership</md-icon>
+          <md-icon>account_box</md-icon>
           <span>Member</span>
         </button>
       </ng-container>
       <ng-container *ngIf="DL.UserAccess.ShowcaseView">
         <button md-menu-item (click)="LoadPage('showcase-list')">
-          <md-icon>pages</md-icon>
+          <md-icon>shop</md-icon>
           <span>Showcase</span>
         </button>
       </ng-container>
       <ng-container *ngIf="DL.UserAccess.ProductView">
         <button md-menu-item (click)="LoadPage('product-list')">
-          <md-icon>book</md-icon>
+          <md-icon>card_giftcard</md-icon>
           <span>Product</span>
         </button>
       </ng-container>
@@ -83,19 +83,19 @@
       </ng-container>
       <ng-container *ngIf="DL.UserAccess.ReportBalanceView">
         <button md-menu-item (click)="LoadPage('user-list')">
-          <md-icon>accessibility</md-icon>
+          <md-icon>supervisor_account</md-icon>
           <span>User</span>
         </button>
       </ng-container>
       <ng-container *ngIf="DL.UserAccess.AccessView">
         <button md-menu-item (click)="LoadPage('access-list')">
-          <md-icon>settings_applications</md-icon>
+          <md-icon>accessibility</md-icon>
           <span>Access</span>
         </button>
       </ng-container>
       <ng-container *ngIf="DL.User.UID;else showSignOut">
         <button md-menu-item (click)="DA.LogOut()">
-          <md-icon>lock</md-icon>
+          <md-icon>exit_to_app</md-icon>
           <span>Log Out</span>
         </button>
       </ng-container>

@@ -142,6 +142,13 @@ export class DataLayer {
         }
     }
 
+    public DeliveryUpdateStatus(item: DeliveryInfo, status: string) {
+        item.Status = status;
+        item.ActionLast = this.GetActionDate();
+        let action = new NameValue(item.Status, item.ActionLast);
+        item.Actions.push(action);
+    }
+
     public GetActionDate(): number {
         return this.core.dateToNumber(new Date());
     }

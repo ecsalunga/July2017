@@ -16,6 +16,10 @@ export class DeliveryListComponent implements OnInit {
     this.DL.LoadFromLink("delivery-detail");
   }
 
+  getDate(actionDate: number): Date {
+    return this.core.numberToDate(actionDate);
+  }
+
   ngOnInit() { 
     this.DL.TITLE = "Delivery List";
   }

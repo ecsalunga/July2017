@@ -25,10 +25,11 @@ export class ReportDetailComponent implements OnInit {
   }
 
   getComputed() : number {
-    if(!this.model.COHStart)
-      this.model.COHStart = 0;
+    let start = 0;
+    if(this.model.COHStart)
+      start = this.model.COHStart;
 
-    return ((this.model.COHStart + this.model.SaleAmount) - this.model.ExpenseAmount)
+    return ((start + this.model.SaleAmount) - this.model.ExpenseAmount)
   }
 
   getDate(keyDay: number): Date {

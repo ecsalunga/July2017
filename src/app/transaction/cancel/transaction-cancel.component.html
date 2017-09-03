@@ -19,7 +19,7 @@
           {{ info.Description }}
         </td>
         <td>
-          {{ getDate(info.ActionDate) | date : 'yyyy-MM-dd hh:mm a' }}
+          {{ getDate(info.ActionDate) | date : 'short' }}
         </td>
         <td class="totalColumn">
           {{info.Amount | number:'1.2-2'}}

@@ -14,7 +14,7 @@ export class ShowcaseScheduleComponent implements OnInit {
   model: ShowcaseInfo;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
-    // workaround for schedules deep clone issue
+    // workaround for array property deep clone issue
     this.model = new ShowcaseInfo();
     this.model.Name = this.DL.Showcase.Name;
     this.model.Code = this.DL.Showcase.Code;

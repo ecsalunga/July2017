@@ -19,7 +19,7 @@
           {{info.Description}}
         </td>
         <td>
-          {{ this.core.numberToDate(info.ActionDate) | date : 'hh:mm a' }}
+          {{ this.core.numberToDate(info.ActionDate) | date : 'shortTime' }}
         </td>
         <td class="totalColumn">
           {{info.Amount | number:'1.2-2'}}

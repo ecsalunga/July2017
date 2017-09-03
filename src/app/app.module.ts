@@ -56,6 +56,7 @@ import { ReportBalancingComponent } from './report/balancing/report-balancing.co
 import { ReportDetailComponent } from './report/detail/report-detail.component';
 import { UserDetailComponent } from './user/detail/user-detail.component';
 import { DeliveryListComponent } from './delivery/list/delivery-list.component';
+import { DeliveryDetailComponent } from './delivery/detail/delivery-detail.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { DeliveryListComponent } from './delivery/list/delivery-list.component';
     ReportBalancingComponent,
     ReportDetailComponent,
     UserDetailComponent,
-    DeliveryListComponent
+    DeliveryListComponent,
+    DeliveryDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -131,7 +133,8 @@ import { DeliveryListComponent } from './delivery/list/delivery-list.component';
     ReportBalancingComponent,
     ReportDetailComponent,
     UserDetailComponent,
-    DeliveryListComponent
+    DeliveryListComponent,
+    DeliveryDetailComponent
   ]
 })
 export class AppModule {

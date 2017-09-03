@@ -113,15 +113,8 @@ export class TransactionDAL {
         item.Transaction = info;
         item.ActionStart = this.DL.GetActionDate();
 
-        this.UpdateDeliveryStatus(item, this.DL.STATUS_CREATED);
+        this.DL.DeliveryUpdateStatus(item, this.DL.STATUS_CREATED);
         this.DeliverySave(item);
-    }
-
-    public UpdateDeliveryStatus(item: DeliveryInfo, status: string) {
-        item.Status = status;
-        item.ActionLast = this.DL.GetActionDate();
-        let action = new NameValue(item.Status, item.ActionLast);
-        item.Actions.push(action);
     }
 
     public DeliverySave(item: DeliveryInfo) {

@@ -25,7 +25,7 @@
           {{ tran.BuyerName }}
         </td>
         <td>
-          {{ this.core.numberToDate(tran.ActionDate) | date : 'hh:mm a' }}
+          {{ this.core.numberToDate(tran.ActionDate) | date : 'shortTime' }}
         </td>
         <td class="totalColumn">
           {{ tran.Count }}

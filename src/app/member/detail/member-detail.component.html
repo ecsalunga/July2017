@@ -31,6 +31,11 @@
     </md-input-container>
     <md-datepicker #picker></md-datepicker>
   </div>
+  <div>
+    <md-slide-toggle [disabled]="!DL.UserAccess.UserGroupEdit" [(ngModel)]="model.IsSystemUser">
+      Sytem User
+    </md-slide-toggle>
+  </div>
   <div class="hSpacer"></div>
   <div class="rightRow">
     <button md-fab (click)="Save()" [disabled]="(!DL.UserAccess.MemberEdit && model.key) || (!DL.UserAccess.MemberAdd && !model.key)" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>

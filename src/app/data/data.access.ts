@@ -24,7 +24,8 @@ import {
     UserInfo, 
     ShowcaseInfo, 
     AccessInfo, 
-    CancelInfo 
+    CancelInfo,
+    DeliveryInfo
 } from './../models';
 
 @Injectable()
@@ -223,6 +224,10 @@ export class DataAccess {
 
     public SellInfoDone(memberKey: string, buyerName: string, isDelivery: boolean) {
         this.transactionDAL.SellDone(memberKey, buyerName, isDelivery);
+    }
+
+    public DeliverySave(item: DeliveryInfo) {
+        this.transactionDAL.DeliverySave(item);
     }
 
     public ProductUpdteFromSellInfo() {

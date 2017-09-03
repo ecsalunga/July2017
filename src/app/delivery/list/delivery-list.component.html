@@ -22,10 +22,10 @@
     <ng-container *ngFor="let item of DL.DeliveryInfos">
       <tr>
         <td>
-          {{ item.ActionStart | date : 'hh:mm a' }}
+          {{ getDate(item.ActionStart) | date : 'shortTime' }}
         </td>
         <td>
-          {{ item.ActionLast | date : 'hh:mm a' }}
+          {{ getDate(item.ActionLast) | date : 'shortTime' }}
         </td>
         <td>
           {{ item.Status }}
