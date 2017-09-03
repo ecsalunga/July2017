@@ -178,3 +178,29 @@ md-input-container {
 .good {
     color: green;
 }
+
+.item {
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.24);
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.itemHeader {
+    font-size: 14px;
+    padding: 10px;
+    background-color: #fafafa;
+}
+
+.itemName {
+    font-weight: bold;
+}
+
+.itemDescription {
+    padding: 20px;
+    color: gray;
+}
+
+.itemFooter {
+    padding: 20px;
+}
