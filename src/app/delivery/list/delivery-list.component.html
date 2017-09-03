@@ -41,4 +41,10 @@
       </ng-container>
     </ng-container>
   </table>
+  <ng-container *ngIf="DL.UserAccess.DeliveryDelete">
+  <div class="hSpacer"></div>
+  <div class="rightRow">
+    <button md-fab (click)="CleanDelete()" [disabled]="!HasClean()"  mdTooltip="Remove all done" mdTooltipPosition="above"><md-icon>delete_sweep</md-icon></button>
+  </div>
+  </ng-container>
 </div>

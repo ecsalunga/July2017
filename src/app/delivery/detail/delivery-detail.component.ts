@@ -28,6 +28,15 @@ export class DeliveryDetailComponent implements OnInit {
     this.DL.DeliveryUpdateStatus(this.model, this.DL.STATUS_ASSIGNED);
   }
 
+  IsDone(): boolean {
+    return (this.model.Status == this.DL.STATUS_DELIVERED || this.model.Status == this.DL.STATUS_CANCELLED);
+  }
+
+  Delete() {
+    this.DA.DeliveryDelete(this.model);
+    this.LoadList();
+  }
+
   Save() {
     let isAssign = false;
     if(this.selectedUser.key != this.DL.Delivery.UserKey) {

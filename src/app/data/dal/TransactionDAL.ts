@@ -98,7 +98,7 @@ export class TransactionDAL {
             this.DeliveryStart(info);
         else {
             this.Save(info);
-            this.DA.ProductUpdteFromSellInfo();
+            this.DA.ProductUpdate(info.Items);
             this.DA.ReportTodaySave();
         }
 
@@ -118,10 +118,23 @@ export class TransactionDAL {
     }
 
     public DeliverySave(item: DeliveryInfo) {
+        if(item.Status == this.DL.STATUS_DELIVERED)
+            this.DeliveryDone(item);
+
         if (item.key)
             this.af.list(this.PATH_DELIVERY).update(item.key, item);
         else
             this.af.list(this.PATH_DELIVERY).push(item);
+    }
+
+    public DeliveryDone(info: DeliveryInfo) {
+        this.Save(info.Transaction);
+        this.DA.ProductUpdate(info.Transaction.Items);
+        this.DA.ReportTodaySave();
+    }
+
+    public DeliveryDelete(item: DeliveryInfo) {
+        this.af.list(this.PATH_DELIVERY).remove(item.key);
     }
 
     public SellDelete(item: SellInfo) {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
-import { DataLayer } from '../../data';
+import { DataLayer, DataAccess } from '../../data';
 import { DeliveryInfo } from '../../models';
 
 @Component({
@@ -9,7 +9,7 @@ import { DeliveryInfo } from '../../models';
   styleUrls: ['./delivery-list.component.css']
 })
 export class DeliveryListComponent implements OnInit {
-  constructor(private core: Core, private DL: DataLayer) {}
+  constructor(private core: Core, private DL: DataLayer, private DA: DataAccess) {}
   
   Select(item: DeliveryInfo) {
     this.DL.Delivery = item;
@@ -22,6 +22,23 @@ export class DeliveryListComponent implements OnInit {
       view = false;
 
     return view;
+  }
+
+  HasClean(): boolean {
+    let hasClean = false
+    this.DL.DeliveryInfos.forEach(item => {
+      if(item.Status == this.DL.STATUS_DELIVERED || item.Status == this.DL.STATUS_CANCELLED)
+        hasClean = true;
+    });
+
+    return hasClean;
+  }
+
+  CleanDelete() {
+    this.DL.DeliveryInfos.forEach(item => {
+      if(item.Status == this.DL.STATUS_DELIVERED || item.Status == this.DL.STATUS_CANCELLED)
+        this.DA.DeliveryDelete(item);
+    });
   }
 
   getDate(actionDate: number): Date {

@@ -89,8 +89,7 @@
       <input id="txtAddress" mdInput readonly placeholder="Address" [(ngModel)]="model.Address"  />
     </md-input-container>
   </div>
-  <div class="vSmallSpacer"></div>
-  <div>
+  <div class="selectionRow">
     <md-select placeholder="Assigned" class="longText" [(ngModel)]="selectedUser">
       <md-option *ngFor="let item of DL.UserSelections" [value]="item">
         {{ item.Name }}
@@ -104,7 +103,8 @@
   </div>
   <div class="hSpacer"></div>
   <div class="rightRow">
-    <button md-fab (click)="Save()" [disabled]="!DL.UserAccess.DeliveryEdit" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+    <button md-fab *ngIf="IsDone()" (click)="Delete()" [disabled]="!DL.UserAccess.DeliveryDelete" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
+    <button md-fab *ngIf="!IsDone()" (click)="Save()" [disabled]="!DL.UserAccess.DeliveryEdit" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
     <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
   </div>
 </div>

@@ -230,8 +230,12 @@ export class DataAccess {
         this.transactionDAL.DeliverySave(item);
     }
 
-    public ProductUpdteFromSellInfo() {
-        this.productDAL.UpdateFromSellInfo();
+    public DeliveryDelete(item: DeliveryInfo) {
+        this.transactionDAL.DeliveryDelete(item);
+    }
+
+    public ProductUpdate(infos: Array<SellInfo>) {
+        this.productDAL.UpdateProducts(infos);
     }
 
     public TransactionSelectedCancel(description: string) {

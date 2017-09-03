@@ -1,5 +1,5 @@
 import { DataLayer } from './../data.layer';
-import { ProductInfo } from './../../models';
+import { ProductInfo, SellInfo } from './../../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class ProductDAL {
@@ -28,11 +28,11 @@ export class ProductDAL {
             this.af.list(this.PATH).push(item);
     }
 
-    public UpdateFromSellInfo() {
+    public UpdateProducts(infos: Array<SellInfo>) {
         let items = Array<ProductInfo>();
-
+        
         // update in memory first to prevent data sync issue
-        this.DL.SellInfos.forEach(sell => {
+        infos.forEach(sell => {
             this.DL.Products.forEach(product => {
                 if (sell.Code == product.Code) {
                     product.Quantity -= sell.Quantity;
