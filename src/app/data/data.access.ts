@@ -25,7 +25,8 @@ import {
     ShowcaseInfo, 
     AccessInfo, 
     CancelInfo,
-    DeliveryInfo
+    DeliveryInfo,
+    SettingInfo
 } from './../models';
 
 @Injectable()
@@ -39,6 +40,7 @@ export class DataAccess {
     transactionDAL: TransactionDAL;
     
     USERS: string = "/users";
+    SETTING: string = "/setting";
     StorageRef: firebase.storage.Reference = firebase.storage().ref();
 
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase, private afAuth: AngularFireAuth) {
@@ -64,7 +66,8 @@ export class DataAccess {
 
     public DataLoad() {
         this.accessDAL.Load();
-        this.UserLoad(); 
+        this.SettingLoad();
+        this.UserLoad();
         this.showcaseDAL.Load();
     }
 
@@ -157,6 +160,13 @@ export class DataAccess {
                 this.DL.IsAuthenticating = true;
                 this.UserAuthenticate();
             }
+        });
+    }
+
+    SettingLoad() {
+        this.af.object(this.SETTING).first().subscribe(snapshot => {
+            if (snapshot.$exists())
+                this.DL.Setting = snapshot;
         });
     }
 
@@ -261,5 +271,10 @@ export class DataAccess {
     
     public ReportSave(item: ReportInfo) {
         this.reportDAL.Save(item);
+    }
+
+    public SettingSave(item: SettingInfo) {
+        this.af.object(this.SETTING).update(item);
+        this.DL.Setting = item;
     }
 }

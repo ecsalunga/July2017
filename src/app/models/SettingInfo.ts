@@ -1,3 +1,3 @@
 export class SettingInfo {
-    DeliveryMaxTime: number;
+    DeliveryMaxMinutes: number;
 }

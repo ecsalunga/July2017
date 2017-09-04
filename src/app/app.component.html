@@ -93,6 +93,12 @@
           <span>Access</span>
         </button>
       </ng-container>
+      <ng-container *ngIf="DL.UserAccess.SettingView">
+        <button md-menu-item (click)="LoadPage('system-setting')">
+          <md-icon>settings</md-icon>
+          <span>Settings</span>
+        </button>
+      </ng-container>
       <ng-container *ngIf="DL.User.UID;else showSignOut">
         <button md-menu-item (click)="DA.LogOut()">
           <md-icon>exit_to_app</md-icon>

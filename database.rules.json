@@ -55,6 +55,10 @@
       ".read": "true",
       ".write": "true",
       ".indexOn": "KeyMonth"
+    },
+    "setting": {
+      ".read": "true",
+      ".write": "true"
     }
   }
 }

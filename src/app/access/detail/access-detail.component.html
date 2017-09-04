@@ -307,6 +307,21 @@
         </table>
       </td>
     </tr>
+    <tr>
+      <td colspan="3" class="accessLabel">Setting</td>
+    </tr>
+    <tr>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.SettingView">
+          View
+        </md-slide-toggle>
+      </td>
+      <td colspan="2">
+        <md-slide-toggle [(ngModel)]="model.SettingEdit">
+          Edit
+        </md-slide-toggle>
+      </td>
+    </tr>
   </table>
   <div class="hSpacer"></div>
   <div class="rightRow">

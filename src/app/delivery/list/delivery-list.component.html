@@ -28,7 +28,7 @@
           <td>
             {{ getDate(item.ActionLast) | date : 'shortTime' }}
           </td>
-          <td>
+          <td class="{{ IsLate(item) ?  'bad' : 'good' }}">
             {{ item.Status }}
           </td>
           <td>

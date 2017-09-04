@@ -19,6 +19,7 @@ import {
   MdToolbarModule,
   MdIconModule,
   MdSidenavModule,
+  MdSnackBarModule,
   MdSlideToggleModule,
   DateAdapter
  } from '@angular/material';
@@ -57,6 +58,7 @@ import { ReportDetailComponent } from './report/detail/report-detail.component';
 import { UserDetailComponent } from './user/detail/user-detail.component';
 import { DeliveryListComponent } from './delivery/list/delivery-list.component';
 import { DeliveryDetailComponent } from './delivery/detail/delivery-detail.component';
+import { SystemSettingComponent } from './system/setting/system-setting.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +85,8 @@ import { DeliveryDetailComponent } from './delivery/detail/delivery-detail.compo
     ReportDetailComponent,
     UserDetailComponent,
     DeliveryListComponent,
-    DeliveryDetailComponent
+    DeliveryDetailComponent,
+    SystemSettingComponent
   ],
   imports: [
     BrowserModule,
@@ -103,6 +106,7 @@ import { DeliveryDetailComponent } from './delivery/detail/delivery-detail.compo
     MdIconModule,
     MdSidenavModule,
     MdSlideToggleModule,
+    MdSnackBarModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -134,7 +138,8 @@ import { DeliveryDetailComponent } from './delivery/detail/delivery-detail.compo
     ReportDetailComponent,
     UserDetailComponent,
     DeliveryListComponent,
-    DeliveryDetailComponent
+    DeliveryDetailComponent,
+    SystemSettingComponent
   ]
 })
 export class AppModule {

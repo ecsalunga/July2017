@@ -24,6 +24,18 @@ export class DeliveryListComponent implements OnInit {
     return view;
   }
 
+  IsLate(item: DeliveryInfo): boolean {
+    let late = false;
+    if(this.DL.Setting.DeliveryMaxMinutes && this.DL.Setting.DeliveryMaxMinutes > 0) {
+      if(item.Status == this.DL.STATUS_DELIVERED || item.Status == this.DL.STATUS_CANCELLED)
+        late = (item.ActionLast - item.ActionStart > this.DL.Setting.DeliveryMaxMinutes * 100);
+      else
+        late = (this.DL.GetActionDate() - item.ActionStart > this.DL.Setting.DeliveryMaxMinutes * 100);
+    } 
+
+    return late;
+  }
+
   HasClean(): boolean {
     let hasClean = false
     this.DL.DeliveryInfos.forEach(item => {

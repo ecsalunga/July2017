@@ -11,7 +11,8 @@ import {
     ShowcaseInfo, 
     AccessInfo, 
     CancelInfo,
-    DeliveryInfo
+    DeliveryInfo,
+    SettingInfo
 } from './../models';
 
 @Injectable()
@@ -86,6 +87,8 @@ export class DataLayer {
     IsAuthenticating: boolean = false;
     IsDataActiveLoaded: boolean = false;
 
+    Setting: SettingInfo;
+
     constructor(private core: Core) {
         this.ReportToday = new ReportInfo();
         this.ReportToday.KeyDay = this.core.dateToKeyDay(this.Date);
@@ -137,6 +140,8 @@ export class DataLayer {
         this.UserPending.Name = "Pending";
         this.UserPending.key = "Pending";
 
+        this.Setting = new SettingInfo();
+        
         this.User = new UserInfo();
         this.UserAccess = new AccessInfo();
     }

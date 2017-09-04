@@ -1,0 +1,11 @@
+<div>
+  <div>
+    <md-input-container>
+      <input id="txtDeliveryMaxTime" type="number" mdInput placeholder="Delivery Max Minutes" [(ngModel)]="model.DeliveryMaxMinutes" />
+    </md-input-container>
+  </div>
+  <div class="hSpacer"></div>
+  <div class="rightRow">
+    <button md-fab (click)="Save()" [disabled]="!DL.UserAccess.SettingEdit" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+  </div>
+</div>
