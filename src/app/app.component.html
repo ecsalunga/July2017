@@ -92,10 +92,10 @@
         <span>Access</span>
       </button>
     </ng-container>
-    <ng-container *ngIf="DL.UserAccess.SettingView">
-      <button md-menu-item (click)="LoadPage('system-setting')">
+    <ng-container *ngIf="DL.UserAccess.ModuleSettingView">
+      <button md-menu-item (click)="LoadPage('setting-module')">
         <md-icon>settings</md-icon>
-        <span>Settings</span>
+        <span>Modules</span>
       </button>
     </ng-container>
     <ng-container *ngIf="DL.User.UID;else showSignOut">

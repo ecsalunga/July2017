@@ -57,7 +57,7 @@ import { ReportDetailComponent } from './report/detail/report-detail.component';
 import { UserDetailComponent } from './user/detail/user-detail.component';
 import { DeliveryListComponent } from './delivery/list/delivery-list.component';
 import { DeliveryDetailComponent } from './delivery/detail/delivery-detail.component';
-import { SystemSettingComponent } from './system/setting/system-setting.component';
+import { SettingModuleComponent } from './setting/module/setting-module.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +85,7 @@ import { SystemSettingComponent } from './system/setting/system-setting.componen
     UserDetailComponent,
     DeliveryListComponent,
     DeliveryDetailComponent,
-    SystemSettingComponent
+    SettingModuleComponent
   ],
   imports: [
     BrowserModule,
@@ -137,7 +137,7 @@ import { SystemSettingComponent } from './system/setting/system-setting.componen
     UserDetailComponent,
     DeliveryListComponent,
     DeliveryDetailComponent,
-    SystemSettingComponent
+    SettingModuleComponent
   ]
 })
 export class AppModule {

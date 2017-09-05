@@ -118,7 +118,7 @@ export class TransactionDAL {
         item.Transaction = info;
         item.ActionStart = this.DL.GetActionDate();
         
-        if(this.DL.Setting.IsDeliveryToggleSell)
+        if(this.DL.ModuleSetting.IsDeliveryToggleSell)
             this.DL.DeliveryToggledStamp = item.ActionStart;
 
         this.DL.DeliveryGetInfo(item);

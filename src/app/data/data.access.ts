@@ -12,6 +12,7 @@ import { ShowcaseDAL } from './dal/ShowcaseDAL';
 import { ReportDAL } from './dal/ReportDAL';
 import { CancelDAL } from './dal/CancelDAL';
 import { TransactionDAL } from './dal/TransactionDAL';
+import { SettingDAL } from './dal/SettingDAL';
 
 import 'rxjs/add/operator/first';
 import { 
@@ -26,7 +27,7 @@ import {
     AccessInfo, 
     CancelInfo,
     DeliveryInfo,
-    SettingInfo
+    ModuleSettingInfo
 } from './../models';
 
 @Injectable()
@@ -38,6 +39,7 @@ export class DataAccess {
     reportDAL: ReportDAL;
     cancelDAL: CancelDAL;
     transactionDAL: TransactionDAL;
+    settingDAL: SettingDAL;
     
     USERS: string = "/users";
     SETTING: string = "/setting";
@@ -49,7 +51,7 @@ export class DataAccess {
         this.reportDAL = new ReportDAL(core, DL, af);
         this.cancelDAL = new CancelDAL(core, DL, this, af);
         this.transactionDAL = new TransactionDAL(core, DL, this, af);
-
+        this.settingDAL = new SettingDAL(DL, af);
         this.accessDAL = new AccessDAL(DL, af);
         this.productDAL = new ProductDAL(DL, af);
     }
@@ -66,7 +68,7 @@ export class DataAccess {
 
     public DataLoad() {
         this.accessDAL.Load();
-        this.SettingLoad();
+        this.settingDAL.ModuleLoad();
         this.UserLoad();
         this.showcaseDAL.Load();
     }
@@ -163,11 +165,8 @@ export class DataAccess {
         });
     }
 
-    SettingLoad() {
-        this.af.object(this.SETTING).first().subscribe(snapshot => {
-            if (snapshot.$exists())
-                this.DL.Setting = snapshot;
-        });
+    ModuleSettingLoad() {
+        this.settingDAL.ModuleLoad();
     }
 
     TransactionCancelCurrentLoad() {
@@ -273,8 +272,8 @@ export class DataAccess {
         this.reportDAL.Save(item);
     }
 
-    public SettingSave(item: SettingInfo) {
-        this.af.object(this.SETTING).update(item);
-        this.DL.Setting = item;
+    public ModuleSettingSave(item: ModuleSettingInfo)
+    {
+        this.settingDAL.ModuleSave(item);
     }
 }

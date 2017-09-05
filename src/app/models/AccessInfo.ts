@@ -54,6 +54,6 @@ export class AccessInfo {
     MemberAdd: boolean;
     MemberEdit: boolean;
 
-    SettingView: boolean;
-    SettingEdit: boolean; 
+    ModuleSettingView: boolean;
+    ModuleSettingEdit: boolean; 
 }

@@ -27,7 +27,7 @@ export class ExpenseDAL {
 
     public LoadTypes() {
         this.af.object(this.PATH_TYPES).first().subscribe(snapshot => {
-            if (snapshot.length)
+            if (snapshot.$exists())
                 this.DL.ExpenseTypes = snapshot;
             else
                 this.DL.ExpenseTypes = new Array<string>();

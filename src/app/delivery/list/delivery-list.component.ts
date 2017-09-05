@@ -26,10 +26,10 @@ export class DeliveryListComponent implements OnInit {
 
   IsLate(item: DeliveryInfo): boolean {
     let late = false;
-    if(this.DL.Setting.DeliveryMaxMinutes && this.DL.Setting.DeliveryMaxMinutes > 0) {
+    if(this.DL.ModuleSetting.DeliveryMaxMinutes && this.DL.ModuleSetting.DeliveryMaxMinutes > 0) {
       let last = new Date();
       let start = this.core.numberToDate(item.ActionStart);
-      start.setMinutes(start.getMinutes() + this.DL.Setting.DeliveryMaxMinutes)
+      start.setMinutes(start.getMinutes() + this.DL.ModuleSetting.DeliveryMaxMinutes)
 
       if(item.Status == this.DL.STATUS_DELIVERED || item.Status == this.DL.STATUS_CANCELLED)
         last = this.core.numberToDate(item.ActionLast);

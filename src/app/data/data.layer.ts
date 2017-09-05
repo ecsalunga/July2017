@@ -12,7 +12,7 @@ import {
     AccessInfo, 
     CancelInfo,
     DeliveryInfo,
-    SettingInfo
+    ModuleSettingInfo
 } from './../models';
 
 @Injectable()
@@ -88,7 +88,7 @@ export class DataLayer {
     IsAuthenticating: boolean = false;
     IsDataActiveLoaded: boolean = false;
 
-    Setting: SettingInfo;
+    ModuleSetting: ModuleSettingInfo;
 
     constructor(private core: Core) {
         this.ReportToday = new ReportInfo();
@@ -141,7 +141,7 @@ export class DataLayer {
         this.UserPending.Name = "Pending";
         this.UserPending.key = "Pending";
 
-        this.Setting = new SettingInfo();
+        this.ModuleSetting = new ModuleSettingInfo();
         
         this.User = new UserInfo();
         this.UserAccess = new AccessInfo();
