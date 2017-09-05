@@ -81,21 +81,21 @@
   </div>
   <div> 
     <md-input-container class="fullWidth">
-      <input id="txtContact" mdInput placeholder="Contact" [(ngModel)]="model.Contact"  />
+      <input id="txtContact" mdInput [readonly]="IsDone()" placeholder="Contact" [(ngModel)]="model.Contact"  />
     </md-input-container>
   </div>
   <div> 
     <md-input-container class="fullWidth">
-      <input id="txtAddress" mdInput placeholder="Address" [(ngModel)]="model.Address"  />
+      <input id="txtAddress" mdInput [readonly]="IsDone()" placeholder="Address" [(ngModel)]="model.Address"  />
     </md-input-container>
   </div>
   <div class="selectionRow">
-    <md-select placeholder="Assigned" class="longText" [(ngModel)]="selectedUser">
+    <md-select placeholder="Assigned" [disabled]="IsDone()" class="longText" [(ngModel)]="selectedUser">
       <md-option *ngFor="let item of DL.UserSelections" [value]="item">
         {{ item.Name }}
       </md-option>
     </md-select>
-    <md-select placeholder="Status" class="longText" [(ngModel)]="selectedStatus">
+    <md-select placeholder="Status" [disabled]="IsDone()" class="longText" [(ngModel)]="selectedStatus">
       <md-option *ngFor="let status of DL.DeliveryStatuses" [value]="status">
         {{ status }}
       </md-option>

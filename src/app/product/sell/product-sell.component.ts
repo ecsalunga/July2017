@@ -85,5 +85,6 @@ export class ProductSellComponent implements OnInit {
 
   ngOnInit() {
     this.DL.TITLE = "Sell Product";
+    this.DL.DeliveryToggledStamp = 0;
   }
 }

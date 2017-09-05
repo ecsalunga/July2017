@@ -71,6 +71,12 @@ export class TransactionDAL {
                 let info: DeliveryInfo = snapshot;
                 info.key = snapshot.$key;
                 this.DL.DeliveryInfos.push(info);
+
+                if(this.DL.DeliveryToggledStamp > 0 && info.ActionStart == this.DL.DeliveryToggledStamp)
+                {
+                    this.DL.Delivery = info;
+                    this.DL.LoadFromLink("delivery-detail");
+                }
             });
         });
     }
@@ -112,6 +118,9 @@ export class TransactionDAL {
         item.Transaction = info;
         item.ActionStart = this.DL.GetActionDate();
         
+        if(this.DL.Setting.IsDeliveryToggleSell)
+            this.DL.DeliveryToggledStamp = item.ActionStart;
+
         this.DL.DeliveryGetInfo(item);
         this.DL.DeliveryUpdateStatus(item, this.DL.STATUS_CREATED);
         this.DeliverySave(item);

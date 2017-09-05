@@ -63,5 +63,6 @@ export class DeliveryListComponent implements OnInit {
 
   ngOnInit() { 
     this.DL.TITLE = "Delivery List";
+    this.DL.DeliveryToggledStamp = 0;
   }
 }

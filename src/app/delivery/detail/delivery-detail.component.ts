@@ -56,7 +56,10 @@ export class DeliveryDetailComponent implements OnInit {
   }
 
   LoadList() {
-    this.DL.LoadFromLink("delivery-list");
+    if(this.DL.DeliveryToggledStamp > 0)
+      this.DL.LoadFromLink("product-sell");
+    else
+      this.DL.LoadFromLink("delivery-list");
   }
 
   ngOnInit() {

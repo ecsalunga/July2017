@@ -50,6 +50,7 @@ export class DataLayer {
     Delivery: DeliveryInfo;
     DeliveryInfos: Array<DeliveryInfo>;
     DeliveryStatuses: Array<string>;
+    DeliveryToggledStamp: number = 0;
 
     ExpenseTypes: Array<string>;
     ExpensesToday: Array<ExpenseInfo>;
