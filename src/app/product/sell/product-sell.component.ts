@@ -23,7 +23,7 @@ export class ProductSellComponent implements OnInit {
     let item = new SellInfo();
     item.Code = this.model.Code;
     item.Description = this.model.Description;
-    item.Price = this.model.SellPrice;
+    item.Price = this.model.Price;
     item.Quantity = this.selectedQuantity;
 
     // merge items

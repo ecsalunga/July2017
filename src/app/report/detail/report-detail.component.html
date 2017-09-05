@@ -6,7 +6,7 @@
   </div>
   <div>
     <md-input-container class="longText">
-      <input id="txtCOHStart" [disabled]="!DL.UserAccess.ReportBalanceStartEdit" type="number" mdInput placeholder="Starting cash on-hand" [(ngModel)]="model.COHStart" />
+      <input id="txtCOHStart" [disabled]="!DL.UserAccess.ReportBalanceStartEdit" (click)="$event.target.select()" type="number" mdInput placeholder="Starting cash on-hand" [(ngModel)]="model.COHStart" />
     </md-input-container>
   </div>
   <div>
@@ -16,7 +16,7 @@
   </div>
   <div>
     <md-input-container class="longText">
-      <input id="txtCOHActual"  [disabled]="!DL.UserAccess.ReportBalanceActualEdit" type="number" mdInput placeholder="Actual cash on-hand" [(ngModel)]="model.COHActual" />
+      <input id="txtCOHActual"  [disabled]="!DL.UserAccess.ReportBalanceActualEdit" (click)="$event.target.select()" type="number" mdInput placeholder="Actual cash on-hand" [(ngModel)]="model.COHActual" />
     </md-input-container>
   </div>
   <div class="hSpacer"></div>

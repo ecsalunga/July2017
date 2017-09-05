@@ -2,8 +2,7 @@ export class ProductInfo {
     key: string;
     Code: string;
     Description: string;
-    BuyPrice: number;
-    SellPrice: number;
+    Price: number;
     Quantity: number;
     QuantityNotify: number;
 }
