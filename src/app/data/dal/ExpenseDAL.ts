@@ -41,7 +41,9 @@ export class ExpenseDAL {
             this.DL.ReportSelected.ExpenseCount = 0;
 
             snapshots.forEach(snapshot => {
-                this.DL.ExpenseSelected.push(snapshot);
+                let info: ExpenseInfo = snapshot;
+                info.key = snapshot.$key;
+                this.DL.ExpenseSelected.push(info);
                 this.DL.ReportSelected.ExpenseCount++;
                 this.DL.ReportSelected.ExpenseAmount += snapshot.Amount;
             });
@@ -65,5 +67,9 @@ export class ExpenseDAL {
             this.af.object(this.PATH_TYPES).update(this.DL.ExpenseTypes);
             this.LoadTypes();
         }
+    }
+
+    public Delete(item: ExpenseInfo) {
+        this.af.list(this.PATH).remove(item.key);
     }
 }

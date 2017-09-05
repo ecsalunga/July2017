@@ -9,6 +9,7 @@ export class AccessInfo {
 
     ExpenseView: boolean;
     ExpenseAdd: boolean;
+    ExpenseDelete: boolean;
     ExpenseSearch: boolean;
 
     ProductView: boolean;

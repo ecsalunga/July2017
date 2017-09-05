@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import { Core } from '../../core';
@@ -30,6 +30,11 @@ export class ReportExpenseComponent implements OnInit {
     this.filteredExpenses = this.ctrl.valueChanges
         .startWith(null)
         .map(name => this.filterExpenses(name));
+  }
+
+  Delete(item: ExpenseInfo) {
+    this.DA.ExpenseDelete(item);
+    this.ExpenseView();
   }
 
   filterExpenses(val: string) {

@@ -33,7 +33,7 @@
           {{ getDate(info.To) | date : 'yyyy-MM-dd' }}
         </td>
         <td class="rightRow">
-          <button md-mini-fab [disabled]="!DL.UserAccess.ShowcaseScheduleDelete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
+          <button md-mini-fab color="warn" [disabled]="!DL.UserAccess.ShowcaseScheduleDelete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
         </td>
       </tr>
     </ng-container>

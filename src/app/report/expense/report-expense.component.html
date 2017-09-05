@@ -11,6 +11,9 @@
         <th class="totalColumn">
           Amount
         </th>
+        <th class="rightRow">
+          Action
+        </th>
       </tr>
     </thead>
     <ng-container *ngFor="let info of DL.ExpenseSelected">
@@ -24,7 +27,12 @@
         <td class="totalColumn">
           {{info.Amount | number:'1.2-2'}}
         </td>
-      </tr>
+        <td class="rightRow">
+          <ng-container *ngIf="info.ActionDate">
+            <button md-mini-fab color="warn" [disabled]="!DL.UserAccess.ExpenseDelete || !isToday" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
+          </ng-container>
+        </td>
+      </tr> 
     </ng-container>
     <tr class="blankCell">
       <td>

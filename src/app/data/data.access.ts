@@ -264,6 +264,11 @@ export class DataAccess {
         this.ReportTodaySave();
     }
 
+    public ExpenseDelete(item: ExpenseInfo) {
+        this.expenseDAL.Delete(item);
+        this.ReportTodaySave();
+    }
+
     public ReportTodaySave() {
         this.reportDAL.SaveTodayReport();
     }

@@ -29,7 +29,7 @@
         </td>
         <td class="rightRow">
           <ng-container *ngIf="info.Price">
-            <button md-mini-fab [disabled]="!DL.UserAccess.SellDelete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
+            <button md-mini-fab color="warn" [disabled]="!DL.UserAccess.SellDelete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
           </ng-container>
         </td>
       </tr>
