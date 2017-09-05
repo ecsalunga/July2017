@@ -1,8 +1,8 @@
 <div class="navbar">
   <md-toolbar color="primary">
-    <button md-icon-button (click)="sidenav.toggle()" mdTooltip="Open menu" mdTooltipPosition="below">
+    <button md-icon-button (click)="ToggleNav()" mdTooltip="Open menu" mdTooltipPosition="below">
       <md-icon>menu</md-icon>
-    </button> TEMP System
+    </button> TEMP System <span class="demo"> ( Demo version )</span>
     <div class="h-spacer"></div>
     <ng-container *ngIf="DL.User.UID">
       <button md-button (click)="LoadPage('report-list')" class="title" mdTooltip="Dashboard" mdTooltipPosition="below">
@@ -11,128 +11,125 @@
     </ng-container>
   </md-toolbar>
 </div>
-<md-sidenav-container class="navContainer">
-  <md-sidenav #sidenav (click)="sidenav.toggle()">
-    <div class="navSide">
-      <div class="vBigSpacer">
-        <md-menu #menu="mdMenu"></md-menu>
-      </div>
-      <button md-menu-item (click)="LoadPage('dashboard-home')">
-        <md-icon>home</md-icon>
-        <span>Home</span>
+<div class="overlay" [style.width]="navWidth" (click)="ToggleNav()">
+  <div class="navSide">
+    <div class="vBigSpacer">
+      <md-menu #menu="mdMenu"></md-menu>
+    </div>
+    <button md-menu-item (click)="LoadPage('dashboard-home')">
+      <md-icon>home</md-icon>
+      <span>Home</span>
+    </button>
+    <ng-container *ngIf="DL.UserAccess.MemberView">
+      <button md-menu-item (click)="LoadPage('member-list')">
+        <md-icon>account_box</md-icon>
+        <span>Member</span>
       </button>
-      <ng-container *ngIf="DL.UserAccess.MemberView">
-        <button md-menu-item (click)="LoadPage('member-list')">
-          <md-icon>account_box</md-icon>
-          <span>Member</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.UserAccess.ShowcaseView">
-        <button md-menu-item (click)="LoadPage('showcase-list')">
-          <md-icon>shop</md-icon>
-          <span>Showcase</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.UserAccess.ProductView">
-        <button md-menu-item (click)="LoadPage('product-list')">
-          <md-icon>card_giftcard</md-icon>
-          <span>Product</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.UserAccess.SellView">
-        <button md-menu-item (click)="LoadPage('product-sell')">
-          <md-icon>shopping_cart</md-icon>
-          <span>Sell</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.UserAccess.DeliveryView">
-        <button md-menu-item (click)="LoadPage('delivery-list')">
-          <md-icon>send</md-icon>
-          <span>Delivery</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.UserAccess.TransactionView">
-        <button md-menu-item (click)="LoadPage('transaction-list')">
-          <md-icon>payment</md-icon>
-          <span>Transaction</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.UserAccess.ExpenseView">
-        <button md-menu-item (click)="LoadPage('report-expense')">
-          <md-icon>broken_image</md-icon>
-          <span>Expense</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.UserAccess.ProductCancelView">
-        <button md-menu-item (click)="LoadPage('transaction-cancel')">
-          <md-icon>restore</md-icon>
-          <span>Cancelled</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.UserAccess.ReportView">
-        <button md-menu-item (click)="LoadPage('report-list')">
-          <md-icon>trending_up</md-icon>
-          <span>Cashflow</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.UserAccess.ReportBalanceSummaryView">
-        <button md-menu-item (click)="LoadPage('report-balancing')">
-          <md-icon>assignment</md-icon>
-          <span>Balancing</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.UserAccess.ReportBalanceView">
-        <button md-menu-item (click)="LoadPage('user-list')">
-          <md-icon>supervisor_account</md-icon>
-          <span>User</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.UserAccess.AccessView">
-        <button md-menu-item (click)="LoadPage('access-list')">
-          <md-icon>accessibility</md-icon>
-          <span>Access</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.UserAccess.SettingView">
-        <button md-menu-item (click)="LoadPage('system-setting')">
-          <md-icon>settings</md-icon>
-          <span>Settings</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="DL.User.UID;else showSignOut">
-        <button md-menu-item (click)="DA.LogOut()">
-          <md-icon>exit_to_app</md-icon>
-          <span>Log Out</span>
-        </button>
-      </ng-container>
-      <ng-template #showSignOut>
-        <button md-menu-item (click)="DA.LogInWithFacebook()">
-          <md-icon>lock_open</md-icon>
-          <span>Log In</span>
-        </button>
-      </ng-template>
-      <div class="vMediumSpacer"></div>
+    </ng-container>
+    <ng-container *ngIf="DL.UserAccess.ShowcaseView">
+      <button md-menu-item (click)="LoadPage('showcase-list')">
+        <md-icon>shop</md-icon>
+        <span>Showcase</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.UserAccess.ProductView">
+      <button md-menu-item (click)="LoadPage('product-list')">
+        <md-icon>card_giftcard</md-icon>
+        <span>Product</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.UserAccess.SellView">
+      <button md-menu-item (click)="LoadPage('product-sell')">
+        <md-icon>shopping_cart</md-icon>
+        <span>Sell</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.UserAccess.DeliveryView">
+      <button md-menu-item (click)="LoadPage('delivery-list')">
+        <md-icon>send</md-icon>
+        <span>Delivery</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.UserAccess.TransactionView">
+      <button md-menu-item (click)="LoadPage('transaction-list')">
+        <md-icon>payment</md-icon>
+        <span>Transaction</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.UserAccess.ExpenseView">
+      <button md-menu-item (click)="LoadPage('report-expense')">
+        <md-icon>broken_image</md-icon>
+        <span>Expense</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.UserAccess.ProductCancelView">
+      <button md-menu-item (click)="LoadPage('transaction-cancel')">
+        <md-icon>restore</md-icon>
+        <span>Cancelled</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.UserAccess.ReportView">
+      <button md-menu-item (click)="LoadPage('report-list')">
+        <md-icon>trending_up</md-icon>
+        <span>Cashflow</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.UserAccess.ReportBalanceSummaryView">
+      <button md-menu-item (click)="LoadPage('report-balancing')">
+        <md-icon>assignment</md-icon>
+        <span>Balancing</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.UserAccess.ReportBalanceView">
+      <button md-menu-item (click)="LoadPage('user-list')">
+        <md-icon>supervisor_account</md-icon>
+        <span>User</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.UserAccess.AccessView">
+      <button md-menu-item (click)="LoadPage('access-list')">
+        <md-icon>accessibility</md-icon>
+        <span>Access</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.UserAccess.SettingView">
+      <button md-menu-item (click)="LoadPage('system-setting')">
+        <md-icon>settings</md-icon>
+        <span>Settings</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.User.UID;else showSignOut">
+      <button md-menu-item (click)="DA.LogOut()">
+        <md-icon>exit_to_app</md-icon>
+        <span>Log Out</span>
+      </button>
+    </ng-container>
+    <ng-template #showSignOut>
+      <button md-menu-item (click)="DA.LogInWithFacebook()">
+        <md-icon>lock_open</md-icon>
+        <span>Log In</span>
+      </button>
+    </ng-template>
+    <div class="vMediumSpacer"></div>
+  </div>
+</div>
+<div class="divBody">
+  <div class="vBigSpacer"></div>
+  <div class="main">
+    <div class="toolbar">
+      <div class="header">{{ DL.TITLE }}</div>
     </div>
-  </md-sidenav>
-  <div id="divMain" class="content">
-    <div class="divBody">
-      <div class="vBigSpacer"></div>
-      <div class="main">
-        <div class="toolbar">
-          <div class="header">{{ DL.TITLE }}</div>
-        </div>
-        <div class="inside">
-            <div class="vSmallSpacer"></div>
-            <ng-container #viewChild></ng-container>
-            <div class="vSmallSpacer"></div>
-        </div>
-      </div>
-    </div>
-    <div class="footer">
-     <div><img md-card-avatar src="favicon-192x192.png"></div> <div>TEMP System Copyright © {{ DL.Date.getFullYear() }}</div>
+    <div class="inside">
+      <div class="vSmallSpacer"></div>
+      <ng-container #viewChild></ng-container>
+      <div class="vSmallSpacer"></div>
     </div>
   </div>
-</md-sidenav-container>
+</div>
+<div class="footer">
+  <div><img md-card-avatar src="favicon-192x192.png"></div>
+  <div>TEMP System Copyright © {{ DL.Date.getFullYear() }}</div>
+</div>
 <div [hidden]="true">
   <md-card>
     <md-card-content>

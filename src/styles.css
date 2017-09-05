@@ -12,10 +12,29 @@ body {
     width: 100%;
 }
 
-.navSide {
-    width: 225px;
+md-sidenav {
+    position: fixed;
+    width: 200px;
     height: 100vh;
-    overflow: auto;
+}
+
+.navSide {
+    top: 0px;
+    overflow-y: auto;
+    width: 200px;
+    height: 100%;
+    background-color: #ffffff;
+}
+
+.overlay {
+    height: 100%;
+    position: fixed;
+    z-index: 500;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.60);
+    overflow-x: hidden;
+    transition: 0.2s;
 }
 
 .vBigSpacer {
@@ -30,11 +49,6 @@ body {
     height: 15px;
 }
 
-.content {
-    height: 100vh;
-    overflow: auto;
-}
-
 .inside {
     background-color: #ffffff;
     margin: 2px;
@@ -45,7 +59,7 @@ body {
 }
 
 .divBody {
-    min-height: calc(100vh - 90px);;
+    min-height: calc(100vh - 90px);
 }
 
 .main {
@@ -207,4 +221,9 @@ md-input-container {
 
 .itemFooter {
     padding: 20px;
+}
+
+.demo {
+    margin-left: 10px;
+    font-size: 12px;
 }

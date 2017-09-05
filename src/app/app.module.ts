@@ -18,7 +18,6 @@ import {
   MdMenuModule,
   MdToolbarModule,
   MdIconModule,
-  MdSidenavModule,
   MdSnackBarModule,
   MdSlideToggleModule,
   DateAdapter
@@ -104,7 +103,6 @@ import { SystemSettingComponent } from './system/setting/system-setting.componen
     MdDatepickerModule,
     MdNativeDateModule,
     MdIconModule,
-    MdSidenavModule,
     MdSlideToggleModule,
     MdSnackBarModule,
     FormsModule,

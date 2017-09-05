@@ -196,18 +196,18 @@ export class DataLayer {
     public LoadFromMenu(name: string) {
         this.SOURCE = this.MENU;
         this.core.loadComponent(name);
-        this.MainContent.scrollTop = 0;
+        window.scroll(0, 0);
     }
 
     public LoadFromLink(name: string) {
         this.SOURCE = this.LINK;
         this.core.loadComponent(name);
-        this.MainContent.scrollTop = 0;
+        window.scroll(0, 0);
     }
 
     public LoadComponentsFromLink(names: Array<string>) {
         this.SOURCE = this.LINK;
         this.core.loadComponents(names);
-        this.MainContent.scrollTop = 0;
+        window.scroll(0, 0);
     }
 }

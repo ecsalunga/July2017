@@ -10,6 +10,9 @@ import { DataAccess, DataLayer } from './data';
 export class AppComponent implements OnInit {
   @ViewChild('viewChild', {read: ViewContainerRef})
   viewChild: ViewContainerRef;
+  show: string = "100%";
+  hide: string = "0%"
+  navWidth: string = "0%";
 
   constructor(public core: Core, private DA: DataAccess, private DL: DataLayer) { }
 
@@ -17,9 +20,12 @@ export class AppComponent implements OnInit {
     this.DL.LoadFromMenu(name);
   }
 
+  ToggleNav() {
+    this.navWidth = (this.navWidth == this.show) ? this.hide : this.show;
+  }
+
   ngOnInit() {
     this.core.viewChild = this.viewChild;
-    this.DL.MainContent = document.getElementById('divMain');
     this.DA.DataLoad();
     this.DL.LoadFromMenu("dashboard-home");
   }
