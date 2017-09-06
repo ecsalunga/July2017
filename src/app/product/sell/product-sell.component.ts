@@ -81,7 +81,7 @@ export class ProductSellComponent implements OnInit {
     if(this.isDelivery)
       this.DL.Display("Delivery Info", "Created!");
     else
-      this.DL.Display("Transaction", "Created!");
+      this.DL.Display("Transaction", "Saved!");
 
     this.selectedMember = this.DL.MemberWalkIn;
     this.isPaying = false;

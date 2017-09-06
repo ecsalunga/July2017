@@ -1,4 +1,4 @@
-::ng-deep .mat-slide-toggle-content {
+::ng-deep .mat-select-trigger {
     font-size: inherit;
 }
 
@@ -15,4 +15,8 @@
 .items div:not(.configLabel) {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.second {
+    padding-left: 10px;
 }
