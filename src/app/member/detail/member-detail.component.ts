@@ -28,6 +28,7 @@ export class MemberDetailComponent implements OnInit {
     this.model.JoinDate = this.core.dateToNumber(this.joinDate);
     this.DA.UserSave(this.model);
     this.LoadList();
+    this.DL.Display("Member Details", "Saved!");
   }
 
   LoadList() {

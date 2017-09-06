@@ -78,6 +78,11 @@ export class ProductSellComponent implements OnInit {
 
   CartDone() {
     this.DA.SellInfoDone(this.selectedMember.key, this.selectedMember.Name, this.isDelivery);
+    if(this.isDelivery)
+      this.DL.Display("Delivery Info", "Created!");
+    else
+      this.DL.Display("Transaction", "Created!");
+
     this.selectedMember = this.DL.MemberWalkIn;
     this.isPaying = false;
     this.isDelivery = false;

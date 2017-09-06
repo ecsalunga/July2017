@@ -55,6 +55,8 @@ export class DeliveryListComponent implements OnInit {
       if(item.Status == this.DL.STATUS_DELIVERED || item.Status == this.DL.STATUS_CANCELLED)
         this.DA.DeliveryDelete(item);
     });
+
+    this.DL.Display("Done Delivery", "Cleared!");
   }
 
   getDate(actionDate: number): Date {

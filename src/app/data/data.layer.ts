@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { MdSnackBar } from '@angular/material';
+
 import { Core } from './../core';
 import { 
     ProductInfo, 
@@ -90,7 +92,7 @@ export class DataLayer {
 
     ModuleSetting: ModuleSettingInfo;
 
-    constructor(private core: Core) {
+    constructor(private core: Core, private snackBar: MdSnackBar) {
         this.ReportToday = new ReportInfo();
         this.ReportToday.KeyDay = this.core.dateToKeyDay(this.Date);
         this.ReportToday.KeyMonth = this.core.dateToKeyMonth(this.Date);
@@ -209,5 +211,10 @@ export class DataLayer {
         this.SOURCE = this.LINK;
         this.core.loadComponents(names);
         window.scroll(0, 0);
+    }
+
+    public Display(message: string, action: string) {
+        if(this.ModuleSetting.ModuleIsNotify)
+            this.snackBar.open(message, action, { duration: 3000 });
     }
 }

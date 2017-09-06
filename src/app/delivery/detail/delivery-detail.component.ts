@@ -35,6 +35,7 @@ export class DeliveryDetailComponent implements OnInit {
   Delete() {
     this.DA.DeliveryDelete(this.model);
     this.LoadList();
+    this.DL.Display("Delivery Details", "Deleted!");
   }
 
   Save() {
@@ -49,6 +50,7 @@ export class DeliveryDetailComponent implements OnInit {
 
     this.DA.DeliverySave(this.model);
     this.LoadList();
+    this.DL.Display("Delivery Details", "Saved!");
   }
 
   getDate(actionDate: number): Date {

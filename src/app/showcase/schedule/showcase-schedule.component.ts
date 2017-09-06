@@ -53,6 +53,7 @@ export class ShowcaseScheduleComponent implements OnInit {
   Save() {
     this.DA.ShowcaseSave(this.model);
     this.LoadList();
+    this.DL.Display("Showcase Schedule", "Saved!");
   }
 
   LoadList() {

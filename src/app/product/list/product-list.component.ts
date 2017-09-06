@@ -38,6 +38,7 @@ export class ProductListComponent implements OnInit {
   SuppyProduct() {
     this.model.Quantity += this.quantitySelected;
     this.DA.ProductSave(this.model);
+    this.DL.Display(this.model.Description, this.quantitySelected + " Added");
     this.model = null;
     this.quantitySelected = null;
   }

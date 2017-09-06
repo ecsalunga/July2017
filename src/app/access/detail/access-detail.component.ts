@@ -21,6 +21,7 @@ export class AccessDetailComponent implements OnInit {
   Save() {
     this.DA.AccessSave(this.model);
     this.LoadList();
+    this.DL.Display("Access Details", "Saved!");
   }
 
   LoadList() {

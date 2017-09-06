@@ -2,16 +2,31 @@
   <div>
     <table>
       <tr>
-        <td>
-          <md-input-container>
-            <input id="txtDeliveryMaxTime" type="number" mdInput placeholder="Delivery Max Minutes" [(ngModel)]="model.DeliveryMaxMinutes" />
-          </md-input-container>
+        <td class="items">
+          <div class="configLabel">
+            Delivery
+          </div>
+          <div>
+            <md-input-container>
+              <input id="txtDeliveryMaxTime" type="number" mdInput placeholder="Delivery Max Minutes" [(ngModel)]="model.DeliveryMaxMinutes" />
+            </md-input-container>
+          </div>
+          <div>
+            <md-slide-toggle [(ngModel)]="model.DeliveryIsToggleSell">
+              Toggle Delivery / Sell
+            </md-slide-toggle>
+          </div>
         </td>
         <td class="tdSeparator"></td>
-        <td>
-          <md-slide-toggle [(ngModel)]="model.IsDeliveryToggleSell">
-            Toggle Delivery / Sell
-          </md-slide-toggle>
+        <td class="items">
+          <div class="configLabel">
+            General
+          </div>
+          <div>
+            <md-slide-toggle [(ngModel)]="model.ModuleIsNotify">
+              Show Notification
+            </md-slide-toggle>
+          </div>
         </td>
       </tr>
     </table>

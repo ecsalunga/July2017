@@ -28,6 +28,7 @@ export class ShowcaseDetailComponent implements OnInit {
   Save() {
     this.DA.ShowcaseSave(this.model);
     this.LoadList();
+    this.DL.Display("Showcase Details", "Saved!");
   }
 
   upload() {

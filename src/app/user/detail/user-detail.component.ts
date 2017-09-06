@@ -21,6 +21,7 @@ export class UserDetailComponent implements OnInit {
     this.model.JoinDate = this.core.dateToNumber(this.joinDate);
     this.DA.UserSave(this.model);
     this.LoadList();
+    this.DL.Display("User Details", "Saved!");
   }
 
   LoadList() {

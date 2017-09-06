@@ -21,6 +21,7 @@ export class ProductDetailComponent implements OnInit {
   Save() {
     this.DA.ProductSave(this.model);
     this.LoadList();
+    this.DL.Display("Product Details", "Saved!");
   }
 
   LoadList() {

@@ -1,4 +1,6 @@
 export class ModuleSettingInfo {
+    ModuleIsNotify: boolean;
+    
     DeliveryMaxMinutes: number;
-    IsDeliveryToggleSell: boolean
+    DeliveryIsToggleSell: boolean
 }

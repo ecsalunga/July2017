@@ -18,6 +18,7 @@ export class ReportDetailComponent implements OnInit {
   Save() {
     this.DA.ReportSave(this.model);
     this.LoadList();
+    this.DL.Display("Cash Balancing Details", "Saved!");
   }
 
   LoadList() {
