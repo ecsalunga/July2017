@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MdSnackBar } from '@angular/material';
+import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 
 import { Core } from './../core';
 import { 
@@ -214,7 +214,11 @@ export class DataLayer {
     }
 
     public Display(message: string, action: string) {
-        if(this.ModuleSetting.ModuleIsNotify)
-            this.snackBar.open(message, action, { duration: 3000 });
+        if(this.ModuleSetting.ModuleIsNotify) {
+            let config = new MdSnackBarConfig();
+            config.extraClasses = ['snackBarclass']; 
+            config.duration = 2000;
+            this.snackBar.open(message, action, config);
+        }
     }
 }
