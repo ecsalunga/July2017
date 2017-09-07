@@ -12,3 +12,11 @@
 .subAccess {
     width: 30%;
 }
+
+.fullWidth {
+    width: 100%;
+}
+
+md-form-field {
+    font-size: 16px;
+}

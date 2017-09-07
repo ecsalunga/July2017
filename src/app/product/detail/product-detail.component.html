@@ -1,28 +1,28 @@
 <div>
   <div>
-    <md-input-container>
+    <md-form-field>
       <input id="txtCode" mdInput placeholder="Code" [(ngModel)]="model.Code" />
-    </md-input-container>
+    </md-form-field>
   </div>
   <div>
-    <md-input-container class="longText">
+    <md-form-field class="longText">
       <input id="txtDescription" mdInput placeholder="Description" [(ngModel)]="model.Description" />
-    </md-input-container>
+    </md-form-field>
   </div>
   <div>
-    <md-input-container>
+    <md-form-field>
       <input id="txtPrice" type="number" mdInput placeholder="Price" [(ngModel)]="model.Price" />
-    </md-input-container>
+    </md-form-field>
   </div>
   <div>
-    <md-input-container>
+    <md-form-field>
       <input id="txtQuantity" [disabled]="!DL.UserAccess.ProductIn" type="number" mdInput placeholder="Quantity" [(ngModel)]="model.Quantity" />
-    </md-input-container>
+    </md-form-field>
   </div>
   <div>
-    <md-input-container>
+    <md-form-field>
       <input id="txtNotifyQuantity" type="number" mdInput placeholder="Notify Quantity" [(ngModel)]="model.QuantityNotify" />
-    </md-input-container>
+    </md-form-field>
   </div>
   <div class="hSpacer"></div>
   <div class="rightRow">

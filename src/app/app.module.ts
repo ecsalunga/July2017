@@ -10,7 +10,6 @@ import {
   MdCheckboxModule,
   MdCardModule,
   MdChipsModule,
-  MdTooltipModule,
   MdSelectModule,
   MdDatepickerModule,
   MdNativeDateModule,
@@ -95,7 +94,6 @@ import { SettingModuleComponent } from './setting/module/setting-module.componen
     MdCheckboxModule,
     MdCardModule,
     MdChipsModule,
-    MdTooltipModule,
     MdAutocompleteModule,
     MdSelectModule,
     MdMenuModule,
@@ -141,7 +139,4 @@ import { SettingModuleComponent } from './setting/module/setting-module.componen
   ]
 })
 export class AppModule {
-  constructor(private dateAdapter: DateAdapter<Date>) {
-    dateAdapter.setLocale('sv-SE'); // DD.MM.YYYY
-  }
 }

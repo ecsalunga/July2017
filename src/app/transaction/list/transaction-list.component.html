@@ -57,11 +57,11 @@
   <table [hidden]="!DL.UserAccess.TransactionSearch">
     <tr class="rightRow">
       <td class="selectionRow">
-        <md-input-container>
+        <md-form-field class="date">
           <input mdInput [mdDatepicker]="picker" placeholder="Report Date" [(ngModel)]="ReportDate">
-          <button mdSuffix [mdDatepickerToggle]="picker"></button>
-        </md-input-container>
-        <md-datepicker #picker></md-datepicker>
+          <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+          <md-datepicker #picker></md-datepicker>
+        </md-form-field>
       </td>
     </tr>
     <tr class="rightRow">

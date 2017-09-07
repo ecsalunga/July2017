@@ -1,35 +1,35 @@
 <div>
   <div>
-    <md-input-container class="longText">
+    <md-form-field class="longText">
       <input id="txtName" mdInput placeholder="Name" [(ngModel)]="model.Name" />
-    </md-input-container>
+    </md-form-field>
   </div>
   <div>
-    <md-input-container class="longText">
+    <md-form-field class="longText">
       <input id="txtAddress1" mdInput placeholder="Address #1" [(ngModel)]="model.Address1" />
-    </md-input-container>
+    </md-form-field>
   </div>
   <div>
-    <md-input-container class="longText">
+    <md-form-field class="longText">
       <input id="txtAddress2" mdInput placeholder="Address #2" [(ngModel)]="model.Address2" />
-    </md-input-container>
+    </md-form-field>
   </div>
   <div>
-    <md-input-container>
+    <md-form-field>
       <input id="txtContact1" mdInput placeholder="Contact #1" [(ngModel)]="model.Contact1" />
-    </md-input-container>
+    </md-form-field>
   </div>
   <div>
-    <md-input-container>
+    <md-form-field>
       <input id="txtContact2" mdInput placeholder="Contact #2" [(ngModel)]="model.Contact2" />
-    </md-input-container>
+    </md-form-field>
   </div>
   <div>
-    <md-input-container>
+    <md-form-field class="date">
       <input mdInput [mdDatepicker]="picker" placeholder="Join Date" [(ngModel)]="joinDate">
-      <button mdSuffix [mdDatepickerToggle]="picker"></button>
-    </md-input-container>
-    <md-datepicker #picker></md-datepicker>
+      <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+      <md-datepicker #picker></md-datepicker>
+    </md-form-field>
   </div>
   <div>
     <md-slide-toggle [disabled]="!DL.UserAccess.UserGroupEdit" [(ngModel)]="model.IsSystemUser">

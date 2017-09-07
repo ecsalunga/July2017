@@ -49,24 +49,25 @@
   <table>
     <tr class="rightRow">
       <td class="selectionRow" style="width: 60%" [hidden]="!isToday || !DL.UserAccess.ExpenseAdd">
-        <md-input-container class="longText">
+        <md-form-field>
           <input id="txtDescription" mdInput placeholder="Description" [mdAutocomplete]="auto" [formControl]="ctrl" [(ngModel)]="description">
-        </md-input-container>
+        </md-form-field>
         <md-autocomplete #auto="mdAutocomplete">
           <md-option *ngFor="let expense of filteredExpenses | async" [value]="expense">
             {{ expense }}
           </md-option>
         </md-autocomplete>
-        <md-input-container>
+        <md-form-field>
           <input id="txtAmount" type="number" mdInput placeholder="Amount" [(ngModel)]="amount" />
-        </md-input-container>
+        </md-form-field>
       </td>
       <td class="selectionRow">
-        <md-input-container>
+        <md-form-field class="date">
           <input mdInput [disabled]="!DL.UserAccess.ExpenseSearch" [mdDatepicker]="picker" placeholder="Report Date" [(ngModel)]="ReportDate">
-          <button mdSuffix [disabled]="!DL.UserAccess.ExpenseSearch" [mdDatepickerToggle]="picker"></button>
-        </md-input-container>
-        <md-datepicker #picker></md-datepicker>
+          <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+          <md-datepicker #picker></md-datepicker>
+        </md-form-field>
+    
       </td>
     </tr>
     <tr class="rightRow">

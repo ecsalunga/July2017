@@ -1,24 +1,24 @@
 <div>
   <div>
-    <md-input-container>
+    <md-form-field>
       <input id="txtCode" mdInput placeholder="Code" [(ngModel)]="model.Code" />
-    </md-input-container>
+    </md-form-field>
   </div>
   <div>
-    <md-input-container class="longText">
+    <md-form-field class="longText">
       <input id="txtName" mdInput placeholder="Name" [(ngModel)]="model.Name" />
-    </md-input-container>
+    </md-form-field>
   </div>
   <div>
-    <md-input-container class="fullWidth">
+    <md-form-field class="fullWidth">
       <textarea id="txtDescrption" mdInput placeholder="Description" [(ngModel)]="model.Description">
         </textarea>
-    </md-input-container>
+    </md-form-field>
   </div>
   <div>
-    <md-input-container>
+    <md-form-field>
       <input id="txtPrice" type="number" mdInput placeholder="Price" [(ngModel)]="model.Price" />
-    </md-input-container>
+    </md-form-field>
   </div>
   <input #fileSelector id="file" [hidden]="true" type="file">
   <div class="imageContainer">

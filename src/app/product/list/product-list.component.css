@@ -1,3 +1,7 @@
 ::ng-deep .mat-select-trigger {
     font-size: inherit;
 }
+
+.longText {
+    width: 225px;
+}

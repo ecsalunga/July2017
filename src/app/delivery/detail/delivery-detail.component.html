@@ -75,19 +75,19 @@
     </table>
   </div>
   <div> 
-    <md-input-container class="longText">
+    <md-form-field class="longText">
       <input id="txtBuyer" mdInput readonly placeholder="Member" [(ngModel)]="model.Transaction.BuyerName"  />
-    </md-input-container>
+    </md-form-field>
   </div>
   <div> 
-    <md-input-container class="fullWidth">
+    <md-form-field class="fullWidth">
       <input id="txtContact" mdInput [readonly]="IsDone()" placeholder="Contact" [(ngModel)]="model.Contact"  />
-    </md-input-container>
+    </md-form-field>
   </div>
   <div> 
-    <md-input-container class="fullWidth">
+    <md-form-field class="fullWidth">
       <input id="txtAddress" mdInput [readonly]="IsDone()" placeholder="Address" [(ngModel)]="model.Address"  />
-    </md-input-container>
+    </md-form-field>
   </div>
   <div class="selectionRow">
     <md-select placeholder="Assigned" [disabled]="IsDone()" class="longText" [(ngModel)]="selectedUser">

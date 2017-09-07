@@ -1,14 +1,14 @@
 <div>
   <div>
-    <md-input-container class="longText">
+    <md-form-field class="longText">
       <input id="txtName" mdInput [readonly]="true" placeholder="Name" [(ngModel)]="model.Name" />
-    </md-input-container>
+    </md-form-field>
   </div>
   <div>
-    <md-input-container class="fullWidth">
+    <md-form-field class="fullWidth">
       <textarea id="txtDescrption" mdInput [readonly]="true" placeholder="Description" [(ngModel)]="model.Description">
       </textarea>
-    </md-input-container>
+    </md-form-field>
   </div>
   <table>
     <thead>
@@ -42,16 +42,16 @@
   <table>
     <tr class="rightRow">
       <td class="selectionRow" style="width: 50%" [hidden]="!DL.UserAccess.ShowcaseScheduleAdd">
-        <md-input-container>
+        <md-form-field class="date">
           <input mdInput [mdDatepicker]="from" placeholder="From Date" [(ngModel)]="FromDate">
-          <button mdSuffix [mdDatepickerToggle]="from"></button>
-        </md-input-container>
-        <md-datepicker #from></md-datepicker>
-        <md-input-container>
+          <md-datepicker-toggle mdSuffix [for]="from"></md-datepicker-toggle>
+          <md-datepicker #from></md-datepicker>
+        </md-form-field>
+        <md-form-field class="date">
           <input mdInput [mdDatepicker]="to" placeholder="To Date" [(ngModel)]="ToDate">
-          <button mdSuffix [mdDatepickerToggle]="to"></button>
-        </md-input-container>
-        <md-datepicker #to></md-datepicker>
+          <md-datepicker-toggle mdSuffix [for]="to"></md-datepicker-toggle>
+          <md-datepicker #to></md-datepicker>
+        </md-form-field>
       </td>
       <td></td>
     </tr>
