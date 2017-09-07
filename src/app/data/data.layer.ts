@@ -19,7 +19,7 @@ import {
 
 @Injectable()
 export class DataLayer {
-    MainContent: HTMLElement;
+    SnackBarConfig: MdSnackBarConfig;
 
     KEYDAY: string = "KeyDay";
     KEYMONTH: string = "KeyMonth";
@@ -147,6 +147,10 @@ export class DataLayer {
         
         this.User = new UserInfo();
         this.UserAccess = new AccessInfo();
+
+        this.SnackBarConfig = new MdSnackBarConfig();
+        this.SnackBarConfig.extraClasses = ['snackBarclass']; 
+        this.SnackBarConfig.duration = 2000;
     }
 
     public SetPermission() {
@@ -215,10 +219,7 @@ export class DataLayer {
 
     public Display(message: string, action: string) {
         if(this.ModuleSetting.ModuleIsNotify) {
-            let config = new MdSnackBarConfig();
-            config.extraClasses = ['snackBarclass']; 
-            config.duration = 2000;
-            this.snackBar.open(message, action, config);
+            this.snackBar.open(message, action, this.SnackBarConfig);
         }
     }
 }
