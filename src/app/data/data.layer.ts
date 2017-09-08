@@ -14,7 +14,8 @@ import {
     AccessInfo, 
     CancelInfo,
     DeliveryInfo,
-    ModuleSettingInfo
+    ModuleSettingInfo,
+    SnapshotInfo
 } from './../models';
 
 @Injectable()
@@ -42,6 +43,7 @@ export class DataLayer {
     Transaction: TransactionInfo;
     TransactionsToday: Array<TransactionInfo>;
     TransactionSelected: Array<TransactionInfo>;
+    
     TransactionCancels: Array<CancelInfo>;
     TransactionCancelSelected: Array<CancelInfo>;
 
@@ -83,6 +85,9 @@ export class DataLayer {
     Showcase: ShowcaseInfo;
     Showcases: Array<ShowcaseInfo>;
     ShowcaseToday: Array<ShowcaseInfo>;
+
+    Snapshot: SnapshotInfo;
+    Snapshots: Array<SnapshotInfo>;
 
     Months: Array<NameValue>;
     Date: Date = new Date();

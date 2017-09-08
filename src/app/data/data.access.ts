@@ -13,6 +13,7 @@ import { ReportDAL } from './dal/ReportDAL';
 import { CancelDAL } from './dal/CancelDAL';
 import { TransactionDAL } from './dal/TransactionDAL';
 import { SettingDAL } from './dal/SettingDAL';
+import { SnapshotDAL } from './dal/SnapshotDAL';
 
 import 'rxjs/add/operator/first';
 import { 
@@ -27,7 +28,8 @@ import {
     AccessInfo, 
     CancelInfo,
     DeliveryInfo,
-    ModuleSettingInfo
+    ModuleSettingInfo,
+    SnapshotInfo
 } from './../models';
 
 @Injectable()
@@ -40,6 +42,7 @@ export class DataAccess {
     cancelDAL: CancelDAL;
     transactionDAL: TransactionDAL;
     settingDAL: SettingDAL;
+    snapshotDAL: SnapshotDAL;
     
     USERS: string = "/users";
     SETTING: string = "/setting";
@@ -54,6 +57,7 @@ export class DataAccess {
         this.settingDAL = new SettingDAL(DL, af);
         this.accessDAL = new AccessDAL(DL, af);
         this.productDAL = new ProductDAL(DL, af);
+        this.snapshotDAL = new SnapshotDAL(DL, af);
     }
 
     public LogInWithFacebook() {
@@ -177,6 +181,10 @@ export class DataAccess {
         this.cancelDAL.LoadByKeyMonth(keyMonth);
     }
 
+    SnapshotLoad(keyDay: number) {
+        this.snapshotDAL.Load(keyDay);
+    }
+
     ShowcasesLoad() {
         this.showcaseDAL.Load();
     }
@@ -221,6 +229,11 @@ export class DataAccess {
 
     public SellInfoSave(item: SellInfo) {
         this.transactionDAL.SellSave(item);
+    }
+
+    public SnapshotSave(item: SnapshotInfo) {
+        this.snapshotDAL.Save(item);
+        this.snapshotDAL.Load(this.DL.ReportToday.KeyDay);
     }
 
     public SellInfoDelete(item: SellInfo) {

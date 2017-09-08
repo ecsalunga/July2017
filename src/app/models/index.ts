@@ -8,3 +8,4 @@ export { ScheduleInfo, ShowcaseInfo } from './ShowcaseInfo';
 export { SellInfo, TransactionInfo, DeliveryInfo } from './TransactionInfo';
 export { UserInfo } from './UserInfo';
 export { ModuleSettingInfo } from './ModuleSettingInfo';
+export { SnapshotInfo } from './SnapshotInfo'

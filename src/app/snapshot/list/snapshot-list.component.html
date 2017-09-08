@@ -1,0 +1,63 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Time
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Reviewed
+        </th>
+        <th class="totalColumn">
+          COH
+        </th>
+        <th class="rightRow">
+          Action
+        </th>
+      </tr>
+    </thead>
+    <ng-container *ngFor="let info of DL.Snapshots">
+      <tr>
+        <td>
+          {{ this.core.numberToDate(info.ActionDate) | date : 'shortTime' }}
+        </td>
+        <td>
+          {{ info.MemberName }}
+        </td>
+        <td class="{{ info.IsReviewed ? 'good' : 'bad' }}">
+          {{ info.IsReviewed ? "Yes" : "No" }}
+        </td>
+        <td class="totalColumn">
+          {{info.COHActual | number:'1.2-2'}}
+        </td>
+        <td class="rightRow">
+          <button md-mini-fab (click)="SelectItem(item)" [disabled]="!DL.UserAccess.ReportBalanceView" mdTooltip="View"><md-icon>pageview</md-icon></button>
+        </td>
+      </tr> 
+    </ng-container>
+  </table>
+  <div class="hSpacer"></div>
+  <table>
+    <tr class="rightRow">
+      <td></td>
+      <td class="selectionRow">
+        <md-form-field class="date">
+          <input mdInput [disabled]="!DL.UserAccess.ExpenseSearch" [mdDatepicker]="picker" placeholder="Snapshot Date" [(ngModel)]="selectedDate">
+          <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+          <md-datepicker #picker></md-datepicker>
+        </md-form-field>    
+      </td>
+    </tr>
+    <tr class="rightRow">
+      <td [hidden]="!DL.UserAccess.ExpenseAdd">
+        <button md-fab (click)="AddItem()" mdTooltip="Add to snapshot" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+      </td>
+      <td>
+        <button md-fab [disabled]="!DL.UserAccess.ExpenseSearch" (click)="loadSnapshot()" mdTooltip="View snapshots" mdTooltipPosition="above"><md-icon>search</md-icon></button>
+      </td>
+    </tr>
+  </table>
+</div>

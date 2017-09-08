@@ -80,6 +80,12 @@
         <span>Balancing</span>
       </button>
     </ng-container>
+    <ng-container *ngIf="DL.UserAccess.ReportBalanceSummaryView">
+      <button md-menu-item (click)="LoadPage('snapshot-list')">
+        <md-icon>assignment</md-icon>
+        <span>Snapshot</span>
+      </button>
+    </ng-container>
     <ng-container *ngIf="DL.UserAccess.ReportBalanceView">
       <button md-menu-item (click)="LoadPage('user-list')">
         <md-icon>supervisor_account</md-icon>

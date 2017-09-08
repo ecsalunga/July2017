@@ -1,5 +1,6 @@
 ::ng-deep snack-bar-container.snackBarclass {
     background-color: #ffffff;
+    border: 1px solid #eeeeee;
 }
   
 ::ng-deep .snackBarclass .mat-simple-snackbar {
