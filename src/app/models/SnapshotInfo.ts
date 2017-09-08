@@ -2,8 +2,8 @@ import { NameValue } from './NameValue';
 
 export class SnapshotInfo {
     key: string;
-    MemberKey: string;
-    MemberName: string;
+    UserKey: string;
+    UserName: string;
     ActionDate: number;
     KeyDay: number;
     Inventory: Array<NameValue>;
@@ -11,6 +11,7 @@ export class SnapshotInfo {
     SaleAmount: number;
     ExpenseAmount: number;
 
+    COHStart: number;
     COHActual: number;
     COHComputed: number;
     Note: string;
@@ -18,5 +19,4 @@ export class SnapshotInfo {
     ReviewerKey: string;
     ReviewerName: string;
     ReviewDate: number;
-    IsReviewed: boolean;
 }

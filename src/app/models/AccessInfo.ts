@@ -56,5 +56,9 @@ export class AccessInfo {
     MemberEdit: boolean;
 
     ModuleSettingView: boolean;
-    ModuleSettingEdit: boolean; 
+    ModuleSettingEdit: boolean;
+
+    SnapshotView: boolean;
+    SnapshotAdd: boolean;
+    SnapshotReview: boolean;
 }

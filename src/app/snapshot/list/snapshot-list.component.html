@@ -9,10 +9,10 @@
           Name
         </th>
         <th>
-          Reviewed
+          Reviewer
         </th>
         <th class="totalColumn">
-          COH
+         COH
         </th>
         <th class="rightRow">
           Action
@@ -25,16 +25,16 @@
           {{ this.core.numberToDate(info.ActionDate) | date : 'shortTime' }}
         </td>
         <td>
-          {{ info.MemberName }}
+          {{ info.UserName }}
         </td>
-        <td class="{{ info.IsReviewed ? 'good' : 'bad' }}">
-          {{ info.IsReviewed ? "Yes" : "No" }}
+        <td>
+          {{ info.ReviewerName }}
         </td>
-        <td class="totalColumn">
+        <td class="totalColumn {{ (info.COHActual == info.COHComputed) ? 'good' : 'bad' }}">
           {{info.COHActual | number:'1.2-2'}}
         </td>
         <td class="rightRow">
-          <button md-mini-fab (click)="SelectItem(item)" [disabled]="!DL.UserAccess.ReportBalanceView" mdTooltip="View"><md-icon>pageview</md-icon></button>
+          <button md-mini-fab (click)="SelectItem(info)" [disabled]="!DL.UserAccess.ReportBalanceView" mdTooltip="View"><md-icon>pageview</md-icon></button>
         </td>
       </tr> 
     </ng-container>
@@ -53,10 +53,10 @@
     </tr>
     <tr class="rightRow">
       <td [hidden]="!DL.UserAccess.ExpenseAdd">
-        <button md-fab (click)="AddItem()" mdTooltip="Add to snapshot" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+        <button md-fab [disabled]="!DL.UserAccess.SnapshotAdd" (click)="AddItem()" mdTooltip="Add to snapshot" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
       </td>
       <td>
-        <button md-fab [disabled]="!DL.UserAccess.ExpenseSearch" (click)="loadSnapshot()" mdTooltip="View snapshots" mdTooltipPosition="above"><md-icon>search</md-icon></button>
+        <button md-fab (click)="loadSnapshot()" mdTooltip="View snapshots" mdTooltipPosition="above"><md-icon>search</md-icon></button>
       </td>
     </tr>
   </table>

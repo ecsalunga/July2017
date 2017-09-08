@@ -2,8 +2,8 @@ textarea {
     height: 70px;
 }
 
-.longText {
-    width: 300px;
+.subContent {
+    margin: 20px;
 }
 
 .fullWidth {
