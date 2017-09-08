@@ -21,7 +21,6 @@ import {
 @Injectable()
 export class DataLayer {
     SnackBarConfig: MdSnackBarConfig;
-
     KEYDAY: string = "KeyDay";
     KEYMONTH: string = "KeyMonth";
     

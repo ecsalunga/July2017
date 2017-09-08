@@ -56,7 +56,7 @@
         <button md-fab [disabled]="!DL.UserAccess.SnapshotAdd" (click)="AddItem()" mdTooltip="Add to snapshot" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
       </td>
       <td>
-        <button md-fab (click)="loadSnapshot()" mdTooltip="View snapshots" mdTooltipPosition="above"><md-icon>search</md-icon></button>
+        <button md-fab [disabled]="!selectedDate" (click)="loadSnapshot()" mdTooltip="View snapshots" mdTooltipPosition="above"><md-icon>search</md-icon></button>
       </td>
     </tr>
   </table>

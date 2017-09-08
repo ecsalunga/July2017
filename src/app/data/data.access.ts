@@ -70,6 +70,28 @@ export class DataAccess {
         this.afAuth.auth.signOut();
     }
 
+    public Signup(email: string, password: string) {
+        this.afAuth.auth
+        .createUserWithEmailAndPassword(email, password)
+        .then(value => {
+            this.DL.Display("Account", "Created!");
+        })
+        .catch(err => {
+            this.DL.Display("error creating account", err.message);
+        });  
+    }
+
+    public LogIn(email: string, password: string) {
+        this.afAuth.auth
+        .signInWithEmailAndPassword(email, password)
+        .then(value => {
+            this.DL.Display("Login", "Successful!");
+        })
+        .catch(err => {
+            this.DL.Display("Login Failed", err.message);
+        });
+    }
+
     public DataLoad() {
         this.accessDAL.Load();
         this.settingDAL.ModuleLoad();
