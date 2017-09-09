@@ -1,6 +1,6 @@
 <div>
   <div>
-    <md-form-field class="longText">
+    <md-form-field class="fullWidth">
       <input mdInput [(ngModel)]="email" placeholder="Email" [formControl]="emailFormControl">
       <md-error *ngIf="emailFormControl.hasError('pattern')">
         Please enter a valid email address

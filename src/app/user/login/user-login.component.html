@@ -5,18 +5,15 @@
       <span>Log In with Facebook</span>
     </button>
   </div>
-
   <div class="vSmallSpacer"></div>
-
   <div>
     <div class="item">
       <div class="itemHeader">
         <div class="itemName">User Log In</div>
       </div>
-
       <div class="subContent">
         <div>
-          <md-form-field class="longText">
+          <md-form-field class="fullWidth">
             <input mdInput [(ngModel)]="email" placeholder="Email" [formControl]="emailFormControl">
             <md-error *ngIf="emailFormControl.hasError('pattern')">
               Please enter a valid email address
@@ -39,7 +36,6 @@
         </div>
       </div>
       <div class="vSmallSpacer"></div>
-
     </div>
   </div>
   <div class="rightRow">

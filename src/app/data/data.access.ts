@@ -143,6 +143,10 @@ export class DataAccess {
 
                 this.DL.User.Name = user.displayName;
                 this.DL.User.Email = user.email;
+
+                if(!this.DL.User.Name)
+                    this.DL.User.Name = this.DL.User.Email;
+
                 this.DL.User.UID = user.uid;
                 this.DL.User.ImageURL = user.photoURL
                 toSave = true;
