@@ -12,14 +12,25 @@
   </div>
   <div>
     <md-form-field>
-      <input mdInput [(ngModel)]="password" type="password" placeholder="Password" [formControl]="passwordFormControl">
+      <input mdInput (change)="notifyConfirm()" [(ngModel)]="password" name="password" type="password" placeholder="Password" [formControl]="passwordFormControl">
       <md-error *ngIf="passwordFormControl.hasError('required')">
         Password is <strong>required</strong>
       </md-error>
     </md-form-field>
   </div>
+  <div>
+    <md-form-field>
+      <input mdInput [(ngModel)]="confirm" type="password" placeholder="Confirm" validateEqual="password" [formControl]="confirmFormControl">
+      <md-error *ngIf="confirmFormControl.hasError('required')">
+        Confirm password is <strong>required</strong>
+      </md-error>
+      <md-error *ngIf="confirmFormControl.hasError('passwordMismatch')">
+        Password mismatch
+      </md-error>
+    </md-form-field>
+  </div>
   <div class="hSpacer"></div>
   <div class="rightRow">
-    <button md-fab [disabled]="emailFormControl.invalid || passwordFormControl.invalid" (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+    <button md-fab [disabled]="emailFormControl.invalid || passwordFormControl.invalid || (password != confirm)" (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
   </div>
 </div>

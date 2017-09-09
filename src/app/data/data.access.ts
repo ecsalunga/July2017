@@ -126,6 +126,8 @@ export class DataAccess {
                 return;
             }
 
+            let toSave = false;
+
             this.DL.UserAll.forEach(u => {
                 if (u.UID == user.uid)
                     this.DL.User = u;
@@ -138,24 +140,45 @@ export class DataAccess {
                 this.DL.User.IsSystemUser = true;
                 this.DL.User.IsMember = true
                 this.DL.User.JoinDate = this.core.dateToNumber(this.DL.Date);
+
+                this.DL.User.Name = user.displayName;
+                this.DL.User.Email = user.email;
+                this.DL.User.UID = user.uid;
+                this.DL.User.ImageURL = user.photoURL
+                toSave = true;
             }
 
             // update system record
-            this.DL.User.Name = user.displayName;
-            this.DL.User.ImageURL = user.photoURL;
-            this.DL.User.Email = user.email;
-            this.DL.User.UID = user.uid;
+            if(this.DL.User.ImageURL != user.photoURL) {
+                this.DL.User.ImageURL = user.photoURL;
+                toSave = true;
+            }
+
+            if(!this.DL.User.ImageURL) {
+                this.DL.User.ImageURL = this.DL.DefaultImageURL;
+                toSave = true;
+            }
+            
+            if(this.DL.User.Email != user.email){
+                this.DL.User.Email = user.email;
+                toSave = true;
+            }
 
             if((!this.DL.User.SystemImageURL || this.DL.User.SystemImageURL == this.DL.DefaultImageURL) && user.photoURL) {
                 this.DL.User.SystemImageURL = user.photoURL;
+                toSave = true;
             }
-    
-            if(this.DL.User.IsSystemUser)
-                this.DataSystemLoad();
 
-            this.DL.SetPermission();
-            this.UserSave(this.DL.User);
-            this.DL.LoadFromMenu("report-list");
+            if(toSave)
+                this.UserSave(this.DL.User);
+            
+            if(this.DL.User.IsSystemUser) {
+                this.DataSystemLoad();
+                this.DL.SetPermission();
+                this.DL.LoadFromMenu("report-list");
+            }
+            else 
+                this.DL.LoadFromMenu("dashboard-home");
         });
     }
 

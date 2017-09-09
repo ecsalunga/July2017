@@ -1,36 +1,51 @@
 <div>
   <div>
-    <button md-button (click)="signup()">
-      <md-icon>supervisor_account</md-icon>
-      <span>Create new account</span>
-    </button>
     <button md-button (click)="DA.LogInWithFacebook()">
       <md-icon>lock_open</md-icon>
       <span>Log In with Facebook</span>
     </button>
   </div>
-  <div class="vMediumSpacer"></div>
+
+  <div class="vSmallSpacer"></div>
+
   <div>
-    <md-form-field class="longText">
-      <input mdInput [(ngModel)]="email" placeholder="Email" [formControl]="emailFormControl">
-      <md-error *ngIf="emailFormControl.hasError('pattern')">
-        Please enter a valid email address
-      </md-error>
-      <md-error *ngIf="emailFormControl.hasError('required')">
-        Email is <strong>required</strong>
-      </md-error>
-    </md-form-field>
+    <div class="item">
+      <div class="itemHeader">
+        <div class="itemName">User Log In</div>
+      </div>
+
+      <div class="subContent">
+        <div>
+          <md-form-field class="longText">
+            <input mdInput [(ngModel)]="email" placeholder="Email" [formControl]="emailFormControl">
+            <md-error *ngIf="emailFormControl.hasError('pattern')">
+              Please enter a valid email address
+            </md-error>
+            <md-error *ngIf="emailFormControl.hasError('required')">
+              Email is <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
+        <div>
+          <md-form-field>
+            <input mdInput [(ngModel)]="password" type="password" placeholder="Password" [formControl]="passwordFormControl">
+            <md-error *ngIf="passwordFormControl.hasError('required')">
+              Password is <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
+        <div>
+          <button md-fab [disabled]="emailFormControl.invalid || passwordFormControl.invalid" (click)="login()" mdTooltip="Login" mdTooltipPosition="above"><md-icon>lock_open</md-icon></button>
+        </div>
+      </div>
+      <div class="vSmallSpacer"></div>
+
+    </div>
   </div>
-  <div>
-    <md-form-field>
-      <input mdInput [(ngModel)]="password" type="password" placeholder="Password" [formControl]="passwordFormControl">
-      <md-error *ngIf="passwordFormControl.hasError('required')">
-        Password is <strong>required</strong>
-      </md-error>
-    </md-form-field>
-  </div>
-  <div class="hSpacer"></div>
   <div class="rightRow">
-    <button md-fab [disabled]="emailFormControl.invalid || passwordFormControl.invalid" (click)="login()" mdTooltip="Login" mdTooltipPosition="above"><md-icon>lock_open</md-icon></button>
+    <button md-button (click)="signup()">
+      <md-icon>supervisor_account</md-icon>
+      <span>Create new account</span>
+    </button>
   </div>
 </div>

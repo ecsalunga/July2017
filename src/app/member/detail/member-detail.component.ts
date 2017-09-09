@@ -48,7 +48,8 @@ export class MemberDetailComponent implements OnInit {
   }
 
   resetPicture() {
-    this.model.SystemImageURL = this.model.ImageURL;
+    if(this.model.ImageURL)
+      this.model.SystemImageURL = this.model.ImageURL;
   }
 
   imageLoaded() {
