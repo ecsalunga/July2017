@@ -56,7 +56,7 @@ export class DeliveryListComponent implements OnInit {
         this.DA.DeliveryDelete(item);
     });
 
-    this.DL.Display("Done Delivery", "Cleared!");
+    this.DL.Display("Delivery", "Done Status Cleared!");
   }
 
   getDate(actionDate: number): Date {

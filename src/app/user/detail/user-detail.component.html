@@ -48,14 +48,14 @@
   <input #fileSelector id="file" [hidden]="true" type="file">
   <div class="imageContainer">
     <img class="fullWidth" src="{{model.SystemImageURL}}" (load)="imageLoaded()">
-    <div class="imageEdit" [hidden]="!isLoaded">
+    <div class="imageEdit" [hidden]="!isLoaded || !DL.UserAccess.UserEdit">
       <div (click)="selectFile()">Update</div>
       <div (click)="resetPicture()">Reset</div>
     </div>
   </div>
   <div class="hSpacer"></div>
   <div class="rightRow">
-    <button md-fab (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+    <button md-fab (click)="Save()" [disabled]="!DL.UserAccess.UserEdit" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
     <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
   </div>
 </div>

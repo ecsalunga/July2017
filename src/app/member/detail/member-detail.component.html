@@ -45,7 +45,7 @@
   <input #fileSelector id="file" [hidden]="true" type="file">
   <div class="imageContainer">
     <img class="fullWidth" src="{{model.SystemImageURL}}" (load)="imageLoaded()">
-    <div class="imageEdit" [hidden]="!isLoaded">
+    <div class="imageEdit" [hidden]="!isLoaded || (!DL.UserAccess.MemberEdit && model.key)">
       <div (click)="selectFile()">Update</div>
       <div (click)="resetPicture()">Reset</div>
     </div>
