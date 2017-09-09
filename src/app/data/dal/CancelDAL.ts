@@ -1,6 +1,6 @@
 import { Core } from './../../core';
 import { DataLayer, DataAccess } from './../../data';
-import { CancelInfo, ProductInfo, ReportInfo, TransactionInfo, ExpenseInfo } from './../../models';
+import { CancelInfo, ProductInfo, ReportInfo, TransactionInfo, ExpenseInfo } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class CancelDAL {

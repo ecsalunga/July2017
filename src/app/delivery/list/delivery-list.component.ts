@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataLayer, DataAccess } from '../../data';
-import { DeliveryInfo } from '../../models';
+import { DeliveryInfo } from '../../data/models';
 
 @Component({
   selector: 'delivery-list',

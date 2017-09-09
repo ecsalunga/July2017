@@ -1,6 +1,6 @@
 import { Core } from './../../core';
 import { DataLayer } from './../data.layer';
-import { ShowcaseInfo } from './../../models';
+import { ShowcaseInfo } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class ShowcaseDAL {

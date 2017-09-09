@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { ExpenseInfo, ReportInfo } from '../../models';
+import { ExpenseInfo, ReportInfo } from '../../data/models';
 
 @Component({
   selector: 'transaction-cancel',

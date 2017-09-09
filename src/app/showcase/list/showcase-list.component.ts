@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataLayer } from '../../data';
-import { ShowcaseInfo } from '../../models';
+import { ShowcaseInfo } from '../../data/models';
 
 @Component({
   selector: 'showcase-list',

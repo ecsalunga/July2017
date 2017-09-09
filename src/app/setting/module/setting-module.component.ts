@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { ModuleSettingInfo } from '../../models';
+import { ModuleSettingInfo } from '../../data/models';
 
 @Component({
   selector: 'setting-module',

@@ -1,5 +1,5 @@
 import { DataLayer } from './../data.layer';
-import { ModuleSettingInfo } from './../../models';
+import { ModuleSettingInfo } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class SettingDAL {

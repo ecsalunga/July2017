@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { AccessInfo } from '../../models';
+import { AccessInfo } from '../../data/models';
 
 @Component({
   selector: 'access-detail',

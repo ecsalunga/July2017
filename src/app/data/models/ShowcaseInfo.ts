@@ -12,8 +12,8 @@ export class ShowcaseInfo {
     ImageURL: string;
     Schedules: Array<ScheduleInfo>;
 
-    constructor() {
+    constructor(defaultImageURL: string) {
         this.Schedules = new Array<ScheduleInfo>();
-        this.ImageURL = "https://firebasestorage.googleapis.com/v0/b/temp-system.appspot.com/o/images%2FNoImage.png?alt=media&token=40823113-df0a-4412-8026-d501036b9d78";
+        this.ImageURL = defaultImageURL;
     }
 }

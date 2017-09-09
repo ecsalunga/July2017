@@ -1,5 +1,5 @@
 import { DataLayer } from './../data.layer';
-import { ProductInfo, SellInfo } from './../../models';
+import { ProductInfo, SellInfo } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class ProductDAL {

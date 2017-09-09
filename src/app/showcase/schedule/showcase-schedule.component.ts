@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { ShowcaseInfo, ScheduleInfo } from '../../models';
+import { ShowcaseInfo, ScheduleInfo } from '../../data/models';
 
 @Component({
   selector: 'showcase-schedule',
@@ -15,7 +15,7 @@ export class ShowcaseScheduleComponent implements OnInit {
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
     // workaround for array property deep clone issue
-    this.model = new ShowcaseInfo();
+    this.model = new ShowcaseInfo(this.DL.DefaultImageURL);
     this.model.Name = this.DL.Showcase.Name;
     this.model.Code = this.DL.Showcase.Code;
     this.model.Description = this.DL.Showcase.Description;

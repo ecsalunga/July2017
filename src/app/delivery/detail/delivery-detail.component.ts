@@ -1,7 +1,7 @@
 import { Component, OnInit, ApplicationRef } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { DeliveryInfo, UserInfo } from '../../models';
+import { DeliveryInfo, UserInfo } from '../../data/models';
 
 @Component({
   selector: 'delivery-detail',

@@ -16,7 +16,7 @@ import {
     DeliveryInfo,
     ModuleSettingInfo,
     SnapshotInfo
-} from './../models';
+} from './models';
 
 @Injectable()
 export class DataLayer {
@@ -94,6 +94,8 @@ export class DataLayer {
     IsAuthenticating: boolean = false;
     IsDataActiveLoaded: boolean = false;
 
+    DefaultImageURL: string = "https://firebasestorage.googleapis.com/v0/b/temp-system.appspot.com/o/images%2FNoImage.png?alt=media&token=40823113-df0a-4412-8026-d501036b9d78";
+
     ModuleSetting: ModuleSettingInfo;
 
     constructor(private core: Core, private snackBar: MdSnackBar) {
@@ -139,17 +141,17 @@ export class DataLayer {
             this.STATUS_CANCELLED
         ];
 
-        this.MemberWalkIn = new UserInfo();
+        this.MemberWalkIn = new UserInfo(this.DefaultImageURL);
         this.MemberWalkIn.Name = "Walk-In";
         this.MemberWalkIn.key = "Walk-In";
 
-        this.UserPending = new UserInfo();
+        this.UserPending = new UserInfo(this.DefaultImageURL);
         this.UserPending.Name = "Pending";
         this.UserPending.key = "Pending";
 
         this.ModuleSetting = new ModuleSettingInfo();
         
-        this.User = new UserInfo();
+        this.User = new UserInfo(this.DefaultImageURL);
         this.UserAccess = new AccessInfo();
 
         this.SnackBarConfig = new MdSnackBarConfig();

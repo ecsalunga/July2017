@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, Renderer } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { ShowcaseInfo } from '../../models';
+import { ShowcaseInfo } from '../../data/models';
 
 @Component({
   selector: 'showcase-detail',
@@ -12,13 +12,13 @@ export class ShowcaseDetailComponent implements OnInit {
   @ViewChild('fileSelector', {read: ViewContainerRef })
   fileSelector: ViewContainerRef;
   model: ShowcaseInfo;
-  isLoaded: boolean = false;
+  isLoaded: boolean = true;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer, private renderer: Renderer) {
     if (this.DL.Showcase)
       this.model = Object.assign({}, this.DL.Showcase);
     else
-      this.model = new ShowcaseInfo();
+      this.model = new ShowcaseInfo(this.DL.DefaultImageURL);
   }
 
   selectFile() {
@@ -34,7 +34,7 @@ export class ShowcaseDetailComponent implements OnInit {
   upload() {
     this.isLoaded = false;
     let selectedFile = (<HTMLInputElement>this.fileSelector.element.nativeElement).files[0];
-    let fRef = this.DA.StorageRef.child("images/" + selectedFile.name);
+    let fRef = this.DA.StorageRef.child("images/showscase/" + selectedFile.name);
     fRef.put(selectedFile).then(snapshot => {
         this.model.ImageURL = snapshot.downloadURL;
     });

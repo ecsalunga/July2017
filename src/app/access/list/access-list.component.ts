@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataLayer } from '../../data';
-import { AccessInfo } from '../../models';
+import { AccessInfo } from '../../data/models';
 
 @Component({
   selector: 'access-list',

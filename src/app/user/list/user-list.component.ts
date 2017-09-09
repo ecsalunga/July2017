@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataAccess, DataLayer } from '../../data';
-import { UserInfo, AccessInfo } from '../../models';
+import { UserInfo, AccessInfo } from '../../data/models';
 
 @Component({
   selector: 'user-list',

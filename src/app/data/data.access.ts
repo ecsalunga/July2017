@@ -30,7 +30,7 @@ import {
     DeliveryInfo,
     ModuleSettingInfo,
     SnapshotInfo
-} from './../models';
+} from './models';
 
 @Injectable()
 export class DataAccess {
@@ -77,7 +77,7 @@ export class DataAccess {
             this.DL.Display("Account", "Created!");
         })
         .catch(err => {
-            this.DL.Display("error creating account", err.message);
+            this.DL.Display("Account", "Create account failed.");
         });  
     }
 
@@ -88,7 +88,7 @@ export class DataAccess {
             this.DL.Display("Login", "Successful!");
         })
         .catch(err => {
-            this.DL.Display("Login Failed", err.message);
+            this.DL.Display("Login", "Login failed.");
         });
     }
 
@@ -119,7 +119,7 @@ export class DataAccess {
 
     UserAuthenticate() {
         this.afAuth.authState.subscribe(user => {
-            this.DL.User = new UserInfo();
+            this.DL.User = new UserInfo(this.DL.DefaultImageURL);
 
             if (!user) {
                 this.DL.User.Name = "GUEST";
@@ -140,9 +140,15 @@ export class DataAccess {
                 this.DL.User.JoinDate = this.core.dateToNumber(this.DL.Date);
             }
 
+            // update system record
             this.DL.User.Name = user.displayName;
             this.DL.User.ImageURL = user.photoURL;
+            this.DL.User.Email = user.email;
             this.DL.User.UID = user.uid;
+
+            if((!this.DL.User.SystemImageURL || this.DL.User.SystemImageURL == this.DL.DefaultImageURL) && user.photoURL) {
+                this.DL.User.SystemImageURL = user.photoURL;
+            }
     
             if(this.DL.User.IsSystemUser)
                 this.DataSystemLoad();

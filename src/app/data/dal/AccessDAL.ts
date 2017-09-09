@@ -1,5 +1,5 @@
 import { DataLayer } from './../data.layer';
-import { AccessInfo } from './../../models';
+import { AccessInfo } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class AccessDAL {

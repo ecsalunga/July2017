@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataLayer } from '../../data';
-import { UserInfo } from '../../models';
+import { UserInfo } from '../../data/models';
 
 @Component({
   selector: 'member-list',

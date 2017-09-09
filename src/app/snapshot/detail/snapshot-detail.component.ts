@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { SnapshotInfo, NameValue } from '../../models';
+import { SnapshotInfo, NameValue } from '../../data/models';
 
 @Component({
   selector: 'snapshot-detail',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { ReportInfo } from '../../models';
+import { ReportInfo } from '../../data/models';
 
 @Component({
   selector: 'report-detail',

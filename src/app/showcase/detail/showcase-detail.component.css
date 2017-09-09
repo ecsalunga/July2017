@@ -1,5 +1,6 @@
 .imageContainer {
     position: relative;
+    min-height: 300px;
 }
 
 .imageEdit {

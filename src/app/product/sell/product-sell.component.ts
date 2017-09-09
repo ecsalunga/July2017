@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { ProductInfo, UserInfo, SellInfo } from '../../models';
+import { ProductInfo, UserInfo, SellInfo } from '../../data/models';
 
 @Component({
   selector: 'product-sell',

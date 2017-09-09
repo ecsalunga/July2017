@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { TransactionInfo, ReportInfo } from '../../models';
+import { TransactionInfo, ReportInfo } from '../../data/models';
 
 @Component({
   selector: 'transaction-list',

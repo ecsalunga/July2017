@@ -1,6 +1,6 @@
 import { Core } from './../../core';
 import { DataLayer, DataAccess } from './../../data';
-import { SellInfo, TransactionInfo, ReportInfo, DeliveryInfo, NameValue } from './../../models';
+import { SellInfo, TransactionInfo, ReportInfo, DeliveryInfo, NameValue } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class TransactionDAL {
