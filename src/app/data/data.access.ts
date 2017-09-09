@@ -153,7 +153,7 @@ export class DataAccess {
             }
 
             // update system record
-            if(this.DL.User.ImageURL != user.photoURL) {
+            if(user.photoURL && this.DL.User.ImageURL != user.photoURL) {
                 this.DL.User.ImageURL = user.photoURL;
                 toSave = true;
             }
