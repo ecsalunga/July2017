@@ -61,6 +61,7 @@ import { SnapshotListComponent } from './snapshot/list/snapshot-list.component';
 import { SnapshotDetailComponent } from './snapshot/detail/snapshot-detail.component';
 import { UserSignupComponent } from './user/signup/user-signup.component';
 import { UserLoginComponent } from './user/login/user-login.component';
+import { UserUpdateComponent } from './user/update/user-update.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { UserLoginComponent } from './user/login/user-login.component';
     SnapshotListComponent,
     SnapshotDetailComponent,
     UserSignupComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    UserUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -147,7 +149,8 @@ import { UserLoginComponent } from './user/login/user-login.component';
     SnapshotListComponent,
     SnapshotDetailComponent,
     UserSignupComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    UserUpdateComponent
   ]
 })
 export class AppModule {

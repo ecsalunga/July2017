@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { SnapshotInfo } from '../../data/models';
+import { SnapshotInfo, ReportInfo } from '../../data/models';
 
 @Component({
   selector: 'snapshot-list',
@@ -11,11 +11,17 @@ import { SnapshotInfo } from '../../data/models';
 export class SnapshotListComponent implements OnInit {
   selectedDate: Date = new Date();
 
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) { 
-    this.loadSnapshots(this.DL.ReportToday.KeyDay);
+  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
+    if(this.DL.SOURCE == this.DL.MENU) {
+      this.loadSnapshots(this.DL.ReportToday.KeyDay);
+    }
+
+    this.selectedDate = this.core.numberToDate(parseInt(this.DL.ReportSelected.KeyDay + '000000'));
   }
 
   loadSnapshots(keyDay: number) {
+    this.DL.ReportSelected = new ReportInfo();
+    this.DL.ReportSelected.KeyDay = this.core.dateToKeyDay(this.selectedDate);
     this.DA.SnapshotLoad(keyDay);
   }
 

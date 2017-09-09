@@ -1,0 +1,39 @@
+.imageContainer {
+    position: relative;
+    width: 300px;
+    min-height: 300px;
+}
+
+.imageEdit {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    bottom: 3px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+}
+
+.imageEdit div {
+    width: 48%;
+    float: left;
+    margin: 2px;
+    cursor: pointer;
+    border: 1px solid #fafafa;
+    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.longText {
+    width: 300px;
+}
+
+md-form-field {
+    font-size: 16px;
+}
