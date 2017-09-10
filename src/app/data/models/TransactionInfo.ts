@@ -7,6 +7,7 @@ export class SellInfo {
     Quantity: number;
     Price: number;
     Total: number;
+    ForDelete: boolean;
 }
 
 export class TransactionInfo {

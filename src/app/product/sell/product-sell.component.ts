@@ -90,6 +90,11 @@ export class ProductSellComponent implements OnInit {
      this.DA.SellInfoDelete(info);
      this.isPaying = false;
   }
+
+  RequestDelete(info: SellInfo) {
+    info.ForDelete = true;
+    this.DA.SellInfoSave(info);
+  }
   
   CartOpen() {
     this.isPaying = false;

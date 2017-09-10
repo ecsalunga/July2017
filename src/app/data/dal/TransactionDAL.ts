@@ -88,7 +88,10 @@ export class TransactionDAL {
     }
 
     public SellSave(item: SellInfo) {
-        this.af.list(this.PATH_SELL).push(item);
+        if (item.key)
+            this.af.list(this.PATH_SELL).update(item.key, item);
+        else
+            this.af.list(this.PATH_SELL).push(item);
     }
 
 
