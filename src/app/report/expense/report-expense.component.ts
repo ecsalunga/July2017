@@ -18,13 +18,11 @@ export class ReportExpenseComponent implements OnInit {
   description: string;
   amount: number;
   ReportDate: Date;
-  isToday: boolean;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) { 
     this.DL.ExpenseSelected = this.DL.ExpensesToday;
     this.DL.ReportSelected = this.DL.ReportToday;
     this.ReportDate = this.core.numberToDate(parseInt(this.DL.ReportSelected.KeyDay + '000000'));
-    this.isToday = true;
 
     this.ctrl = new FormControl();
     this.filteredExpenses = this.ctrl.valueChanges
@@ -42,14 +40,16 @@ export class ReportExpenseComponent implements OnInit {
   }
 
   AddExpense() {
-    this.DA.ExpenseInfoSave(this.description, this.amount);
+    let info = new ExpenseInfo();
+    info.Description = this.description;
+    info.Amount = this.amount;
+    info.ActionDate = this.core.dateToNumber(new Date());
+    info.KeyDay = this.core.dateToKeyDay(this.ReportDate);
+    this.DA.ExpenseInfoSave(info);
+    
     this.amount = null;
     this.description = "";
     this.ExpenseView();
-  }
-
-  private setIsToday() {
-    this.isToday = (this.core.dateToKeyDay(new Date()) == this.core.dateToKeyDay(this.ReportDate));
   }
 
   ExpenseView() {
@@ -58,7 +58,6 @@ export class ReportExpenseComponent implements OnInit {
     this.DL.ReportSelected.KeyMonth = this.core.dateToKeyMonth(this.ReportDate);
     this.DL.ReportSelected.KeyYear = this.ReportDate.getFullYear();
     this.DA.ExpenseSelectedLoad(this.DL.ReportSelected);
-    this.setIsToday();
   }
 
   ngOnInit() {

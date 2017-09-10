@@ -68,7 +68,7 @@ export class CancelDAL {
         this.transactionInfoDelete(this.DL.ReportSelected, this.DL.Transaction.key);
 
         // report recompute
-        this.DA.ReportReGenerate(this.DL.ReportSelected.KeyYear, this.DL.ReportSelected.KeyMonth, this.DL.ReportSelected.KeyDay);
+        this.DA.ReportReGenerateBySelected();
     }
 
     private transactionInfoDelete(report: ReportInfo, key: string) {

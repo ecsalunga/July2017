@@ -6,7 +6,7 @@
           Description
         </th>
         <th>
-          Time
+          Date
         </th>
         <th class="totalColumn">
           Amount
@@ -22,14 +22,14 @@
           {{info.Description}}
         </td>
         <td>
-          {{ this.core.numberToDate(info.ActionDate) | date : 'shortTime' }}
+          {{ this.core.numberToDate(info.ActionDate) | date : 'short' }}
         </td>
         <td class="totalColumn">
           {{info.Amount | number:'1.2-2'}}
         </td>
         <td class="rightRow">
           <ng-container *ngIf="info.ActionDate">
-            <button md-mini-fab color="warn" [disabled]="!DL.UserAccess.ExpenseDelete || !isToday" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
+            <button md-mini-fab color="warn" [disabled]="!DL.UserAccess.ExpenseDelete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
           </ng-container>
         </td>
       </tr> 
@@ -48,7 +48,7 @@
   <div class="hSpacer"></div>
   <table>
     <tr class="rightRow">
-      <td class="selectionRow" style="width: 60%" [hidden]="!isToday || !DL.UserAccess.ExpenseAdd">
+      <td class="selectionRow" style="width: 60%" [hidden]="!DL.UserAccess.ExpenseAdd">
         <md-form-field>
           <input id="txtDescription" mdInput placeholder="Description" [mdAutocomplete]="auto" [formControl]="ctrl" [(ngModel)]="description">
         </md-form-field>
@@ -71,8 +71,8 @@
       </td>
     </tr>
     <tr class="rightRow">
-      <td [hidden]="!isToday || !DL.UserAccess.ExpenseAdd">
-        <button md-fab [disabled]="!description || !amount" (click)="AddExpense()" mdTooltip="Add to expenses" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+      <td [hidden]="!DL.UserAccess.ExpenseAdd">
+        <button md-fab [disabled]="!description || !amount || !ReportDate" (click)="AddExpense()" mdTooltip="Add to expenses" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
       </td>
       <td>
         <button md-fab [disabled]="!ReportDate || !DL.UserAccess.ExpenseSearch" (click)="ExpenseView()" mdTooltip="View expenses" mdTooltipPosition="above"><md-icon>search</md-icon></button>

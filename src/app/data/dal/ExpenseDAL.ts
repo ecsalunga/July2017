@@ -16,8 +16,9 @@ export class ExpenseDAL {
             this.DL.ReportToday.ExpenseCount = 0;
 
             snapshots.forEach(snapshot => {
-                this.DL.ExpensesToday.push(snapshot);
-
+                let info: ExpenseInfo = snapshot;
+                info.key = snapshot.$key;
+                this.DL.ExpensesToday.push(info);
                 this.DL.ReportToday.ExpenseCount++;
                 this.DL.ReportToday.ExpenseAmount += snapshot.Amount;
             });
@@ -52,17 +53,12 @@ export class ExpenseDAL {
         });
     }
 
-    public Save(description: string, amount: number) {
-        let info = new ExpenseInfo();
-        info.Description = description;
-        info.Amount = amount;
-        info.ActionDate = this.core.dateToNumber(new Date());
-        info.KeyDay = this.core.dateToKeyDay(this.DL.Date);
-        this.af.list(this.PATH).push(info);
+    public Save(item: ExpenseInfo) {
+        this.af.list(this.PATH).push(item);
         
         // add record for auto complete
-        if (this.DL.ExpenseTypes.indexOf(description) === -1) {
-            this.DL.ExpenseTypes.push(description);
+        if (this.DL.ExpenseTypes.indexOf(item.Description) === -1) {
+            this.DL.ExpenseTypes.push(item.Description);
             this.DL.ExpenseTypes.sort();
             this.af.object(this.PATH_TYPES).update(this.DL.ExpenseTypes);
             this.LoadTypes();

@@ -333,14 +333,22 @@ export class DataAccess {
         this.cancelDAL.Save(item);
     }
 
-    public ExpenseInfoSave(description: string, amount: number) {
-        this.expenseDAL.Save(description, amount);
-        this.ReportTodaySave();
+    public ExpenseInfoSave(item: ExpenseInfo) {
+        this.expenseDAL.Save(item);
+
+        if(item.KeyDay == this.DL.ReportToday.KeyDay)
+            this.ReportTodaySave();
+        else
+            this.ReportReGenerateBySelected()
     }
 
     public ExpenseDelete(item: ExpenseInfo) {
         this.expenseDAL.Delete(item);
-        this.ReportTodaySave();
+        
+        if(item.KeyDay == this.DL.ReportToday.KeyDay)
+            this.ReportTodaySave();
+        else
+            this.ReportReGenerateBySelected()
     }
 
     public ReportTodaySave() {
@@ -355,6 +363,10 @@ export class DataAccess {
     
     public ReportSave(item: ReportInfo) {
         this.reportDAL.Save(item);
+    }
+
+    public ReportReGenerateBySelected() {
+        this.ReportReGenerate(this.DL.ReportSelected.KeyYear, this.DL.ReportSelected.KeyMonth, this.DL.ReportSelected.KeyDay);
     }
 
     public ModuleSettingSave(item: ModuleSettingInfo)
