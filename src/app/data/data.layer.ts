@@ -21,6 +21,8 @@ import {
 @Injectable()
 export class DataLayer {
     SnackBarConfig: MdSnackBarConfig;
+    SnackBarConfigLong: MdSnackBarConfig;
+
     KEYDAY: string = "KeyDay";
     KEYMONTH: string = "KeyMonth";
     KEYDISCOUNT: string = "X";
@@ -161,6 +163,10 @@ export class DataLayer {
         this.SnackBarConfig = new MdSnackBarConfig();
         this.SnackBarConfig.extraClasses = ['snackBarclass']; 
         this.SnackBarConfig.duration = 2000;
+
+        this.SnackBarConfigLong = new MdSnackBarConfig();
+        this.SnackBarConfigLong.extraClasses = ['snackBarclassLong']; 
+        this.SnackBarConfigLong.duration = 10000;
     }
 
     public ReportTodayRefresh()
@@ -238,6 +244,12 @@ export class DataLayer {
     public Display(message: string, action: string) {
         if(this.ModuleSetting.ModuleIsNotify) {
             this.snackBar.open(message, action, this.SnackBarConfig);
+        }
+    }
+
+    public DisplayLong(message: string, action: string) {
+        if(this.ModuleSetting.ModuleIsNotify) {
+            this.snackBar.open(message, action, this.SnackBarConfigLong);
         }
     }
 }

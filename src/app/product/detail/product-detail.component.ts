@@ -10,6 +10,7 @@ import { ProductInfo } from '../../data/models';
 })
 export class ProductDetailComponent implements OnInit {
   model: ProductInfo;
+  hasDuplicate: boolean;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
     if (this.DL.Product)
@@ -19,17 +20,47 @@ export class ProductDetailComponent implements OnInit {
   }
 
   canSave(): boolean {
-    return (
-      (this.model.Code != this.DL.KEYDISCOUNT) 
-      && ((this.DL.UserAccess.ProductEdit && !(!this.model.key))
-        || (this.DL.UserAccess.ProductAdd && !this.model.key))
-    );
+    if(this.model.Code == this.DL.KEYDISCOUNT)
+      return false;
+
+    if(this.model.key && !this.DL.UserAccess.ProductEdit)
+      return false;
+
+    if(!this.model.key && !this.DL.UserAccess.ProductAdd)
+      return false;
+
+    if(this.model.Quantity > 10000)
+      return false;
+    
+    return true;
+  }
+
+  codeChange() {
+    this.hasDuplicate = false;
   }
 
   Save() {
-    this.DA.ProductSave(this.model);
-    this.LoadList();
-    this.DL.Display("Product Details", "Saved!");
+    let validated = this.hasDuplicate;
+    this.hasDuplicate = false;
+
+    if(!validated) {
+      this.DL.Products.forEach(product => {
+        if(this.model.Code == product.Code && this.model.key != product.key) {
+          this.hasDuplicate = true;
+        }
+      });
+
+      if(!this.hasDuplicate)
+        validated = true;
+      else
+        this.DL.DisplayLong("Duplicate Code", "Save again to proceed.");
+    }
+
+    if(validated) {
+      this.DA.ProductSave(this.model);
+      this.LoadList();
+      this.DL.Display("Product Details", "Saved!");
+    }
   }
 
   LoadList() {

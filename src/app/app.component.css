@@ -11,3 +11,17 @@
     font-weight: bold;
     font-size: 14px;
 }
+
+::ng-deep snack-bar-container.snackBarclassLong {
+    background-color: #ffffff;
+    border: 1px solid #eeeeee;
+}
+  
+::ng-deep .snackBarclassLong .mat-simple-snackbar {
+    color: #FF0000;
+}
+
+::ng-deep .snackBarclassLong .mat-simple-snackbar-action {
+    font-weight: bold;
+    font-size: 14px;
+}

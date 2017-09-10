@@ -1,7 +1,7 @@
 <div>
   <div>
     <md-form-field>
-      <input id="txtCode" mdInput placeholder="Code" [(ngModel)]="model.Code" />
+      <input id="txtCode" mdInput placeholder="Code" [(ngModel)]="model.Code" (change)="codeChange()" />
     </md-form-field>
   </div>
   <div>
@@ -15,12 +15,12 @@
     </md-form-field>
   </div>
   <div>
-    <md-form-field>
+    <md-form-field class="shortText">
       <input id="txtQuantity" [disabled]="!DL.UserAccess.ProductIn" type="number" mdInput placeholder="Quantity" [(ngModel)]="model.Quantity" />
     </md-form-field>
   </div>
   <div>
-    <md-form-field>
+    <md-form-field class="shortText">
       <input id="txtNotifyQuantity" type="number" mdInput placeholder="Notify Quantity" [(ngModel)]="model.QuantityNotify" />
     </md-form-field>
   </div>
