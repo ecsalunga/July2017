@@ -7,7 +7,7 @@ export class AccessDAL {
     constructor(private DL: DataLayer, private af: AngularFireDatabase) { }
 
     public Load() {
-        this.af.list(this.PATH, { query: { orderByChild: 'Name' } }).first().subscribe(snapshots => {
+        this.af.list(this.PATH, { query: { orderByChild: 'Name' } }).subscribe(snapshots => {
             this.DL.Accesses = new Array<AccessInfo>();
             snapshots.forEach(snapshot => {
                 let info: AccessInfo = snapshot;
@@ -16,8 +16,10 @@ export class AccessDAL {
 
                 // update current user access
                 if (this.DL.UserAccess && this.DL.UserAccess.key == info.key)
-                    this.DL.UserAccess = info;
+                    this.DL.UserAccess = info; 
             });
+
+            this.DL.SetPermission();
         });
     }
 
