@@ -57,7 +57,9 @@ export class TransactionDAL {
                 info.key = snapshot.$key;
                 this.DL.SellInfos.push(info);
 
-                this.DL.SellInfosCount += info.Quantity;
+                if(info.Code != this.DL.KEYDISCOUNT)
+                    this.DL.SellInfosCount += info.Quantity;
+
                 this.DL.SellInfosAmount += info.Total;
             });
         });

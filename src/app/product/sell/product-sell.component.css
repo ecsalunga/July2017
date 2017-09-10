@@ -13,3 +13,7 @@ md-form-field {
 .longText {
     width: 180px;
 }
+
+.shortText {
+    width: 80px;
+}

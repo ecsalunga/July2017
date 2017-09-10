@@ -57,11 +57,18 @@
               {{ product.Description }} ({{ product.Code }})
             </md-option>
           </md-select>
+          <span [hidden]="isDiscount">
           <md-select placeholder="Quantity" [(ngModel)]="selectedQuantity">
             <md-option *ngFor="let quantity of quantities" [value]="quantity">
               {{quantity}}
             </md-option>
           </md-select>
+          </span>
+          <span [hidden]="!isDiscount">
+            <md-form-field class="shortText">
+              <input id="txtPrice" type="number" mdInput placeholder="Discount" [(ngModel)]="discountPrice" />
+            </md-form-field>
+          </span>
         </td>
         <td class="selectionRow">
           <md-checkbox [(ngModel)]="isDelivery">Delivery</md-checkbox>

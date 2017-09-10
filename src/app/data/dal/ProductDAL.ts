@@ -18,6 +18,8 @@ export class ProductDAL {
                 if (info.Quantity > 0)
                     this.DL.ProductSelections.push(info);
             });
+
+            this.DL.ProductSelections.push(this.DL.ProductDiscount);
         });
     }
 

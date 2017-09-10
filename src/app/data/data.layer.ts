@@ -23,7 +23,8 @@ export class DataLayer {
     SnackBarConfig: MdSnackBarConfig;
     KEYDAY: string = "KeyDay";
     KEYMONTH: string = "KeyMonth";
-    
+    KEYDISCOUNT: string = "X";
+
     MENU: string = "MENU";
     LINK: string = "LINK";
     SOURCE: string;
@@ -37,6 +38,7 @@ export class DataLayer {
 
     Product: ProductInfo;
     Products: Array<ProductInfo>;
+    ProductDiscount: ProductInfo;
     ProductSelections: Array<ProductInfo>;
 
     Transaction: TransactionInfo;
@@ -140,6 +142,11 @@ export class DataLayer {
             this.STATUS_DELIVERED,
             this.STATUS_CANCELLED
         ];
+
+        this.ProductDiscount = new ProductInfo();
+        this.ProductDiscount.Code = this.KEYDISCOUNT;
+        this.ProductDiscount.Description = "Discount";
+        this.ProductDiscount.key = this.KEYDISCOUNT;
 
         this.MemberWalkIn = new UserInfo(this.DefaultImageURL);
         this.MemberWalkIn.Name = "Walk-In";

@@ -11,41 +11,51 @@ import { ProductInfo, UserInfo, SellInfo } from '../../data/models';
 export class ProductSellComponent implements OnInit {
   model: ProductInfo;
   selectedQuantity: number = 1;
+  discountPrice: number = 0;
   quantities: Array<number>;
   selectedMember: UserInfo = this.DL.MemberWalkIn;
   isPaying: boolean = false;
   isDelivery: boolean = false;
+  isDiscount: boolean = false;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) { }
 
   AddProduct() {
     let duplicate: SellInfo;
     let item = new SellInfo();
+
     item.Code = this.model.Code;
     item.Description = this.model.Description;
-    item.Price = this.model.Price;
-    item.Quantity = this.selectedQuantity;
 
-    // merge items
-    this.DL.SellInfos.forEach(info => {
-      if(info.Code == item.Code) {
-        duplicate = info;
-        item.Quantity += info.Quantity;
-      }
-    });
-
-    if(duplicate) {
-       this.DA.SellInfoDelete(duplicate);
+    if(this.isDiscount) {
+      item.Price = this.discountPrice;
+      item.Quantity = 1;
+      item.Total = item.Price * -1;
     }
+    else {
+      item.Price = this.model.Price;
+      item.Quantity = this.selectedQuantity;
 
-    // re-evaluate quantity
-    this.DL.Products.forEach(product => {
-      if(product.Code == item.Code && product.Quantity < item.Quantity) {
-        item.Quantity = product.Quantity;
+      // merge items
+      this.DL.SellInfos.forEach(info => {
+        if(info.Code == item.Code) {
+          duplicate = info;
+          item.Quantity += info.Quantity;
+        }
+      });
+
+      if(duplicate) {
+          this.DA.SellInfoDelete(duplicate);
       }
-    });
-    item.Total = item.Quantity * item.Price;
-    
+
+      // re-evaluate quantity
+      this.DL.Products.forEach(product => {
+        if(product.Code == item.Code && product.Quantity < item.Quantity) {
+          item.Quantity = product.Quantity;
+        }
+      });
+      item.Total = item.Quantity * item.Price;
+    }
     this.DA.SellInfoSave(item);
     this.clearSelection();
   }
@@ -54,12 +64,18 @@ export class ProductSellComponent implements OnInit {
     this.model = null;
     this.quantities = new Array<number>();
     this.selectedQuantity = 1;
+    this.isDiscount = false;
+    this.discountPrice = 0;
   }
 
   productSelected() {
-    this.quantities = new Array<number>();
-    for(let x = 1; x <= this.model.Quantity; x++){
-      this.quantities.push(x);
+    if(this.model.Code == this.DL.KEYDISCOUNT)
+      this.isDiscount = true;
+    else {
+      this.isDiscount = false;
+      this.quantities = new Array<number>();
+      for(let x = 1; x <= this.model.Quantity; x++)
+        this.quantities.push(x);
     }
   }
 
