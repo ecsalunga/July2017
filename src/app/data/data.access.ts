@@ -338,6 +338,12 @@ export class DataAccess {
     }
 
     public ReportTodaySave() {
+        let date = new Date();
+        if(this.DL.Date.getDate() != date.getDate()) {
+            this.DL.Date = date;
+            this.DL.ReportTodayRefresh();
+        }
+
         this.reportDAL.SaveTodayReport();
     }
     

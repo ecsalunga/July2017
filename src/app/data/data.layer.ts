@@ -101,10 +101,7 @@ export class DataLayer {
     ModuleSetting: ModuleSettingInfo;
 
     constructor(private core: Core, private snackBar: MdSnackBar) {
-        this.ReportToday = new ReportInfo();
-        this.ReportToday.KeyDay = this.core.dateToKeyDay(this.Date);
-        this.ReportToday.KeyMonth = this.core.dateToKeyMonth(this.Date);
-        this.ReportToday.KeyYear = this.Date.getFullYear();
+        this.ReportTodayRefresh();
         this.ReportSelected = this.ReportToday;
         
         this.ReportYears = new Array<number>();
@@ -164,6 +161,14 @@ export class DataLayer {
         this.SnackBarConfig = new MdSnackBarConfig();
         this.SnackBarConfig.extraClasses = ['snackBarclass']; 
         this.SnackBarConfig.duration = 2000;
+    }
+
+    public ReportTodayRefresh()
+    {
+        this.ReportToday = new ReportInfo();
+        this.ReportToday.KeyDay = this.core.dateToKeyDay(this.Date);
+        this.ReportToday.KeyMonth = this.core.dateToKeyMonth(this.Date);
+        this.ReportToday.KeyYear = this.Date.getFullYear();
     }
 
     public SetPermission() {
