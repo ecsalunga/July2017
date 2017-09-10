@@ -60,6 +60,11 @@ export class ProductSellComponent implements OnInit {
     this.clearSelection();
   }
 
+  canAdd(): boolean {
+    return ((this.model && this.selectedQuantity > 0) 
+    || (this.isDiscount && this.discountPrice > 0 && this.discountPrice <= this.DL.SellInfosAmount));
+  }
+
   clearSelection() {
     this.model = null;
     this.quantities = new Array<number>();
@@ -69,8 +74,10 @@ export class ProductSellComponent implements OnInit {
   }
 
   productSelected() {
-    if(this.model.Code == this.DL.KEYDISCOUNT)
+    if(this.model.Code == this.DL.KEYDISCOUNT) {
       this.isDiscount = true;
+      this.selectedQuantity = 0;
+    }
     else {
       this.isDiscount = false;
       this.quantities = new Array<number>();

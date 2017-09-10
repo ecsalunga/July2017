@@ -19,7 +19,8 @@ export class ProductDAL {
                     this.DL.ProductSelections.push(info);
             });
 
-            this.DL.ProductSelections.push(this.DL.ProductDiscount);
+            if(this.DL.UserAccess.SellDiscount)
+                this.DL.ProductSelections.push(this.DL.ProductDiscount);
         });
     }
 

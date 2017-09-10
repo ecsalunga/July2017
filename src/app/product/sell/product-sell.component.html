@@ -81,7 +81,7 @@
       </tr>
       <tr class="rightRow">
         <td>
-          <button md-fab [disabled]="!model || !selectedQuantity" (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><md-icon>add_shopping_cart</md-icon></button>
+          <button md-fab [disabled]="!canAdd()" (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><md-icon>add_shopping_cart</md-icon></button>
         </td>
         <td>
           <button md-fab [disabled]="!DL.SellInfosCount" (click)="CartClose()" mdTooltip="Close Cart" mdTooltipPosition="above"><md-icon>done</md-icon></button>
