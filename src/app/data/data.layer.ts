@@ -248,8 +248,6 @@ export class DataLayer {
     }
 
     public DisplayLong(message: string, action: string) {
-        if(this.ModuleSetting.ModuleIsNotify) {
-            this.snackBar.open(message, action, this.SnackBarConfigLong);
-        }
+        this.snackBar.open(message, action, this.SnackBarConfigLong);
     }
 }
