@@ -29,9 +29,9 @@ export class ProductDetailComponent implements OnInit {
     if(!this.model.key && !this.DL.UserAccess.ProductAdd)
       return false;
 
-    if(this.model.Quantity > 10000)
+    if(this.model.Quantity > 5000)
       return false;
-    
+
     return true;
   }
 

@@ -13,3 +13,7 @@ md-form-field {
 .date {
     width: 120px;
 }
+
+.subContent {
+    margin: 20px;
+}

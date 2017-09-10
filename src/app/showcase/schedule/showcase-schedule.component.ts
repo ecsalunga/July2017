@@ -11,6 +11,7 @@ import { ShowcaseInfo, ScheduleInfo } from '../../data/models';
 export class ShowcaseScheduleComponent implements OnInit {
   FromDate: Date;
   ToDate: Date;
+  ToDay: Date;
   model: ShowcaseInfo;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
@@ -30,9 +31,9 @@ export class ShowcaseScheduleComponent implements OnInit {
         this.model.Schedules.push(item);
       });
     }
-
-    this.FromDate = this.DL.Date;
-    this.ToDate = this.DL.Date;
+    this.ToDay = new Date();
+    this.FromDate = this.ToDay;
+    this.ToDate = this.ToDay;
   }
 
   getDate(keyDay: number): Date {
@@ -44,16 +45,22 @@ export class ShowcaseScheduleComponent implements OnInit {
     schedule.From = this.core.dateToKeyDay(this.FromDate);
     schedule.To = this.core.dateToKeyDay(this.ToDate);
     this.model.Schedules.push(schedule);
+    this.model.Schedules.sort((item1, item2) => item1.From - item2.From);
   }
 
   Delete(info: ScheduleInfo) {
-    this.model.Schedules = this.model.Schedules.filter(s => s.From != info.From && s.To != info.To);
+    this.model.Schedules = this.model.Schedules.filter(s => !(s.From == info.From && s.To == info.To));
   }
 
   Save() {
     this.DA.ShowcaseSave(this.model);
     this.LoadList();
     this.DL.Display("Showcase Schedule", "Saved!");
+  }
+
+  canAdd(): boolean {
+    return (this.core.dateToKeyDay(this.ToDate) >= this.core.dateToKeyDay(this.FromDate) 
+      && this.core.dateToKeyDay(this.ToDate) >= this.core.dateToKeyDay(this.ToDay));
   }
 
   LoadList() {
