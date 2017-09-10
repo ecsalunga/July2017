@@ -20,7 +20,7 @@
       <input id="txtPrice" type="number" mdInput placeholder="Price" [(ngModel)]="model.Price" />
     </md-form-field>
   </div>
-  <input #fileSelector id="file" [hidden]="true" type="file">
+  <input #fileSelector id="file" [hidden]="true" type="file" accept="image/*">
   <div class="imageContainer">
     <img class="fullWidth" src="{{model.ImageURL}}" (load)="imageLoaded()">
     <div class="imageEdit" [hidden]="!isLoaded" (click)="selectFile()">Update Picture</div>

@@ -39,12 +39,16 @@ export class MemberDetailComponent implements OnInit {
   }
 
   upload() {
-    this.isLoaded = false;
     let selectedFile = (<HTMLInputElement>this.fileSelector.element.nativeElement).files[0];
-    let fRef = this.DA.StorageRef.child("images/users/" + this.model.UID + "_" + selectedFile.name);
-    fRef.put(selectedFile).then(snapshot => {
-        this.model.SystemImageURL = snapshot.downloadURL;
-    });
+    if(selectedFile.type.indexOf("image") > -1) {
+      this.isLoaded = false;
+      let fRef = this.DA.StorageRef.child("images/users/" + this.model.UID + "_" + selectedFile.name);
+      fRef.put(selectedFile).then(snapshot => {
+          this.model.SystemImageURL = snapshot.downloadURL;
+      });
+    }
+    else
+      this.DL.Display("Image", "Please select valid image file.");
   }
 
   resetPicture() {

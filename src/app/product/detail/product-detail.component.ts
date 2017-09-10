@@ -18,6 +18,14 @@ export class ProductDetailComponent implements OnInit {
       this.model = new ProductInfo();
   }
 
+  canSave(): boolean {
+    return (
+      (this.model.Code != this.DL.KEYDISCOUNT) 
+      && ((this.DL.UserAccess.ProductEdit && !(!this.model.key))
+        || (this.DL.UserAccess.ProductAdd && !this.model.key))
+    );
+  }
+
   Save() {
     this.DA.ProductSave(this.model);
     this.LoadList();
