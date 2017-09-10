@@ -104,6 +104,12 @@
         <span>Modules</span>
       </button>
     </ng-container>
+    <ng-container *ngIf="DL.UserAccess.SystemSettingView">
+      <button md-menu-item (click)="LoadPage('setting-system')">
+        <md-icon>settings_applications</md-icon>
+        <span>System</span>
+      </button>
+    </ng-container>
     <ng-container *ngIf="DL.User.UID;else showSignOut">
       <button md-menu-item (click)="DA.LogOut()">
         <md-icon>exit_to_app</md-icon>
@@ -132,7 +138,7 @@
   </div>
   <div class="footer">
     <div><img md-card-avatar src="favicon-192x192.png"></div>
-    <div>TEMP System Copyright © {{ DL.Date.getFullYear() }}</div>
+    <div>{{ DL.SystemSetting.Footer }}</div>
   </div>
 </div>
 <div [hidden]="true">

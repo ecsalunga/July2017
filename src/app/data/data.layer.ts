@@ -15,6 +15,7 @@ import {
     CancelInfo,
     DeliveryInfo,
     ModuleSettingInfo,
+    SystemSettingInfo,
     SnapshotInfo
 } from './models';
 
@@ -101,6 +102,7 @@ export class DataLayer {
     DefaultImageURL: string = "https://firebasestorage.googleapis.com/v0/b/temp-system.appspot.com/o/images%2FNoImage.png?alt=media&token=40823113-df0a-4412-8026-d501036b9d78";
 
     ModuleSetting: ModuleSettingInfo;
+    SystemSetting: SystemSettingInfo;
 
     constructor(private core: Core, private snackBar: MdSnackBar) {
         this.ReportTodayRefresh();
@@ -156,17 +158,23 @@ export class DataLayer {
         this.UserPending.key = "Pending";
 
         this.ModuleSetting = new ModuleSettingInfo();
+        this.SystemSetting = new SystemSettingInfo();
         
         this.User = new UserInfo(this.DefaultImageURL);
         this.UserAccess = new AccessInfo();
 
         this.SnackBarConfig = new MdSnackBarConfig();
         this.SnackBarConfig.extraClasses = ['snackBarclass']; 
-        this.SnackBarConfig.duration = 2000;
+        this.SnackBarConfig.duration = 2500;
 
         this.SnackBarConfigLong = new MdSnackBarConfig();
         this.SnackBarConfigLong.extraClasses = ['snackBarclassLong']; 
         this.SnackBarConfigLong.duration = 10000;
+    }
+
+    public SetSnackBarConfig() {
+        this.SnackBarConfig.duration = this.SystemSetting.NotificationDuration;
+        this.SnackBarConfigLong.duration = this.SystemSetting.NotificationSlowDuration;
     }
 
     public ReportTodayRefresh()

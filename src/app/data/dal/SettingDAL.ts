@@ -1,9 +1,11 @@
 import { DataLayer } from './../data.layer';
-import { ModuleSettingInfo } from '../models';
+import { ModuleSettingInfo, SystemSettingInfo } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class SettingDAL {
     PATH_MODULE: string = "/settings/module";
+    PATH_SYSTEM: string = "/settings/system";
+
     constructor(private DL: DataLayer, private af: AngularFireDatabase) { }
 
     public ModuleLoad() {
@@ -13,8 +15,22 @@ export class SettingDAL {
         });
     }
 
+    public SystemLoad() {
+        this.af.object(this.PATH_SYSTEM).first().subscribe(snapshot => {
+            if (snapshot.$exists()) {
+                this.DL.SystemSetting = snapshot;
+                this.DL.SetSnackBarConfig();
+            }
+        });
+    }
+
     public ModuleSave(item: ModuleSettingInfo) {
         this.af.object(this.PATH_MODULE).update(item);
         this.DL.ModuleSetting = item;
+    }
+
+    public SystemSave(item: SystemSettingInfo) {
+        this.af.object(this.PATH_SYSTEM).update(item);
+        this.DL.SystemSetting = item;
     }
 }

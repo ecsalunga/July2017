@@ -1,0 +1,34 @@
+<div>
+  <div class="items">
+    <div class="configLabel">
+      System
+    </div>
+    <div>
+      <md-form-field class="fullWidth">
+        <input id="txtName" mdInput placeholder="Name" [(ngModel)]="model.Name" />
+      </md-form-field>
+    </div>
+    <div>
+      <md-form-field class="fullWidth">
+        <input id="txtFooter" mdInput placeholder="Footer" [(ngModel)]="model.Footer" />
+      </md-form-field>
+    </div>
+    <div class="configLabel">
+      Notifications
+    </div>
+    <div>
+      <md-form-field>
+        <input id="txtDuration" type="number" mdInput placeholder="Regular Durations" [(ngModel)]="model.NotificationDuration" />
+      </md-form-field>
+    </div>
+    <div>
+      <md-form-field>
+        <input id="txtDurationLong" type="number" mdInput placeholder="Long Durations" [(ngModel)]="model.NotificationSlowDuration" />
+      </md-form-field>
+    </div>
+  </div>
+  <div class="hSpacer"></div>
+  <div class="rightRow">
+    <button md-fab (click)="Save()" [disabled]="!DL.UserAccess.SystemSettingEdit" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+  </div>
+</div>

@@ -29,6 +29,7 @@ import {
     CancelInfo,
     DeliveryInfo,
     ModuleSettingInfo,
+    SystemSettingInfo,
     SnapshotInfo
 } from './models';
 
@@ -95,6 +96,7 @@ export class DataAccess {
     public DataLoad() {
         this.accessDAL.Load();
         this.settingDAL.ModuleLoad();
+        this.settingDAL.SystemLoad();
         this.UserLoad();
         this.showcaseDAL.Load();
     }
@@ -354,5 +356,10 @@ export class DataAccess {
     public ModuleSettingSave(item: ModuleSettingInfo)
     {
         this.settingDAL.ModuleSave(item);
+    }
+
+    public SystemSettingSave(item: SystemSettingInfo)
+    {
+        this.settingDAL.SystemSave(item);
     }
 }

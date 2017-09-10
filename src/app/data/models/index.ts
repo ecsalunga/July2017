@@ -7,5 +7,5 @@ export { ReportInfo } from './ReportInfo';
 export { ScheduleInfo, ShowcaseInfo } from './ShowcaseInfo';
 export { SellInfo, TransactionInfo, DeliveryInfo } from './TransactionInfo';
 export { UserInfo } from './UserInfo';
-export { ModuleSettingInfo } from './ModuleSettingInfo';
+export { ModuleSettingInfo, SystemSettingInfo } from './SettingInfo';
 export { SnapshotInfo } from './SnapshotInfo'

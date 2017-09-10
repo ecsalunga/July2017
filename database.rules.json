@@ -62,6 +62,10 @@
       "module": {
         ".read": "true",
         ".write": "true"
+      },
+      "system": {
+        ".read": "true",
+        ".write": "true"
       }
     },
     "snapshots": {
