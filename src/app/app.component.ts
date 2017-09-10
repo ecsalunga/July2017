@@ -20,6 +20,11 @@ export class AppComponent implements OnInit {
     this.DL.LoadFromMenu(name);
   }
 
+  LoadProfile() {
+    this.navWidth = this.hide;
+    this.LoadPage('user-update')
+  }
+
   ToggleNav() {
     this.navWidth = (this.navWidth == this.show) ? this.hide : this.show;
   }

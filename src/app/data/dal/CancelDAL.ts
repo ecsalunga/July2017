@@ -5,8 +5,6 @@ import { AngularFireDatabase } from 'angularfire2/database';
 
 export class CancelDAL {
     PATH: string = "/transactions/cancels";
-    PATH_REPORTS: string = "/reports";
-    PATH_EXPENSE: string = "/expenses/items";
     PATH_TRANSACTION: string = "/transactions/items";
     constructor(private core: Core, private DL: DataLayer, private DA: DataAccess, private af: AngularFireDatabase) {}
 
@@ -70,53 +68,11 @@ export class CancelDAL {
         this.transactionInfoDelete(this.DL.ReportSelected, this.DL.Transaction.key);
 
         // report recompute
-        this.reportGenerate(this.DL.ReportSelected.KeyYear, this.DL.ReportSelected.KeyMonth, this.DL.ReportSelected.KeyDay);
+        this.DA.ReportReGenerate(this.DL.ReportSelected.KeyYear, this.DL.ReportSelected.KeyMonth, this.DL.ReportSelected.KeyDay);
     }
 
     private transactionInfoDelete(report: ReportInfo, key: string) {
         this.af.object(this.PATH_TRANSACTION + "/" + key).remove();
-    }
-
-    private reportGenerate(year: number, keyMonth: number, keyDay: number) {
-        // get report for that day
-        let report = new ReportInfo();
-        report.KeyYear = year;
-        report.KeyMonth = keyMonth;
-        report.KeyDay = keyDay;
-
-        let transaction = new TransactionInfo();
-        let expense = new ExpenseInfo();
-
-        this.af.list(this.PATH_REPORTS, { query: { orderByChild: this.DL.KEYMONTH, equalTo: report.KeyMonth } }).first().subscribe(snapshots => {
-            snapshots.forEach(snapshot => {
-                if(snapshot.KeyDay == report.KeyDay)
-                    report.key = snapshot.$key;
-            });
-
-            // get transactions
-            this.af.list(this.PATH_TRANSACTION, { query: { orderByChild: this.DL.KEYDAY, equalTo: report.KeyDay } }).first().subscribe(snapshots => {
-                snapshots.forEach(snapshot => {
-                    report.SaleCount += snapshot.Count;
-                    report.SaleAmount += snapshot.Amount;
-                });
-
-                // get expenses
-                this.af.list(this.PATH_EXPENSE, { query: { orderByChild: this.DL.KEYDAY, equalTo: keyDay } }).first().subscribe(snapshots => {
-                    snapshots.forEach(snapshot => {
-                        report.ExpenseCount++;
-                        report.ExpenseAmount += snapshot.Amount;
-                    });
-
-                    // save
-                    if (report.key)
-                        this.af.list(this.PATH_REPORTS).update(report.key, report);
-                    else
-                        this.af.list(this.PATH_REPORTS).push(report);
-
-                    this.DA.TransactionSelectedLoad(report);
-                });
-            });
-        });
     }
 
     public Save(item: CancelInfo) {

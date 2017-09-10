@@ -52,7 +52,7 @@ export class DataAccess {
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase, private afAuth: AngularFireAuth) {
         this.expenseDAL = new ExpenseDAL(core, DL, af);
         this.showcaseDAL = new ShowcaseDAL(core, DL, af);
-        this.reportDAL = new ReportDAL(core, DL, af);
+        this.reportDAL = new ReportDAL(core, DL, this, af);
         this.cancelDAL = new CancelDAL(core, DL, this, af);
         this.transactionDAL = new TransactionDAL(core, DL, this, af);
         this.settingDAL = new SettingDAL(DL, af);
@@ -252,6 +252,10 @@ export class DataAccess {
 
     ReportMonthlyLoad(selectedYear: number, selectedMonth: number) {
         this.reportDAL.LoadByYearAndMonth(selectedYear, selectedMonth);
+    }
+
+    public ReportReGenerate(year: number, keyMonth: number, keyDay: number) {
+        this.reportDAL.ReGenerate(year, keyMonth, keyDay);
     }
 
     ExpenseSelectedLoad(report: ReportInfo) {
