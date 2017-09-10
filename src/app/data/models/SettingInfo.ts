@@ -9,6 +9,10 @@ export class SystemSettingInfo {
     Name: string;
     Footer: string;
     HomeTitle: string;
+
     NotificationDuration: number;
     NotificationSlowDuration: number;
+
+    UserDefaultAccess: string;
+    IsSystemUser: boolean;
 }

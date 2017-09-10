@@ -78,6 +78,7 @@ export class DataLayer {
     UserSelections: Array<UserInfo>;
     UserAccess: AccessInfo;
     UserPending: UserInfo;
+    UserIsDefaultSystemUser: boolean;
 
     Members: Array<UserInfo>;
     MemberSelections: Array<UserInfo>;
@@ -85,6 +86,7 @@ export class DataLayer {
 
     Access: AccessInfo;
     Accesses: Array<AccessInfo>;
+    AccessDefault: string;
 
     Showcase: ShowcaseInfo;
     Showcases: Array<ShowcaseInfo>;
@@ -175,6 +177,8 @@ export class DataLayer {
     public SetSystemConfig() {
         this.SnackBarConfig.duration = this.SystemSetting.NotificationDuration;
         this.SnackBarConfigLong.duration = this.SystemSetting.NotificationSlowDuration;
+        this.AccessDefault = this.SystemSetting.UserDefaultAccess;
+        this.UserIsDefaultSystemUser = this.SystemSetting.IsSystemUser;
     }
 
     public ReportTodayRefresh()

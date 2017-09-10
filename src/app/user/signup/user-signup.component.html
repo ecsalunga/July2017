@@ -8,6 +8,7 @@
       <md-error *ngIf="emailFormControl.hasError('required')">
         Email is <strong>required</strong>
       </md-error>
+      
     </md-form-field>
   </div>
   <div>
@@ -15,6 +16,9 @@
       <input mdInput (change)="notifyConfirm()" [(ngModel)]="password" name="password" type="password" placeholder="Password" [formControl]="passwordFormControl">
       <md-error *ngIf="passwordFormControl.hasError('required')">
         Password is <strong>required</strong>
+      </md-error>
+      <md-error *ngIf="passwordFormControl.hasError('minlength')">
+        Password should be at <strong>least 6 characters</strong>
       </md-error>
     </md-form-field>
   </div>

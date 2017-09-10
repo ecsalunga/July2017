@@ -17,13 +17,12 @@ export class UserSignupComponent implements OnInit {
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.pattern(EMAIL_REGEX)]);
-  passwordFormControl = new FormControl('', [Validators.required]);
+  passwordFormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
   confirmFormControl = new FormControl('', [Validators.required, this.passwordsMatch.bind(this)]);
 
   constructor(private DA: DataAccess, private DL: DataLayer) { }
 
   notifyConfirm() {
-    //any.select();
     this.confirmFormControl.updateValueAndValidity();
   }
 

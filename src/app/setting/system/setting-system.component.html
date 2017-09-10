@@ -13,6 +13,24 @@
         <input id="txtFooter" mdInput placeholder="Footer" [(ngModel)]="model.Footer" />
       </md-form-field>
     </div>
+    <div class="vSmallSpacer"></div>
+    <div class="configLabel">
+      User
+    </div>
+    <div>
+      <md-select placeholder="Default Access" [(ngModel)]="model.UserDefaultAccess">
+        <md-option *ngFor="let access of DL.Accesses" [value]="access.key">
+          {{ access.Name }}
+        </md-option>
+      </md-select>
+    </div>
+    <div>
+      <md-select placeholder="Default System User" [(ngModel)]="model.IsSystemUser">
+        <md-option [value]="true">Yes</md-option>
+        <md-option [value]="false">No</md-option>
+      </md-select>
+    </div>
+    <div class="vSmallSpacer"></div>
     <div class="configLabel">
       Home Page
     </div>
@@ -21,6 +39,7 @@
         <input id="txtHomeTitle" mdInput placeholder="Home Title" [(ngModel)]="model.HomeTitle" />
       </md-form-field>
     </div>
+    <div class="vSmallSpacer"></div>
     <div class="configLabel">
       Notifications
     </div>

@@ -9,7 +9,7 @@
 .configLabel {
     font-size: 14px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .items {
@@ -18,7 +18,6 @@
 
 .items div:not(.configLabel) {
     margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 md-form-field {

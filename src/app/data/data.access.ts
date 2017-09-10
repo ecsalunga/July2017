@@ -78,6 +78,7 @@ export class DataAccess {
             this.DL.Display("Account", "Created!");
         })
         .catch(err => {
+            console.log(err);
             this.DL.Display("Account", "Create account failed.");
         });  
     }
@@ -89,14 +90,15 @@ export class DataAccess {
             this.DL.Display("Login", "Successful!");
         })
         .catch(err => {
+            console.log(err);
             this.DL.Display("Login", "Login failed.");
         });
     }
 
     public DataLoad() {
         this.accessDAL.Load();
-        this.settingDAL.ModuleLoad();
         this.settingDAL.SystemLoad();
+        this.settingDAL.ModuleLoad();
         this.UserLoad();
         this.showcaseDAL.Load();
     }
@@ -135,11 +137,11 @@ export class DataAccess {
                     this.DL.User = u;
             });
 
-            // [temp] default to manager
+            // default to manager
             if (!this.DL.User.AccessKey) {
-                this.DL.User.AccessKey = "-KsasLernU2_JWOO90Bz";
-                this.DL.User.AccessName = "DEMO";
-                this.DL.User.IsSystemUser = true;
+                this.DL.User.AccessKey = this.DL.AccessDefault;
+                this.DL.User.AccessName = "Default";
+                this.DL.User.IsSystemUser = this.DL.UserIsDefaultSystemUser;
                 this.DL.User.IsMember = true
                 this.DL.User.JoinDate = this.core.dateToNumber(this.DL.Date);
 
