@@ -172,7 +172,7 @@ export class DataLayer {
         this.SnackBarConfigLong.duration = 10000;
     }
 
-    public SetSnackBarConfig() {
+    public SetSystemConfig() {
         this.SnackBarConfig.duration = this.SystemSetting.NotificationDuration;
         this.SnackBarConfigLong.duration = this.SystemSetting.NotificationSlowDuration;
     }

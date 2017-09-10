@@ -8,6 +8,7 @@ export class ModuleSettingInfo {
 export class SystemSettingInfo {
     Name: string;
     Footer: string;
+    HomeTitle: string;
     NotificationDuration: number;
     NotificationSlowDuration: number;
 }

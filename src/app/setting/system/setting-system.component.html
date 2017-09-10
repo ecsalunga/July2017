@@ -14,16 +14,24 @@
       </md-form-field>
     </div>
     <div class="configLabel">
+      Home Page
+    </div>
+    <div>
+      <md-form-field>
+        <input id="txtHomeTitle" mdInput placeholder="Home Title" [(ngModel)]="model.HomeTitle" />
+      </md-form-field>
+    </div>
+    <div class="configLabel">
       Notifications
     </div>
     <div>
       <md-form-field>
-        <input id="txtDuration" type="number" mdInput placeholder="Regular Durations" [(ngModel)]="model.NotificationDuration" />
+        <input id="txtDuration" type="number" mdInput placeholder="Duration" [(ngModel)]="model.NotificationDuration" />
       </md-form-field>
     </div>
     <div>
       <md-form-field>
-        <input id="txtDurationLong" type="number" mdInput placeholder="Long Durations" [(ngModel)]="model.NotificationSlowDuration" />
+        <input id="txtDurationLong" type="number" mdInput placeholder="Alert Duration" [(ngModel)]="model.NotificationSlowDuration" />
       </md-form-field>
     </div>
   </div>

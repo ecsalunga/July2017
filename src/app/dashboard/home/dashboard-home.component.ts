@@ -15,7 +15,7 @@ export class DashboardHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Welcome!";
+    this.DL.TITLE = this.DL.SystemSetting.HomeTitle;
     this.DL.LoadComponentsFromLink(['showcase-widget']);
   }
 }

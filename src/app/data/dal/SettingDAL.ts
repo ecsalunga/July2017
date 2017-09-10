@@ -19,18 +19,18 @@ export class SettingDAL {
         this.af.object(this.PATH_SYSTEM).first().subscribe(snapshot => {
             if (snapshot.$exists()) {
                 this.DL.SystemSetting = snapshot;
-                this.DL.SetSnackBarConfig();
+                this.DL.SetSystemConfig();
             }
         });
     }
 
     public ModuleSave(item: ModuleSettingInfo) {
         this.af.object(this.PATH_MODULE).update(item);
-        this.DL.ModuleSetting = item;
+        this.ModuleLoad();
     }
 
     public SystemSave(item: SystemSettingInfo) {
         this.af.object(this.PATH_SYSTEM).update(item);
-        this.DL.SystemSetting = item;
+        this.SystemLoad();
     }
 }
