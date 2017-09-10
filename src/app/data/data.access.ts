@@ -137,7 +137,7 @@ export class DataAccess {
                     this.DL.User = u;
             });
 
-            // default to manager
+            // default to system config
             if (!this.DL.User.AccessKey) {
                 this.DL.User.AccessKey = this.DL.AccessDefault;
                 this.DL.User.AccessName = "Default";

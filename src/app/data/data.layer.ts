@@ -101,7 +101,7 @@ export class DataLayer {
     IsAuthenticating: boolean = false;
     IsDataActiveLoaded: boolean = false;
 
-    DefaultImageURL: string = "https://firebasestorage.googleapis.com/v0/b/temp-system.appspot.com/o/images%2FNoImage.png?alt=media&token=40823113-df0a-4412-8026-d501036b9d78";
+    DefaultImageURL: string;
 
     ModuleSetting: ModuleSettingInfo;
     SystemSetting: SystemSettingInfo;
@@ -179,6 +179,7 @@ export class DataLayer {
         this.SnackBarConfigLong.duration = this.SystemSetting.NotificationSlowDuration;
         this.AccessDefault = this.SystemSetting.UserDefaultAccess;
         this.UserIsDefaultSystemUser = this.SystemSetting.IsSystemUser;
+        this.DefaultImageURL = this.SystemSetting.DefaultImageURL;
     }
 
     public ReportTodayRefresh()

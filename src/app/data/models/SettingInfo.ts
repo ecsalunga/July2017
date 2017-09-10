@@ -8,6 +8,8 @@ export class ModuleSettingInfo {
 export class SystemSettingInfo {
     Name: string;
     Footer: string;
+    DefaultImageURL: string;
+    
     HomeTitle: string;
 
     NotificationDuration: number;
