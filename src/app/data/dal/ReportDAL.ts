@@ -85,8 +85,12 @@ export class ReportDAL {
                     });
 
                     // save
-                    if (report.key)
-                        this.af.list(this.PATH).update(report.key, report);
+                    if (report.key) {
+                        if(report.SaleAmount == 0 && report.ExpenseAmount == 0)
+                            this.af.list(this.PATH).remove(report.key);
+                        else
+                            this.af.list(this.PATH).update(report.key, report);
+                    }
                     else
                         this.af.list(this.PATH).push(report);
 
