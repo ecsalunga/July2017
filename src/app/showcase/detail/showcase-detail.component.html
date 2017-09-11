@@ -13,6 +13,11 @@
         </textarea>
     </md-form-field>
   </div>
+  <div>
+    <md-form-field class="shortText">
+      <input id="txtOrder" type="number" mdInput placeholder="Order" [(ngModel)]="model.Order" />
+    </md-form-field>
+  </div>
   <input #fileSelector id="file" [hidden]="true" type="file" accept="image/*">
   <div class="imageContainer">
     <img class="fullWidth" src="{{model.ImageURL}}" (load)="ImageLoaded()">

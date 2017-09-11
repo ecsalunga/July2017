@@ -20,6 +20,7 @@ export class ShowcaseScheduleComponent implements OnInit {
     this.model.Product = this.DL.Showcase.Product;
     this.model.Description = this.DL.Showcase.Description;
     this.model.ImageURL = this.DL.Showcase.ImageURL;
+    this.model.Order = this.DL.Showcase.Order;
     this.model.key = this.DL.Showcase.key;
     if(this.DL.Showcase.Schedules) {
       this.DL.Showcase.Schedules.forEach(s => {

@@ -9,6 +9,7 @@ export class ShowcaseInfo {
     key: string;
     Product: ProductInfo;
     Description: string;
+    Order: number;
     ImageURL: string;
     Schedules: Array<ScheduleInfo>;
 

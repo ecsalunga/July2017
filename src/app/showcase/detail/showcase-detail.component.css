@@ -29,6 +29,10 @@ textarea {
     width: 225px;
 }
 
+.shortText {
+    width: 80px;
+}
+
 .fullWidth {
     width: 100%;
 }

@@ -8,7 +8,7 @@ export class ShowcaseDAL {
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) {}
 
     public Load() {
-        this.af.list(this.PATH, { query: { orderByChild: 'Name' } }).first().subscribe(snapshots => {
+        this.af.list(this.PATH, { query: { orderByChild: 'Order' } }).first().subscribe(snapshots => {
             this.DL.Showcases = new Array<ShowcaseInfo>();
             this.DL.ShowcaseToday = new Array<ShowcaseInfo>();
 
