@@ -32,15 +32,15 @@
     </ng-container>
   </table>
   <div class="hSpacer"></div>
-  <table [hidden]="!DL.UserAccess.UserAccessEdit">
+  <table>
     <tr class="rightRow">
       <td class="selectionRow">
-        <md-select placeholder="User" [(ngModel)]="selectedUser">
+        <md-select [disabled]="!DL.UserAccess.UserAccessEdit" placeholder="User" [(ngModel)]="selectedUser">
           <md-option *ngFor="let user of DL.Users" [value]="user">
             {{user.Name}}
           </md-option>
         </md-select>
-        <md-select placeholder="Access" [(ngModel)]="selectedAccess">
+        <md-select [disabled]="!DL.UserAccess.UserAccessEdit" placeholder="Access" [(ngModel)]="selectedAccess">
           <md-option *ngFor="let access of DL.Accesses" [value]="access">
             {{access.Name}}
           </md-option>
@@ -49,7 +49,7 @@
     </tr>
     <tr class="rightRow">
       <td>
-        <button md-fab [disabled]="!selectedUser || !selectedAccess" (click)="AccessSet()" mdTooltip="Set access" mdTooltipPosition="above"><md-icon>accessibility</md-icon></button>
+        <button md-fab [disabled]="!DL.UserAccess.UserAccessEdit || !selectedUser || !selectedAccess" (click)="AccessSet()" mdTooltip="Set access" mdTooltipPosition="above"><md-icon>accessibility</md-icon></button>
       </td>
     </tr>
   </table>

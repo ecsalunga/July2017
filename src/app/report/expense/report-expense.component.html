@@ -48,9 +48,9 @@
   <div class="hSpacer"></div>
   <table>
     <tr class="rightRow">
-      <td class="selectionRow" style="width: 60%" [hidden]="!DL.UserAccess.ExpenseAdd">
+      <td class="selectionRow" style="width: 60%">
         <md-form-field>
-          <input id="txtDescription" mdInput placeholder="Description" [mdAutocomplete]="auto" [formControl]="ctrl" [(ngModel)]="description">
+          <input id="txtDescription" mdInput [disabled]="!DL.UserAccess.ExpenseAdd" placeholder="Description" [mdAutocomplete]="auto" [formControl]="ctrl" [(ngModel)]="description">
         </md-form-field>
         <md-autocomplete #auto="mdAutocomplete">
           <md-option *ngFor="let expense of filteredExpenses | async" [value]="expense">
@@ -58,7 +58,7 @@
           </md-option>
         </md-autocomplete>
         <md-form-field>
-          <input id="txtAmount" type="number" mdInput placeholder="Amount" [(ngModel)]="amount" />
+          <input id="txtAmount" type="number" mdInput [disabled]="!DL.UserAccess.ExpenseAdd" placeholder="Amount" [(ngModel)]="amount" />
         </md-form-field>
       </td>
       <td class="selectionRow">
@@ -67,12 +67,11 @@
           <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
           <md-datepicker #picker></md-datepicker>
         </md-form-field>
-    
       </td>
     </tr>
     <tr class="rightRow">
-      <td [hidden]="!DL.UserAccess.ExpenseAdd">
-        <button md-fab [disabled]="!description || !amount || !ReportDate" (click)="AddExpense()" mdTooltip="Add to expenses" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+      <td>
+        <button md-fab [disabled]="!DL.UserAccess.ExpenseAdd || !description || !amount || !ReportDate" (click)="AddExpense()" mdTooltip="Add to expenses" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
       </td>
       <td>
         <button md-fab [disabled]="!ReportDate || !DL.UserAccess.ExpenseSearch" (click)="ExpenseView()" mdTooltip="View expenses" mdTooltipPosition="above"><md-icon>search</md-icon></button>

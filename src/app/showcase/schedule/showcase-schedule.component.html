@@ -45,14 +45,14 @@
   <div class="hSpacer"></div>
   <table>
     <tr class="rightRow">
-      <td class="selectionRow" style="width: 50%" [hidden]="!DL.UserAccess.ShowcaseScheduleAdd">
+      <td class="selectionRow" style="width: 50%">
         <md-form-field class="date">
-          <input mdInput [mdDatepicker]="from" placeholder="From Date" [(ngModel)]="FromDate">
+          <input mdInput [disabled]="!DL.UserAccess.ShowcaseScheduleAdd" [mdDatepicker]="from" placeholder="From Date" [(ngModel)]="FromDate">
           <md-datepicker-toggle mdSuffix [for]="from"></md-datepicker-toggle>
           <md-datepicker #from></md-datepicker>
         </md-form-field>
         <md-form-field class="date">
-          <input mdInput [mdDatepicker]="to" placeholder="To Date" [(ngModel)]="ToDate">
+          <input mdInput [disabled]="!DL.UserAccess.ShowcaseScheduleAdd" [mdDatepicker]="to" placeholder="To Date" [(ngModel)]="ToDate">
           <md-datepicker-toggle mdSuffix [for]="to"></md-datepicker-toggle>
           <md-datepicker #to></md-datepicker>
         </md-form-field>
@@ -60,8 +60,8 @@
       <td></td>
     </tr>
     <tr class="rightRow">
-      <td [hidden]="!DL.UserAccess.ShowcaseScheduleAdd">
-        <button md-fab [disabled]="!FromDate || !ToDate || !canAdd()" (click)="AddSchedule()" mdTooltip="Add schedule" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+      <td>
+        <button md-fab [disabled]="!DL.UserAccess.ShowcaseScheduleAdd || !FromDate || !ToDate || !canAdd()" (click)="AddSchedule()" mdTooltip="Add schedule" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
       </td>
       <td>
         <button md-fab [disabled]="!DL.UserAccess.ShowcaseScheduleAdd  && !DL.UserAccess.ShowcaseScheduleDelete" (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>

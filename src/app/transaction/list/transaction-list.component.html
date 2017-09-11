@@ -54,11 +54,11 @@
     </tr>
   </table>
   <div class="hSpacer"></div>
-  <table [hidden]="!DL.UserAccess.TransactionSearch">
+  <table>
     <tr class="rightRow">
       <td class="selectionRow">
         <md-form-field class="date">
-          <input mdInput [mdDatepicker]="picker" placeholder="Report Date" [(ngModel)]="ReportDate">
+          <input mdInput [disabled]="!DL.UserAccess.TransactionSearch" [mdDatepicker]="picker" placeholder="Report Date" [(ngModel)]="ReportDate">
           <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
           <md-datepicker #picker></md-datepicker>
         </md-form-field>
@@ -66,7 +66,7 @@
     </tr>
     <tr class="rightRow">
       <td>
-        <button md-fab [disabled]="!ReportDate" (click)="TransactionView()" mdTooltip="View transactions" mdTooltipPosition="above"><md-icon>search</md-icon></button>
+        <button md-fab [disabled]="!ReportDate || !DL.UserAccess.TransactionSearch" (click)="TransactionView()" mdTooltip="View transactions" mdTooltipPosition="above"><md-icon>search</md-icon></button>
       </td>
     </tr>
   </table>

@@ -37,7 +37,7 @@
     </md-form-field>
   </div>
   <div>
-    <md-slide-toggle [disabled]="!DL.UserAccess.UserGroupEdit" [(ngModel)]="model.IsSystemUser">
+    <md-slide-toggle [disabled]="!model.UID || !DL.UserAccess.UserGroupEdit" [(ngModel)]="model.IsSystemUser">
       Sytem User
     </md-slide-toggle>
     <md-slide-toggle [disabled]="!DL.UserAccess.UserGroupEdit" [(ngModel)]="model.IsMember">
