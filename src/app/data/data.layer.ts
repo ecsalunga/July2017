@@ -239,18 +239,22 @@ export class DataLayer {
     public LoadFromMenu(name: string) {
         this.SOURCE = this.MENU;
         this.core.loadComponent(name);
-        window.scroll(0, 0);
+        this.GotoTop();
     }
 
     public LoadFromLink(name: string) {
         this.SOURCE = this.LINK;
         this.core.loadComponent(name);
-        window.scroll(0, 0);
+        this.GotoTop();
     }
 
     public LoadComponentsFromLink(names: Array<string>) {
         this.SOURCE = this.LINK;
         this.core.loadComponents(names);
+        this.GotoTop();
+    }
+
+    public GotoTop() {
         window.scroll(0, 0);
     }
 

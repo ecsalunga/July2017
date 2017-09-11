@@ -26,16 +26,16 @@
         <span>Member</span>
       </button>
     </ng-container>
-    <ng-container *ngIf="DL.UserAccess.ShowcaseView">
-      <button md-menu-item (click)="LoadPage('showcase-list')">
-        <md-icon>shop</md-icon>
-        <span>Showcase</span>
-      </button>
-    </ng-container>
     <ng-container *ngIf="DL.UserAccess.ProductView">
       <button md-menu-item (click)="LoadPage('product-list')">
         <md-icon>card_giftcard</md-icon>
         <span>Product</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.UserAccess.ShowcaseView">
+      <button md-menu-item (click)="LoadPage('showcase-list')">
+        <md-icon>shop</md-icon>
+        <span>Showcase</span>
       </button>
     </ng-container>
     <ng-container *ngIf="DL.UserAccess.SellView">

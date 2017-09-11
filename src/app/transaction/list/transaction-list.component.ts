@@ -32,6 +32,7 @@ export class TransactionListComponent implements OnInit {
     this.DL.ReportSelected.KeyMonth = this.core.dateToKeyMonth(this.ReportDate);
     this.DL.ReportSelected.KeyYear = this.ReportDate.getFullYear();
     this.DA.TransactionSelectedLoad(this.DL.ReportSelected);
+    this.DL.GotoTop();
   }
 
   ngOnInit() {
