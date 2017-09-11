@@ -33,6 +33,16 @@
           <div>
             <md-checkbox [(ngModel)]="model.DeliveryIsToggleSell">Switch Sell / Delivery</md-checkbox>
           </div>
+          <div class="vSmallSpacer"></div>
+          <div class="configLabel">
+            Expense
+          </div>
+          <div>
+            <button color="primary" md-raised-button (click)="ClearAutocomplete()">
+              <md-icon>delete_sweep</md-icon>
+              <span>Clear Autocomplete</span>
+            </button>
+          </div>
         </td>
       </tr>
     </table>

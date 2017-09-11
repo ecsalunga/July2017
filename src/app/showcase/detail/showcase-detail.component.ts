@@ -28,7 +28,7 @@ export class ShowcaseDetailComponent implements OnInit {
       this.model = new ShowcaseInfo(this.DL.DefaultImageURL);
   }
 
-  selectFile() {
+  SelectFile() {
     this.fileSelector.element.nativeElement.click();
   }
 

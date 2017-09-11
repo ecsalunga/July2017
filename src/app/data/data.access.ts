@@ -268,6 +268,10 @@ export class DataAccess {
         this.accessDAL.Load();
     }
 
+    ExpenseTypeClear() {
+        this.expenseDAL.TypeDelete();
+    }
+
     public ProductSave(item: ProductInfo) {
         this.productDAL.Save(item);
     }

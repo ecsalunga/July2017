@@ -60,12 +60,17 @@ export class ExpenseDAL {
         if (this.DL.ExpenseTypes.indexOf(item.Description) === -1) {
             this.DL.ExpenseTypes.push(item.Description);
             this.DL.ExpenseTypes.sort();
-            this.af.object(this.PATH_TYPES).update(this.DL.ExpenseTypes);
+            this.af.object(this.PATH_TYPES).set(this.DL.ExpenseTypes);
             this.LoadTypes();
         }
     }
 
     public Delete(item: ExpenseInfo) {
         this.af.list(this.PATH).remove(item.key);
+    }
+
+    public TypeDelete() {
+        this.af.object(this.PATH_TYPES).remove();
+        this.LoadTypes();
     }
 }
