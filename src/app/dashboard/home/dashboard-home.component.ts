@@ -10,7 +10,7 @@ export class DashboardHomeComponent implements OnInit {
 
   constructor(private DL: DataLayer, private DA: DataAccess) {}
   
-  login() {
+  Login() {
     this.DL.LoadFromLink('user-login');
   }
 

@@ -23,7 +23,7 @@ export class TransactionCancelComponent implements OnInit {
     this.DA.TransactionCancelLoad(keyMonth);
   }
 
-  getDate(keyDay: number): Date {
+  GetDate(keyDay: number): Date {
     return this.core.numberToDate(keyDay);
   }
 

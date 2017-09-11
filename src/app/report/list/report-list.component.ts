@@ -27,7 +27,7 @@ export class ReportListComponent implements OnInit {
     this.DL.LoadFromLink("report-detail");
   }
 
-  getDate(keyDay: number): Date {
+  GetDate(keyDay: number): Date {
     return this.core.numberToDate(parseInt(keyDay + '000000'))
   }
 

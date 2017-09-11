@@ -27,7 +27,7 @@ export class ReportExpenseComponent implements OnInit {
     this.ctrl = new FormControl();
     this.filteredExpenses = this.ctrl.valueChanges
         .startWith(null)
-        .map(name => this.filterExpenses(name));
+        .map(name => this.FilterExpenses(name));
   }
 
   Delete(item: ExpenseInfo) {
@@ -35,7 +35,7 @@ export class ReportExpenseComponent implements OnInit {
     this.ExpenseView();
   }
 
-  filterExpenses(val: string) {
+  FilterExpenses(val: string) {
     return val ? this.DL.ExpenseTypes.filter(s => s.toLowerCase().indexOf(val.toLowerCase()) === 0) : this.DL.ExpenseTypes;
   }
 

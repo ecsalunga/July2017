@@ -27,11 +27,11 @@ export class UserDetailComponent implements OnInit {
     this.DL.Display("User Details", "Saved!");
   }
 
-  selectFile() {
+  SelectFile() {
     this.fileSelector.element.nativeElement.click();
   }
 
-  upload() {
+  Upload() {
     let selectedFile = (<HTMLInputElement>this.fileSelector.element.nativeElement).files[0];
     if(selectedFile.type.indexOf("image") > -1) {
       this.isLoaded = false;
@@ -44,12 +44,12 @@ export class UserDetailComponent implements OnInit {
       this.DL.Display("Image", "Please select valid image file.");
   }
 
-  resetPicture() {
+  ResetPicture() {
     if(this.model.ImageURL)
       this.model.SystemImageURL = this.model.ImageURL;
   }
 
-  imageLoaded() {
+  ImageLoaded() {
     this.isLoaded = true;
   }
 
@@ -61,7 +61,7 @@ export class UserDetailComponent implements OnInit {
     this.DL.TITLE = "User Details";
 
     this.renderer.listen(this.fileSelector.element.nativeElement, 'change', (event) => {
-      this.upload();
+      this.Upload();
     });
   }
 }

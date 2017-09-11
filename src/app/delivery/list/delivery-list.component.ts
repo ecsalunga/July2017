@@ -59,7 +59,7 @@ export class DeliveryListComponent implements OnInit {
     this.DL.Display("Delivery", "Done Status Cleared!");
   }
 
-  getDate(actionDate: number): Date {
+  GetDate(actionDate: number): Date {
     return this.core.numberToDate(actionDate);
   }
 

@@ -18,17 +18,17 @@ export class UserSignupComponent implements OnInit {
     Validators.required,
     Validators.pattern(EMAIL_REGEX)]);
   passwordFormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
-  confirmFormControl = new FormControl('', [Validators.required, this.passwordsMatch.bind(this)]);
+  confirmFormControl = new FormControl('', [Validators.required, this.PasswordsMatch.bind(this)]);
 
   constructor(private DA: DataAccess, private DL: DataLayer) { }
 
-  notifyConfirm() {
+  NotifyConfirm() {
     this.confirmFormControl.updateValueAndValidity();
   }
 
-  public passwordsMatch() {
+  PasswordsMatch() {
     if(this.password != this.confirm)
-      return { 'passwordMismatch': true };
+      return { 'PasswordMismatch': true };
   }
 
   Save() {

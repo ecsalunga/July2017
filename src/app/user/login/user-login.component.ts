@@ -20,11 +20,11 @@ export class UserLoginComponent implements OnInit {
 
   constructor(private DA: DataAccess, private DL: DataLayer) { }
 
-  login() {
+  Login() {
     this.DA.LogIn(this.email, this.password);
   }
 
-  signup() {
+  Signup() {
     this.DL.LoadFromLink('user-signup');
   }
 

@@ -1,7 +1,7 @@
 <div>
   <div>
     <md-form-field>
-      <input id="txtDate" mdInput [readonly]="true" placeholder="Cashflow Date" value="{{ getDate(model.KeyDay) | date : 'yyyy-MM-dd' }}" />
+      <input id="txtDate" mdInput [readonly]="true" placeholder="Cashflow Date" value="{{ GetDate(model.KeyDay) | date : 'yyyy-MM-dd' }}" />
     </md-form-field>
   </div>
   <div>
@@ -11,7 +11,7 @@
   </div>
   <div>
     <md-form-field class="longText">
-      <input id="txtCOHComputed" [readonly]="true" mdInput placeholder="Computed cash on-hand" value="{{ getComputed() | number:'1.2-2'}}" />
+      <input id="txtCOHComputed" [readonly]="true" mdInput placeholder="Computed cash on-hand" value="{{ GetComputed() | number:'1.2-2'}}" />
     </md-form-field>
   </div>
   <div>

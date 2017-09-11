@@ -25,7 +25,7 @@ export class ReportDetailComponent implements OnInit {
     this.DL.LoadFromLink("report-list");
   }
 
-  getComputed() : number {
+  GetComputed() : number {
     let start = 0;
     if(this.model.COHStart)
       start = this.model.COHStart;
@@ -33,7 +33,7 @@ export class ReportDetailComponent implements OnInit {
     return ((start + this.model.SaleAmount) - this.model.ExpenseAmount)
   }
 
-  getDate(keyDay: number): Date {
+  GetDate(keyDay: number): Date {
     return this.core.numberToDate(parseInt(keyDay + '000000'))
   }
 

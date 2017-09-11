@@ -1,7 +1,7 @@
 <div>
   <div>
     <md-form-field>
-      <input id="txtCode" mdInput placeholder="Code" [(ngModel)]="model.Code" (change)="codeChange()" />
+      <input id="txtCode" mdInput placeholder="Code" [(ngModel)]="model.Code" (change)="CodeChange()" />
     </md-form-field>
   </div>
   <div>
@@ -26,7 +26,7 @@
   </div>
   <div class="hSpacer"></div>
   <div class="rightRow">
-    <button md-fab (click)="Save()" [disabled]="!canSave()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+    <button md-fab (click)="Save()" [disabled]="!CanSave()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
     <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
   </div>
 </div>

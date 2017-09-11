@@ -57,15 +57,15 @@ export class ProductSellComponent implements OnInit {
       item.Total = item.Quantity * item.Price;
     }
     this.DA.SellInfoSave(item);
-    this.clearSelection();
+    this.ClearSelection();
   }
 
-  canAdd(): boolean {
+  CanAdd(): boolean {
     return ((this.model && this.selectedQuantity > 0) 
     || (this.isDiscount && this.discountPrice > 0 && this.discountPrice <= this.DL.SellInfosAmount));
   }
 
-  clearSelection() {
+  ClearSelection() {
     this.model = null;
     this.quantities = new Array<number>();
     this.selectedQuantity = 1;
@@ -73,7 +73,7 @@ export class ProductSellComponent implements OnInit {
     this.discountPrice = 0;
   }
 
-  productSelected() {
+  ProductSelected() {
     if(this.model.Code == this.DL.KEYDISCOUNT) {
       this.isDiscount = true;
       this.selectedQuantity = 0;

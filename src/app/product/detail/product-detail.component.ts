@@ -19,7 +19,7 @@ export class ProductDetailComponent implements OnInit {
       this.model = new ProductInfo();
   }
 
-  canSave(): boolean {
+  CanSave(): boolean {
     if(this.model.Code == this.DL.KEYDISCOUNT)
       return false;
 
@@ -35,7 +35,7 @@ export class ProductDetailComponent implements OnInit {
     return true;
   }
 
-  codeChange() {
+  CodeChange() {
     this.hasDuplicate = false;
   }
 

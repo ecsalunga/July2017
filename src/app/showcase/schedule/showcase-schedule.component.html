@@ -27,10 +27,10 @@
           <ng-container *ngFor="let info of model.Schedules">
             <tr>
               <td>
-                {{ getDate(info.From) | date : 'yyyy-MM-dd' }}
+                {{ GetDate(info.From) | date : 'yyyy-MM-dd' }}
               </td>
               <td class="totalColumn">
-                {{ getDate(info.To) | date : 'yyyy-MM-dd' }}
+                {{ GetDate(info.To) | date : 'yyyy-MM-dd' }}
               </td>
               <td class="rightRow">
                 <button md-mini-fab color="warn" [disabled]="!DL.UserAccess.ShowcaseScheduleDelete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
@@ -61,7 +61,7 @@
     </tr>
     <tr class="rightRow">
       <td>
-        <button md-fab [disabled]="!DL.UserAccess.ShowcaseScheduleAdd || !FromDate || !ToDate || !canAdd()" (click)="AddSchedule()" mdTooltip="Add schedule" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+        <button md-fab [disabled]="!DL.UserAccess.ShowcaseScheduleAdd || !FromDate || !ToDate || !CanAdd()" (click)="AddSchedule()" mdTooltip="Add schedule" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
       </td>
       <td>
         <button md-fab [disabled]="!DL.UserAccess.ShowcaseScheduleAdd  && !DL.UserAccess.ShowcaseScheduleDelete" (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>

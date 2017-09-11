@@ -23,10 +23,10 @@
       <ng-container *ngIf="Visible(item)">
         <tr>
           <td>
-            {{ getDate(item.ActionStart) | date : 'shortTime' }}
+            {{ GetDate(item.ActionStart) | date : 'shortTime' }}
           </td>
           <td>
-            {{ getDate(item.ActionLast) | date : 'shortTime' }}
+            {{ GetDate(item.ActionLast) | date : 'shortTime' }}
           </td>
           <td class="{{ IsLate(item) ?  'bad' : 'good' }}">
             {{ item.Status }}

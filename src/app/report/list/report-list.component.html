@@ -22,7 +22,7 @@
     <ng-container *ngFor="let item of DL.Reports">
       <tr>
         <td>
-          {{ getDate(item.KeyDay) | date : 'yyyy-MM-dd' }}
+          {{ GetDate(item.KeyDay) | date : 'yyyy-MM-dd' }}
         </td>
         <td class="totalColumn">
           {{item.SaleAmount | number:'1.2-2'}}

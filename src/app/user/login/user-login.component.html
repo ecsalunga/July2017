@@ -32,14 +32,14 @@
           </md-form-field>
         </div>
         <div>
-          <button md-fab [disabled]="emailFormControl.invalid || passwordFormControl.invalid" (click)="login()" mdTooltip="Login" mdTooltipPosition="above"><md-icon>lock_open</md-icon></button>
+          <button md-fab [disabled]="emailFormControl.invalid || passwordFormControl.invalid" (click)="Login()" mdTooltip="Login" mdTooltipPosition="above"><md-icon>lock_open</md-icon></button>
         </div>
       </div>
       <div class="vSmallSpacer"></div>
     </div>
   </div>
   <div class="rightRow">
-    <button md-button (click)="signup()">
+    <button md-button (click)="Signup()">
       <md-icon>supervisor_account</md-icon>
       <span>Create new account</span>
     </button>

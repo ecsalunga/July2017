@@ -30,7 +30,7 @@ export class ProductListComponent implements OnInit {
     this.DL.LoadFromLink("product-detail");
   }
 
-  productSelected() {
+  ProductSelected() {
     if(this.model)
       this.quantitySelected = 1;
   }

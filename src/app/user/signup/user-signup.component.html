@@ -13,7 +13,7 @@
   </div>
   <div>
     <md-form-field>
-      <input mdInput (change)="notifyConfirm()" [(ngModel)]="password" name="password" type="password" placeholder="Password" [formControl]="passwordFormControl">
+      <input mdInput (change)="NotifyConfirm()" [(ngModel)]="password" name="password" type="password" placeholder="Password" [formControl]="passwordFormControl">
       <md-error *ngIf="passwordFormControl.hasError('required')">
         Password is <strong>required</strong>
       </md-error>
@@ -28,7 +28,7 @@
       <md-error *ngIf="confirmFormControl.hasError('required')">
         Confirm password is <strong>required</strong>
       </md-error>
-      <md-error *ngIf="confirmFormControl.hasError('passwordMismatch')">
+      <md-error *ngIf="confirmFormControl.hasError('PasswordMismatch')">
         Password mismatch
       </md-error>
     </md-form-field>

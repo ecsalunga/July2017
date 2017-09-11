@@ -53,7 +53,7 @@
     <table [hidden]="!DL.UserAccess.SellAdd">
       <tr class="rightRow">
         <td class="selectionRow" style="width: 60%">
-          <md-select class="longText" placeholder="Product" [(ngModel)]="model" (change)="productSelected()">
+          <md-select class="longText" placeholder="Product" [(ngModel)]="model" (change)="ProductSelected()">
             <md-option *ngFor="let product of DL.ProductSelections" [value]="product">
               {{ product.Description }} ({{ product.Code }})
             </md-option>
@@ -82,7 +82,7 @@
       </tr>
       <tr class="rightRow">
         <td>
-          <button md-fab [disabled]="!canAdd()" (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><md-icon>add_shopping_cart</md-icon></button>
+          <button md-fab [disabled]="!CanAdd()" (click)="AddProduct()" mdTooltip="Add to cart" mdTooltipPosition="above"><md-icon>add_shopping_cart</md-icon></button>
         </td>
         <td>
           <button md-fab [disabled]="!DL.SellInfosCount" (click)="CartClose()" mdTooltip="Close Cart" mdTooltipPosition="above"><md-icon>done</md-icon></button>

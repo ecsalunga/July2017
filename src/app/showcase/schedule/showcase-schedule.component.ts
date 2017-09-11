@@ -36,7 +36,7 @@ export class ShowcaseScheduleComponent implements OnInit {
     this.ToDate = this.ToDay;
   }
 
-  getDate(keyDay: number): Date {
+  GetDate(keyDay: number): Date {
     return this.core.numberToDate(parseInt(keyDay + '000000'))
   }
 
@@ -58,7 +58,7 @@ export class ShowcaseScheduleComponent implements OnInit {
     this.DL.Display("Showcase Schedule", "Saved!");
   }
 
-  canAdd(): boolean {
+  CanAdd(): boolean {
     return (this.core.dateToKeyDay(this.ToDate) >= this.core.dateToKeyDay(this.FromDate) 
       && this.core.dateToKeyDay(this.ToDate) >= this.core.dateToKeyDay(this.ToDay));
   }

@@ -12,12 +12,12 @@ export class MemberListComponent implements OnInit {
 
   constructor(private core: Core, private DL: DataLayer) {}
 
-  SelectMember(member: UserInfo) {
-    this.DL.UserSelected = member;
+  SelectItem(item: UserInfo) {
+    this.DL.UserSelected = item;
     this.DL.LoadFromLink("member-detail");
   }
 
-  AddMember(){
+  AddItem(){
     this.DL.UserSelected = null;
     this.DL.LoadFromLink("member-detail");
   }

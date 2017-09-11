@@ -22,20 +22,20 @@ export class ReportBalancingComponent implements OnInit {
     this.DA.ReportMonthlyLoad(this.yearSelected, this.monthSelected)
   }
 
-  getComputed(item: ReportInfo) : number {
+  GetComputed(item: ReportInfo) : number {
     if(!item.COHStart)
       item.COHStart = 0;
 
     return ((item.COHStart + item.SaleAmount) - item.ExpenseAmount)
   }
 
-  getActual(item: ReportInfo) : number {
+  GetActual(item: ReportInfo) : number {
     if(!item.COHActual)
       item.COHActual = 0;
     return item.COHActual;
   }
 
-  getDate(keyDay: number): Date {
+  GetDate(keyDay: number): Date {
     return this.core.numberToDate(parseInt(keyDay + '000000'))
   }
 

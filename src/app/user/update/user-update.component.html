@@ -32,10 +32,10 @@
   <div class="vSmallSpacer"></div>
   <input #fileSelector id="file" [hidden]="true" type="file" accept="image/*">
   <div class="imageContainer">
-    <img class="fullWidth" src="{{model.SystemImageURL}}" (load)="imageLoaded()">
+    <img class="fullWidth" src="{{model.SystemImageURL}}" (load)="ImageLoaded()">
     <div class="imageEdit" [hidden]="!isLoaded">
-      <div (click)="selectFile()">Update</div>
-      <div (click)="resetPicture()">Reset</div>
+      <div (click)="SelectFile()">Update</div>
+      <div (click)="ResetPicture()">Reset</div>
     </div>
   </div>
   <div class="hSpacer"></div>

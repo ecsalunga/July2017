@@ -13,13 +13,13 @@ export class SnapshotListComponent implements OnInit {
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
     if(this.DL.SOURCE == this.DL.MENU) {
-      this.loadSnapshots(this.DL.ReportToday.KeyDay);
+      this.LoadSnapshots(this.DL.ReportToday.KeyDay);
     }
 
     this.selectedDate = this.core.numberToDate(parseInt(this.DL.ReportSelected.KeyDay + '000000'));
   }
 
-  loadSnapshots(keyDay: number) {
+  LoadSnapshots(keyDay: number) {
     this.DL.ReportSelected = new ReportInfo();
     this.DL.ReportSelected.KeyDay = this.core.dateToKeyDay(this.selectedDate);
     this.DA.SnapshotLoad(keyDay);
@@ -35,8 +35,8 @@ export class SnapshotListComponent implements OnInit {
     this.DL.LoadFromLink("snapshot-detail");
   }
 
-  loadSnapshot() {
-    this.loadSnapshots(this.core.dateToKeyDay(this.selectedDate));
+  LoadSnapshot() {
+    this.LoadSnapshots(this.core.dateToKeyDay(this.selectedDate));
   }
 
   ngOnInit() {

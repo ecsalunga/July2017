@@ -53,7 +53,7 @@ export class DeliveryDetailComponent implements OnInit {
     this.DL.Display("Delivery Details", "Saved!");
   }
 
-  getDate(actionDate: number): Date {
+  GetDate(actionDate: number): Date {
     return this.core.numberToDate(actionDate);
   }
 
