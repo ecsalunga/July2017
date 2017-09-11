@@ -1,17 +1,26 @@
 <div>
   <div>
     <md-form-field>
-      <input id="txtCode" mdInput placeholder="Code" [(ngModel)]="model.Code" (change)="CodeChange()" />
+      <input id="txtCode" mdInput placeholder="Code" [(ngModel)]="model.Code" (change)="CodeChange()" [formControl]="codeValidator" />
+      <md-error *ngIf="codeValidator.hasError('required')">
+        Code is <strong>required</strong>
+      </md-error>
     </md-form-field>
   </div>
   <div>
     <md-form-field class="longText">
-      <input id="txtDescription" mdInput placeholder="Description" [(ngModel)]="model.Description" />
+      <input id="txtDescription" mdInput placeholder="Description" [(ngModel)]="model.Description" [formControl]="descriptionValidator" />
+      <md-error *ngIf="descriptionValidator.hasError('required')">
+        Description is <strong>required</strong>
+      </md-error>
     </md-form-field>
   </div>
   <div>
     <md-form-field>
-      <input id="txtPrice" type="number" mdInput placeholder="Price" [(ngModel)]="model.Price" />
+      <input id="txtPrice" type="number" mdInput placeholder="Price" [(ngModel)]="model.Price" [formControl]="priceValidator" />
+      <md-error *ngIf="priceValidator.hasError('required')">
+        Price is <strong>required</strong>
+      </md-error>
     </md-form-field>
   </div>
   <div>

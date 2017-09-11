@@ -49,6 +49,7 @@ export class AccessInfo {
 
     UserView: boolean;
     UserEdit: boolean;
+    UserProfileEdit: boolean;
     UserAccessEdit: boolean;
     UserGroupEdit: boolean;
 

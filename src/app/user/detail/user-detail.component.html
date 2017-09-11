@@ -1,7 +1,10 @@
 <div>
   <div>
     <md-form-field class="longText">
-      <input id="txtName" mdInput placeholder="Name" [(ngModel)]="model.Name" />
+      <input id="txtName" mdInput placeholder="Name" [(ngModel)]="model.Name" [formControl]="nameValidator" />
+      <md-error *ngIf="nameValidator.hasError('required')">
+        Name is <strong>required</strong>
+      </md-error>
     </md-form-field>
   </div>
   <div>
@@ -55,7 +58,7 @@
   </div>
   <div class="hSpacer"></div>
   <div class="rightRow">
-    <button md-fab (click)="Save()" [disabled]="!DL.UserAccess.UserEdit" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+    <button md-fab (click)="Save()" [disabled]="nameValidator.invalid || !DL.UserAccess.UserEdit" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
     <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
   </div>
 </div>

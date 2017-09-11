@@ -1,4 +1,5 @@
 import { Component, OnInit, ApplicationRef, ViewChild, ViewContainerRef, Renderer } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
 import { UserInfo } from '../../data/models';
@@ -14,6 +15,7 @@ export class UserDetailComponent implements OnInit {
   joinDate: Date;
   model: UserInfo;
   isLoaded: boolean = true;
+  nameValidator = new FormControl('', [Validators.required]);
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer, private renderer: Renderer) {
     this.model = Object.assign({}, this.DL.UserSelected);

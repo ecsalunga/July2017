@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
 import { ProductInfo } from '../../data/models';
@@ -12,6 +13,10 @@ export class ProductDetailComponent implements OnInit {
   model: ProductInfo;
   hasDuplicate: boolean;
 
+  codeValidator = new FormControl('', [Validators.required]);
+  descriptionValidator = new FormControl('', [Validators.required]);
+  priceValidator = new FormControl('', [Validators.required]);
+
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
     if (this.DL.Product)
       this.model = Object.assign({}, this.DL.Product);
@@ -20,6 +25,9 @@ export class ProductDetailComponent implements OnInit {
   }
 
   CanSave(): boolean {
+    if(this.descriptionValidator.invalid || this.descriptionValidator.invalid || this.priceValidator.invalid)
+      return false;
+    
     if(this.model.Code == this.DL.KEYDISCOUNT)
       return false;
 
