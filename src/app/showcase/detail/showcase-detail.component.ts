@@ -61,7 +61,7 @@ export class ShowcaseDetailComponent implements OnInit {
 
   ngOnInit() {
     this.DL.TITLE = "Showcase Details";
-
+    
     this.renderer.listen(this.fileSelector.element.nativeElement, 'change', (event) => {
       this.Upload();
     });
