@@ -11,7 +11,10 @@
         <th>
           Visible
         </th>
-        <th class="rightRow">
+        <th>
+          Order
+        </th>
+        <th class="rightRow" style="width: 30%;">
           Action
         </th>
       </tr>
@@ -19,13 +22,16 @@
     <ng-container *ngFor="let item of DL.Showcases">
       <tr>
         <td>
-          {{item.Product.Description}}
+          {{ item.Product.Description }}
         </td>
         <td>
-          {{item.Product.Price | number:'1.2-2'}}
+          {{ item.Product.Price | number:'1.2-2' }}
         </td>
         <td class="{{ (Visibility(item) == 'Yes') ?  'good' : 'bad' }}">
           {{ Visibility(item) }}
+        </td>
+        <td>
+          {{ item.Order }}
         </td>
         <td class="rightRow">
           <button md-mini-fab [disabled]="!DL.UserAccess.ShowcaseScheduleView" (click)="ScheduleShowcase(item)" mdTooltip="Schedule"><md-icon>schedule</md-icon></button>

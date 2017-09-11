@@ -19,6 +19,7 @@ import {
   MdIconModule,
   MdSnackBarModule,
   MdSlideToggleModule,
+  MdTooltipModule,
   DateAdapter
  } from '@angular/material';
 
@@ -115,6 +116,7 @@ import { SettingSystemComponent } from './setting/system/setting-system.componen
     MdIconModule,
     MdSlideToggleModule,
     MdSnackBarModule,
+    MdTooltipModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
