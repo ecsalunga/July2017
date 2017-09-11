@@ -4,7 +4,7 @@
 
 .imageContainer {
     position: relative;
-    min-height: 100px;
+    min-height: 300px;
 }
 
 .imageEdit {
@@ -23,6 +23,10 @@
 
 textarea {
     height: 70px;
+}
+
+.longText {
+    width: 225px;
 }
 
 .fullWidth {
