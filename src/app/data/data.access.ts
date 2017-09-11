@@ -282,7 +282,11 @@ export class DataAccess {
 
     public ShowcaseSave(item: ShowcaseInfo) {
         this.showcaseDAL.Save(item);
-        this.showcaseDAL.Load();
+        this.ShowcasesLoad();
+    }
+
+    public ShowcaseSaveOnly(item: ShowcaseInfo) {
+        this.showcaseDAL.Save(item);
     }
 
     public AccessSave(item: AccessInfo) {

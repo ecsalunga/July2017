@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { ModuleSettingInfo } from '../../data/models';
+import { ModuleSettingInfo, ShowcaseInfo } from '../../data/models';
 
 @Component({
   selector: 'setting-module',
@@ -18,6 +18,25 @@ export class SettingModuleComponent implements OnInit {
   Save() {
     this.DA.ModuleSettingSave(this.model);
     this.DL.Display("Module Settings", "Saved!");
+  }
+
+  ShowcaseUpdate() {
+    let items = new Array<ShowcaseInfo>();
+    this.DL.Showcases.forEach(showcase => {
+      this.DL.Products.forEach(product => {
+        if(showcase.Product.key == product.key) {
+          showcase.Product = product;
+        }
+      });
+      items.push(showcase);
+    });
+
+    items.forEach(item => {
+      this.DA.ShowcaseSaveOnly(item);
+    });
+
+    this.DA.ShowcasesLoad();
+    this.DL.Display("Showcase", "Updated!");
   }
 
   ngOnInit() {
