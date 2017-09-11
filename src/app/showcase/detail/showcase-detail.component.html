@@ -1,23 +1,16 @@
 <div>
   <div>
-    <md-form-field>
-      <input id="txtCode" mdInput placeholder="Code" [(ngModel)]="model.Code" />
-    </md-form-field>
+    <md-select class="fullWidth" placeholder="Product" [(ngModel)]="model.Product">
+      <md-option *ngFor="let product of DL.Products" [value]="product">
+        {{ product.Description }} ({{ product.Code }})
+      </md-option>
+    </md-select>    
   </div>
-  <div>
-    <md-form-field class="longText">
-      <input id="txtName" mdInput placeholder="Name" [(ngModel)]="model.Name" />
-    </md-form-field>
-  </div>
+  <div class="vSmallSpacer"></div>
   <div>
     <md-form-field class="fullWidth">
       <textarea id="txtDescrption" mdInput placeholder="Description" [(ngModel)]="model.Description">
         </textarea>
-    </md-form-field>
-  </div>
-  <div>
-    <md-form-field>
-      <input id="txtPrice" type="number" mdInput placeholder="Price" [(ngModel)]="model.Price" />
     </md-form-field>
   </div>
   <input #fileSelector id="file" [hidden]="true" type="file" accept="image/*">

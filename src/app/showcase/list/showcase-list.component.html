@@ -19,10 +19,10 @@
     <ng-container *ngFor="let item of DL.Showcases">
       <tr>
         <td>
-          {{item.Name}}
+          {{item.Product.Description}}
         </td>
         <td>
-          {{item.Price | number:'1.2-2'}}
+          {{item.Product.Price | number:'1.2-2'}}
         </td>
         <td class="{{ (Visibility(item) == 'Yes') ?  'good' : 'bad' }}">
           {{ Visibility(item) }}

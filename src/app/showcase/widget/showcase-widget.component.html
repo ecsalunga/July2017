@@ -1,14 +1,14 @@
 <ng-container *ngFor="let item of DL.ShowcaseToday">
   <div class="item">
     <div class="itemHeader">
-      <div class="itemName">{{ item.Name }}</div>
+      <div class="itemName">{{ item.Product.Description }}</div>
     </div>
     <div class="itemDescription">
       {{ item.Description }}
     </div>
     <img class="fullWidth" src="{{item.ImageURL}}" />
     <div class="itemFooter">
-      {{ item.Price | number:'1.2-2' }}
+      {{ item.Product.Price | number:'1.2-2' }}
     </div>
   </div>
 </ng-container>

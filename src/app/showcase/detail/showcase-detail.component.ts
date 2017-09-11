@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, Renderer } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { ShowcaseInfo } from '../../data/models';
+import { ShowcaseInfo, ProductInfo } from '../../data/models';
 
 @Component({
   selector: 'showcase-detail',
@@ -15,8 +15,15 @@ export class ShowcaseDetailComponent implements OnInit {
   isLoaded: boolean = true;
 
   constructor(private core: Core, private DA: DataAccess, private DL: DataLayer, private renderer: Renderer) {
-    if (this.DL.Showcase)
+    if (this.DL.Showcase) {
       this.model = Object.assign({}, this.DL.Showcase);
+      if(this.model.Product) {
+        this.DL.Products.forEach(product => {
+          if(this.model.Product.key == product.key) 
+            this.model.Product = product;
+        });
+      }
+    }
     else
       this.model = new ShowcaseInfo(this.DL.DefaultImageURL);
   }

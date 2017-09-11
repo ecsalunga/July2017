@@ -1,3 +1,5 @@
+import { ProductInfo } from './ProductInfo';
+
 export class ScheduleInfo {
     From: number;
     To: number;
@@ -5,10 +7,8 @@ export class ScheduleInfo {
 
 export class ShowcaseInfo {
     key: string;
-    Code: string;
-    Name: string;
+    Product: ProductInfo;
     Description: string;
-    Price: number;
     ImageURL: string;
     Schedules: Array<ScheduleInfo>;
 
