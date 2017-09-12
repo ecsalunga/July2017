@@ -132,8 +132,10 @@ body {
 }
 
 .navbar .right {
+    margin-top: 10px;
     vertical-align: middle;
     float: right;
+    margin-right: 20px;
 }
 
 .objectActive {
