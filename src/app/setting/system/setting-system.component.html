@@ -23,14 +23,14 @@
       User
     </div>
     <div>
-      <md-select placeholder="Default Access" [(ngModel)]="model.UserDefaultAccess">
+      <md-select placeholder="Default Access" [(ngModel)]="model.DefaultAccess">
         <md-option *ngFor="let access of DL.Accesses" [value]="access.key">
           {{ access.Name }}
         </md-option>
       </md-select>
     </div>
     <div>
-      <md-select placeholder="Default System User" [(ngModel)]="model.IsSystemUser">
+      <md-select placeholder="Default System User" [(ngModel)]="model.DefaultIsSystemUser">
         <md-option [value]="true">Yes</md-option>
         <md-option [value]="false">No</md-option>
       </md-select>

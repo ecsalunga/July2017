@@ -4,7 +4,7 @@ import { ShowcaseInfo } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class ShowcaseDAL {
-    PATH: string = "/showcases";
+    PATH: string = "/showcases/items";
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) {}
 
     public Load() {

@@ -54,6 +54,7 @@ export class DataLayer {
     SellInfos: Array<SellInfo>;
     SellInfosAmount: number = 0;
     SellInfosCount: number = 0;
+    SellInfoCart: Array<SellInfo>;
 
     Delivery: DeliveryInfo;
     DeliveryInfos: Array<DeliveryInfo>;
@@ -91,7 +92,7 @@ export class DataLayer {
     Showcase: ShowcaseInfo;
     Showcases: Array<ShowcaseInfo>;
     ShowcaseToday: Array<ShowcaseInfo>;
-
+    
     Snapshot: SnapshotInfo;
     Snapshots: Array<SnapshotInfo>;
 
@@ -177,8 +178,8 @@ export class DataLayer {
     public SetSystemConfig() {
         this.SnackBarConfig.duration = this.SystemSetting.NotificationDuration;
         this.SnackBarConfigLong.duration = this.SystemSetting.NotificationSlowDuration;
-        this.AccessDefault = this.SystemSetting.UserDefaultAccess;
-        this.UserIsDefaultSystemUser = this.SystemSetting.IsSystemUser;
+        this.AccessDefault = this.SystemSetting.DefaultAccess;
+        this.UserIsDefaultSystemUser = this.SystemSetting.DefaultIsSystemUser;
         this.DefaultImageURL = this.SystemSetting.DefaultImageURL;
     }
 

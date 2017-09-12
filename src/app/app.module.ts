@@ -62,6 +62,7 @@ import { UserSignupComponent } from './user/signup/user-signup.component';
 import { UserLoginComponent } from './user/login/user-login.component';
 import { UserUpdateComponent } from './user/update/user-update.component';
 import { SettingSystemComponent } from './setting/system/setting-system.component';
+import { ProductOrderComponent } from './product/order/product-order.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { SettingSystemComponent } from './setting/system/setting-system.componen
     UserSignupComponent,
     UserLoginComponent,
     UserUpdateComponent,
-    SettingSystemComponent
+    SettingSystemComponent,
+    ProductOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -151,7 +153,8 @@ import { SettingSystemComponent } from './setting/system/setting-system.componen
     UserSignupComponent,
     UserLoginComponent,
     UserUpdateComponent,
-    SettingSystemComponent
+    SettingSystemComponent,
+    ProductOrderComponent
   ]
 })
 export class AppModule {

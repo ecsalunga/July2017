@@ -1,6 +1,7 @@
 export class ModuleSettingInfo {
     ModuleIsNotify: boolean;
-    
+    CurrencySymbol: string;
+
     DeliveryMaxMinutes: number;
     DeliveryIsToggleSell: boolean
 }
@@ -8,13 +9,12 @@ export class ModuleSettingInfo {
 export class SystemSettingInfo {
     Name: string;
     Footer: string;
-    DefaultImageURL: string;
-    
     HomeTitle: string;
 
     NotificationDuration: number;
     NotificationSlowDuration: number;
 
-    UserDefaultAccess: string;
-    IsSystemUser: boolean;
+    DefaultAccess: string;
+    DefaultIsSystemUser: boolean;
+    DefaultImageURL: string;
 }

@@ -8,7 +8,7 @@
     </div>
     <img class="fullWidth" src="{{item.ImageURL}}" />
     <div class="itemFooter">
-      {{ item.Product.Price | number:'1.2-2' }}
+     {{ DL.ModuleSetting.CurrencySymbol }} {{ item.Product.Price | number:'1.2-2' }}
     </div>
   </div>
 </ng-container>
