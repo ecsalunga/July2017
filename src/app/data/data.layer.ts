@@ -16,7 +16,8 @@ import {
     DeliveryInfo,
     ModuleSettingInfo,
     SystemSettingInfo,
-    SnapshotInfo
+    SnapshotInfo,
+    OrderInfo
 } from './models';
 
 @Injectable()
@@ -38,6 +39,8 @@ export class DataLayer {
     STATUS_IN_PROGRESS: string = "In-Progress";
     STATUS_DELIVERED: string = "Delivered";
     STATUS_CANCELLED: string = "Cancelled";
+    STATUS_SELECTING: string = "Selecting";
+    STATUS_REQUESTED: string = "Requested";
 
     Product: ProductInfo;
     Products: Array<ProductInfo>;
@@ -54,7 +57,6 @@ export class DataLayer {
     SellInfos: Array<SellInfo>;
     SellInfosAmount: number = 0;
     SellInfosCount: number = 0;
-    SellInfoCart: Array<SellInfo>;
 
     Delivery: DeliveryInfo;
     DeliveryInfos: Array<DeliveryInfo>;
@@ -92,6 +94,10 @@ export class DataLayer {
     Showcase: ShowcaseInfo;
     Showcases: Array<ShowcaseInfo>;
     ShowcaseToday: Array<ShowcaseInfo>;
+    ShowcaseOrder: OrderInfo;
+    ShowcaseOrders: Array<OrderInfo>;
+    ShowcaseUserOrders: Array<OrderInfo>;
+    ShowcaseUserHasOrder: boolean = false;
     
     Snapshot: SnapshotInfo;
     Snapshots: Array<SnapshotInfo>;

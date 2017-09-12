@@ -10,11 +10,18 @@
     </div>
   </div>
   <div class="right">
-    <ng-container *ngIf="DL.User.UID">
-      <button md-icon-button (click)="LoadProfile()" class="title" mdTooltip="Update Profile" mdTooltipPosition="below">
-        <img md-card-avatar src="{{DL.User.SystemImageURL}}"> 
+    <div *ngIf="DL.ShowcaseUserHasOrder">
+      <button md-icon-button (click)="LoadPage('showcase-cart')" mdTooltip="Open cart" mdTooltipPosition="below">
+        <md-icon>shopping_cart</md-icon>
       </button>
-    </ng-container>
+    </div>
+    <div>
+      <ng-container *ngIf="DL.User.UID">
+        <button md-icon-button (click)="LoadProfile()" class="title" mdTooltip="Update Profile" mdTooltipPosition="below">
+          <img md-card-avatar src="{{DL.User.SystemImageURL}}"> 
+        </button>
+      </ng-container>
+    </div>
   </div>
 </div>
 <div class="overlay" [style.width]="navWidth" (click)="ToggleNav()">

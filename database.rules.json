@@ -6,12 +6,15 @@
       ".indexOn": "Code"
     },
     "showcases": {
-      ".read": "true",
-      ".write": "true",
       "items": {
         ".read": "true",
         ".write": "true",
         ".indexOn": "Order"
+      },
+      "orders": {
+        ".read": "true",
+        ".write": "true",
+        ".indexOn": "ActionDate"
       }
     },
     "users": {
@@ -34,8 +37,6 @@
       }
     },
     "transactions": {
-      ".read": "true",
-      ".write": "true",
       "items": {
         ".read": "true",
         ".write": "true",
@@ -61,8 +62,6 @@
       ".indexOn": "KeyMonth"
     },
     "settings": {
-      ".read": "true",
-      ".write": "true",
       "module": {
         ".read": "true",
         ".write": "true"

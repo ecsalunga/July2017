@@ -1,10 +1,12 @@
 import { Core } from './../../core';
 import { DataLayer } from './../data.layer';
-import { ShowcaseInfo } from '../models';
+import { ShowcaseInfo, OrderInfo } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class ShowcaseDAL {
     PATH: string = "/showcases/items";
+    PATH_ORDER: string = "/showcases/orders";
+
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) {}
 
     public Load() {
@@ -31,6 +33,36 @@ export class ShowcaseDAL {
                 }
             });
         });
+    }
+
+    public LoadOrder() {
+        this.af.list(this.PATH_ORDER).subscribe(snapshots => {
+            this.DL.ShowcaseOrders = new Array<OrderInfo>();
+            this.DL.ShowcaseUserOrders = new Array<OrderInfo>();
+            this.DL.ShowcaseUserHasOrder = false;
+
+            snapshots.forEach(snapshot => {
+                let info: OrderInfo = snapshot;
+                info.key = snapshot.$key;
+                this.DL.ShowcaseOrders.push(info);
+
+                if(info.MemberKey == this.DL.User.key) {
+                    this.DL.ShowcaseUserOrders.push(info);
+                    this.DL.ShowcaseUserHasOrder = true;
+                }
+            });
+        });
+    }
+
+    public SaveOrder(item: OrderInfo) {
+        if (item.key)
+            this.af.list(this.PATH_ORDER).update(item.key, item);
+        else
+            this.af.list(this.PATH_ORDER).push(item);
+    }
+
+    public DeleteOrder(item: OrderInfo) {
+        this.af.list(this.PATH_ORDER).remove(item.key);
     }
 
     public Save(item: ShowcaseInfo) {

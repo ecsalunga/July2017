@@ -1,0 +1,69 @@
+<ng-container *ngFor="let order of DL.ShowcaseUserOrders">
+  <div class="item">
+    <div class="itemHeader">
+      <div class="itemName">{{ GetDate(order.ActionDate) | date : 'short' }}</div>
+    </div>
+    <div class="subContent">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              #
+            </th>
+            <th>
+              Description
+            </th>
+            <th class="totalColumn">
+              Price / QTY
+            </th>
+            <th class="totalColumn">
+              Total
+            </th>
+            <th class="rightRow">
+              Action
+            </th>
+          </tr>
+        </thead>
+        <ng-container *ngFor="let info of order.Items; let num = index;">
+          <tr>
+            <td>
+              {{ (info.Price) ? num+1 : '' }}
+            </td>
+            <td>
+              {{ info.Description }}
+            </td>
+            <td class="totalColumn">
+              {{ info.Price | number:'1.2-2' }} x {{ info.Quantity }}
+            </td>
+            <td class="totalColumn">
+              {{ info.Total | number:'1.2-2' }}
+            </td>
+            <td class="rightRow">
+              <ng-container>
+                <button md-mini-fab color="warn" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
+              </ng-container>
+            </td>
+            </tr>
+          </ng-container>
+          <tr class="blankCell">
+            <td></td>
+            <td>
+              Total
+            </td>
+            <td class="totalColumn">
+              {{ order.Count }}
+            </td>
+            <td class="totalColumn">
+              {{ order.Amount | number:'1.2-2' }}
+            </td>
+            <td></td>
+          </tr>
+        </table>
+      <div class="vSmallSpacer"></div>
+    </div>
+  </div>
+</ng-container>
+<div class="hSpacer"></div>
+<div class="rightRow">
+  <button md-fab (click)="LoadList()" mdTooltip="Back to selection" mdTooltipPosition="above"><md-icon>shopping_cart</md-icon></button>
+</div>

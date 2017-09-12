@@ -4,7 +4,7 @@ export { ExpenseInfo } from './ExpenseInfo';
 export { NameValue } from './NameValue';
 export { ProductInfo } from './ProductInfo';
 export { ReportInfo } from './ReportInfo';
-export { ScheduleInfo, ShowcaseInfo } from './ShowcaseInfo';
+export { ScheduleInfo, ShowcaseInfo, OrderInfo } from './ShowcaseInfo';
 export { SellInfo, TransactionInfo, DeliveryInfo } from './TransactionInfo';
 export { UserInfo } from './UserInfo';
 export { ModuleSettingInfo, SystemSettingInfo } from './SettingInfo';

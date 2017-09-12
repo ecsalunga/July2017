@@ -1,3 +1,8 @@
 .fullWidth {
     width: 100%;
 }
+
+.itemFooter div {
+    display: table-cell;
+    width: 100%;
+}

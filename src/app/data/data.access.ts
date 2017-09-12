@@ -30,7 +30,8 @@ import {
     DeliveryInfo,
     ModuleSettingInfo,
     SystemSettingInfo,
-    SnapshotInfo
+    SnapshotInfo,
+    OrderInfo
 } from './models';
 
 @Injectable()
@@ -180,13 +181,16 @@ export class DataAccess {
 
             if(toSave)
                 this.UserSave(this.DL.User);
+
+            if(this.DL.User.IsMember || this.DL.User.IsSystemUser)
+                this.showcaseDAL.LoadOrder();
             
             if(this.DL.User.IsSystemUser) {
                 this.DataSystemLoad();
                 this.DL.SetPermission();
                 this.DL.LoadFromMenu("report-list");
             }
-            else 
+            else
                 this.DL.LoadFromMenu("dashboard-home");
         });
     }
@@ -293,6 +297,14 @@ export class DataAccess {
 
     public ShowcaseSaveOnly(item: ShowcaseInfo) {
         this.showcaseDAL.Save(item);
+    }
+
+    public ShowcaseOrderSave(item: OrderInfo) {
+        this.showcaseDAL.SaveOrder(item);
+    }
+
+    public ShowcaseOrderDelete(item: OrderInfo) {
+        this.showcaseDAL.DeleteOrder(item);
     }
 
     public AccessSave(item: AccessInfo) {
