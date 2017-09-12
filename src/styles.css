@@ -111,31 +111,25 @@ body {
     top: 0px;
     min-width: 350px;
     background-color: #2196f3;
-}
-
-.navbar div {
-    margin-top: 5px;
-    margin-bottom: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .navbar .left {
+    margin-left: 10px;
     font-size: 20px;
     color: #ffffff;
-    margin-left: 10px;
-    vertical-align: middle;
     float: left;
 }
 
 .navbar .left div {
-    vertical-align: middle;
     display: inline-block;
+    vertical-align: middle;
 }
 
 .navbar .right {
-    margin-top: 10px;
-    vertical-align: middle;
     float: right;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .objectActive {
