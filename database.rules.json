@@ -8,7 +8,7 @@
     "showcases": {
       ".read": "true",
       ".write": "true",
-      ".items": {
+      "items": {
         ".read": "true",
         ".write": "true",
         ".indexOn": "Order"
