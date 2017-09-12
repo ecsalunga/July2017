@@ -10,7 +10,7 @@ body {
     width: 100%;
 }
 
-.navSide {
+.navSide { 
     top: 0px;
     overflow-y: auto;
     width: 200px;
@@ -70,9 +70,34 @@ body {
 
 .navbar { 
     position: fixed;
-    z-index: 1000;
+    z-index: 501;
     width: 100%;
     top: 0px;
+    min-width: 350px;
+    background-color: #2196f3;
+}
+
+.navbar div {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.navbar .left {
+    font-size: 20px;
+    color: #ffffff;
+    margin-left: 10px;
+    vertical-align: middle;
+    float: left;
+}
+
+.navbar .left div {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.navbar .right {
+    vertical-align: middle;
+    float: right;
 }
 
 .objectActive {
@@ -83,10 +108,6 @@ body {
   
 .objectActive:hover {
     box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 4px 2px rgba(0,0,0,0.22);
-}
-
-.h-spacer {
-    flex: 1 1 auto;
 }
 
 table {

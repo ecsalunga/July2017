@@ -1,15 +1,21 @@
 <div class="navbar">
-  <md-toolbar color="accent">
-    <button md-icon-button (click)="ToggleNav()" mdTooltip="Open menu" mdTooltipPosition="below">
-      <md-icon>menu</md-icon>
-    </button> {{ DL.SystemSetting.Name }}
-    <div class="h-spacer"></div>
+  <div class="left">
+    <div>
+      <button md-icon-button (click)="ToggleNav()" mdTooltip="Open menu" mdTooltipPosition="below">
+        <md-icon>menu</md-icon>
+      </button>
+    </div>
+    <div>
+      {{ DL.SystemSetting.Name }}
+    </div>
+  </div>
+  <div class="right">
     <ng-container *ngIf="DL.User.UID">
       <button md-button (click)="LoadProfile()" class="title" mdTooltip="Update Profile" mdTooltipPosition="below">
         <img md-card-avatar src="{{DL.User.SystemImageURL}}"> 
       </button>
     </ng-container>
-  </md-toolbar>
+  </div>
 </div>
 <div class="overlay" [style.width]="navWidth" (click)="ToggleNav()">
   <div class="navSide">
