@@ -13,8 +13,9 @@ export class AppComponent implements OnInit {
   show: string = "100%";
   hide: string = "0%"
   navWidth: string = "0%";
+  loader: string = "100%";
 
-  constructor(public core: Core, private DA: DataAccess, private DL: DataLayer) { }
+  constructor(public core: Core, private DA: DataAccess, private DL: DataLayer) {}
 
   LoadPage(name: string) {
     this.DL.LoadFromMenu(name);
@@ -33,5 +34,8 @@ export class AppComponent implements OnInit {
     this.core.viewChild = this.viewChild;
     this.DA.DataLoad();
     this.DL.LoadFromMenu("dashboard-home");
+    this.DA.DataLoaded.subscribe(data => {
+      this.loader =  this.hide;
+    });
   }
 }

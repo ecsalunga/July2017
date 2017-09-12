@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -35,6 +35,7 @@ import {
 
 @Injectable()
 export class DataAccess {
+    DataLoaded: EventEmitter<any> = new EventEmitter();
     expenseDAL: ExpenseDAL;
     productDAL: ProductDAL;
     accessDAL: AccessDAL;
@@ -224,6 +225,7 @@ export class DataAccess {
             if (!this.DL.IsAuthenticating) {
                 this.DL.IsAuthenticating = true;
                 this.UserAuthenticate();
+                this.DataLoaded.emit(null);
             }
         });
     }
