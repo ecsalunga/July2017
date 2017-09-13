@@ -42,6 +42,7 @@ export class ShowcaseDAL {
             this.DL.ShowcaseUserSelectingOrders = new Array<OrderInfo>();
             this.DL.ShowcaseUserOrders = new Array<OrderInfo>();
             this.DL.ShowcaseUserHasOrder = false;
+            this.DL.ShowcaseUserHasOpenCart = false;
 
             snapshots.forEach(snapshot => {
                 let info: OrderInfo = snapshot;
@@ -57,6 +58,8 @@ export class ShowcaseDAL {
                 if(info.MemberKey == this.DL.User.key) {
                     this.DL.ShowcaseUserOrders.push(info);
                     this.DL.ShowcaseUserHasOrder = true;
+                    if(info.Status == this.DL.STATUS_SELECTING)
+                        this.DL.ShowcaseUserHasOpenCart = true;
                 }
             });
 
