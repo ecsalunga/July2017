@@ -16,9 +16,14 @@ export class ShowcaseCartComponent implements OnInit {
   }
 
   Checkout(item: OrderInfo) {
-    item.Status = this.DL.STATUS_REQUESTED;
+    this.DL.OrderUpdateStatus(item, this.DL.STATUS_REQUESTED);
     this.DA.ShowcaseOrderSave(item);
     this.DL.Display("Order", "Requested!");
+  }
+
+  ViewStatus(item: OrderInfo) {
+    this.DL.ShowcaseOrder = item;
+    this.DL.LoadFromPublic('product-order-detail');
   }
 
   Delete(info: SellInfo) {

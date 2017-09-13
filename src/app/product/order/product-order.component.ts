@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { SellInfo, OrderInfo } from '../../data/models';
+import { OrderInfo } from '../../data/models';
 
 @Component({
   selector: 'product-order',
@@ -16,7 +16,8 @@ export class ProductOrderComponent implements OnInit {
   }
 
   Select(item: OrderInfo) {
-    
+    this.DL.ShowcaseOrder =  item;
+    this.DL.LoadFromLink('product-order-detail');
   }
 
   ngOnInit() {

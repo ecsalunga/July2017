@@ -25,7 +25,7 @@ export class ShowcaseWidgetComponent implements OnInit {
         });
       }
 
-      if(order.Status != this.DL.STATUS_DELIVERED || order.Status != this.DL.STATUS_CANCELLED )
+      if(order.Status != this.DL.STATUS_DELIVERED && order.Status != this.DL.STATUS_CANCELLED )
         openCart++;
     });
 
@@ -77,9 +77,7 @@ export class ShowcaseWidgetComponent implements OnInit {
       
       order.Count = 1;
       order.Amount = item.Product.Price;
-      
-      order.ActionDate = this.DL.GetActionDate();
-      order.Status = this.DL.STATUS_SELECTING;
+      this.DL.OrderUpdateStatus(order, this.DL.STATUS_SELECTING);
       quantity = 1;
 
       order.Items.push(this.createSell(item));

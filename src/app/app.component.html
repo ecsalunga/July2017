@@ -69,10 +69,10 @@
         <span>Delivery</span>
       </button>
     </ng-container>
-    <ng-container *ngIf="DL.UserAccess.DeliveryView">
+    <ng-container *ngIf="DL.UserAccess.ShowcaseOrderView">
       <button md-menu-item (click)="LoadPage('product-order')">
         <md-icon>web</md-icon>
-        <span>Orders</span>
+        <span>Order</span>
       </button>
     </ng-container>
     <ng-container *ngIf="DL.UserAccess.TransactionView">

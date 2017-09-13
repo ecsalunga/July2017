@@ -60,7 +60,7 @@ export class ShowcaseDAL {
                 }
             });
 
-            this.DL.ShowcaseOrders.reverse();
+            this.DL.ShowcaseUserOrders.reverse();
             this.DL.ShowcaseUserDoneOrders.reverse();
             this.DL.ShowcaseUserSelectingOrders.reverse();
         });

@@ -1,4 +1,4 @@
-import { ProductInfo, SellInfo } from './index';
+import { ProductInfo, SellInfo, NameValue } from './index';
 
 export class ScheduleInfo {
     From: number;
@@ -14,9 +14,11 @@ export class OrderInfo {
     Amount: number;
     ActionDate: number;
     Status: string;
+    Actions: Array<NameValue>;
 
     constructor() {
         this.Items = new Array<SellInfo>();
+        this.Actions =  new Array<NameValue>();
     }
 }
 

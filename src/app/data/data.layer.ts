@@ -31,12 +31,15 @@ export class DataLayer {
 
     MENU: string = "MENU";
     LINK: string = "LINK";
+    PUBLIC: string = "PUBLIC";
     SOURCE: string;
     TITLE: string;
 
     STATUS_CREATED: string = "Created";
     STATUS_ASSIGNED: string = "Assigned";
     STATUS_IN_PROGRESS: string = "In-Progress";
+    STATUS_READY_PICKUP: string = "Ready for Pickup";
+    STATUS_FOR_DELIVERY: string = "Set for Delivery";
     STATUS_DELIVERED: string = "Delivered";
     STATUS_CANCELLED: string = "Cancelled";
     STATUS_SELECTING: string = "Selecting";
@@ -100,7 +103,8 @@ export class DataLayer {
     ShowcaseUserSelectingOrders: Array<OrderInfo>;
     ShowcaseUserDoneOrders: Array<OrderInfo>;
     ShowcaseUserHasOrder: boolean = false;
-    
+    ShowcaseOrderStatuses: Array<string>;
+
     Snapshot: SnapshotInfo;
     Snapshots: Array<SnapshotInfo>;
 
@@ -151,6 +155,16 @@ export class DataLayer {
             this.STATUS_CREATED,
             this.STATUS_ASSIGNED,
             this.STATUS_IN_PROGRESS,
+            this.STATUS_DELIVERED,
+            this.STATUS_CANCELLED
+        ];
+
+        this.ShowcaseOrderStatuses = [
+            this.STATUS_SELECTING,
+            this.STATUS_REQUESTED,
+            this.STATUS_IN_PROGRESS,
+            this.STATUS_READY_PICKUP,
+            this.STATUS_FOR_DELIVERY,
             this.STATUS_DELIVERED,
             this.STATUS_CANCELLED
         ];
@@ -217,6 +231,13 @@ export class DataLayer {
         item.Actions.push(action);
     }
 
+    public OrderUpdateStatus(item: OrderInfo, status: string) {
+        item.Status = status;
+        item.ActionDate = this.GetActionDate();
+        let action = new NameValue(item.Status, item.ActionDate);
+        item.Actions.push(action);
+    }
+
     public DeliveryGetInfo(item: DeliveryInfo) {
         this.Members.forEach(info => {
             if(item.Transaction.MemberKey == info.key) {
@@ -247,12 +268,20 @@ export class DataLayer {
 
     public LoadFromMenu(name: string) {
         this.SOURCE = this.MENU;
-        this.core.loadComponent(name);
-        this.GotoTop();
+        this.LoadComponent(name);
     }
 
     public LoadFromLink(name: string) {
         this.SOURCE = this.LINK;
+        this.LoadComponent(name);
+    }
+
+    public LoadFromPublic(name: string) {
+        this.SOURCE = this.PUBLIC;
+        this.LoadComponent(name);
+    }
+
+    public LoadComponent(name: string) {
         this.core.loadComponent(name);
         this.GotoTop();
     }

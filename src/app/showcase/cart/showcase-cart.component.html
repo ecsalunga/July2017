@@ -1,7 +1,7 @@
 <ng-container *ngFor="let order of DL.ShowcaseUserOrders">
   <div class="item">
     <div class="itemHeader">
-      <div class="itemName">{{ GetDate(order.ActionDate) | date : 'short' }} </div>
+      <div class="itemName">{{ order.Status }} {{ GetDate(order.ActionDate) | date : 'short' }} </div>
     </div>
     <div class="subContent">
       <table>
@@ -61,14 +61,17 @@
       </table>
       <div class="hSpacer"></div>
       <div class="itemControl mainColor">
-        <div class="cartStatus">
-          Status: {{ order.Status }}
-        </div>
         <div class="cartSelection">
           <div *ngIf="order.Status == DL.STATUS_SELECTING">
             <button md-raised-button (click)="Checkout(order)">
               <md-icon>done</md-icon>
               <span>Checkout</span>
+            </button>
+          </div>
+          <div *ngIf="order.Status != DL.STATUS_SELECTING">
+            <button md-raised-button (click)="ViewStatus(order)">
+              <md-icon>event_note</md-icon>
+              <span>Check Status</span>
             </button>
           </div>
         </div>
