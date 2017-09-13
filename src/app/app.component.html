@@ -11,13 +11,13 @@
   </div>
   <div class="right">
     <div *ngIf="DL.ShowcaseUserHasOrder">
-      <button md-icon-button (click)="LoadPage('showcase-cart')" mdTooltip="Open cart" mdTooltipPosition="below">
+      <button md-icon-button (click)="LoadFromHeader('showcase-cart')" mdTooltip="Open cart" mdTooltipPosition="below">
         <md-icon>shopping_cart</md-icon>
       </button>
     </div>
     <div>
       <ng-container *ngIf="DL.User.UID">
-        <button md-icon-button (click)="LoadProfile()" class="title" mdTooltip="Update Profile" mdTooltipPosition="below">
+        <button md-icon-button (click)="LoadFromHeader('user-update')" class="title" mdTooltip="Update Profile" mdTooltipPosition="below">
           <img md-card-avatar src="{{DL.User.SystemImageURL}}"> 
         </button>
       </ng-container>
@@ -33,6 +33,12 @@
       <md-icon>home</md-icon>
       <span>Home</span>
     </button>
+    <ng-container *ngIf="DL.ShowcaseUserHasOrder">
+      <button md-menu-item (click)="LoadPage('showcase-cart')">
+        <md-icon>shopping_cart</md-icon>
+        <span>Shopping</span>
+      </button>
+    </ng-container>
     <ng-container *ngIf="DL.UserAccess.MemberView">
       <button md-menu-item (click)="LoadPage('member-list')">
         <md-icon>account_box</md-icon>
@@ -53,7 +59,7 @@
     </ng-container>
     <ng-container *ngIf="DL.UserAccess.SellView">
       <button md-menu-item (click)="LoadPage('product-sell')">
-        <md-icon>shopping_cart</md-icon>
+        <md-icon>payment</md-icon>
         <span>Sell</span>
       </button>
     </ng-container>
@@ -65,7 +71,7 @@
     </ng-container>
     <ng-container *ngIf="DL.UserAccess.TransactionView">
       <button md-menu-item (click)="LoadPage('transaction-list')">
-        <md-icon>payment</md-icon>
+        <md-icon>receipt</md-icon>
         <span>Transaction</span>
       </button>
     </ng-container>

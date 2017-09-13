@@ -69,6 +69,7 @@ export class DataAccess {
 
     public LogOut() {
         this.DL.UserAccess = new AccessInfo();
+        this.DL.ShowcaseUserHasOrder = false;
         this.DL.LoadFromMenu("dashboard-home");
         this.afAuth.auth.signOut();
     }

@@ -21,9 +21,9 @@ export class AppComponent implements OnInit {
     this.DL.LoadFromMenu(name);
   }
 
-  LoadProfile() {
+  LoadFromHeader(name: string) {
     this.navWidth = this.hide;
-    this.LoadPage('user-update')
+    this.LoadPage(name)
   }
 
   ToggleNav() {
