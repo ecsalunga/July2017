@@ -36,7 +36,7 @@ export class ShowcaseDAL {
     }
 
     public LoadOrder() {
-        this.af.list(this.PATH_ORDER).subscribe(snapshots => {
+        this.af.list(this.PATH_ORDER, { query: { orderByChild: 'ActionDate' } }).subscribe(snapshots => {
             this.DL.ShowcaseOrders = new Array<OrderInfo>();
             this.DL.ShowcaseUserOrders = new Array<OrderInfo>();
             this.DL.ShowcaseUserHasOrder = false;
@@ -51,6 +51,9 @@ export class ShowcaseDAL {
                     this.DL.ShowcaseUserHasOrder = true;
                 }
             });
+
+            this.DL.ShowcaseOrders.reverse();
+            this.DL.ShowcaseUserOrders.reverse();
         });
     }
 
