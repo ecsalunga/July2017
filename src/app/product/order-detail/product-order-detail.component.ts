@@ -15,8 +15,6 @@ export class ProductOrderDetailComponent implements OnInit {
   constructor(private core: Core, private DL: DataLayer, private DA: DataAccess) { 
     this.model = Object.assign({}, this.DL.ShowcaseOrder);
     this.selectedStatus = this.model.Status;
-
-    
   }
 
   Save() {
@@ -40,6 +38,6 @@ export class ProductOrderDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Order Detail";
+    this.DL.TITLE = "Order Details";
   }
 }
