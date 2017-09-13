@@ -1,8 +1,32 @@
+::ng-deep .mat-select-trigger {
+    font-size: inherit;
+}
+
 .fullWidth {
     width: 100%;
 }
 
-.itemFooter div {
-    display: table-cell;
-    width: 100%;
+.shortText {
+    width: 80px;
+}
+
+.itemControl {
+    overflow: auto;
+    padding: 5px;
+}
+
+.cartPrice {
+    float: left; 
+    margin-top: 20px;
+    margin-left: 10px;
+    height: 30px;
+}
+
+.cartSelection {
+    float: right; 
+}
+
+.cartSelection div {
+    margin: 5px;
+    float: left; 
 }

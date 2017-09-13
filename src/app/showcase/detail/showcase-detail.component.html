@@ -15,7 +15,12 @@
   </div>
   <div>
     <md-form-field class="shortText">
-      <input id="txtOrder" type="number" mdInput placeholder="Order" [(ngModel)]="model.Order" />
+      <input id="txtOrder" type="number" mdInput placeholder="Display Order" [(ngModel)]="model.Order" />
+    </md-form-field>
+  </div>
+  <div>
+    <md-form-field class="shortText">
+      <input id="txtMaxCart" type="number" mdInput placeholder="Cart Max" [(ngModel)]="model.MaxCart" />
     </md-form-field>
   </div>
   <input #fileSelector id="file" [hidden]="true" type="file" accept="image/*">

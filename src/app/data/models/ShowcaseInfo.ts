@@ -25,6 +25,7 @@ export class ShowcaseInfo {
     Product: ProductInfo;
     Description: string;
     Order: number;
+    MaxCart: number;
     ImageURL: string;
     Schedules: Array<ScheduleInfo>;
 

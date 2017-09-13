@@ -1,6 +1,6 @@
 <div>
-  <div>
-    <button md-raised-button (click)="DA.LogInWithFacebook()">
+  <div class="mainColor">
+    <button md-raised-button (click)="DA.LogInWithFacebook()" mdTooltip="Use Facebook account to login" mdTooltipPosition="above">
       <md-icon>lock_open</md-icon>
       <span>Log In with Facebook</span>
     </button>
@@ -38,8 +38,8 @@
       <div class="vSmallSpacer"></div>
     </div>
   </div>
-  <div class="rightRow">
-    <button md-raised-button (click)="Signup()">
+  <div class="rightRow mainColor">
+    <button md-raised-button (click)="Signup()" mdTooltip="Create new Account" mdTooltipPosition="above">
       <md-icon>supervisor_account</md-icon>
       <span>Create new account</span>
     </button>

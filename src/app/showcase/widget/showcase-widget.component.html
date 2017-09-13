@@ -7,15 +7,17 @@
       {{ item.Description }}
     </div>
     <img class="fullWidth" src="{{item.ImageURL}}" />
-    <div class="itemFooter">
-      <div>
-        {{ DL.ModuleSetting.CurrencySymbol }} {{ item.Product.Price | number:'1.2-2' }}
+    <div class="itemControl mainColor">
+      <div class="cartPrice">
+        Price: {{ DL.ModuleSetting.CurrencySymbol }} {{ item.Product.Price | number:'1.2-2' }} | Max order: {{ item.MaxCart }}
       </div>
-      <div *ngIf="DL.User.IsMember">
-        <button md-raised-button (click)="AddToCart(item)">
-          <md-icon>add_shopping_cart</md-icon>
-          <span>Add</span>
-        </button>
+      <div *ngIf="DL.User.IsMember" class="cartSelection">
+        <div>
+          <button [disabled]="!CanAdd(item)" md-raised-button (click)="AddToCart(item)">
+            <md-icon>add_shopping_cart</md-icon>
+            <span>Add</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>

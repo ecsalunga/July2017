@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { SellInfo } from '../../data/models';
+import { SellInfo, OrderInfo } from '../../data/models';
 
 @Component({
   selector: 'showcase-cart',
@@ -13,6 +13,12 @@ export class ShowcaseCartComponent implements OnInit {
   
   GetDate(keyDay: number): Date {
     return this.core.numberToDate(keyDay);
+  }
+
+  Checkout(item: OrderInfo) {
+    item.Status = this.DL.STATUS_REQUESTED;
+    this.DA.ShowcaseOrderSave(item);
+    this.DL.Display("Order", "Requested!");
   }
 
   Delete(info: SellInfo) {

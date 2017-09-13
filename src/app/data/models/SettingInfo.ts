@@ -1,6 +1,7 @@
 export class ModuleSettingInfo {
     ModuleIsNotify: boolean;
     CurrencySymbol: string;
+    ShowcseCartItemMax: number;
 
     DeliveryMaxMinutes: number;
     DeliveryIsToggleSell: boolean

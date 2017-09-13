@@ -10,13 +10,18 @@
             <md-checkbox [(ngModel)]="model.ModuleIsNotify">Show Notification</md-checkbox>
           </div>
           <div>
-              <md-form-field>
-                <input id="txtCurrencySymbol" mdInput placeholder="Currency Symbol" [(ngModel)]="model.CurrencySymbol" />
-              </md-form-field>
+            <md-form-field>
+              <input id="txtCurrencySymbol" mdInput placeholder="Currency Symbol" [(ngModel)]="model.CurrencySymbol" />
+            </md-form-field>
             </div>
           <div class="vSmallSpacer"></div>
           <div class="configLabel">
             Showcase
+          </div>
+          <div>
+            <md-form-field>
+              <input id="txtShowcseCartItemMax" type="number" mdInput placeholder="Max open cart" [(ngModel)]="model.ShowcseCartItemMax" />
+            </md-form-field>
           </div>
           <div>
             <button color="primary" md-raised-button (click)="ShowcaseUpdate()">
