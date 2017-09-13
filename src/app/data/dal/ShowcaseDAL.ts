@@ -38,13 +38,21 @@ export class ShowcaseDAL {
     public LoadOrder() {
         this.af.list(this.PATH_ORDER, { query: { orderByChild: 'ActionDate' } }).subscribe(snapshots => {
             this.DL.ShowcaseOrders = new Array<OrderInfo>();
+            this.DL.ShowcaseUserDoneOrders = new Array<OrderInfo>();
+            this.DL.ShowcaseUserSelectingOrders = new Array<OrderInfo>();
             this.DL.ShowcaseUserOrders = new Array<OrderInfo>();
             this.DL.ShowcaseUserHasOrder = false;
 
             snapshots.forEach(snapshot => {
                 let info: OrderInfo = snapshot;
                 info.key = snapshot.$key;
-                this.DL.ShowcaseOrders.push(info);
+
+                if(info.Status == this.DL.STATUS_SELECTING)
+                    this.DL.ShowcaseUserSelectingOrders.push(info);
+                else if(info.Status == this.DL.STATUS_CANCELLED || info.Status == this.DL.STATUS_DELIVERED)
+                    this.DL.ShowcaseUserDoneOrders.push(info);
+                else
+                    this.DL.ShowcaseOrders.push(info);
 
                 if(info.MemberKey == this.DL.User.key) {
                     this.DL.ShowcaseUserOrders.push(info);
@@ -53,7 +61,8 @@ export class ShowcaseDAL {
             });
 
             this.DL.ShowcaseOrders.reverse();
-            this.DL.ShowcaseUserOrders.reverse();
+            this.DL.ShowcaseUserDoneOrders.reverse();
+            this.DL.ShowcaseUserSelectingOrders.reverse();
         });
     }
 

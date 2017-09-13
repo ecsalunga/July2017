@@ -18,6 +18,7 @@ import {
   MdSnackBarModule,
   MdSlideToggleModule,
   MdTooltipModule,
+  MdTabsModule,
   DateAdapter
  } from '@angular/material';
 
@@ -118,6 +119,7 @@ import { ShowcaseCartComponent } from './showcase/cart/showcase-cart.component';
     MdSnackBarModule,
     MdTooltipModule,
     FormsModule,
+    MdTabsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

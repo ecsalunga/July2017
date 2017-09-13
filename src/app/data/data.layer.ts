@@ -97,6 +97,8 @@ export class DataLayer {
     ShowcaseOrder: OrderInfo;
     ShowcaseOrders: Array<OrderInfo>;
     ShowcaseUserOrders: Array<OrderInfo>;
+    ShowcaseUserSelectingOrders: Array<OrderInfo>;
+    ShowcaseUserDoneOrders: Array<OrderInfo>;
     ShowcaseUserHasOrder: boolean = false;
     
     Snapshot: SnapshotInfo;

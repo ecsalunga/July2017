@@ -69,6 +69,12 @@
         <span>Delivery</span>
       </button>
     </ng-container>
+    <ng-container *ngIf="DL.UserAccess.DeliveryView">
+      <button md-menu-item (click)="LoadPage('product-order')">
+        <md-icon>web</md-icon>
+        <span>Orders</span>
+      </button>
+    </ng-container>
     <ng-container *ngIf="DL.UserAccess.TransactionView">
       <button md-menu-item (click)="LoadPage('transaction-list')">
         <md-icon>receipt</md-icon>
