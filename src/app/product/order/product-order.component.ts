@@ -21,6 +21,6 @@ export class ProductOrderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Order List";
+    this.DL.TITLE = "Request List";
   }
 }

@@ -32,6 +32,12 @@ export class ShowcaseCartComponent implements OnInit {
     this.DL.Display("Order", "Requested!");
   }
 
+  SetStatusDone(item: OrderInfo) {
+    this.DL.OrderUpdateStatus(item, this.DL.STATUS_DONE);
+    this.DA.ShowcaseOrderSave(item);
+    this.DL.Display("Order", "Hidden!");
+  }
+
   ViewStatus(item: OrderInfo) {
     this.DL.ShowcaseOrder = item;
     this.DL.LoadFromPublic('product-order-detail');

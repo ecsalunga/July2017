@@ -77,11 +77,17 @@
               <md-icon>done_all</md-icon>
               <span>Confirm</span>
             </button>
+          </div>
+          <div *ngIf="order.Status != DL.STATUS_SELECTING && order.Status != DL.STATUS_DONE">
+            <div class="visibility" *ngIf="order.Status == DL.STATUS_DELIVERED || order.Status == DL.STATUS_CANCELLED">
+              <button md-raised-button (click)="SetStatusDone(order)">
+                <md-icon>visibility_off</md-icon>
+                <span>Finished</span>
+              </button>
             </div>
-          <div *ngIf="order.Status != DL.STATUS_SELECTING">
             <button md-raised-button (click)="ViewStatus(order)">
               <md-icon>event_note</md-icon>
-              <span>Check Status</span>
+              <span>Check details</span>
             </button>
           </div>
         </div>
@@ -93,6 +99,6 @@
 <div class="rightRow mainColor">
   <button md-raised-button (click)="LoadList()" mdTooltip="Back to item selection" mdTooltipPosition="above">
     <md-icon>shopping_cart</md-icon>
-    <span>Back to shop</span>
+    <span>Go to shop</span>
   </button>
 </div>

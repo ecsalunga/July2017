@@ -50,12 +50,12 @@ export class ShowcaseDAL {
 
                 if(info.Status == this.DL.STATUS_SELECTING)
                     this.DL.ShowcaseUserSelectingOrders.push(info);
-                else if(info.Status == this.DL.STATUS_CANCELLED || info.Status == this.DL.STATUS_DELIVERED)
+                else if(info.Status == this.DL.STATUS_CANCELLED || info.Status == this.DL.STATUS_DELIVERED || info.Status == this.DL.STATUS_DONE)
                     this.DL.ShowcaseUserDoneOrders.push(info);
                 else
                     this.DL.ShowcaseOrders.push(info);
 
-                if(info.MemberKey == this.DL.User.key) {
+                if(info.Status != this.DL.STATUS_DONE && info.MemberKey == this.DL.User.key) {
                     this.DL.ShowcaseUserOrders.push(info);
                     this.DL.ShowcaseUserHasOrder = true;
                     if(info.Status == this.DL.STATUS_SELECTING)

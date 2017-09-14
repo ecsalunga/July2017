@@ -38,7 +38,7 @@
     <ng-container *ngIf="DL.ShowcaseUserHasOrder">
       <button md-menu-item (click)="LoadPage('showcase-cart')">
         <md-icon>shopping_cart</md-icon>
-        <span>Shopping</span>
+        <span>Order</span>
       </button>
     </ng-container>
     <ng-container *ngIf="DL.UserAccess.MemberView">
@@ -74,7 +74,7 @@
     <ng-container *ngIf="DL.UserAccess.ShowcaseOrderView">
       <button md-menu-item (click)="LoadPage('product-order')">
         <md-icon>web</md-icon>
-        <span>Order</span>
+        <span>Request</span>
       </button>
     </ng-container>
     <ng-container *ngIf="DL.UserAccess.TransactionView">

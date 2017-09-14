@@ -44,6 +44,7 @@ export class DataLayer {
     STATUS_CANCELLED: string = "Cancelled";
     STATUS_SELECTING: string = "Selecting";
     STATUS_REQUESTED: string = "Requested";
+    STATUS_DONE: string = "Done";
 
     Product: ProductInfo;
     Products: Array<ProductInfo>;
@@ -167,7 +168,8 @@ export class DataLayer {
             this.STATUS_READY_PICKUP,
             this.STATUS_FOR_DELIVERY,
             this.STATUS_DELIVERED,
-            this.STATUS_CANCELLED
+            this.STATUS_CANCELLED,
+            this.STATUS_DONE
         ];
 
         this.ProductDiscount = new ProductInfo();

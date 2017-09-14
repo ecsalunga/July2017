@@ -14,3 +14,7 @@
 .cartSelection div {
     float: left; 
 }
+
+.visibility {
+    margin-right: 5px;
+}
