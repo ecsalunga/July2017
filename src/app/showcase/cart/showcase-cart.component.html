@@ -62,12 +62,22 @@
       <div class="hSpacer"></div>
       <div class="itemControl mainColor">
         <div class="cartSelection">
-          <div *ngIf="order.Status == DL.STATUS_SELECTING">
-            <button md-raised-button (click)="Checkout(order)">
+          <div *ngIf="!isCheckingout && order.Status == DL.STATUS_SELECTING">
+            <button md-raised-button (click)="ShowCheckout()">
               <md-icon>done</md-icon>
               <span>Checkout</span>
             </button>
           </div>
+          <div *ngIf="isCheckingout && order.Status == DL.STATUS_SELECTING">
+            <button md-raised-button (click)="HideCheckout()">
+              <md-icon>assignment_return</md-icon>
+              <span>Cancel</span>
+            </button>
+            <button md-raised-button (click)="Checkout(order)">
+              <md-icon>done_all</md-icon>
+              <span>Confirm</span>
+            </button>
+            </div>
           <div *ngIf="order.Status != DL.STATUS_SELECTING">
             <button md-raised-button (click)="ViewStatus(order)">
               <md-icon>event_note</md-icon>

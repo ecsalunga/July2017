@@ -9,15 +9,26 @@ import { SellInfo, OrderInfo } from '../../data/models';
   styleUrls: ['./showcase-cart.component.css']
 })
 export class ShowcaseCartComponent implements OnInit {
+  isCheckingout: boolean = false;
+
   constructor(private core: Core, private DL: DataLayer, private DA: DataAccess) { }
   
   GetDate(keyDay: number): Date {
     return this.core.numberToDate(keyDay);
   }
 
+  ShowCheckout() {
+    this.isCheckingout = true;
+  }
+
+  HideCheckout() {
+    this.isCheckingout = false;
+  }
+
   Checkout(item: OrderInfo) {
     this.DL.OrderUpdateStatus(item, this.DL.STATUS_REQUESTED);
     this.DA.ShowcaseOrderSave(item);
+    this.isCheckingout = false;
     this.DL.Display("Order", "Requested!");
   }
 
