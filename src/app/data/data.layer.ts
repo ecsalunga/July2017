@@ -206,6 +206,13 @@ export class DataLayer {
         this.DefaultImageURL = this.SystemSetting.DefaultImageURL;
     }
 
+    public Reset() {
+        this.User = new UserInfo(this.DefaultImageURL);
+        this.UserAccess = new AccessInfo();
+        this.ShowcaseUserHasOrder = false;
+        this.ShowcaseUserHasOpenCart = false;
+    }
+
     public ReportTodayRefresh()
     {
         this.ReportToday = new ReportInfo();

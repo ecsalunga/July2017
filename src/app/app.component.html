@@ -10,10 +10,12 @@
     </div>
   </div>
   <div class="right">
-    <div *ngIf="DL.ShowcaseUserHasOpenCart">
-      <button md-icon-button (click)="LoadFromHeader('showcase-cart')" mdTooltip="Open cart" mdTooltipPosition="below">
-        <md-icon>shopping_cart</md-icon>
-      </button>
+    <div>
+      <ng-container *ngIf="DL.ShowcaseUserHasOpenCart">
+        <button md-icon-button (click)="LoadFromHeader('showcase-cart')" mdTooltip="Open cart" mdTooltipPosition="below">
+          <md-icon>shopping_cart</md-icon>
+        </button>
+      </ng-container>
     </div>
     <div>
       <ng-container *ngIf="DL.User.UID">
