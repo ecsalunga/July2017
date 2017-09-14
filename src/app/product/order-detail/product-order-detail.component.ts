@@ -17,6 +17,11 @@ export class ProductOrderDetailComponent implements OnInit {
     this.selectedStatus = this.model.Status;
   }
 
+  CanSave(): boolean {
+    return (this.DL.UserAccess.ShowcaseOrderEdit && 
+      !(this.model.Status == this.DL.STATUS_SELECTING ||  this.model.Status == this.DL.STATUS_DONE));
+  }
+
   Save() {
     if(this.DL.ShowcaseOrder.Status != this.selectedStatus) {
       this.DL.OrderUpdateStatus(this.model, this.selectedStatus);

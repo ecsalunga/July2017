@@ -81,7 +81,7 @@
     </md-form-field>
   </div>
   <div class="selectionRow">
-    <md-select placeholder="Status" class="longText" [(ngModel)]="selectedStatus">
+    <md-select [disabled]="model.Status == DL.STATUS_SELECTING || model.Status == DL.STATUS_DONE" placeholder="Status" class="longText" [(ngModel)]="selectedStatus">
       <md-option *ngFor="let status of DL.ShowcaseOrderStatuses" [value]="status">
         {{ status }}
       </md-option>
@@ -89,7 +89,7 @@
   </div>
   <div class="hSpacer"></div>
   <div class="rightRow">
-    <button md-fab (click)="Save()" mdTooltip="Save" [disabled]="!DL.UserAccess.ShowcaseOrderEdit" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+    <button md-fab (click)="Save()" mdTooltip="Save" [disabled]="!CanSave()" mdTooltipPosition="above"><md-icon>save</md-icon></button>
     <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
   </div>
   </ng-container>
