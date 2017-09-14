@@ -273,27 +273,31 @@
       </td>
     </tr>
     <tr>
-        <td colspan="3">
-          <table style="margin-left: 10px;">
-            <tr>
-              <td colspan="3" class="accessLabel">Order</td>
-            </tr>
-            <tr>
-              <td class="subAccess">
-                <md-slide-toggle [(ngModel)]="model.ShowcaseOrderView">
-                  View
-                </md-slide-toggle>
-              </td>
-              <td class="subAccess">
-               
-              </td>
-              <td>
-               
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
+      <td colspan="3">
+        <table style="margin-left: 10px;">
+          <tr>
+            <td colspan="3" class="accessLabel">Request</td>
+          </tr>
+          <tr>
+            <td class="subAccess">
+              <md-slide-toggle [(ngModel)]="model.ShowcaseOrderView">
+                View
+              </md-slide-toggle>
+            </td>
+            <td class="subAccess">
+              <md-slide-toggle [(ngModel)]="model.ShowcaseOrderEdit">
+                Edit
+              </md-slide-toggle>
+            </td>
+            <td>
+              <md-slide-toggle [(ngModel)]="model.ShowcaseOrderDelete">
+                Delete
+              </md-slide-toggle>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
     <tr>
       <td colspan="3" class="accessLabel">Transaction</td>
     </tr>

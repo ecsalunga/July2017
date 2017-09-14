@@ -36,8 +36,11 @@ export class AccessInfo {
     ShowcaseEdit: boolean;
     ShowcaseScheduleView: boolean;
     ShowcaseScheduleAdd: boolean;
-    ShowcaseScheduleDelete: boolean;
+    ShowcaseScheduleDelete: boolean; 
+
     ShowcaseOrderView: boolean;
+    ShowcaseOrderEdit: boolean;
+    ShowcaseOrderDelete: boolean;
 
     TransactionView: boolean;
     TransactionDetail: boolean;

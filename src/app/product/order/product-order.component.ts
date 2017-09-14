@@ -20,6 +20,25 @@ export class ProductOrderComponent implements OnInit {
     this.DL.LoadFromLink('product-order-detail');
   }
 
+  HasClean(): boolean {
+    let hasClean = false
+    this.DL.ShowcaseUserDoneOrders.forEach(item => {
+      if(item.Status == this.DL.STATUS_DONE)
+        hasClean = true;
+    });
+
+    return hasClean;
+  }
+
+  CleanDelete() {
+    this.DL.ShowcaseUserDoneOrders.forEach(item => {
+      if(item.Status == this.DL.STATUS_DONE)
+        this.DA.ShowcaseOrderDelete(item);
+    });
+
+    this.DL.Display("Order", "Done Status Cleared!");
+  }
+
   ngOnInit() {
     this.DL.TITLE = "Request List";
   }
