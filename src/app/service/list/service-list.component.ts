@@ -10,7 +10,7 @@ import { ServiceInfo } from '../../data/models';
 })
 export class ServiceListComponent implements OnInit {
 
-  constructor(private core: Core, private DL: DataLayer) { }
+  constructor(private core: Core, public DL: DataLayer) { }
   
     SelectItem(item: ServiceInfo) {
       this.DL.Service = item;

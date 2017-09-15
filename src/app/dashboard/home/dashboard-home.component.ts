@@ -8,7 +8,7 @@ import { DataLayer, DataAccess } from '../../data';
 })
 export class DashboardHomeComponent implements OnInit {
 
-  constructor(private DL: DataLayer, private DA: DataAccess) {}
+  constructor(public DL: DataLayer, private DA: DataAccess) {}
   
   Login() {
     this.DL.LoadFromLink('user-login');

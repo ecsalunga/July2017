@@ -10,7 +10,7 @@ import { DataAccess, DataLayer } from '../../data';
 export class TransactionDetailComponent implements OnInit {
   description: string;
 
-  constructor(private core: Core, private DL: DataLayer, private DA: DataAccess) { }
+  constructor(private core: Core, public DL: DataLayer, private DA: DataAccess) { }
   
   Cancel() {
     this.DA.TransactionSelectedCancel(this.description);

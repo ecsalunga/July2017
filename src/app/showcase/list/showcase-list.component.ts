@@ -10,7 +10,7 @@ import { ShowcaseInfo } from '../../data/models';
 })
 export class ShowcaseListComponent implements OnInit {
 
-  constructor(private core: Core, private DL: DataLayer) {}
+  constructor(private core: Core, public DL: DataLayer) {}
 
   SelectShowcase(showcase: ShowcaseInfo) {
     this.DL.Showcase = showcase;

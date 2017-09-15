@@ -9,7 +9,7 @@ import { ShowcaseInfo, OrderInfo, SellInfo } from '../../data/models';
 })
 export class ShowcaseWidgetComponent implements OnInit {
   
-  constructor(private DL: DataLayer, private DA: DataAccess) { }
+  constructor(public DL: DataLayer, private DA: DataAccess) { }
 
   CanAdd(item: ShowcaseInfo): boolean {
     let isAllowed = true;

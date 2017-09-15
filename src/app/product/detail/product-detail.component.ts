@@ -17,7 +17,7 @@ export class ProductDetailComponent implements OnInit {
   descriptionValidator = new FormControl('', [Validators.required]);
   priceValidator = new FormControl('', [Validators.required]);
 
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
+  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     if (this.DL.Product)
       this.model = Object.assign({}, this.DL.Product);
     else

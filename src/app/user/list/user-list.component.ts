@@ -11,7 +11,7 @@ export class UserListComponent implements OnInit {
   selectedUser: UserInfo;
   selectedAccess: AccessInfo;
 
-  constructor(private DA: DataAccess, private DL: DataLayer) {}
+  constructor(private DA: DataAccess, public DL: DataLayer) {}
   
   AccessSet() {
     this.selectedUser.AccessKey = this.selectedAccess.key;

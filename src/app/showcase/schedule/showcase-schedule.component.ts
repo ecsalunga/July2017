@@ -14,7 +14,7 @@ export class ShowcaseScheduleComponent implements OnInit {
   ToDay: Date;
   model: ShowcaseInfo;
 
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
+  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     // workaround for array property deep clone issue
     this.model = new ShowcaseInfo(this.DL.DefaultImageURL);
     this.model.Product = this.DL.Showcase.Product;

@@ -11,7 +11,7 @@ import { SystemSettingInfo } from '../../data/models';
 export class SettingSystemComponent implements OnInit {
   model: SystemSettingInfo;
   
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
+  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
       this.model = Object.assign({}, this.DL.SystemSetting);
   }
 

@@ -15,7 +15,7 @@ export class MemberDetailComponent implements OnInit {
   isLoaded: boolean = true;
   nameValidator = new FormControl('', [Validators.required]);
   
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
+  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     if (this.DL.UserSelected) {
       this.model = Object.assign({}, this.DL.UserSelected);
       this.joinDate = this.core.numberToDate(this.model.JoinDate);
@@ -25,6 +25,10 @@ export class MemberDetailComponent implements OnInit {
       this.model.IsMember = true;
       this.joinDate = this.DL.Date;
     }
+  }
+
+  IsHidden() : boolean {
+    return !this.isLoaded || (!this.DL.UserAccess.MemberEdit && !(!this.model.key));
   }
 
   Save() {

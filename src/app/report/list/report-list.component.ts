@@ -12,7 +12,7 @@ export class ReportListComponent implements OnInit {
   yearSelected: number;
   monthSelected: number;
 
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) { 
+  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) { 
     this.yearSelected = this.DL.Date.getFullYear();
     this.monthSelected = this.DL.Date.getMonth()+1;
     this.ReportView();

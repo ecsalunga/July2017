@@ -17,7 +17,7 @@ export class ServiceDetailComponent implements OnInit {
   nameValidator = new FormControl('', [Validators.required]);
   priceValidator = new FormControl('', [Validators.required]);
 
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
+  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     if (this.DL.Service)
       this.model = Object.assign({}, this.DL.Service);
     else

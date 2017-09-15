@@ -10,7 +10,7 @@ import { UserInfo } from '../../data/models';
 })
 export class MemberListComponent implements OnInit {
 
-  constructor(private core: Core, private DL: DataLayer) {}
+  constructor(private core: Core, public DL: DataLayer) {}
 
   SelectItem(item: UserInfo) {
     this.DL.UserSelected = item;

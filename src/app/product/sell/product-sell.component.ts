@@ -18,7 +18,7 @@ export class ProductSellComponent implements OnInit {
   isDelivery: boolean = false;
   isDiscount: boolean = false;
 
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) { }
+  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) { }
 
   AddProduct() {
     let duplicate: SellInfo;

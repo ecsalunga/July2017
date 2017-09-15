@@ -9,7 +9,7 @@ import { DeliveryInfo } from '../../data/models';
   styleUrls: ['./delivery-list.component.css']
 })
 export class DeliveryListComponent implements OnInit {
-  constructor(private core: Core, private DL: DataLayer, private DA: DataAccess) {}
+  constructor(private core: Core, public DL: DataLayer, private DA: DataAccess) {}
   
   Select(item: DeliveryInfo) {
     this.DL.Delivery = item;

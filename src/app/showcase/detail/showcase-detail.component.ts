@@ -12,7 +12,7 @@ export class ShowcaseDetailComponent implements OnInit {
   model: ShowcaseInfo;
   isLoaded: boolean = true;
 
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
+  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     if (this.DL.Showcase) {
       this.model = Object.assign({}, this.DL.Showcase);
       if(this.model.Product) {
@@ -24,6 +24,10 @@ export class ShowcaseDetailComponent implements OnInit {
     }
     else
       this.model = new ShowcaseInfo(this.DL.DefaultImageURL);
+  }
+
+  IsSaveDisabled() : boolean {
+    return !this.model.Product || (!this.DL.UserAccess.ShowcaseEdit && !(!this.model.key)) || (!this.DL.UserAccess.ShowcaseAdd && !this.model.key);
   }
 
   SelectFile() {

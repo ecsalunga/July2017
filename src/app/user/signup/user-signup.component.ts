@@ -20,7 +20,7 @@ export class UserSignupComponent implements OnInit {
   passwordFormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
   confirmFormControl = new FormControl('', [Validators.required, this.PasswordsMatch.bind(this)]);
 
-  constructor(private DA: DataAccess, private DL: DataLayer) { }
+  constructor(private DA: DataAccess, public DL: DataLayer) { }
 
   NotifyConfirm() {
     this.confirmFormControl.updateValueAndValidity();

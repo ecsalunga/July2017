@@ -13,7 +13,7 @@ export class ProductListComponent implements OnInit {
   quantities: Array<number>;
   quantitySelected: number = 0;
 
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
+  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     this.quantities = new Array<number>();
     for(let x = 1; x <= 100; x++){
       this.quantities.push(x);

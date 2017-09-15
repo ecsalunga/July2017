@@ -11,11 +11,15 @@ import { AccessInfo } from '../../data/models';
 export class AccessDetailComponent implements OnInit {
   model: AccessInfo;
   
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
+  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     if (this.DL.Access)
       this.model = Object.assign({}, this.DL.Access);
     else
       this.model = new AccessInfo();
+  }
+
+  IsSaveDisabled() : boolean {
+    return (!this.DL.UserAccess.AccessEdit && !(!this.model.key)) || (!this.DL.UserAccess.AccessAdd && !this.model.key);
   }
 
   Save() {

@@ -11,7 +11,7 @@ import { SnapshotInfo, NameValue } from '../../data/models';
 export class SnapshotDetailComponent implements OnInit {
   model: SnapshotInfo;
   
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
+  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     if (this.DL.Snapshot)
       this.model = Object.assign({}, this.DL.Snapshot);
     else {

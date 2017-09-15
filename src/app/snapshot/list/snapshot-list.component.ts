@@ -11,7 +11,7 @@ import { SnapshotInfo, ReportInfo } from '../../data/models';
 export class SnapshotListComponent implements OnInit {
   selectedDate: Date = new Date();
 
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
+  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     if(this.DL.SOURCE == this.DL.MENU) {
       this.LoadSnapshots(this.DL.ReportToday.KeyDay);
     }

@@ -12,7 +12,7 @@ export class ProductOrderDetailComponent implements OnInit {
   model: OrderInfo;
   selectedStatus: string;
 
-  constructor(private core: Core, private DL: DataLayer, private DA: DataAccess) { 
+  constructor(private core: Core, public DL: DataLayer, private DA: DataAccess) { 
     this.model = Object.assign({}, this.DL.ShowcaseOrder);
     this.selectedStatus = this.model.Status;
   }

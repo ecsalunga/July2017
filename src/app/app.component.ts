@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   navWidth: string = "0%";
   loader: string = "100%";
 
-  constructor(public core: Core, private DA: DataAccess, private DL: DataLayer, private renderer: Renderer) {}
+  constructor(public core: Core, private DA: DataAccess, public DL: DataLayer, private renderer: Renderer) {}
 
   LoadPage(name: string) {
     this.DL.LoadFromMenu(name);

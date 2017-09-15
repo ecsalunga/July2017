@@ -9,7 +9,7 @@ import { AccessInfo } from '../../data/models';
 })
 export class AccessListComponent implements OnInit {
 
-  constructor(private DL: DataLayer) { }
+  constructor(public DL: DataLayer) { }
 
   SelectItem(item: AccessInfo) {
     this.DL.Access = item;

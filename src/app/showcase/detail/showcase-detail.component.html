@@ -29,7 +29,7 @@
   </div>
   <div class="hSpacer"></div>
   <div class="rightRow">
-    <button md-fab [disabled]="!model.Product || (!DL.UserAccess.ShowcaseEdit && model.key) || (!DL.UserAccess.ShowcaseAdd && !model.key)" (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+    <button md-fab [disabled]="IsSaveDisabled()" (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
     <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
   </div>
 </div>

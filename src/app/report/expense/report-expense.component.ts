@@ -19,7 +19,7 @@ export class ReportExpenseComponent implements OnInit {
   amount: number;
   ReportDate: Date;
 
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) { 
+  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) { 
     this.DL.ExpenseSelected = this.DL.ExpensesToday;
     this.DL.ReportSelected = this.DL.ReportToday;
     this.ReportDate = this.core.numberToDate(parseInt(this.DL.ReportSelected.KeyDay + '000000'));

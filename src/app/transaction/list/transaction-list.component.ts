@@ -12,7 +12,7 @@ import { TransactionInfo, ReportInfo } from '../../data/models';
 export class TransactionListComponent implements OnInit {
   ReportDate: Date;
 
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
+  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     if (this.DL.SOURCE == this.DL.MENU) {
       this.DL.TransactionSelected = this.DL.TransactionsToday;
       this.DL.ReportSelected = this.DL.ReportToday;

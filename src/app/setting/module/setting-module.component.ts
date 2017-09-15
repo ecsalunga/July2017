@@ -11,7 +11,7 @@ import { ModuleSettingInfo, ShowcaseInfo } from '../../data/models';
 export class SettingModuleComponent implements OnInit {
   model: ModuleSettingInfo;
   
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
+  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
       this.model = Object.assign({}, this.DL.ModuleSetting);
   }
 

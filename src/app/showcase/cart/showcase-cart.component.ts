@@ -11,7 +11,7 @@ import { SellInfo, OrderInfo } from '../../data/models';
 export class ShowcaseCartComponent implements OnInit {
   isCheckingout: boolean = false;
 
-  constructor(private core: Core, private DL: DataLayer, private DA: DataAccess) { }
+  constructor(private core: Core, public DL: DataLayer, private DA: DataAccess) { }
   
   GetDate(keyDay: number): Date {
     return this.core.numberToDate(keyDay);
