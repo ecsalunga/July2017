@@ -28,10 +28,10 @@ export class ServiceDetailComponent implements OnInit {
     if(this.codeValidator.invalid || this.nameValidator.invalid || this.priceValidator.invalid)
       return false;
     
-    if(this.model.key && !this.DL.UserAccess.ProductEdit)
+    if(this.model.key && !this.DL.UserAccess.ServiceEdit)
       return false;
 
-    if(!this.model.key && !this.DL.UserAccess.ProductAdd)
+    if(!this.model.key && !this.DL.UserAccess.ServiceAdd)
       return false;
 
     return true;

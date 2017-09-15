@@ -19,6 +19,10 @@ export class AccessInfo {
     ProductCancel: boolean;
     ProductCancelView: boolean;
 
+    ServiceView: boolean;
+    ServiceAdd: boolean;
+    ServiceEdit: boolean;
+
     ReportView: boolean;
     ReportSearch: boolean;
     ReportBalanceView: boolean;
