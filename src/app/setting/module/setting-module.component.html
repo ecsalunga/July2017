@@ -16,8 +16,7 @@
             <md-form-field>
               <input id="txtCurrencySymbol" mdInput placeholder="Currency Symbol" [(ngModel)]="model.CurrencySymbol" />
             </md-form-field>
-            </div>
-          <div class="vSmallSpacer"></div>
+          </div>
           <div class="configLabel">
             Showcase
           </div>
@@ -39,14 +38,13 @@
             Delivery
           </div>
           <div>
+            <md-checkbox [(ngModel)]="model.DeliveryIsToggleSell">Switch Sell / Delivery</md-checkbox>
+          </div>
+          <div>
             <md-form-field>
               <input id="txtDeliveryMaxTime" type="number" mdInput placeholder="Delivery Max Minutes" [(ngModel)]="model.DeliveryMaxMinutes" />
             </md-form-field>
           </div>
-          <div>
-            <md-checkbox [(ngModel)]="model.DeliveryIsToggleSell">Switch Sell / Delivery</md-checkbox>
-          </div>
-          <div class="vSmallSpacer"></div>
           <div class="configLabel">
             Expense
           </div>
