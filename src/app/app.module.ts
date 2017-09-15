@@ -66,6 +66,8 @@ import { SettingSystemComponent } from './setting/system/setting-system.componen
 import { ProductOrderComponent } from './product/order/product-order.component';
 import { ShowcaseCartComponent } from './showcase/cart/showcase-cart.component';
 import { ProductOrderDetailComponent } from './product/order-detail/product-order-detail.component';
+import { ServiceListComponent } from './service/list/service-list.component';
+import { ServiceDetailComponent } from './service/detail/service-detail.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +104,9 @@ import { ProductOrderDetailComponent } from './product/order-detail/product-orde
     SettingSystemComponent,
     ProductOrderComponent,
     ShowcaseCartComponent,
-    ProductOrderDetailComponent
+    ProductOrderDetailComponent,
+    ServiceListComponent,
+    ServiceDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -162,7 +166,9 @@ import { ProductOrderDetailComponent } from './product/order-detail/product-orde
     SettingSystemComponent,
     ProductOrderComponent,
     ShowcaseCartComponent,
-    ProductOrderDetailComponent
+    ProductOrderDetailComponent,
+    ServiceListComponent,
+    ServiceDetailComponent
   ]
 })
 export class AppModule {

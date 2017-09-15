@@ -3,7 +3,12 @@
     "products": {
       ".read": "true",
       ".write": "true",
-      ".indexOn": "Code"
+      ".indexOn": "Description"
+    },
+    "services": {
+      ".read": "true",
+      ".write": "true",
+      ".indexOn": "Name"
     },
     "showcases": {
       "items": {

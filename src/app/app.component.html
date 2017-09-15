@@ -53,6 +53,12 @@
         <span>Product</span>
       </button>
     </ng-container>
+    <ng-container *ngIf="DL.UserAccess.ProductView">
+      <button md-menu-item (click)="LoadPage('service-list')">
+        <md-icon>room_service</md-icon>
+        <span>Service</span>
+      </button>
+    </ng-container>
     <ng-container *ngIf="DL.UserAccess.ShowcaseView">
       <button md-menu-item (click)="LoadPage('showcase-list')">
         <md-icon>shop</md-icon>

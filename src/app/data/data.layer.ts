@@ -17,7 +17,8 @@ import {
     ModuleSettingInfo,
     SystemSettingInfo,
     SnapshotInfo,
-    OrderInfo
+    OrderInfo,
+    ServiceInfo
 } from './models';
 
 @Injectable()
@@ -50,6 +51,9 @@ export class DataLayer {
     Products: Array<ProductInfo>;
     ProductDiscount: ProductInfo;
     ProductSelections: Array<ProductInfo>;
+
+    Service: ServiceInfo;
+    Services: Array<ServiceInfo>;
 
     Transaction: TransactionInfo;
     TransactionsToday: Array<TransactionInfo>;

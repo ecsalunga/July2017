@@ -14,24 +14,26 @@ import { CancelDAL } from './dal/CancelDAL';
 import { TransactionDAL } from './dal/TransactionDAL';
 import { SettingDAL } from './dal/SettingDAL';
 import { SnapshotDAL } from './dal/SnapshotDAL';
+import { ServiceDAL } from './dal/ServiceDAL';
 
 import 'rxjs/add/operator/first';
-import { 
-    ProductInfo, 
-    SellInfo, 
-    TransactionInfo, 
-    ReportInfo, 
-    ExpenseInfo, 
-    NameValue, 
-    UserInfo, 
-    ShowcaseInfo, 
-    AccessInfo, 
+import {
+    ProductInfo,
+    SellInfo,
+    TransactionInfo,
+    ReportInfo,
+    ExpenseInfo,
+    NameValue,
+    UserInfo,
+    ShowcaseInfo,
+    AccessInfo,
     CancelInfo,
     DeliveryInfo,
     ModuleSettingInfo,
     SystemSettingInfo,
     SnapshotInfo,
-    OrderInfo
+    OrderInfo,
+    ServiceInfo
 } from './models';
 
 @Injectable()
@@ -49,7 +51,8 @@ export class DataAccess {
     transactionDAL: TransactionDAL;
     settingDAL: SettingDAL;
     snapshotDAL: SnapshotDAL;
-    
+    serviceDAL: ServiceDAL;
+
     USERS: string = "/users";
     SETTING: string = "/setting";
     StorageRef: firebase.storage.Reference = firebase.storage().ref();
@@ -64,6 +67,7 @@ export class DataAccess {
         this.accessDAL = new AccessDAL(DL, af);
         this.productDAL = new ProductDAL(DL, af);
         this.snapshotDAL = new SnapshotDAL(DL, af);
+        this.serviceDAL = new ServiceDAL(DL, af);
     }
 
     public LogInWithFacebook() {
@@ -78,25 +82,25 @@ export class DataAccess {
 
     public Signup(email: string, password: string) {
         this.afAuth.auth
-        .createUserWithEmailAndPassword(email, password)
-        .then(value => {
-            this.DL.Display("Account", "Created!");
+            .createUserWithEmailAndPassword(email, password)
+            .then(value => {
+                this.DL.Display("Account", "Created!");
         })
-        .catch(err => {
-            console.log(err);
-            this.DL.Display("Account", "Create account failed.");
-        });  
+            .catch(err => {
+                console.log(err);
+                this.DL.Display("Account", "Create account failed.");
+        });
     }
 
     public LogIn(email: string, password: string) {
         this.afAuth.auth
-        .signInWithEmailAndPassword(email, password)
-        .then(value => {
-            this.DL.Display("Login", "Successful!");
+            .signInWithEmailAndPassword(email, password)
+            .then(value => {
+                this.DL.Display("Login", "Successful!");
         })
-        .catch(err => {
-            console.log(err);
-            this.DL.Display("Login", "Login failed.");
+            .catch(err => {
+                console.log(err);
+                this.DL.Display("Login", "Login failed.");
         });
     }
 
@@ -105,6 +109,7 @@ export class DataAccess {
         this.settingDAL.SystemLoad();
         this.settingDAL.ModuleLoad();
         this.showcaseDAL.Load();
+        this.serviceDAL.Load();
         this.UserLoad();
     }
 
@@ -116,7 +121,7 @@ export class DataAccess {
     }
 
     ActiveDataLoad() {
-        if(!this.DL.IsDataActiveLoaded) {
+        if (!this.DL.IsDataActiveLoaded) {
             this.productDAL.Load();
             this.transactionDAL.Load();
             this.transactionDAL.LoadSell();
@@ -153,7 +158,7 @@ export class DataAccess {
                 this.DL.User.Name = user.displayName;
                 this.DL.User.Email = user.email;
 
-                if(!this.DL.User.Name)
+                if (!this.DL.User.Name)
                     this.DL.User.Name = this.DL.User.Email;
 
                 this.DL.User.UID = user.uid;
@@ -162,33 +167,33 @@ export class DataAccess {
             }
 
             // update system record
-            if(user.photoURL && this.DL.User.ImageURL != user.photoURL) {
+            if (user.photoURL && this.DL.User.ImageURL != user.photoURL) {
                 this.DL.User.ImageURL = user.photoURL;
                 toSave = true;
             }
 
-            if(!this.DL.User.ImageURL) {
+            if (!this.DL.User.ImageURL) {
                 this.DL.User.ImageURL = this.DL.DefaultImageURL;
                 toSave = true;
             }
-            
-            if(this.DL.User.Email != user.email){
+
+            if (this.DL.User.Email != user.email) {
                 this.DL.User.Email = user.email;
                 toSave = true;
             }
 
-            if((!this.DL.User.SystemImageURL || this.DL.User.SystemImageURL == this.DL.DefaultImageURL) && user.photoURL) {
+            if ((!this.DL.User.SystemImageURL || this.DL.User.SystemImageURL == this.DL.DefaultImageURL) && user.photoURL) {
                 this.DL.User.SystemImageURL = user.photoURL;
                 toSave = true;
             }
 
-            if(toSave)
+            if (toSave)
                 this.UserSave(this.DL.User);
 
-            if(this.DL.User.IsMember || this.DL.User.IsSystemUser)
+            if (this.DL.User.IsMember || this.DL.User.IsSystemUser)
                 this.showcaseDAL.LoadOrder();
-            
-            if(this.DL.User.IsSystemUser) {
+
+            if (this.DL.User.IsSystemUser) {
                 this.DataSystemLoad();
                 this.DL.SetPermission();
                 this.DL.LoadFromMenu("report-list");
@@ -199,7 +204,7 @@ export class DataAccess {
     }
 
     UserLoad() {
-        this.af.list(this.USERS, { query: { orderByChild: 'Name' }}).first().subscribe(snapshots => {
+        this.af.list(this.USERS, { query: { orderByChild: 'Name' } }).first().subscribe(snapshots => {
             this.DL.Users = new Array<UserInfo>();
             this.DL.UserAll = new Array<UserInfo>();
             this.DL.UserSelections = new Array<UserInfo>();
@@ -211,10 +216,10 @@ export class DataAccess {
                 let info: UserInfo = snapshot;
                 info.key = snapshot.$key;
 
-                if(info.IsSystemUser)
+                if (info.IsSystemUser)
                     this.DL.Users.push(info);
-                
-                if(info.IsMember)
+
+                if (info.IsMember)
                     this.DL.Members.push(info);
 
                 this.DL.UserAll.push(info);
@@ -237,31 +242,23 @@ export class DataAccess {
         });
     }
 
-    ModuleSettingLoad() {
-        this.settingDAL.ModuleLoad();
-    }
-
-    TransactionCancelCurrentLoad() {
-        this.cancelDAL.Load();
-    }
-
-    TransactionCancelLoad(keyMonth: number) {
+    public TransactionCancelLoad(keyMonth: number) {
         this.cancelDAL.LoadByKeyMonth(keyMonth);
     }
 
-    SnapshotLoad(keyDay: number) {
+    public SnapshotLoad(keyDay: number) {
         this.snapshotDAL.Load(keyDay);
     }
 
-    ShowcasesLoad() {
+    public ShowcasesLoad() {
         this.showcaseDAL.Load();
     }
 
-    TransactionSelectedLoad(report: ReportInfo) {
+    public TransactionSelectedLoad(report: ReportInfo) {
         this.transactionDAL.LoadByReportInfo(report);
     }
 
-    ReportMonthlyLoad(selectedYear: number, selectedMonth: number) {
+    public ReportMonthlyLoad(selectedYear: number, selectedMonth: number) {
         this.reportDAL.LoadByYearAndMonth(selectedYear, selectedMonth);
     }
 
@@ -269,20 +266,21 @@ export class DataAccess {
         this.reportDAL.ReGenerate(year, keyMonth, keyDay);
     }
 
-    ExpenseSelectedLoad(report: ReportInfo) {
+    public ExpenseSelectedLoad(report: ReportInfo) {
         this.expenseDAL.LoadByReport(report);
     }
 
-    AccessLoad() {
-        this.accessDAL.Load();
-    }
-
-    ExpenseTypeClear() {
+    public ExpenseTypeClear() {
         this.expenseDAL.TypeDelete();
     }
 
     public ProductSave(item: ProductInfo) {
         this.productDAL.Save(item);
+    }
+
+    public ServiceSave(item: ServiceInfo) {
+        this.serviceDAL.Save(item);
+        this.serviceDAL.Load();
     }
 
     public UserSave(item: UserInfo) {
@@ -363,7 +361,7 @@ export class DataAccess {
     public ExpenseInfoSave(item: ExpenseInfo) {
         this.expenseDAL.Save(item);
 
-        if(item.KeyDay == this.DL.ReportToday.KeyDay)
+        if (item.KeyDay == this.DL.ReportToday.KeyDay)
             this.ReportTodaySave();
         else
             this.ReportReGenerateBySelected()
@@ -371,8 +369,8 @@ export class DataAccess {
 
     public ExpenseDelete(item: ExpenseInfo) {
         this.expenseDAL.Delete(item);
-        
-        if(item.KeyDay == this.DL.ReportToday.KeyDay)
+
+        if (item.KeyDay == this.DL.ReportToday.KeyDay)
             this.ReportTodaySave();
         else
             this.ReportReGenerateBySelected()
@@ -380,14 +378,14 @@ export class DataAccess {
 
     public ReportTodaySave() {
         let date = new Date();
-        if(this.DL.Date.getDate() != date.getDate()) {
+        if (this.DL.Date.getDate() != date.getDate()) {
             this.DL.Date = date;
             this.DL.ReportTodayRefresh();
         }
 
         this.reportDAL.SaveTodayReport();
     }
-    
+
     public ReportSave(item: ReportInfo) {
         this.reportDAL.Save(item);
     }
@@ -396,13 +394,11 @@ export class DataAccess {
         this.ReportReGenerate(this.DL.ReportSelected.KeyYear, this.DL.ReportSelected.KeyMonth, this.DL.ReportSelected.KeyDay);
     }
 
-    public ModuleSettingSave(item: ModuleSettingInfo)
-    {
+    public ModuleSettingSave(item: ModuleSettingInfo) {
         this.settingDAL.ModuleSave(item);
     }
 
-    public SystemSettingSave(item: SystemSettingInfo)
-    {
+    public SystemSettingSave(item: SystemSettingInfo) {
         this.settingDAL.SystemSave(item);
     }
 }
