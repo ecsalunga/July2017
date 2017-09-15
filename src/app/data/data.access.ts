@@ -104,8 +104,8 @@ export class DataAccess {
         this.accessDAL.Load();
         this.settingDAL.SystemLoad();
         this.settingDAL.ModuleLoad();
-        this.UserLoad();
         this.showcaseDAL.Load();
+        this.UserLoad();
     }
 
     public DataSystemLoad() {

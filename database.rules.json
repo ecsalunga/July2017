@@ -20,7 +20,7 @@
     "users": {
       ".read": "true",
       ".write": "true",
-      ".indexOn": "UID"
+      ".indexOn": "Name"
     },
     "accesses": {
       ".read": "true",
