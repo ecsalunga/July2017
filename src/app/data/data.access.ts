@@ -196,7 +196,7 @@ export class DataAccess {
             if (this.DL.User.IsSystemUser) {
                 this.DataSystemLoad();
                 this.DL.SetPermission();
-                this.DL.LoadFromMenu("report-list");
+                this.DL.LoadFromMenu(this.DL.UserAccess.ModuleStart);
             }
             else
                 this.DL.LoadFromMenu("dashboard-home");

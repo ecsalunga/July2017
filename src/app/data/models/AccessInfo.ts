@@ -2,6 +2,7 @@ export class AccessInfo {
     key: string;
     Name: string;
     Description: string;
+    ModuleStart: string;
     
     AccessView: boolean;
     AccessAdd: boolean;

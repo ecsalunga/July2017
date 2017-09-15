@@ -128,6 +128,7 @@ export class DataLayer {
 
     ModuleSetting: ModuleSettingInfo;
     SystemSetting: SystemSettingInfo;
+    Modules: Array<NameValue>;
 
     constructor(private core: Core, private snackBar: MdSnackBar) {
         this.ReportTodayRefresh();
@@ -137,6 +138,15 @@ export class DataLayer {
         for (let x = this.ReportToday.KeyYear - 5; x <= this.ReportToday.KeyYear; x++) {
             this.ReportYears.push(x);
         }
+
+        this.Modules = [
+            new NameValue("Home", "dashboard-home"),
+            new NameValue("Sell", "product-sell"),
+            new NameValue("Delivery", "delivery-list"),
+            new NameValue("Order", "product-order"),
+            new NameValue("Transaction", "transaction-list"),
+            new NameValue("Balancing", "report-balancing")
+        ];
 
         this.Months = [
             new NameValue("January", 1),

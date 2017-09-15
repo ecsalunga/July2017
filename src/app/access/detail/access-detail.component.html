@@ -9,6 +9,13 @@
       <textarea id="txtDescrption" mdInput placeholder="Description" [(ngModel)]="model.Description"></textarea>
     </md-form-field>
   </div>
+  <div>
+    <md-select placeholder="Start Module" [(ngModel)]="model.ModuleStart">
+      <md-option *ngFor="let module of DL.Modules" [value]="module.Value">
+        {{ module.Name }}
+      </md-option>
+    </md-select>
+  </div>
   <table>
     <tr>
       <td colspan="3" class="accessLabel">Access</td>
