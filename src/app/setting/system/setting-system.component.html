@@ -14,11 +14,11 @@
         </textarea>
       </md-form-field>
     </div>
-    <div>
-      <md-form-field class="fullWidth">
-        <textarea id="txtDefaultImageURL" mdInput placeholder="Default Image URL" [(ngModel)]="model.DefaultImageURL">
-        </textarea>
-      </md-form-field>
+    <div class="imageContainer">
+      <img class="fullWidth" src="{{model.DefaultImageURL}}" (load)="ImageLoaded()">
+      <div class="imageEdit" [hidden]="!isLoaded || !DL.UserAccess.SystemSettingEdit">
+        <div (click)="SelectFile()">Update Default Image</div>
+      </div>
     </div>
     <div class="vSmallSpacer"></div>
     <div class="configLabel">

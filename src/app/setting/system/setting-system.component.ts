@@ -10,7 +10,8 @@ import { SystemSettingInfo } from '../../data/models';
 })
 export class SettingSystemComponent implements OnInit {
   model: SystemSettingInfo;
-  
+  isLoaded: boolean = true;
+
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
       this.model = Object.assign({}, this.DL.SystemSetting);
   }
@@ -20,7 +21,23 @@ export class SettingSystemComponent implements OnInit {
     this.DL.Display("System Settings", "Saved!");
   }
 
+  SelectFile() {
+    this.DL.SelectImage("images/default_");
+  }
+
+  ImageLoaded() {
+    this.isLoaded = true;
+  }
+
   ngOnInit() {
     this.DL.TITLE = "System Settings";
+
+    this.DA.ImageUploaded.subscribe(url => {
+      this.model.DefaultImageURL = url;
+    });
+    this.DA.DataChecked.subscribe(isValid => {
+      if(isValid) 
+        this.isLoaded = false;
+    });
   }
 }
