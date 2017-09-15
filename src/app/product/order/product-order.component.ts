@@ -15,7 +15,8 @@ export class ProductOrderComponent implements OnInit {
     return this.core.numberToDate(keyDay);
   }
 
-  Select(item: OrderInfo) {
+  Select(item: OrderInfo, index: number) {
+    this.DL.ShowcaseOrderTabIndex = index;
     this.DL.ShowcaseOrder =  item;
     this.DL.LoadFromLink('product-order-detail');
   }
@@ -40,6 +41,6 @@ export class ProductOrderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Request List";
+    this.DL.TITLE = "Order List";
   }
 }

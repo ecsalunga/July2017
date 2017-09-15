@@ -98,14 +98,17 @@ export class DataLayer {
     Showcase: ShowcaseInfo;
     Showcases: Array<ShowcaseInfo>;
     ShowcaseToday: Array<ShowcaseInfo>;
+
     ShowcaseOrder: OrderInfo;
     ShowcaseOrders: Array<OrderInfo>;
+
     ShowcaseUserOrders: Array<OrderInfo>;
     ShowcaseUserSelectingOrders: Array<OrderInfo>;
     ShowcaseUserDoneOrders: Array<OrderInfo>;
     ShowcaseUserHasOrder: boolean = false;
     ShowcaseUserHasOpenCart: boolean = false;
     ShowcaseOrderStatuses: Array<string>;
+    ShowcaseOrderTabIndex: number = 0;
 
     Snapshot: SnapshotInfo;
     Snapshots: Array<SnapshotInfo>;

@@ -1,5 +1,5 @@
 <div>
-  <md-tab-group dynamicHeight="true">
+  <md-tab-group [selectedIndex]="DL.ShowcaseOrderTabIndex" dynamicHeight="true">
     <md-tab>
       <ng-template md-tab-label>
         <md-icon>send</md-icon>&nbsp;Active
@@ -40,7 +40,7 @@
                 {{ item.Amount | number:'1.2-2' }} / {{ item.Count }}
               </td>
               <td class="rightRow">
-                <button md-mini-fab (click)="Select(item)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
+                <button md-mini-fab (click)="Select(item, 0)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
               </td>
             </tr>
           </ng-container>
@@ -87,7 +87,7 @@
                 {{ item.Amount | number:'1.2-2' }} / {{ item.Count }}
               </td>
               <td class="rightRow">
-                <button md-mini-fab (click)="Select(item)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
+                <button md-mini-fab (click)="Select(item, 1)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
               </td>
             </tr>
           </ng-container>
@@ -134,7 +134,7 @@
                 {{ item.Amount | number:'1.2-2' }} / {{ item.Count }}
               </td>
               <td class="rightRow">
-                <button md-mini-fab (click)="Select(item)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
+                <button md-mini-fab (click)="Select(item, 2)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
               </td>
             </tr>
           </ng-container>
