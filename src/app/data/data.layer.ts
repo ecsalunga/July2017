@@ -315,6 +315,12 @@ export class DataLayer {
         }
     }
 
+    public DisplayPublic(message: string, action: string) {
+        if(this.ModuleSetting.PublicIsNotify) {
+            this.snackBar.open(message, action, this.SnackBarConfig);
+        }
+    }
+
     public DisplayLong(message: string, action: string) {
         this.snackBar.open(message, action, this.SnackBarConfigLong);
     }

@@ -29,13 +29,13 @@ export class ShowcaseCartComponent implements OnInit {
     this.DL.OrderUpdateStatus(item, this.DL.STATUS_REQUESTED);
     this.DA.ShowcaseOrderSave(item);
     this.isCheckingout = false;
-    this.DL.Display("Order", "Requested!");
+    this.DL.DisplayPublic("Order", "Requested!");
   }
 
   SetStatusDone(item: OrderInfo) {
     this.DL.OrderUpdateStatus(item, this.DL.STATUS_DONE);
     this.DA.ShowcaseOrderSave(item);
-    this.DL.Display("Order", "Hidden!");
+    this.DL.DisplayPublic("Order", "Hidden!");
   }
 
   ViewStatus(item: OrderInfo) {
@@ -69,7 +69,7 @@ export class ShowcaseCartComponent implements OnInit {
         } 
         else {
           this.DA.ShowcaseOrderDelete(order);
-          this.DL.Display("Order", "Deleted!");
+          this.DL.DisplayPublic("Shopping Cart", "Deleted!");
           
           if(!this.DL.ShowcaseUserHasOrder) {
             this.LoadList();

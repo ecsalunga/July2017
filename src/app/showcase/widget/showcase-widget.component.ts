@@ -84,7 +84,7 @@ export class ShowcaseWidgetComponent implements OnInit {
       this.DA.ShowcaseOrderSave(order);
     }
 
-    this.DL.Display(item.Product.Description, quantity + " " + (quantity == 1 ? "item":"items") + " to cart.");
+    this.DL.DisplayPublic(item.Product.Description, quantity + " " + (quantity == 1 ? "item":"items") + " to cart.");
   }
 
   createSell(item: ShowcaseInfo): SellInfo {
