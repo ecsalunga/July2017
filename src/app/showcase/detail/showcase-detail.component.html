@@ -23,7 +23,6 @@
       <input id="txtMaxCart" type="number" mdInput placeholder="Cart Max" [(ngModel)]="model.MaxCart" />
     </md-form-field>
   </div>
-  <input #fileSelector id="file" [hidden]="true" type="file" accept="image/*">
   <div class="imageContainer">
     <img class="fullWidth" src="{{model.ImageURL}}" (load)="ImageLoaded()">
     <div class="imageEdit" [hidden]="!isLoaded" (click)="SelectFile()">Update Picture</div>

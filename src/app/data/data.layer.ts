@@ -120,6 +120,7 @@ export class DataLayer {
     IsDataActiveLoaded: boolean = false;
 
     DefaultImageURL: string;
+    UploadingImageBasePath: string;
 
     ModuleSetting: ModuleSettingInfo;
     SystemSetting: SystemSettingInfo;
@@ -307,6 +308,11 @@ export class DataLayer {
 
     public GotoTop() {
         window.scroll(0, 0);
+    }
+
+    public SelectImage(basePath: string) {
+        this.UploadingImageBasePath = basePath;
+        this.core.selectImage();
     }
 
     public Display(message: string, action: string) {

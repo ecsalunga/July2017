@@ -33,7 +33,6 @@
     </md-form-field>
   </div>
   <div class="vSmallSpacer"></div>
-  <input #fileSelector id="file" [hidden]="true" type="file" accept="image/*">
   <div class="imageContainer">
     <img class="fullWidth" src="{{model.SystemImageURL}}" (load)="ImageLoaded()">
     <div class="imageEdit" [hidden]="!isLoaded || !DL.UserAccess.UserProfileEdit">

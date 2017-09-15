@@ -37,6 +37,9 @@ import {
 @Injectable()
 export class DataAccess {
     DataLoaded: EventEmitter<any> = new EventEmitter();
+    ImageUploaded: EventEmitter<string> = new EventEmitter();
+    DataChecked: EventEmitter<boolean> = new EventEmitter();
+
     expenseDAL: ExpenseDAL;
     productDAL: ProductDAL;
     accessDAL: AccessDAL;

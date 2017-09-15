@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef, Renderer } from '@angular/core';
 import { Core } from './core';
 import { DataAccess, DataLayer } from './data';
 
@@ -10,12 +10,16 @@ import { DataAccess, DataLayer } from './data';
 export class AppComponent implements OnInit {
   @ViewChild('viewChild', {read: ViewContainerRef})
   viewChild: ViewContainerRef;
+
+  @ViewChild('imageSelector', {read: ViewContainerRef })
+  imageSelector: ViewContainerRef;
+
   show: string = "100%";
   hide: string = "0%"
   navWidth: string = "0%";
   loader: string = "100%";
 
-  constructor(public core: Core, private DA: DataAccess, private DL: DataLayer) {}
+  constructor(public core: Core, private DA: DataAccess, private DL: DataLayer, private renderer: Renderer) {}
 
   LoadPage(name: string) {
     this.DL.LoadFromMenu(name);
@@ -30,12 +34,32 @@ export class AppComponent implements OnInit {
     this.navWidth = (this.navWidth == this.show) ? this.hide : this.show;
   }
 
+  Upload() {
+    let selectedFile = (<HTMLInputElement>this.imageSelector.element.nativeElement).files[0];
+    if(selectedFile.type.indexOf("image") > -1) {
+      this.DA.DataChecked.emit(true);
+      let fRef = this.DA.StorageRef.child(this.DL.UploadingImageBasePath + selectedFile.name);
+      fRef.put(selectedFile).then(snapshot => {
+        this.DA.ImageUploaded.emit(snapshot.downloadURL);
+      });
+    }
+    else {
+      this.DA.DataChecked.emit(false);
+      this.DL.Display("Image", "Please select valid image file.");
+    }
+  }
+
   ngOnInit() {
     this.core.viewChild = this.viewChild;
+    this.core.imageSelector = this.imageSelector;
     this.DA.DataLoad();
     this.DL.LoadFromMenu("dashboard-home");
     this.DA.DataLoaded.subscribe(data => {
       this.loader =  this.hide;
+    });
+
+    this.renderer.listen(this.imageSelector.element.nativeElement, 'change', (event) => {
+      this.Upload();
     });
   }
 }

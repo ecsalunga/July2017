@@ -3,6 +3,8 @@ import { Injectable, ComponentFactory, ComponentFactoryResolver, ViewContainerRe
 @Injectable()
 export class Core {
     viewChild: ViewContainerRef;
+    imageSelector: ViewContainerRef;
+
     components: Array<any> = new Array<any>();
     selector: string;
 
@@ -31,6 +33,10 @@ export class Core {
                 this.components.push(created);
             }
         });
+    }
+
+    selectImage() {
+        this.imageSelector.element.nativeElement.click();
     }
 
     clearComponent() {

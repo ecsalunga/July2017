@@ -1,4 +1,4 @@
-import { Component, OnInit, ApplicationRef, ViewChild, ViewContainerRef, Renderer } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
@@ -10,14 +10,12 @@ import { UserInfo } from '../../data/models';
   styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent implements OnInit {
-  @ViewChild('fileSelector', {read: ViewContainerRef })
-  fileSelector: ViewContainerRef;
   joinDate: Date;
   model: UserInfo;
   isLoaded: boolean = true;
   nameValidator = new FormControl('', [Validators.required]);
 
-  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer, private renderer: Renderer) {
+  constructor(private core: Core, private DA: DataAccess, private DL: DataLayer) {
     this.model = Object.assign({}, this.DL.UserSelected);
     this.joinDate = this.core.numberToDate(this.model.JoinDate);
   }
@@ -30,20 +28,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   SelectFile() {
-    this.fileSelector.element.nativeElement.click();
-  }
-
-  Upload() {
-    let selectedFile = (<HTMLInputElement>this.fileSelector.element.nativeElement).files[0];
-    if(selectedFile.type.indexOf("image") > -1) {
-      this.isLoaded = false;
-      let fRef = this.DA.StorageRef.child("images/users/" + this.model.UID + "_" + selectedFile.name);
-      fRef.put(selectedFile).then(snapshot => {
-          this.model.SystemImageURL = snapshot.downloadURL;
-      });
-    }
-    else
-      this.DL.Display("Image", "Please select valid image file.");
+    this.DL.SelectImage("images/users/" + this.model.UID + "_");
   }
 
   ResetPicture() {
@@ -62,8 +47,12 @@ export class UserDetailComponent implements OnInit {
   ngOnInit() {
     this.DL.TITLE = "User Details";
 
-    this.renderer.listen(this.fileSelector.element.nativeElement, 'change', (event) => {
-      this.Upload();
+    this.DA.ImageUploaded.subscribe(url => {
+      this.model.SystemImageURL = url;
+    });
+    this.DA.DataChecked.subscribe(isValid => {
+      if(isValid) 
+        this.isLoaded = false;
     });
   }
 }
