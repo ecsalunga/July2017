@@ -25,6 +25,10 @@ export class AppComponent implements OnInit {
     this.DL.LoadFromMenu(name);
   }
 
+  Login() {
+    this.DL.LoadFromLink('user-login');
+  }
+
   LoadFromHeader(name: string) {
     this.navWidth = this.hide;
     this.LoadPage(name)

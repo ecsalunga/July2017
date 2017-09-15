@@ -18,11 +18,19 @@
       </ng-container>
     </div>
     <div>
-      <ng-container *ngIf="DL.User.UID">
+      <ng-container *ngIf="DL.User.UID; else showLogin">
         <button md-icon-button (click)="LoadFromHeader('user-update')" class="title" mdTooltip="Update Profile" mdTooltipPosition="below">
           <img md-card-avatar src="{{DL.User.SystemImageURL}}"> 
         </button>
       </ng-container>
+      <ng-template #showLogin>
+        <div class="mainColor">
+          <button *ngIf="!DL.User.UID && DL.TITLE != 'Log In'" md-raised-button (click)="Login()">
+            <md-icon>lock_open</md-icon>
+            <span>Log In</span>
+          </button>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>
