@@ -244,12 +244,12 @@ th {
     font-weight: bold;
 }
 
-.itemDescription {
+.itemDescriptionRes {
     padding: 20px;
     color: gray;
 }
 
-.imageContainer {
+.imageContainerRes {
     height: 100%;
     overflow: hidden;
 }
@@ -274,8 +274,8 @@ th {
 @media (min-width: 720px) {
     .column             { margin-left: 2%; }
     .half.column        { width: 47%; }
-    .imageContainer     { height: 275px; }
-    .itemDescription    { height: 75px; }
+    .imageContainerRes  { height: 275px; }
+    .itemDescriptionRes { height: 75px; }
 }
   
 .container:after {
