@@ -26,6 +26,12 @@ export class MessageDetailComponent implements OnInit {
       this.model = new ConversationInfo();
   }
 
+  Delete() {
+    this.DA.ConversationDelete(this.model);
+    this.LoadList();
+    this.DL.Display("Conversation", "Deleted!");
+  }
+
   Save() {
     if(!this.model.key) {
       this.model.ActionDate = this.DL.GetActionDate();

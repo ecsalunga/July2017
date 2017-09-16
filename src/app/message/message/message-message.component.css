@@ -32,12 +32,12 @@ button:disabled {
 }
 
 .fromYou {
-    color: green;
+    color: #009688;
     text-align: right;
 }
 
 .fromConvo {
-    color: red;
+    color: #000000;
     text-align: left;
 }
 

@@ -333,6 +333,10 @@ export class DataAccess {
         this.messageDAL.ConversationSave(item);
     }
 
+    public ConversationDelete(item: ConversationInfo) {
+        this.messageDAL.ConversationDelete(item);
+    }
+
     public MessageGet(item: ConversationInfo) {
         this.messageDAL.GetMessages(item);
     }

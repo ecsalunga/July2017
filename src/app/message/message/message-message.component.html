@@ -8,12 +8,13 @@
       </ng-container>
     </div>
     <div class="chat">
-      <div class="convo">
+      <div class="convo" #chatMessages>
         <ng-container *ngFor="let item of DL.Messages">
           <div class="{{ IsFromYou(item) ?  'fromYou' : 'fromConvo' }}">
             {{ item.Message }}
           </div>
         </ng-container>
+        <div class="vSmallSpacer"></div>
       </div>
       <div>
         <md-form-field class="fullWidth">
