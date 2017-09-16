@@ -3,8 +3,7 @@
     <div class="conversations">
       <ng-container *ngFor="let item of DL.Conversations">
         <button md-menu-item (click)="Load(item)" [disabled]="item.key == DL.Conversation.key">
-          <md-icon>message</md-icon>
-          <span>{{ GetConvoWith(item) }}</span>
+          {{ GetConvoWith(item) }}
         </button>
       </ng-container>
     </div>
