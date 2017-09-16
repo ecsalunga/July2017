@@ -1,4 +1,8 @@
 <div>
+  <div *ngIf="!(!DL.Transaction.UserName)">
+    Cashier: {{ DL.Transaction.UserName }}
+    <div class="vSmallSpacer"></div>
+  </div>
   <table>
     <thead>
       <tr>

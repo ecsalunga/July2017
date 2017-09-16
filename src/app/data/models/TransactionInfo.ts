@@ -14,6 +14,8 @@ export class TransactionInfo {
     key: string;
     MemberKey: string;
     BuyerName: string;
+    UserKey: string;
+    UserName: string;
     Items: Array<SellInfo>;
     Count: number;
     Amount: number;

@@ -99,6 +99,8 @@ export class TransactionDAL {
         let info = new TransactionInfo();
         info.MemberKey = memberKey
         info.BuyerName = buyerName;
+        info.UserKey = this.DL.User.key;
+        info.UserName = this.DL.User.Name;
         info.Items = this.DL.SellInfos;
         info.Count = this.DL.SellInfosCount;
         info.Amount = this.DL.SellInfosAmount;
