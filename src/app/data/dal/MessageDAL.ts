@@ -1,8 +1,10 @@
+import { EventEmitter } from '@angular/core';
 import { DataLayer } from './../data.layer';
 import { ConversationInfo, MessageInfo } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class MessageDAL {
+    MessageReceived: EventEmitter<any> = new EventEmitter();
     PATH: string = "/messages/conversations";
     PATH_MESSAGE: string = "/messages/items";
 
@@ -33,6 +35,9 @@ export class MessageDAL {
             });
 
             this.DL.Messages.sort((item1, item2) => item1.ActionDate - item2.ActionDate);
+            
+            if(this.DL.Messages.length > 0)
+                this.MessageReceived.emit(null);
         });
     }
 

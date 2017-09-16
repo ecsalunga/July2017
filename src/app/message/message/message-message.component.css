@@ -41,6 +41,10 @@ button:disabled {
     text-align: left;
 }
 
+.vTinySpacer {
+    height: 2px;
+}
+
 md-form-field {
     font-size: 16px;
 }

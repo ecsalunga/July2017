@@ -27,6 +27,9 @@ export class MessageMessageComponent implements OnInit {
   Send() {
     this.DA.MessageSend(this.message);
     this.message = "";
+  }
+
+  ScrollBottom() {
     try {
       this.chatMessages.element.nativeElement.scrollTop = this.chatMessages.element.nativeElement.scrollHeight;
     } catch(err) { }
@@ -42,5 +45,9 @@ export class MessageMessageComponent implements OnInit {
 
   ngOnInit() {
     this.DL.TITLE = "Massage Details";
+
+    this.DA.messageDAL.MessageReceived.subscribe(msg => {
+      this.ScrollBottom();
+    });
   }
 }
