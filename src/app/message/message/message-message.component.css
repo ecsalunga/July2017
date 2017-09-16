@@ -1,0 +1,46 @@
+.message {
+    overflow: auto;
+}
+
+button:disabled {
+    color: #009688;
+}
+
+.conversations {
+    width: 33%;
+    height: 350px;
+    overflow-x: auto;
+    border: 1px solid #eeeeee;
+    float: left;
+}
+
+.chat {
+    margin-left: 2%;
+    width: 64%;
+    float: right;
+}
+
+.convo {
+    height: 300px;
+    overflow-x: auto;
+    border: 1px solid #eeeeee;
+    padding: 3px;
+}
+
+.fromYou {
+    color: green;
+    text-align: right;
+}
+
+.fromConvo {
+    color: red;
+    text-align: left;
+}
+
+md-form-field {
+    font-size: 16px;
+}
+
+.fullWidth {
+    width: 100%;
+}

@@ -1,0 +1,19 @@
+::ng-deep .mat-select-trigger {
+    font-size: inherit;
+}
+
+md-form-field {
+    font-size: 16px;
+}
+
+textarea {
+    height: 70px;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.shortText {
+    width: 120px;
+}

@@ -1,0 +1,41 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Created
+        </th>
+        <th>
+          From
+        </th>
+        <th>
+          To
+        </th>
+        <th class="rightRow" style="width: 30%;">
+          Action
+        </th>
+      </tr>
+    </thead>
+    <ng-container *ngFor="let item of DL.Conversations">
+      <tr>
+        <td>
+          {{ this.core.numberToDate(item.ActionDate) | date : 'short' }}
+        </td>
+        <td>
+          {{ item.FromName }}
+        </td>
+        <td>
+          {{ item.ToName }}
+        </td>
+        <td class="rightRow">
+          <button md-mini-fab (click)="Message(item)" mdTooltip="Message"><md-icon>message</md-icon></button>
+          <button md-mini-fab (click)="SelectItem(item)" mdTooltip="View"><md-icon>pageview</md-icon></button>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+  <div class="hSpacer"></div>
+  <div class="rightRow">
+    <button md-fab (click)="AddItem()" [disabled]="!DL.UserAccess.ServiceAdd" mdTooltip="Add" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+  </div>
+</div>

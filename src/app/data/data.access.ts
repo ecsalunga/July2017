@@ -15,6 +15,7 @@ import { TransactionDAL } from './dal/TransactionDAL';
 import { SettingDAL } from './dal/SettingDAL';
 import { SnapshotDAL } from './dal/SnapshotDAL';
 import { ServiceDAL } from './dal/ServiceDAL';
+import { MessageDAL } from './dal/MessageDAL';
 
 import 'rxjs/add/operator/first';
 import {
@@ -34,7 +35,9 @@ import {
     SnapshotInfo,
     OrderInfo,
     ServiceInfo,
-    CommandInfo
+    CommandInfo,
+    ConversationInfo,
+    MessageInfo
 } from './models';
 
 @Injectable()
@@ -53,6 +56,7 @@ export class DataAccess {
     settingDAL: SettingDAL;
     snapshotDAL: SnapshotDAL;
     serviceDAL: ServiceDAL;
+    messageDAL: MessageDAL;
 
     USERS: string = "/users";
     SETTING: string = "/setting";
@@ -70,6 +74,7 @@ export class DataAccess {
         this.productDAL = new ProductDAL(DL, af);
         this.snapshotDAL = new SnapshotDAL(DL, af);
         this.serviceDAL = new ServiceDAL(DL, af);
+        this.messageDAL = new MessageDAL(DL, af);
     }
 
     public LogInWithFacebook() {
@@ -161,6 +166,15 @@ export class DataAccess {
         }
     }
 
+    GeneralActiveDataLoad() {
+        if(!this.DL.IsDataActiveLoaded) {
+            this.showcaseDAL.LoadOrder();
+            this.messageDAL.Load();
+            this.CommandLoad();
+            this.DL.IsDataActiveLoaded = true
+        }
+    }
+
     UserAuthenticate() {
         this.afAuth.authState.subscribe(user => {
             this.DL.User = new UserInfo(this.DL.DefaultImageURL);
@@ -221,6 +235,10 @@ export class DataAccess {
             if (toSave)
                 this.UserSave(this.DL.User);
 
+            if (this.DL.User.IsMember || this.DL.User.IsSystemUser) {
+                this.GeneralActiveDataLoad();
+            }
+
             if (this.DL.User.IsSystemUser) {
                 this.DataSystemLoad();
                 this.DL.SetPermission();
@@ -228,12 +246,6 @@ export class DataAccess {
             }
             else
                 this.DL.LoadFromMenu("dashboard-home");
-
-            if ((this.DL.User.IsMember || this.DL.User.IsSystemUser) && !this.DL.IsDataActiveLoaded) {
-                this.showcaseDAL.LoadOrder();
-                this.CommandLoad();
-                this.DL.IsDataActiveLoaded = true
-            }
         });
     }
 
@@ -315,6 +327,25 @@ export class DataAccess {
     public ServiceSave(item: ServiceInfo) {
         this.serviceDAL.Save(item);
         this.serviceDAL.Load();
+    }
+
+    public ConversationSave(item: ConversationInfo) {
+        this.messageDAL.ConversationSave(item);
+    }
+
+    public MessageGet(item: ConversationInfo) {
+        this.messageDAL.GetMessages(item);
+    }
+
+    public MessageSend(message: string) {
+        if(this.DL.Conversation) {
+            let info = new MessageInfo();
+            info.ConversationKey = this.DL.Conversation.key;
+            info.ActionDate = this.DL.GetActionDate();
+            info.FromKey = this.DL.User.key;
+            info.Message = message;
+            this.messageDAL.MessageSave(info);
+        }
     }
 
     public UserSave(item: UserInfo) {

@@ -1,0 +1,26 @@
+<div>
+  <div class="message">
+    <div class="conversations">
+      <ng-container *ngFor="let item of DL.Conversations">
+        <button md-menu-item (click)="Load(item)" [disabled]="item.key == DL.Conversation.key">
+          <md-icon>message</md-icon>
+          <span>{{ GetConvoWith(item) }}</span>
+        </button>
+      </ng-container>
+    </div>
+    <div class="chat">
+      <div class="convo">
+        <ng-container *ngFor="let item of DL.Messages">
+          <div class="{{ IsFromYou(item) ?  'fromYou' : 'fromConvo' }}">
+            {{ item.Message }}
+          </div>
+        </ng-container>
+      </div>
+      <div>
+        <md-form-field class="fullWidth">
+          <input id="txtMessage" (keyup.enter)="Send()" mdInput placeholder="Message" [(ngModel)]="message" />
+        </md-form-field>
+      </div>
+    </div>
+  </div>
+</div>

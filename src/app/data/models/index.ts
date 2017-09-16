@@ -10,3 +10,4 @@ export { UserInfo } from './UserInfo';
 export { ModuleSettingInfo, SystemSettingInfo } from './SettingInfo';
 export { SnapshotInfo } from './SnapshotInfo';
 export { ServiceInfo } from './ServiceInfo';
+export { ConversationInfo, MessageInfo } from './MessageInfo';

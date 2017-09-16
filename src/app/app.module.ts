@@ -68,6 +68,9 @@ import { ShowcaseCartComponent } from './showcase/cart/showcase-cart.component';
 import { ProductOrderDetailComponent } from './product/order-detail/product-order-detail.component';
 import { ServiceListComponent } from './service/list/service-list.component';
 import { ServiceDetailComponent } from './service/detail/service-detail.component';
+import { MessageListComponent } from './message/list/message-list.component';
+import { MessageDetailComponent } from './message/detail/message-detail.component';
+import { MessageMessageComponent } from './message/message/message-message.component';
 
 @NgModule({
   declarations: [
@@ -106,7 +109,10 @@ import { ServiceDetailComponent } from './service/detail/service-detail.componen
     ShowcaseCartComponent,
     ProductOrderDetailComponent,
     ServiceListComponent,
-    ServiceDetailComponent
+    ServiceDetailComponent,
+    MessageListComponent,
+    MessageDetailComponent,
+    MessageMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -168,7 +174,10 @@ import { ServiceDetailComponent } from './service/detail/service-detail.componen
     ShowcaseCartComponent,
     ProductOrderDetailComponent,
     ServiceListComponent,
-    ServiceDetailComponent
+    ServiceDetailComponent,
+    MessageListComponent,
+    MessageDetailComponent,
+    MessageMessageComponent
   ]
 })
 export class AppModule {

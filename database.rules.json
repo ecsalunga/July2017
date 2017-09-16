@@ -85,6 +85,18 @@
       ".read": "true",
       ".write": "true",
       ".indexOn": "KeyDay"
+    },
+    "messages": {
+      "conversations": {
+        ".read": "true",
+        ".write": "true",
+        ".indexOn": "ActionDate"
+      },
+      "items": {
+        ".read": "true",
+        ".write": "true",
+        ".indexOn": "ConversationKey"
+      }
     }
   }
 }

@@ -18,7 +18,9 @@ import {
     SystemSettingInfo,
     SnapshotInfo,
     OrderInfo,
-    ServiceInfo
+    ServiceInfo,
+    ConversationInfo,
+    MessageInfo
 } from './models';
 
 @Injectable()
@@ -33,6 +35,8 @@ export class DataLayer {
     MENU: string = "MENU";
     LINK: string = "LINK";
     PUBLIC: string = "PUBLIC";
+
+    COMPONENT: string;
     SOURCE: string;
     TITLE: string;
 
@@ -119,9 +123,14 @@ export class DataLayer {
     Snapshot: SnapshotInfo;
     Snapshots: Array<SnapshotInfo>;
 
+    Conversation: ConversationInfo;
+    Conversations: Array<ConversationInfo>;
+    Messages: Array<MessageInfo>;
+
     Months: Array<NameValue>;
     Date: Date = new Date();
     AccessTypes: Array<NameValue>;
+
     IsAuthenticating: boolean = false;
     IsSystemDataActiveLoaded: boolean = false;
     IsDataActiveLoaded: boolean = false;
@@ -134,6 +143,7 @@ export class DataLayer {
     Modules: Array<NameValue>;
 
     constructor(private core: Core, private snackBar: MdSnackBar) {
+        this.InitCollections();
         this.ReportTodayRefresh();
         this.ReportSelected = this.ReportToday;
         
@@ -219,6 +229,13 @@ export class DataLayer {
         this.SnackBarConfigLong = new MdSnackBarConfig();
         this.SnackBarConfigLong.extraClasses = ['snackBarclassLong']; 
         this.SnackBarConfigLong.duration = 10000;
+    }
+
+    public InitCollections() {
+        this.ShowcaseOrders = new Array<OrderInfo>();
+        this.ShowcaseUserDoneOrders = new Array<OrderInfo>();
+        this.ShowcaseUserSelectingOrders = new Array<OrderInfo>();
+        this.ShowcaseUserOrders = new Array<OrderInfo>();
     }
 
     public SetSystemConfig() {
@@ -313,11 +330,13 @@ export class DataLayer {
     }
 
     public LoadComponent(name: string) {
+        this.COMPONENT = name;
         this.core.loadComponent(name);
         this.GotoTop();
     }
 
     public LoadComponentsFromLink(names: Array<string>) {
+        this.COMPONENT = "Multiple";
         this.SOURCE = this.LINK;
         this.core.loadComponents(names);
         this.GotoTop();

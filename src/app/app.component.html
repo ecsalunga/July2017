@@ -43,6 +43,10 @@
       <md-icon>home</md-icon>
       <span>Home</span>
     </button>
+    <button md-menu-item (click)="LoadPage('message-list')">
+      <md-icon>message</md-icon>
+      <span>Message</span>
+    </button>
     <ng-container *ngIf="DL.ShowcaseUserHasOrder">
       <button md-menu-item (click)="LoadPage('showcase-cart')">
         <md-icon>shopping_cart</md-icon>

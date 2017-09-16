@@ -1,0 +1,18 @@
+<div>
+  <div>
+    <md-select [disabled]="model.key != null" placeholder="With User" [(ngModel)]="user">
+      <md-option *ngFor="let user of this.DL.UserAll" [value]="user">
+        {{ user.Name }}
+      </md-option>
+    </md-select>
+  </div>
+  <div class="vSmallSpacer"></div>
+  <div>
+    <md-checkbox [(ngModel)]="model.WillPopup">Will popup</md-checkbox>
+  </div>
+  <div class="hSpacer"></div>
+  <div class="rightRow">
+    <button md-fab (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+    <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+  </div>
+</div>
