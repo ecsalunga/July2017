@@ -12,15 +12,19 @@ export class ShowcaseWidgetComponent implements OnInit {
   constructor(public DL: DataLayer, private DA: DataAccess) { }
 
   CanAdd(item: ShowcaseInfo): boolean {
+    if(item.MaxCart == 0)
+      return false;
+
     let isAllowed = true;
     let openCart = 0;
     let hasOpen = false;
+
     this.DL.ShowcaseUserOrders.forEach(order => {
       if(order.Status == this.DL.STATUS_SELECTING) {
         hasOpen = true;
         order.Items.forEach(cItem => {
           if(item.Product.Code == cItem.Code) {
-            isAllowed = cItem.Quantity < item.MaxCart;
+            isAllowed = (item.MaxCart == null || cItem.Quantity < item.MaxCart);
           }
         });
       }
