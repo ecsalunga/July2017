@@ -47,6 +47,8 @@ export class DataLayer {
     STATUS_REQUESTED: string = "Requested";
     STATUS_DONE: string = "Done";
 
+    COMMAND_LOGOUT: string = "logout";
+
     Product: ProductInfo;
     Products: Array<ProductInfo>;
     ProductDiscount: ProductInfo;
@@ -121,6 +123,7 @@ export class DataLayer {
     Date: Date = new Date();
     AccessTypes: Array<NameValue>;
     IsAuthenticating: boolean = false;
+    IsSystemDataActiveLoaded: boolean = false;
     IsDataActiveLoaded: boolean = false;
 
     DefaultImageURL: string;

@@ -151,18 +151,18 @@
         <span>System</span>
       </button>
     </ng-container>
-    <ng-container *ngIf="DL.User.UID;else showSignOut">
+    <ng-container *ngIf="DL.User.UID && DL.UserAccess.CanLogout">
       <button md-menu-item (click)="DA.LogOut()">
         <md-icon>exit_to_app</md-icon>
         <span>Log Out</span>
       </button>
     </ng-container>
-    <ng-template #showSignOut>
+    <ng-container *ngIf="!DL.User.UID">
       <button md-menu-item (click)="LoadPage('user-login')">
         <md-icon>lock_open</md-icon>
         <span>Log In</span>
       </button>
-    </ng-template>
+    </ng-container>
     <div class="vMediumSpacer"></div>
   </div>
 </div>

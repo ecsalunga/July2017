@@ -3,6 +3,7 @@ export class AccessInfo {
     Name: string;
     Description: string;
     ModuleStart: string;
+    CanLogout: string;
     
     AccessView: boolean;
     AccessAdd: boolean;
@@ -59,6 +60,7 @@ export class AccessInfo {
 
     UserView: boolean;
     UserEdit: boolean;
+    UserCommandLogout: boolean;
     UserProfileEdit: boolean;
     UserAccessEdit: boolean;
     UserGroupEdit: boolean;

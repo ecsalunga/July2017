@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { UserInfo } from '../../data/models';
+import { UserInfo, CommandInfo } from '../../data/models';
 
 @Component({
   selector: 'user-detail',
@@ -34,6 +34,15 @@ export class UserDetailComponent implements OnInit {
   ResetPicture() {
     if(this.model.ImageURL)
       this.model.SystemImageURL = this.model.ImageURL;
+  }
+
+  Logout() {
+    let info = new CommandInfo();
+    info.ComandType = this.DL.COMMAND_LOGOUT;
+    info.UserKey = this.model.key;
+
+    this.DA.CommandSave(info);
+    this.DL.Display("Command", "Issued!");
   }
 
   ImageLoaded() {

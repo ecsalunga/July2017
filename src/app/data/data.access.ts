@@ -33,7 +33,8 @@ import {
     SystemSettingInfo,
     SnapshotInfo,
     OrderInfo,
-    ServiceInfo
+    ServiceInfo,
+    CommandInfo
 } from './models';
 
 @Injectable()
@@ -55,6 +56,7 @@ export class DataAccess {
 
     USERS: string = "/users";
     SETTING: string = "/setting";
+    COMMAND: string = "/commands";
     StorageRef: firebase.storage.Reference = firebase.storage().ref();
 
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase, private afAuth: AngularFireAuth) {
@@ -117,17 +119,46 @@ export class DataAccess {
         this.expenseDAL.LoadTypes();
         this.reportDAL.Load();
         this.cancelDAL.Load();
-        this.ActiveDataLoad();
+        this.SystemActiveDataLoad();
     }
 
-    ActiveDataLoad() {
-        if (!this.DL.IsDataActiveLoaded) {
+    public CommandLoad() {
+        this.af.list(this.COMMAND).subscribe(snapshots => {
+            snapshots.forEach(snapshot => {
+                let info: CommandInfo = snapshot;
+                info.key = snapshot.$key;
+
+                if(this.DL.User.key == info.UserKey)
+                    this.CommandExecute(info);
+            });
+        });
+    }
+
+    public CommandExecute(item: CommandInfo) {
+        if(item.ComandType == this.DL.COMMAND_LOGOUT) {
+            this.DL.Display("Logout Command", "Executed!");
+            this.LogOut();
+        }
+
+        this.CommandDelete(item);
+    }
+
+    public CommandSave(item: CommandInfo) {
+        this.af.list(this.COMMAND).push(item);
+    }
+
+    public CommandDelete(item: CommandInfo) {
+        this.af.list(this.COMMAND).remove(item.key);
+    }
+
+    SystemActiveDataLoad() {
+        if (!this.DL.IsSystemDataActiveLoaded) {
             this.productDAL.Load();
             this.transactionDAL.Load();
             this.transactionDAL.LoadSell();
             this.transactionDAL.LoadDelivery();
             this.expenseDAL.Load();
-            this.DL.IsDataActiveLoaded = true;
+            this.DL.IsSystemDataActiveLoaded = true;
         }
     }
 
@@ -190,8 +221,11 @@ export class DataAccess {
             if (toSave)
                 this.UserSave(this.DL.User);
 
-            if (this.DL.User.IsMember || this.DL.User.IsSystemUser)
+            if ((this.DL.User.IsMember || this.DL.User.IsSystemUser) && !this.DL.IsDataActiveLoaded) {
                 this.showcaseDAL.LoadOrder();
+                this.CommandLoad();
+                this.DL.IsDataActiveLoaded = true
+            }
 
             if (this.DL.User.IsSystemUser) {
                 this.DataSystemLoad();

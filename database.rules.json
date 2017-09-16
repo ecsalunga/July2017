@@ -22,6 +22,11 @@
         ".indexOn": "ActionDate"
       }
     },
+    "commands": {
+      ".read": "true",
+      ".write": "true",
+      ".indexOn": "UserKey"
+    },
     "users": {
       ".read": "true",
       ".write": "true",

@@ -1,4 +1,4 @@
-import { ProductInfo, SellInfo, NameValue } from './index';
+import { ProductInfo, SellInfo, NameValue } from './';
 
 export class ScheduleInfo {
     From: number;

@@ -7,3 +7,10 @@ export class NameValue {
         this.Value = value;
     }
 }
+
+export class CommandInfo {
+    key: string;
+    UserKey: string;
+    ComandType: string;
+    Data: any;
+}

@@ -1,4 +1,4 @@
-import { NameValue } from './NameValue';
+import { NameValue } from './';
 
 export class SellInfo {
     key: string;

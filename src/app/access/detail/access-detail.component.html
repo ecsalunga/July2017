@@ -16,6 +16,11 @@
       </md-option>
     </md-select>
   </div>
+  <div class="vSmallSpacer"></div>
+  <div>
+    <md-checkbox [(ngModel)]="model.CanLogout">Can Log-Out</md-checkbox>
+  </div>
+  <div class="vSmallSpacer"></div>
   <table>
     <tr>
       <td colspan="3" class="accessLabel">Access</td>
@@ -399,7 +404,11 @@
                 Edit Group
               </md-slide-toggle>
             </td>
-            <td></td>
+            <td>
+              <md-slide-toggle [(ngModel)]="model.UserCommandLogout">
+                Issue Logout
+              </md-slide-toggle>
+            </td>
           </tr>
         </table>
       </td>
