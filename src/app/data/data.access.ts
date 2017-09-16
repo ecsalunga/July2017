@@ -78,7 +78,6 @@ export class DataAccess {
 
     public LogOut() {
         this.DL.Reset();
-        this.DL.LoadFromMenu("dashboard-home");
         this.afAuth.auth.signOut();
     }
 
@@ -168,6 +167,7 @@ export class DataAccess {
 
             if (!user) {
                 this.DL.User.Name = "GUEST";
+                this.DL.LoadFromMenu("dashboard-home");
                 return;
             }
 

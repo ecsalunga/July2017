@@ -57,7 +57,6 @@ export class AppComponent implements OnInit {
     this.core.viewChild = this.viewChild;
     this.core.imageSelector = this.imageSelector;
     this.DA.DataLoad();
-    this.DL.LoadFromMenu("dashboard-home");
     this.DA.DataLoaded.subscribe(data => {
       this.loader =  this.hide;
     });
