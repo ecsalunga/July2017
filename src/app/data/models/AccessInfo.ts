@@ -29,6 +29,7 @@ export class AccessInfo {
     ReportBalanceView: boolean;
     ReportBalanceStartEdit: boolean;
     ReportBalanceActualEdit: boolean;
+    ReportRegenerate: boolean;
     ReportBalanceSummaryView: boolean;
 
     SellView: boolean;

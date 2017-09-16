@@ -25,6 +25,12 @@ export class ReportDetailComponent implements OnInit {
     this.DL.LoadFromLink("report-list");
   }
 
+  Regenerate() {
+    this.DA.ReportReGenerate(this.model.KeyYear, this.model.KeyMonth, this.model.KeyDay);
+    this.LoadList();
+    this.DL.Display("Cashflow Regeneration", "Issued!");
+  }
+
   GetComputed() : number {
     let start = 0;
     if(this.model.COHStart)

@@ -20,8 +20,15 @@
     </md-form-field>
   </div>
   <div class="hSpacer"></div>
-  <div class="rightRow">
-    <button md-fab (click)="Save()" [disabled]="!DL.UserAccess.ReportBalanceStartEdit && !DL.UserAccess.ReportBalanceActualEdit" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
-    <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
-  </div>
+  <table>
+    <tr class="rightRow">
+      <td>
+        <button md-fab (click)="Regenerate()" [disabled]="!DL.UserAccess.ReportRegenerate" mdTooltip="Regenerate" mdTooltipPosition="above"><md-icon>autorenew</md-icon></button>
+      </td>
+      <td>
+        <button md-fab (click)="Save()" [disabled]="!DL.UserAccess.ReportBalanceStartEdit && !DL.UserAccess.ReportBalanceActualEdit" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+        <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+      </td>
+    </tr>
+  </table>
 </div>

@@ -20,19 +20,21 @@ export class ReportDAL {
             this.DL.ReportSelected = new ReportInfo();
 
             snapshots.forEach(snapshot => {
-                // get today report
-                if(snapshot.KeyDay == this.DL.ReportToday.KeyDay) {
-                    this.DL.ReportToday = snapshot;
-                    this.DL.ReportToday.key = snapshot.$key;
-                }
+                let info: ReportInfo = snapshot;
+                info.key = snapshot.$key;
 
-                this.DL.Reports.push(snapshot);
-                this.DL.ReportSelected.SaleCount += snapshot.SaleCount;
-                this.DL.ReportSelected.SaleAmount += snapshot.SaleAmount;
-                this.DL.ReportSelected.ExpenseCount += snapshot.ExpenseCount;
-                this.DL.ReportSelected.ExpenseAmount += snapshot.ExpenseAmount;
+                // get today report
+                if(info.KeyDay == this.DL.ReportToday.KeyDay)
+                    this.DL.ReportToday = info;
+
+                this.DL.Reports.push(info);
+                this.DL.ReportSelected.SaleCount += info.SaleCount;
+                this.DL.ReportSelected.SaleAmount += info.SaleAmount;
+                this.DL.ReportSelected.ExpenseCount += info.ExpenseCount;
+                this.DL.ReportSelected.ExpenseAmount += info.ExpenseAmount;
             });
 
+            this.DL.Reports.sort((item1, item2) => item1.KeyDay - item2.KeyDay);
             this.DL.Reports.reverse();
         });
     }
@@ -64,10 +66,10 @@ export class ReportDAL {
         this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYMONTH, equalTo: report.KeyMonth } }).first().subscribe(snapshots => {
             snapshots.forEach(snapshot => {
                 if(snapshot.KeyDay == report.KeyDay) {
-                    report.key = snapshot.$key;
                     report.COHStart = snapshot.COHStart;
                     report.COHActual = snapshot.COHActual;
-                } 
+                    this.af.list(this.PATH).remove(snapshot.$key);
+                }
             });
 
             // get transactions
@@ -85,13 +87,7 @@ export class ReportDAL {
                     });
 
                     // save
-                    if (report.key) {
-                        if(report.SaleAmount == 0 && report.ExpenseAmount == 0)
-                            this.af.list(this.PATH).remove(report.key);
-                        else
-                            this.af.list(this.PATH).update(report.key, report);
-                    }
-                    else
+                    if(report.SaleAmount != 0 || report.ExpenseAmount != 0)
                         this.af.list(this.PATH).push(report);
 
                     // load affected
