@@ -221,12 +221,6 @@ export class DataAccess {
             if (toSave)
                 this.UserSave(this.DL.User);
 
-            if ((this.DL.User.IsMember || this.DL.User.IsSystemUser) && !this.DL.IsDataActiveLoaded) {
-                this.showcaseDAL.LoadOrder();
-                this.CommandLoad();
-                this.DL.IsDataActiveLoaded = true
-            }
-
             if (this.DL.User.IsSystemUser) {
                 this.DataSystemLoad();
                 this.DL.SetPermission();
@@ -234,6 +228,12 @@ export class DataAccess {
             }
             else
                 this.DL.LoadFromMenu("dashboard-home");
+
+            if ((this.DL.User.IsMember || this.DL.User.IsSystemUser) && !this.DL.IsDataActiveLoaded) {
+                this.showcaseDAL.LoadOrder();
+                this.CommandLoad();
+                this.DL.IsDataActiveLoaded = true
+            }
         });
     }
 
