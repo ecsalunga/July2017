@@ -52,6 +52,7 @@ export class DataLayer {
     STATUS_DONE: string = "Done";
 
     COMMAND_LOGOUT: string = "logout";
+    COMMAND_POPCHAT: string = "popchat";
 
     Product: ProductInfo;
     Products: Array<ProductInfo>;

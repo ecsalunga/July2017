@@ -4,7 +4,6 @@ export class ConversationInfo {
     FromName: string;
     ToKey: string;
     ToName: string;
-    WillPopup: string;
     ActionDate: number;
 }
 

@@ -1,23 +1,19 @@
 <div>
   <div>
-    <md-select [disabled]="model.key != null" placeholder="With User" [(ngModel)]="user">
+    <md-select class="longText" [disabled]="model.key != null" placeholder="With" [(ngModel)]="user">
       <md-option *ngFor="let user of this.DL.UserAll" [value]="user">
         {{ user.Name }}
       </md-option>
     </md-select>
   </div>
-  <div class="vSmallSpacer"></div>
-  <div>
-    <md-checkbox [(ngModel)]="model.WillPopup">Will popup</md-checkbox>
-  </div>
   <div class="hSpacer"></div>
   <table>
     <tr class="rightRow">
       <td>
-        <button md-fab *ngIf="model.key != null" color="warn" (click)="Delete()" [disabled]="!DL.UserAccess.ReportRegenerate" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
+        <button md-fab *ngIf="model.key != null" color="warn" (click)="Delete()" [disabled]="!DL.UserAccess.MessageManage" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
       </td>
       <td>
-        <button md-fab (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+        <button md-fab *ngIf="model.key == null" (click)="Save()" [disabled]="!DL.UserAccess.MessageManage || !user" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
         <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
       </td>
     </tr>

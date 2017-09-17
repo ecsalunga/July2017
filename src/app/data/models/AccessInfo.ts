@@ -78,4 +78,8 @@ export class AccessInfo {
     SnapshotView: boolean;
     SnapshotAdd: boolean;
     SnapshotReview: boolean;
+
+    MessageView: boolean;
+    MessageManage: boolean;
+    MessagePop: boolean;
 }

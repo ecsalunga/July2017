@@ -17,6 +17,9 @@ import { SnapshotDAL } from './dal/SnapshotDAL';
 import { ServiceDAL } from './dal/ServiceDAL';
 import { MessageDAL } from './dal/MessageDAL';
 
+import { MdDialog } from '@angular/material';
+import { MessagePopupComponent } from '../message/popup/message-popup.component';
+
 import 'rxjs/add/operator/first';
 import {
     ProductInfo,
@@ -63,7 +66,7 @@ export class DataAccess {
     COMMAND: string = "/commands";
     StorageRef: firebase.storage.Reference = firebase.storage().ref();
 
-    constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase, private afAuth: AngularFireAuth) {
+    constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase, private afAuth: AngularFireAuth, private dialog: MdDialog) {
         this.expenseDAL = new ExpenseDAL(core, DL, af);
         this.showcaseDAL = new ShowcaseDAL(core, DL, af);
         this.reportDAL = new ReportDAL(core, DL, this, af);
@@ -140,11 +143,26 @@ export class DataAccess {
 
     public CommandExecute(item: CommandInfo) {
         if(item.ComandType == this.DL.COMMAND_LOGOUT) {
-            this.DL.Display("Logout Command", "Executed!");
+            this.DL.DisplayLong("Logout Command", "Executed!");
             this.LogOut();
+        } else if(item.ComandType == this.DL.COMMAND_POPCHAT) {
+            this.PopChat(item.Data);
         }
 
         this.CommandDelete(item);
+    }
+
+    public PopChat(conversationKey: string) {
+        this.DL.Conversations.forEach(item => {
+            if(item.key == conversationKey){
+                this.DL.Conversation = item;
+
+                let dialogRef = this.dialog.open(MessagePopupComponent, {
+                    width: '400px',
+                    data: { DA: this, DL: this.DL }
+                });
+            }
+        });
     }
 
     public CommandSave(item: CommandInfo) {

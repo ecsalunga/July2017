@@ -1,0 +1,32 @@
+.chat {
+    width: 100%;
+}
+
+.convo {
+    height: 200px;
+    overflow-x: auto;
+    border: 1px solid #eeeeee;
+    padding: 3px;
+}
+
+.fromYou {
+    color: #009688;
+    text-align: right;
+}
+
+.fromConvo {
+    color: #000000;
+    text-align: left;
+}
+
+.vTinySpacer {
+    height: 2px;
+}
+
+md-form-field {
+    font-size: 16px;
+}
+
+.fullWidth {
+    width: 100%;
+}

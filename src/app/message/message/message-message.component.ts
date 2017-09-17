@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { ConversationInfo, MessageInfo } from '../../data/models';
+import { ConversationInfo, MessageInfo, CommandInfo } from '../../data/models';
 
 @Component({
   selector: 'message-message',
@@ -16,7 +16,18 @@ export class MessageMessageComponent implements OnInit {
   message: string;
 
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) { 
-    this.DA.MessageGet(this.DL.Conversation);
+    if(this.DL.Conversation)
+      this.DA.MessageGet(this.DL.Conversation);
+  }
+
+  Popup() {
+    if(this.DL.Conversation) {
+      let info = new CommandInfo();
+      info.ComandType = this.DL.COMMAND_POPCHAT;
+      info.UserKey = (this.DL.User.key != this.DL.Conversation.FromKey ? this.DL.Conversation.FromKey : this.DL.Conversation.ToKey);
+      info.Data = this.DL.Conversation.key;
+      this.DA.CommandSave(info);
+    }
   }
 
   Load(item: ConversationInfo) {
@@ -44,7 +55,7 @@ export class MessageMessageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Massage Details";
+    this.DL.TITLE = "Conversations";
 
     this.DA.messageDAL.MessageReceived.subscribe(msg => {
       this.ScrollBottom();

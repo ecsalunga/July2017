@@ -19,8 +19,7 @@ button:disabled {
 }
 
 .chat {
-    margin-left: 2%;
-    width: 64%;
+    width: 65%;
     float: right;
 }
 
@@ -39,10 +38,6 @@ button:disabled {
 .fromConvo {
     color: #000000;
     text-align: left;
-}
-
-.vTinySpacer {
-    height: 2px;
 }
 
 md-form-field {

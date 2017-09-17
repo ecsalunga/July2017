@@ -2,7 +2,7 @@
   <div class="message">
     <div class="conversations">
       <ng-container *ngFor="let item of DL.Conversations">
-        <button md-menu-item (click)="Load(item)" [disabled]="item.key == DL.Conversation.key">
+        <button md-menu-item (click)="Load(item)" [disabled]="DL.Conversation && item.key == DL.Conversation.key">
           {{ GetConvoWith(item) }}
         </button>
       </ng-container>
@@ -14,13 +14,20 @@
             {{ item.Message }}
           </div>
         </ng-container>
-        <div class="vTinySpacer"></div>
+        <div class="vSmallSpacer"></div>
       </div>
-      <div>
-        <md-form-field class="fullWidth">
-          <input id="txtMessage" (keyup.enter)="Send()" mdInput placeholder="Message" [(ngModel)]="message" />
-        </md-form-field>
-      </div>
+      <table>
+          <tr class="rightRow">
+            <td>
+              <md-form-field class="fullWidth">
+                <input id="txtMessage" (keyup.enter)="Send()" mdInput placeholder="Message" [(ngModel)]="message" />
+              </md-form-field>
+            </td>
+            <td>
+              <button md-mini-fab color="primary" *ngIf="DL.UserAccess.MessagePop && DL.Conversation" (click)="Popup()" mdTooltip="Popup" mdTooltipPosition="above"><md-icon>add_alert</md-icon></button>
+            </td>
+          </tr>
+        </table>
     </div>
   </div>
 </div>

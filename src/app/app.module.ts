@@ -5,27 +5,17 @@ import 'firebase/storage';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
-  MdInputModule, 
-  MdButtonModule,
-  MdCheckboxModule,
-  MdCardModule,
-  MdSelectModule,
-  MdDatepickerModule,
-  MdNativeDateModule,
-  MdAutocompleteModule,
-  MdMenuModule,
-  MdIconModule,
-  MdSnackBarModule,
-  MdSlideToggleModule,
-  MdTooltipModule,
-  MdTabsModule,
+  MdInputModule, MdButtonModule, MdCheckboxModule,
+  MdCardModule, MdSelectModule, MdDatepickerModule,
+  MdNativeDateModule, MdAutocompleteModule, MdMenuModule,
+  MdIconModule, MdSnackBarModule, MdDialogModule,
+  MdSlideToggleModule, MdTooltipModule, MdTabsModule,
   DateAdapter
  } from '@angular/material';
 
 import { AngularFireModule } from 'angularfire2'
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-
 import { environment } from '../environments/environment';
 
 import { Core } from './core';
@@ -71,48 +61,24 @@ import { ServiceDetailComponent } from './service/detail/service-detail.componen
 import { MessageListComponent } from './message/list/message-list.component';
 import { MessageDetailComponent } from './message/detail/message-detail.component';
 import { MessageMessageComponent } from './message/message/message-message.component';
+import { MessagePopupComponent } from './message/popup/message-popup.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ProductListComponent,
-    ProductDetailComponent,
-    MemberListComponent,
-    MemberDetailComponent,
-    TransactionListComponent,
-    TransactionDetailComponent,
-    ShowcaseListComponent,
-    ShowcaseDetailComponent,
-    ShowcaseWidgetComponent,
-    ShowcaseScheduleComponent,
-    UserListComponent,
-    AccessListComponent,
-    AccessDetailComponent,
-    TransactionCancelComponent,
-    ReportListComponent,
-    ReportExpenseComponent,
-    ProductSellComponent,
-    DashboardHomeComponent,
-    ReportBalancingComponent,
-    ReportDetailComponent,
-    UserDetailComponent,
-    DeliveryListComponent,
-    DeliveryDetailComponent,
-    SettingModuleComponent,
-    SnapshotListComponent,
-    SnapshotDetailComponent,
-    UserSignupComponent,
-    UserLoginComponent,
-    UserUpdateComponent,
-    SettingSystemComponent,
-    ProductOrderComponent,
-    ShowcaseCartComponent,
-    ProductOrderDetailComponent,
-    ServiceListComponent,
-    ServiceDetailComponent,
-    MessageListComponent,
-    MessageDetailComponent,
-    MessageMessageComponent
+    AppComponent, ProductListComponent, ProductDetailComponent,
+    MemberListComponent, MemberDetailComponent, TransactionListComponent,
+    TransactionDetailComponent, ShowcaseListComponent, ShowcaseDetailComponent,
+    ShowcaseWidgetComponent, ShowcaseScheduleComponent, UserListComponent,
+    AccessListComponent, AccessDetailComponent, TransactionCancelComponent,
+    ReportListComponent, ReportExpenseComponent, ProductSellComponent,
+    DashboardHomeComponent, ReportBalancingComponent, ReportDetailComponent,
+    UserDetailComponent, DeliveryListComponent, DeliveryDetailComponent,
+    SettingModuleComponent, SnapshotListComponent, SnapshotDetailComponent,
+    UserSignupComponent, UserLoginComponent, UserUpdateComponent,
+    SettingSystemComponent, ProductOrderComponent, ShowcaseCartComponent,
+    ProductOrderDetailComponent, ServiceListComponent, ServiceDetailComponent,
+    MessageListComponent, MessageDetailComponent, MessageMessageComponent,
+    MessagePopupComponent
   ],
   imports: [
     BrowserModule,
@@ -131,6 +97,7 @@ import { MessageMessageComponent } from './message/message/message-message.compo
     MdSnackBarModule,
     MdTooltipModule,
     FormsModule,
+    MdDialogModule,
     MdTabsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -140,44 +107,19 @@ import { MessageMessageComponent } from './message/message/message-message.compo
   providers: [Core, DataAccess, DataLayer],
   bootstrap: [AppComponent],
   entryComponents: [ 
-    ProductListComponent,
-    ProductDetailComponent,
-    MemberListComponent,
-    MemberDetailComponent,
-    TransactionListComponent,
-    TransactionDetailComponent,
-    ShowcaseListComponent,
-    ShowcaseDetailComponent,
-    ShowcaseWidgetComponent,
-    ShowcaseScheduleComponent,
-    UserListComponent,
-    AccessListComponent,
-    AccessDetailComponent,
-    TransactionCancelComponent,
-    ReportListComponent,
-    ReportExpenseComponent,
-    ProductSellComponent,
-    DashboardHomeComponent,
-    ReportBalancingComponent,
-    ReportDetailComponent,
-    UserDetailComponent,
-    DeliveryListComponent,
-    DeliveryDetailComponent,
-    SettingModuleComponent,
-    SnapshotListComponent,
-    SnapshotDetailComponent,
-    UserSignupComponent,
-    UserLoginComponent,
-    UserUpdateComponent,
-    SettingSystemComponent,
-    ProductOrderComponent,
-    ShowcaseCartComponent,
-    ProductOrderDetailComponent,
-    ServiceListComponent,
-    ServiceDetailComponent,
-    MessageListComponent,
-    MessageDetailComponent,
-    MessageMessageComponent
+    ProductListComponent, ProductDetailComponent, MemberListComponent,
+    MemberDetailComponent, TransactionListComponent, TransactionDetailComponent,
+    ShowcaseListComponent, ShowcaseDetailComponent, ShowcaseWidgetComponent,
+    ShowcaseScheduleComponent, UserListComponent, AccessListComponent,
+    AccessDetailComponent, TransactionCancelComponent, ReportListComponent,
+    ReportExpenseComponent, ProductSellComponent, DashboardHomeComponent,
+    ReportBalancingComponent, ReportDetailComponent, UserDetailComponent,
+    DeliveryListComponent, DeliveryDetailComponent, SettingModuleComponent,
+    SnapshotListComponent, SnapshotDetailComponent, UserSignupComponent,
+    UserLoginComponent, UserUpdateComponent, SettingSystemComponent,
+    ProductOrderComponent, ShowcaseCartComponent, ProductOrderDetailComponent,
+    ServiceListComponent, ServiceDetailComponent, MessageListComponent,
+    MessageDetailComponent, MessageMessageComponent, MessagePopupComponent
   ]
 })
 export class AppModule {

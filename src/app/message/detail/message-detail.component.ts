@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { ConversationInfo, UserInfo } from '../../data/models';
+import { ConversationInfo, UserInfo, CommandInfo, MessageInfo } from '../../data/models';
 
 @Component({
   selector: 'message-detail',
