@@ -158,7 +158,7 @@ export class DataAccess {
                 this.DL.Conversation = item;
 
                 let dialogRef = this.dialog.open(MessagePopupComponent, {
-                    width: '400px',
+                    width: '350px',
                     data: { DA: this, DL: this.DL }
                 });
             }

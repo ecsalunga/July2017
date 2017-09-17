@@ -30,6 +30,11 @@ export class MessagePopupComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  GotoMessage() {
+    this.Close();
+    this.DL.LoadFromLink("message-message");
+  }
+
   Send() {
     this.DA.MessageSend(this.message);
     this.message = "";
