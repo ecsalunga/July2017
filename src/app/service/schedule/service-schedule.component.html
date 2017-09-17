@@ -1,0 +1,72 @@
+<div>
+    <div>
+      <md-form-field class="longText">
+        <input id="txtName" mdInput readonly placeholder="Name" [(ngModel)]="model.Name" />
+      </md-form-field>
+    </div>
+    <div>
+      <div class="item">
+        <div class="itemHeader">
+          <div class="itemName">Display Schedule</div>
+        </div>
+        <div class="subContent">
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  From
+                </th>
+                <th class="totalColumn">
+                  To
+                </th>
+                <th class="rightRow">
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <ng-container *ngFor="let info of model.Schedules">
+              <tr>
+                <td>
+                  {{ GetDate(info.From) | date : 'yyyy-MM-dd' }}
+                </td>
+                <td class="totalColumn">
+                  {{ GetDate(info.To) | date : 'yyyy-MM-dd' }}
+                </td>
+                <td class="rightRow">
+                  <button md-mini-fab color="warn" [disabled]="!DL.UserAccess.ShowcaseScheduleDelete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
+                </td>
+              </tr>
+            </ng-container>
+          </table>
+          <div class="vSmallSpacer"></div>
+        </div>
+      </div>
+    </div>
+    <div class="hSpacer"></div>
+    <table>
+      <tr class="rightRow">
+        <td class="selectionRow" style="width: 50%">
+          <md-form-field class="date">
+            <input mdInput [disabled]="!DL.UserAccess.ShowcaseScheduleAdd" [mdDatepicker]="from" placeholder="From Date" [(ngModel)]="FromDate">
+            <md-datepicker-toggle mdSuffix [for]="from"></md-datepicker-toggle>
+            <md-datepicker #from></md-datepicker>
+          </md-form-field>
+          <md-form-field class="date">
+            <input mdInput [disabled]="!DL.UserAccess.ShowcaseScheduleAdd" [mdDatepicker]="to" placeholder="To Date" [(ngModel)]="ToDate">
+            <md-datepicker-toggle mdSuffix [for]="to"></md-datepicker-toggle>
+            <md-datepicker #to></md-datepicker>
+          </md-form-field>
+        </td>
+        <td></td>
+      </tr>
+      <tr class="rightRow">
+        <td>
+          <button md-fab [disabled]="!DL.UserAccess.ShowcaseScheduleAdd || !FromDate || !ToDate || !CanAdd()" (click)="AddSchedule()" mdTooltip="Add schedule" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+        </td>
+        <td>
+          <button md-fab [disabled]="!DL.UserAccess.ShowcaseScheduleAdd  && !DL.UserAccess.ShowcaseScheduleDelete" (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+          <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+        </td>
+      </tr>
+    </table>
+  </div>

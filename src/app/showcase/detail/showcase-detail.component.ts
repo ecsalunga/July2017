@@ -10,7 +10,7 @@ import { ShowcaseInfo, ProductInfo } from '../../data/models';
 })
 export class ShowcaseDetailComponent implements OnInit {
   model: ShowcaseInfo;
-  isLoaded: boolean = true;
+  isLoaded: boolean = true; 
 
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     if (this.DL.Showcase) {

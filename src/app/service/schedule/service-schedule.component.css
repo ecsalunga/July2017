@@ -1,0 +1,19 @@
+textarea {
+    height: 70px;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+md-form-field {
+    font-size: 16px;
+}
+
+.date {
+    width: 120px;
+}
+
+.subContent {
+    margin: 20px;
+}

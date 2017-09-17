@@ -17,6 +17,14 @@
               <input id="txtCurrencySymbol" mdInput placeholder="Currency Symbol" [(ngModel)]="model.CurrencySymbol" />
             </md-form-field>
           </div>
+          <div>
+            <md-select placeholder="Default Page" [(ngModel)]="model.DefaultPage">
+              <md-option *ngFor="let module of DL.PublicModules" [value]="module.Value">
+                {{ module.Name }}
+              </md-option>
+            </md-select>
+          </div>
+          <div class="vSmallSpacer"></div>
           <div class="configLabel">
             Showcase
           </div>

@@ -40,7 +40,6 @@ import { TransactionCancelComponent } from './transaction/cancel/transaction-can
 import { ReportListComponent } from './report/list/report-list.component';
 import { ReportExpenseComponent } from './report/expense/report-expense.component';
 import { ProductSellComponent } from './product/sell/product-sell.component';
-import { DashboardHomeComponent } from './dashboard/home/dashboard-home.component';
 import { ReportBalancingComponent } from './report/balancing/report-balancing.component';
 import { ReportDetailComponent } from './report/detail/report-detail.component';
 import { UserDetailComponent } from './user/detail/user-detail.component';
@@ -62,6 +61,11 @@ import { MessageListComponent } from './message/list/message-list.component';
 import { MessageDetailComponent } from './message/detail/message-detail.component';
 import { MessageMessageComponent } from './message/message/message-message.component';
 import { MessagePopupComponent } from './message/popup/message-popup.component';
+import { WebsiteHomeComponent } from './website/home/website-home.component';
+import { WebsiteCatalogComponent } from './website/catalog/website-catalog.component';
+import { ServiceScheduleComponent } from './service/schedule/service-schedule.component';
+import { ServiceWidgetComponent } from './service/widget/service-widget.component';
+import { WebsiteReservationComponent } from './website/reservation/website-reservation.component';
 
 @NgModule({
   declarations: [
@@ -71,14 +75,15 @@ import { MessagePopupComponent } from './message/popup/message-popup.component';
     ShowcaseWidgetComponent, ShowcaseScheduleComponent, UserListComponent,
     AccessListComponent, AccessDetailComponent, TransactionCancelComponent,
     ReportListComponent, ReportExpenseComponent, ProductSellComponent,
-    DashboardHomeComponent, ReportBalancingComponent, ReportDetailComponent,
+    WebsiteHomeComponent, ReportBalancingComponent, ReportDetailComponent,
     UserDetailComponent, DeliveryListComponent, DeliveryDetailComponent,
     SettingModuleComponent, SnapshotListComponent, SnapshotDetailComponent,
     UserSignupComponent, UserLoginComponent, UserUpdateComponent,
     SettingSystemComponent, ProductOrderComponent, ShowcaseCartComponent,
     ProductOrderDetailComponent, ServiceListComponent, ServiceDetailComponent,
     MessageListComponent, MessageDetailComponent, MessageMessageComponent,
-    MessagePopupComponent
+    MessagePopupComponent, WebsiteCatalogComponent, ServiceScheduleComponent, 
+    ServiceWidgetComponent, WebsiteReservationComponent
   ],
   imports: [
     BrowserModule,
@@ -112,14 +117,16 @@ import { MessagePopupComponent } from './message/popup/message-popup.component';
     ShowcaseListComponent, ShowcaseDetailComponent, ShowcaseWidgetComponent,
     ShowcaseScheduleComponent, UserListComponent, AccessListComponent,
     AccessDetailComponent, TransactionCancelComponent, ReportListComponent,
-    ReportExpenseComponent, ProductSellComponent, DashboardHomeComponent,
+    ReportExpenseComponent, ProductSellComponent, WebsiteHomeComponent,
     ReportBalancingComponent, ReportDetailComponent, UserDetailComponent,
     DeliveryListComponent, DeliveryDetailComponent, SettingModuleComponent,
     SnapshotListComponent, SnapshotDetailComponent, UserSignupComponent,
     UserLoginComponent, UserUpdateComponent, SettingSystemComponent,
     ProductOrderComponent, ShowcaseCartComponent, ProductOrderDetailComponent,
     ServiceListComponent, ServiceDetailComponent, MessageListComponent,
-    MessageDetailComponent, MessageMessageComponent, MessagePopupComponent
+    MessageDetailComponent, MessageMessageComponent, MessagePopupComponent,
+    WebsiteCatalogComponent, ServiceScheduleComponent, ServiceWidgetComponent,
+    WebsiteReservationComponent
   ]
 })
 export class AppModule {

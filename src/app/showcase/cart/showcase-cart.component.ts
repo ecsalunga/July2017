@@ -36,6 +36,9 @@ export class ShowcaseCartComponent implements OnInit {
     this.DL.OrderUpdateStatus(item, this.DL.STATUS_DONE);
     this.DA.ShowcaseOrderSave(item);
     this.DL.DisplayPublic("Order", "Hidden!");
+    if(!this.DL.ShowcaseUserHasOrder) {
+      this.LoadList();
+    }
   }
 
   ViewStatus(item: OrderInfo) {
@@ -80,7 +83,7 @@ export class ShowcaseCartComponent implements OnInit {
   }
 
   LoadList() {
-    this.DL.LoadFromLink("dashboard-home");
+    this.DL.LoadFromLink("website-catalog");
   }
 
   ngOnInit() {

@@ -1,0 +1,30 @@
+<div class="container">
+  <ng-container *ngFor="let item of DL.ServiceToday">
+    <div class="half column">
+      <div class="item">
+        <div class="itemHeader">
+          <div class="itemName">{{ item.Name }}</div>
+        </div>
+        <div class="itemDescriptionRes">
+          {{ item.Description }}
+        </div>
+        <div class="imageContainerRes">
+          <img class="fullWidth" src="{{item.ImageURL}}" />
+        </div>
+        <div class="itemControl mainColor">
+          <div class="cartPrice">
+            Price: {{ DL.ModuleSetting.CurrencySymbol }} {{ item.Price | number:'1.2-2' }}
+          </div>
+          <div *ngIf="DL.User.IsMember" class="cartSelection">
+            <div>
+              <button md-raised-button (click)="Book(item)">
+                <md-icon>event</md-icon>
+                <span>Reserve</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

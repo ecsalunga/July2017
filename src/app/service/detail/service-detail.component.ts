@@ -11,6 +11,7 @@ import { ServiceInfo } from '../../data/models';
 })
 export class ServiceDetailComponent implements OnInit {
   model: ServiceInfo;
+  isLoaded: boolean = true;
   hasDuplicate: boolean;
 
   codeValidator = new FormControl('', [Validators.required]);
@@ -21,7 +22,7 @@ export class ServiceDetailComponent implements OnInit {
     if (this.DL.Service)
       this.model = Object.assign({}, this.DL.Service);
     else
-      this.model = new ServiceInfo();
+      this.model = new ServiceInfo(this.DL.DefaultImageURL);
   }
 
   CanSave(): boolean {
@@ -35,6 +36,14 @@ export class ServiceDetailComponent implements OnInit {
       return false;
 
     return true;
+  }
+
+  SelectFile() {
+    this.DL.SelectImage("images/service/");
+  }
+
+  ImageLoaded() {
+    this.isLoaded = true;
   }
 
   CodeChange() {
@@ -71,5 +80,13 @@ export class ServiceDetailComponent implements OnInit {
 
   ngOnInit() {
     this.DL.TITLE = "Service Details";
+
+    this.DA.ImageUploaded.subscribe(url => {
+      this.model.ImageURL = url;
+    });
+    this.DA.DataChecked.subscribe(isValid => {
+      if(isValid) 
+        this.isLoaded = false;
+    });
   }
 }

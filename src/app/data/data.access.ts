@@ -69,14 +69,15 @@ export class DataAccess {
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase, private afAuth: AngularFireAuth, private dialog: MdDialog) {
         this.expenseDAL = new ExpenseDAL(core, DL, af);
         this.showcaseDAL = new ShowcaseDAL(core, DL, af);
+        this.serviceDAL = new ServiceDAL(core, DL, af);
         this.reportDAL = new ReportDAL(core, DL, this, af);
         this.cancelDAL = new CancelDAL(core, DL, this, af);
         this.transactionDAL = new TransactionDAL(core, DL, this, af);
+        
         this.settingDAL = new SettingDAL(DL, af);
         this.accessDAL = new AccessDAL(DL, af);
         this.productDAL = new ProductDAL(DL, af);
         this.snapshotDAL = new SnapshotDAL(DL, af);
-        this.serviceDAL = new ServiceDAL(DL, af);
         this.messageDAL = new MessageDAL(DL, af);
     }
 
@@ -199,7 +200,7 @@ export class DataAccess {
 
             if (!user) {
                 this.DL.User.Name = "GUEST";
-                this.DL.LoadFromMenu("dashboard-home");
+                this.DL.LoadFromMenu(this.DL.ModuleSetting.DefaultPage);
                 return;
             }
 
@@ -263,7 +264,7 @@ export class DataAccess {
                 this.DL.LoadFromMenu(this.DL.UserAccess.ModuleStart);
             }
             else
-                this.DL.LoadFromMenu("dashboard-home");
+                this.DL.LoadFromMenu(this.DL.ModuleSetting.DefaultPage);
         });
     }
 

@@ -61,6 +61,7 @@ export class DataLayer {
 
     Service: ServiceInfo;
     Services: Array<ServiceInfo>;
+    ServiceToday: Array<ServiceInfo>;
 
     Transaction: TransactionInfo;
     TransactionsToday: Array<TransactionInfo>;
@@ -142,6 +143,7 @@ export class DataLayer {
     ModuleSetting: ModuleSettingInfo;
     SystemSetting: SystemSettingInfo;
     Modules: Array<NameValue>;
+    PublicModules: Array<NameValue>;
 
     constructor(private core: Core, private snackBar: MdSnackBar) {
         this.InitCollections();
@@ -154,12 +156,18 @@ export class DataLayer {
         }
 
         this.Modules = [
-            new NameValue("Home", "dashboard-home"),
+            new NameValue("Home", "website-home"),
+            new NameValue("Catalog", "website-catalog"),
             new NameValue("Sell", "product-sell"),
             new NameValue("Delivery", "delivery-list"),
             new NameValue("Order", "product-order"),
             new NameValue("Transaction", "transaction-list"),
             new NameValue("Balancing", "report-balancing")
+        ];
+
+        this.PublicModules = [
+            new NameValue("Home", "website-home"),
+            new NameValue("Catalog", "website-catalog")
         ];
 
         this.Months = [
@@ -250,6 +258,8 @@ export class DataLayer {
     public Reset() {
         this.User = new UserInfo(this.DefaultImageURL);
         this.UserAccess = new AccessInfo();
+        this.Messages = new Array<MessageInfo>();
+        this.Conversations = new Array<ConversationInfo>();
         this.ShowcaseUserHasOrder = false;
         this.ShowcaseUserHasOpenCart = false;
     }

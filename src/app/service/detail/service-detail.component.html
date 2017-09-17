@@ -29,6 +29,15 @@
         </md-error>
       </md-form-field>
     </div>
+    <div>
+      <md-form-field class="shortText">
+        <input id="txtOrder" type="number" mdInput placeholder="Display Order" [(ngModel)]="model.Order" />
+      </md-form-field>
+    </div>
+    <div class="imageContainer">
+      <img class="fullWidth" src="{{model.ImageURL}}" (load)="ImageLoaded()">
+      <div class="imageEdit" [hidden]="!isLoaded" (click)="SelectFile()">Update Picture</div>
+    </div>
     <div class="hSpacer"></div>
     <div class="rightRow">
       <button md-fab (click)="Save()" [disabled]="!CanSave()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>

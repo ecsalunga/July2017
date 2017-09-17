@@ -11,7 +11,13 @@
         <th>
           Price
         </th>
-        <th class="rightRow">
+        <th>
+          Visible
+        </th>
+        <th>
+          Order
+        </th>
+        <th class="rightRow" style="width: 30%;">
           Action
         </th>
       </tr>
@@ -27,7 +33,14 @@
         <td>
           {{item.Price | number:'1.2-2'}}
         </td>
+        <td class="{{ (Visibility(item) == 'Yes') ?  'good' : 'bad' }}">
+          {{ Visibility(item) }}
+        </td>
+        <td>
+          {{ item.Order }}
+        </td>
         <td class="rightRow">
+          <button md-mini-fab [disabled]="!DL.UserAccess.ShowcaseScheduleView" (click)="ScheduleItem(item)" mdTooltip="Schedule"><md-icon>schedule</md-icon></button>
           <button md-mini-fab (click)="SelectItem(item)" mdTooltip="View"><md-icon>pageview</md-icon></button>
         </td>
       </tr>

@@ -39,9 +39,17 @@
     <div class="vBigSpacer">
       <md-menu #menu="mdMenu"></md-menu>
     </div>
-    <button md-menu-item (click)="LoadPage('dashboard-home')">
+    <button md-menu-item (click)="LoadPage('website-home')">
       <md-icon>home</md-icon>
       <span>Home</span>
+    </button>
+    <button md-menu-item (click)="LoadPage('website-catalog')">
+      <md-icon>add_shopping_cart</md-icon>
+      <span>Catalog</span>
+    </button>
+    <button md-menu-item (click)="LoadPage('website-reservation')">
+      <md-icon>event</md-icon>
+      <span>Reservation</span>
     </button>
     <ng-container *ngIf="DL.UserAccess.MessageView">
       <button md-menu-item (click)="LoadPage(DL.UserAccess.MessageManage ? 'message-list' : 'message-message')">
@@ -148,7 +156,7 @@
     <ng-container *ngIf="DL.UserAccess.ModuleSettingView">
       <button md-menu-item (click)="LoadPage('setting-module')">
         <md-icon>settings</md-icon>
-        <span>Modules</span>
+        <span>Module</span>
       </button>
     </ng-container>
     <ng-container *ngIf="DL.UserAccess.SystemSettingView">
