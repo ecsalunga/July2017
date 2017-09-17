@@ -24,6 +24,9 @@ export class AccessInfo {
     ServiceView: boolean;
     ServiceAdd: boolean;
     ServiceEdit: boolean;
+    ServiceScheduleView: boolean;
+    ServiceScheduleAdd: boolean;
+    ServiceScheduleDelete: boolean; 
 
     ReportView: boolean;
     ReportSearch: boolean;

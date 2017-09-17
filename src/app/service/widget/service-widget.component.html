@@ -13,7 +13,7 @@
         </div>
         <div class="itemControl mainColor">
           <div class="cartPrice">
-            Price: {{ DL.ModuleSetting.CurrencySymbol }} {{ item.Price | number:'1.2-2' }}
+            Price: {{ DL.CURRENCY }} {{ item.Price | number:'1.2-2' }}
           </div>
           <div *ngIf="DL.User.IsMember" class="cartSelection">
             <div>

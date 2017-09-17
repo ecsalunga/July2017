@@ -33,7 +33,7 @@
                   {{ GetDate(info.To) | date : 'yyyy-MM-dd' }}
                 </td>
                 <td class="rightRow">
-                  <button md-mini-fab color="warn" [disabled]="!DL.UserAccess.ShowcaseScheduleDelete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
+                  <button md-mini-fab color="warn" [disabled]="!DL.UserAccess.ServiceScheduleDelete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
                 </td>
               </tr>
             </ng-container>
@@ -47,12 +47,12 @@
       <tr class="rightRow">
         <td class="selectionRow" style="width: 50%">
           <md-form-field class="date">
-            <input mdInput [disabled]="!DL.UserAccess.ShowcaseScheduleAdd" [mdDatepicker]="from" placeholder="From Date" [(ngModel)]="FromDate">
+            <input mdInput [disabled]="!DL.UserAccess.ServiceScheduleAdd" [mdDatepicker]="from" placeholder="From Date" [(ngModel)]="FromDate">
             <md-datepicker-toggle mdSuffix [for]="from"></md-datepicker-toggle>
             <md-datepicker #from></md-datepicker>
           </md-form-field>
           <md-form-field class="date">
-            <input mdInput [disabled]="!DL.UserAccess.ShowcaseScheduleAdd" [mdDatepicker]="to" placeholder="To Date" [(ngModel)]="ToDate">
+            <input mdInput [disabled]="!DL.UserAccess.ServiceScheduleAdd" [mdDatepicker]="to" placeholder="To Date" [(ngModel)]="ToDate">
             <md-datepicker-toggle mdSuffix [for]="to"></md-datepicker-toggle>
             <md-datepicker #to></md-datepicker>
           </md-form-field>
@@ -61,10 +61,10 @@
       </tr>
       <tr class="rightRow">
         <td>
-          <button md-fab [disabled]="!DL.UserAccess.ShowcaseScheduleAdd || !FromDate || !ToDate || !CanAdd()" (click)="AddSchedule()" mdTooltip="Add schedule" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+          <button md-fab [disabled]="!DL.UserAccess.ServiceScheduleAdd || !FromDate || !ToDate || !CanAdd()" (click)="AddSchedule()" mdTooltip="Add schedule" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
         </td>
         <td>
-          <button md-fab [disabled]="!DL.UserAccess.ShowcaseScheduleAdd  && !DL.UserAccess.ShowcaseScheduleDelete" (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+          <button md-fab [disabled]="!DL.UserAccess.ServiceScheduleAdd  && !DL.UserAccess.ServiceScheduleDelete" (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
           <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
         </td>
       </tr>

@@ -14,6 +14,11 @@
         </textarea>
       </md-form-field>
     </div>
+    <div>
+      <md-form-field>
+        <input id="txtCurrencySymbol" mdInput placeholder="Currency Symbol" [(ngModel)]="model.CurrencySymbol" />
+      </md-form-field>
+    </div>
     <div class="imageContainer">
       <img class="fullWidth" src="{{model.DefaultImageURL}}" (load)="ImageLoaded()">
       <div class="imageEdit" [hidden]="!isLoaded || !DL.UserAccess.SystemSettingEdit">
@@ -36,15 +41,6 @@
         <md-option [value]="true">Yes</md-option>
         <md-option [value]="false">No</md-option>
       </md-select>
-    </div>
-    <div class="vSmallSpacer"></div>
-    <div class="configLabel">
-      Home Page
-    </div>
-    <div>
-      <md-form-field>
-        <input id="txtHomeTitle" mdInput placeholder="Home Title" [(ngModel)]="model.HomeTitle" />
-      </md-form-field>
     </div>
     <div class="vSmallSpacer"></div>
     <div class="configLabel">

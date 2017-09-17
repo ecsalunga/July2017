@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   }
 
   Login() {
-    this.DL.LoadFromLink('user-login');
+    this.LoadFromHeader('user-login');
   }
 
   LoadFromHeader(name: string) {

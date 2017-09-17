@@ -139,6 +139,7 @@ export class DataLayer {
 
     DefaultImageURL: string;
     UploadingImageBasePath: string;
+    CURRENCY: string;
 
     ModuleSetting: ModuleSettingInfo;
     SystemSetting: SystemSettingInfo;
@@ -253,6 +254,7 @@ export class DataLayer {
         this.AccessDefault = this.SystemSetting.DefaultAccess;
         this.UserIsDefaultSystemUser = this.SystemSetting.DefaultIsSystemUser;
         this.DefaultImageURL = this.SystemSetting.DefaultImageURL;
+        this.CURRENCY = this.SystemSetting.CurrencySymbol;
     }
 
     public Reset() {

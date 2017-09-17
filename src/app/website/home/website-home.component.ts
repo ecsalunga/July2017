@@ -10,6 +10,6 @@ export class WebsiteHomeComponent implements OnInit {
   constructor(public DL: DataLayer, private DA: DataAccess) {}
   
   ngOnInit() {
-    this.DL.TITLE = this.DL.SystemSetting.HomeTitle;
+    this.DL.TITLE = this.DL.ModuleSetting.HomeTitle;
   }
 }

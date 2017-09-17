@@ -13,7 +13,7 @@
     </div>
     <div class="itemControl mainColor">
       <div class="cartPrice">
-        Price: {{ DL.ModuleSetting.CurrencySymbol }} {{ item.Product.Price | number:'1.2-2' }}  {{ !item.MaxCart ?  "" : "| Max order: " + item.MaxCart}}
+        Price: {{ DL.CURRENCY }} {{ item.Product.Price | number:'1.2-2' }}  {{ !item.MaxCart ?  "" : "| Max order: " + item.MaxCart}}
       </div>
       <div *ngIf="DL.User.IsMember" class="cartSelection">
         <div>

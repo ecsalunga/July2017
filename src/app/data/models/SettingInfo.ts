@@ -1,9 +1,10 @@
 export class ModuleSettingInfo {
     ModuleIsNotify: boolean;
     PublicIsNotify: boolean;
-    CurrencySymbol: string;
+   
     DefaultPage: string;
-    
+    HomeTitle: string;
+
     ShowcseCartItemMax: number;
 
     DeliveryMaxMinutes: number;
@@ -13,8 +14,8 @@ export class ModuleSettingInfo {
 export class SystemSettingInfo {
     Name: string;
     Footer: string;
-    HomeTitle: string;
-
+    CurrencySymbol: string;
+    
     NotificationDuration: number;
     NotificationSlowDuration: number;
 
