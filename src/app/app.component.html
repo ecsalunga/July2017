@@ -49,7 +49,7 @@
     </button>
     <button md-menu-item (click)="LoadPage('website-reservation')">
       <md-icon>event</md-icon>
-      <span>Reservation</span>
+      <span>Reserve</span>
     </button>
     <ng-container *ngIf="DL.UserAccess.MessageView">
       <button md-menu-item (click)="LoadPage(DL.UserAccess.MessageManage ? 'message-list' : 'message-message')">
@@ -103,6 +103,12 @@
       <button md-menu-item (click)="LoadPage('product-order')">
         <md-icon>web</md-icon>
         <span>Order</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.UserAccess.ShowcaseOrderView">
+      <button md-menu-item (click)="LoadPage('service-reservation')">
+        <md-icon>book</md-icon>
+        <span>Reservation</span>
       </button>
     </ng-container>
     <ng-container *ngIf="DL.UserAccess.TransactionView">

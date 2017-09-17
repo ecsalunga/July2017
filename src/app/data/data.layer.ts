@@ -3,24 +3,13 @@ import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 
 import { Core } from './../core';
 import { 
-    ProductInfo, 
-    SellInfo, 
-    TransactionInfo, 
-    ReportInfo, 
-    ExpenseInfo, 
-    NameValue, 
-    UserInfo, 
-    ShowcaseInfo, 
-    AccessInfo, 
-    CancelInfo,
-    DeliveryInfo,
-    ModuleSettingInfo,
-    SystemSettingInfo,
-    SnapshotInfo,
-    OrderInfo,
-    ServiceInfo,
-    ConversationInfo,
-    MessageInfo
+    ProductInfo, SellInfo, TransactionInfo, 
+    ReportInfo, ExpenseInfo, NameValue, 
+    UserInfo, ShowcaseInfo, AccessInfo, 
+    CancelInfo, DeliveryInfo, ModuleSettingInfo,
+    SystemSettingInfo, SnapshotInfo, OrderInfo,
+    ServiceInfo, ConversationInfo, MessageInfo,
+    ReservationInfo
 } from './models';
 
 @Injectable()
@@ -49,6 +38,10 @@ export class DataLayer {
     STATUS_CANCELLED: string = "Cancelled";
     STATUS_SELECTING: string = "Selecting";
     STATUS_REQUESTED: string = "Requested";
+    STATUS_CONFIRMED: string = "Confirmed";
+    STATUS_REJECTED: string = "Rejected";
+    STATUS_NOSHOW: string = "No-show";
+    STATUS_DELAYED: string = "Delayed";
     STATUS_DONE: string = "Done";
 
     COMMAND_LOGOUT: string = "logout";
@@ -62,6 +55,15 @@ export class DataLayer {
     Service: ServiceInfo;
     Services: Array<ServiceInfo>;
     ServiceToday: Array<ServiceInfo>;
+
+    ServiceReservation: ReservationInfo;
+    ServiceReservationUser: Array<ReservationInfo>;
+    ServiceReservationNew: Array<ReservationInfo>;
+    ServiceReservationActive: Array<ReservationInfo>;
+    ServiceReservationDone: Array<ReservationInfo>;
+    ServiceReservationUserHasItem: boolean = false;
+    ServiceReservationStatuses: Array<string>;
+    ServiceReservationTabIndex: number = 0;
 
     Transaction: TransactionInfo;
     TransactionsToday: Array<TransactionInfo>;
@@ -213,6 +215,16 @@ export class DataLayer {
             this.STATUS_DONE
         ];
 
+        this.ServiceReservationStatuses = [
+            this.STATUS_REQUESTED,
+            this.STATUS_CONFIRMED,
+            this.STATUS_REJECTED,
+            this.STATUS_DELAYED,
+            this.STATUS_NOSHOW,
+            this.STATUS_CANCELLED,
+            this.STATUS_DONE
+        ];
+
         this.ProductDiscount = new ProductInfo();
         this.ProductDiscount.Code = this.KEYDISCOUNT;
         this.ProductDiscount.Description = "Discount";
@@ -246,6 +258,11 @@ export class DataLayer {
         this.ShowcaseUserDoneOrders = new Array<OrderInfo>();
         this.ShowcaseUserSelectingOrders = new Array<OrderInfo>();
         this.ShowcaseUserOrders = new Array<OrderInfo>();
+
+        this.ServiceReservationUser = new Array<ReservationInfo>();
+        this.ServiceReservationActive = new Array<ReservationInfo>();
+        this.ServiceReservationDone = new Array<ReservationInfo>();
+        this.ServiceReservationNew = new Array<ReservationInfo>();
     }
 
     public SetSystemConfig() {
@@ -293,6 +310,13 @@ export class DataLayer {
     }
 
     public OrderUpdateStatus(item: OrderInfo, status: string) {
+        item.Status = status;
+        item.ActionDate = this.GetActionDate();
+        let action = new NameValue(item.Status, item.ActionDate);
+        item.Actions.push(action);
+    }
+
+    public ReservationUpdateStatus(item: ReservationInfo, status: string) {
         item.Status = status;
         item.ActionDate = this.GetActionDate();
         let action = new NameValue(item.Status, item.ActionDate);

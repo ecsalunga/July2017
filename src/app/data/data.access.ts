@@ -22,25 +22,13 @@ import { MessagePopupComponent } from '../message/popup/message-popup.component'
 
 import 'rxjs/add/operator/first';
 import {
-    ProductInfo,
-    SellInfo,
-    TransactionInfo,
-    ReportInfo,
-    ExpenseInfo,
-    NameValue,
-    UserInfo,
-    ShowcaseInfo,
-    AccessInfo,
-    CancelInfo,
-    DeliveryInfo,
-    ModuleSettingInfo,
-    SystemSettingInfo,
-    SnapshotInfo,
-    OrderInfo,
-    ServiceInfo,
-    CommandInfo,
-    ConversationInfo,
-    MessageInfo
+    ProductInfo, SellInfo, TransactionInfo,
+    ReportInfo, ExpenseInfo, NameValue,
+    UserInfo, ShowcaseInfo, AccessInfo,
+    CancelInfo, DeliveryInfo, ModuleSettingInfo,
+    SystemSettingInfo, SnapshotInfo, OrderInfo,
+    ServiceInfo, CommandInfo, ConversationInfo,
+    MessageInfo, ReservationInfo
 } from './models';
 
 @Injectable()
@@ -188,6 +176,7 @@ export class DataAccess {
     GeneralActiveDataLoad() {
         if(!this.DL.IsDataActiveLoaded) {
             this.showcaseDAL.LoadOrder();
+            this.serviceDAL.LoadReservation();
             this.messageDAL.Load();
             this.CommandLoad();
             this.DL.IsDataActiveLoaded = true
@@ -394,6 +383,14 @@ export class DataAccess {
 
     public ShowcaseOrderDelete(item: OrderInfo) {
         this.showcaseDAL.DeleteOrder(item);
+    }
+
+    public ServiceReserveSave(item: ReservationInfo) {
+        this.serviceDAL.SaveReservation(item);
+    }
+
+    public ServiceReserveDelete(item: ReservationInfo) {
+        this.serviceDAL.DeleteReservation(item);
     }
 
     public AccessSave(item: AccessInfo) {

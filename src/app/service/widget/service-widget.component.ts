@@ -12,10 +12,10 @@ export class ServiceWidgetComponent implements OnInit {
   constructor(public DL: DataLayer, private DA: DataAccess) { }
 
   Book(item: ServiceInfo) {
-
+    this.DL.Service = item;
+    this.DL.LoadFromLink("service-reserve");
   }
 
   ngOnInit() {
-    
   }
 }

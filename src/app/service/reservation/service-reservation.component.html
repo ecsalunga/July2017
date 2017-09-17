@@ -1,0 +1,149 @@
+<div>
+  <md-tab-group [selectedIndex]="DL.ServiceReservationTabIndex" dynamicHeight="true">
+    <md-tab>
+      <ng-template md-tab-label>
+        <md-icon>new_releases</md-icon>&nbsp;New
+      </ng-template>
+      <div class="listing">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                Date
+              </th>
+              <th>
+                Member
+              </th>
+              <th>
+                Status
+              </th>
+              <th class="totalColumn">
+                Amount / Count
+              </th>
+              <th class="rightRow">
+                Action
+              </th>
+            </tr>
+          </thead>
+          <ng-container *ngFor="let item of DL.ServiceReservationNew">
+            <tr>
+              <td>
+                {{ GetDate(item.ActionDate) | date : 'short' }}
+              </td>
+              <td>
+                {{ item.MemberName }}
+              </td>
+              <td>
+                {{ item.Status }}
+              </td>
+              <td class="totalColumn">
+                {{ item.Price * item.Count | number:'1.2-2' }} / {{ item.Count }}
+              </td>
+              <td class="rightRow">
+                <button md-mini-fab (click)="Select(item, 0)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
+              </td>
+            </tr>
+          </ng-container>
+        </table>
+      </div>
+    </md-tab>
+    <md-tab>
+      <ng-template md-tab-label>
+        <md-icon>schedule</md-icon>&nbsp;Confirmed
+      </ng-template>
+      <div class="listing">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                Date
+              </th>
+              <th>
+                Member
+              </th>
+              <th>
+                Status
+              </th>
+              <th class="totalColumn">
+                Amount / Count
+              </th>
+              <th class="rightRow">
+                Action
+              </th>
+            </tr>
+          </thead>
+          <ng-container *ngFor="let item of DL.ServiceReservationActive">
+            <tr>
+              <td>
+                {{ GetDate(item.ActionDate) | date : 'short' }}
+              </td>
+              <td>
+                {{ item.MemberName }}
+              </td>
+              <td>
+                {{ item.Status }}
+              </td>
+              <td class="totalColumn">
+                {{ item.Price * item.Count | number:'1.2-2' }} / {{ item.Count }}
+              </td>
+              <td class="rightRow">
+                <button md-mini-fab (click)="Select(item, 1)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
+              </td>
+            </tr>
+          </ng-container>
+        </table>
+      </div>
+    </md-tab>
+    <md-tab>
+      <ng-template md-tab-label>
+        <md-icon>check_circle</md-icon>&nbsp;Done
+      </ng-template>
+      <div class="listing">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                Date
+              </th>
+              <th>
+                Member
+              </th>
+              <th>
+                Status
+              </th>
+              <th class="totalColumn">
+                Amount / Count
+              </th>
+              <th class="rightRow">
+                Action
+              </th>
+            </tr>
+          </thead>
+          <ng-container *ngFor="let item of DL.ServiceReservationDone">
+            <tr>
+              <td>
+                {{ GetDate(item.ActionDate) | date : 'short' }}
+              </td>
+              <td>
+                {{ item.MemberName }}
+              </td>
+              <td>
+                {{ item.Status }}
+              </td>
+              <td class="totalColumn">
+                {{ item.Price * item.Count | number:'1.2-2' }} / {{ item.Count }}
+              </td>
+              <td class="rightRow">
+                <button md-mini-fab (click)="Select(item, 2)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
+              </td>
+            </tr>
+          </ng-container>
+        </table>
+        <div class="hSpacer"></div>
+        <div class="rightRow">
+          <button md-fab color="warn" (click)="CleanDelete()" [disabled]="!HasClean() || !DL.UserAccess.ShowcaseOrderDelete"  mdTooltip="Remove all done" mdTooltipPosition="above"><md-icon>delete_sweep</md-icon></button>
+        </div>
+      </div>
+    </md-tab>
+  </md-tab-group>
+</div>

@@ -6,9 +6,16 @@
       ".indexOn": "Description"
     },
     "services": {
-      ".read": "true",
-      ".write": "true",
-      ".indexOn": "Order"
+      "items": {
+        ".read": "true",
+        ".write": "true",
+        ".indexOn": "Order"
+      },
+      "reservations": {
+        ".read": "true",
+        ".write": "true",
+        ".indexOn": "ActionDate"
+      }
     },
     "showcases": {
       "items": {

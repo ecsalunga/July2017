@@ -1,4 +1,4 @@
-import { ScheduleInfo } from './';
+import { ScheduleInfo, NameValue } from './';
 
 export class ServiceInfo {
     key: string;
@@ -13,5 +13,24 @@ export class ServiceInfo {
     constructor(defaultImageURL: string) {
         this.Schedules = new Array<ScheduleInfo>();
         this.ImageURL = defaultImageURL;
+    }
+}
+
+export class ReservationInfo {
+    key: string;
+    MemberKey: string;
+    MemberName: string;
+    From: number;
+    To: number;
+    ItemKey: string;
+    Name: string;
+    Price: number;
+    Count: number;
+    ActionDate: number;
+    Status: string;
+    Actions: Array<NameValue>;
+
+    constructor() {
+        this.Actions =  new Array<NameValue>();
     }
 }

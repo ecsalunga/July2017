@@ -9,5 +9,5 @@ export { SellInfo, TransactionInfo, DeliveryInfo } from './TransactionInfo';
 export { UserInfo } from './UserInfo';
 export { ModuleSettingInfo, SystemSettingInfo } from './SettingInfo';
 export { SnapshotInfo } from './SnapshotInfo';
-export { ServiceInfo } from './ServiceInfo';
+export { ServiceInfo, ReservationInfo } from './ServiceInfo';
 export { ConversationInfo, MessageInfo } from './MessageInfo';
