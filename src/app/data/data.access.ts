@@ -207,7 +207,7 @@ export class DataAccess {
             let toSave = false;
 
             this.DL.UserAll.forEach(u => {
-                if (u.UID == user.uid)
+                if (user.uid == u.UID || user.email == u.Email)
                     this.DL.User = u;
             });
 
