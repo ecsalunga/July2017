@@ -138,6 +138,8 @@ export class DataLayer {
     IsAuthenticating: boolean = false;
     IsSystemDataActiveLoaded: boolean = false;
     IsDataActiveLoaded: boolean = false;
+    ShowLogin: boolean = true;
+    SignupName: string;
 
     DefaultImageURL: string;
     UploadingImageBasePath: string;
@@ -368,6 +370,7 @@ export class DataLayer {
     }
 
     public LoadComponent(name: string) {
+        this.ShowLogin = true;
         this.COMPONENT = name;
         this.core.loadComponent(name);
         this.GotoTop();

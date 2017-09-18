@@ -13,7 +13,7 @@
       </div>
       <div class="subContent">
         <div>
-          <md-form-field class="fullWidth">
+          <md-form-field class="longText">
             <input mdInput [(ngModel)]="email" placeholder="Email" [formControl]="emailFormControl">
             <md-error *ngIf="emailFormControl.hasError('pattern')">
               Please enter a valid email address
@@ -24,7 +24,7 @@
           </md-form-field>
         </div>
         <div>
-          <md-form-field>
+          <md-form-field (keyup.enter)="LoginEnter()">
             <input mdInput [(ngModel)]="password" type="password" placeholder="Password" [formControl]="passwordFormControl">
             <md-error *ngIf="passwordFormControl.hasError('required')">
               Password is <strong>required</strong>
@@ -32,7 +32,7 @@
           </md-form-field>
         </div>
         <div class="mainColor">
-          <button md-raised-button [disabled]="emailFormControl.invalid || passwordFormControl.invalid" (click)="Login()" mdTooltip="Login" mdTooltipPosition="above">
+          <button md-raised-button #login [disabled]="emailFormControl.invalid || passwordFormControl.invalid" (click)="Login()" mdTooltip="Login" mdTooltipPosition="above">
             <md-icon>lock_open</md-icon>
             <span>Log In</span>
           </button>

@@ -10,6 +10,7 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA
   styleUrls: ['./user-signup.component.css']
 })
 export class UserSignupComponent implements OnInit {
+  name: string;
   email: string;
   password: string;
   confirm: string;
@@ -19,7 +20,7 @@ export class UserSignupComponent implements OnInit {
     Validators.pattern(EMAIL_REGEX)]);
   passwordFormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
   confirmFormControl = new FormControl('', [Validators.required, this.PasswordsMatch.bind(this)]);
-
+  nameFormControl = new FormControl('', [Validators.required]);
   constructor(private DA: DataAccess, public DL: DataLayer) { }
 
   NotifyConfirm() {
@@ -32,6 +33,7 @@ export class UserSignupComponent implements OnInit {
   }
 
   Save() {
+    this.DL.SignupName = this.name;
     this.DA.Signup(this.email, this.password);
   }
 

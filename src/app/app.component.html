@@ -40,10 +40,12 @@
       </ng-container>
       <ng-template #showLogin>
         <div class="mainColor">
-          <button *ngIf="!DL.User.UID && DL.TITLE != 'Log In'" md-raised-button (click)="Login()">
-            <md-icon>lock_open</md-icon>
-            <span>Log In</span>
-          </button>
+          <ng-container *ngIf="DL.ShowLogin">
+            <button md-raised-button (click)="Login()">
+              <md-icon>lock_open</md-icon>
+              <span>Log In</span>
+            </button>
+          </ng-container>
         </div>
       </ng-template>
     </div>

@@ -18,7 +18,14 @@ export class UserLoginComponent implements OnInit {
     Validators.pattern(EMAIL_REGEX)]);
   passwordFormControl = new FormControl('', [Validators.required]);
 
-  constructor(public DA: DataAccess, public DL: DataLayer) { }
+  constructor(public DA: DataAccess, public DL: DataLayer) { 
+    this.DL.ShowLogin = false; 
+  }
+
+  LoginEnter() {
+    if(this.emailFormControl.valid && this.passwordFormControl.valid)
+      this.Login();
+  }
 
   Login() {
     this.DA.LogIn(this.email, this.password);

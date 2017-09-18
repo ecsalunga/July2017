@@ -205,7 +205,6 @@ export class DataAccess {
             }
 
             let toSave = false;
-
             this.DL.UserAll.forEach(u => {
                 if (user.uid == u.UID || user.email == u.Email)
                     this.DL.User = u;
@@ -223,8 +222,15 @@ export class DataAccess {
                 this.DL.User.Email = user.email;
 
                 if (!this.DL.User.Name)
-                    this.DL.User.Name = this.DL.User.Email;
-
+                {
+                    if(!this.DL.SignupName)
+                        this.DL.User.Name = this.DL.User.Email;
+                    else {
+                        this.DL.User.Name = this.DL.SignupName;
+                        this.DL.SignupName = null;
+                    }
+                }
+                    
                 this.DL.User.UID = user.uid;
                 this.DL.User.ImageURL = user.photoURL
                 toSave = true;
