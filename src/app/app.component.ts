@@ -18,8 +18,13 @@ export class AppComponent implements OnInit {
   hide: string = "0%"
   navWidth: string = "0%";
   loader: string = "100%";
+  viewWidth: number;
 
   constructor(public core: Core, private DA: DataAccess, public DL: DataLayer, private renderer: Renderer) {}
+
+  onResize(event) {
+    this.viewWidth = event.target.innerWidth; 
+  }
 
   LoadPage(name: string) {
     this.DL.LoadFromMenu(name);
@@ -64,5 +69,7 @@ export class AppComponent implements OnInit {
     this.renderer.listen(this.imageSelector.element.nativeElement, 'change', (event) => {
       this.Upload();
     });
+
+    this.viewWidth = window.innerWidth;
   }
 }

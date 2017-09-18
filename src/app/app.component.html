@@ -8,6 +8,23 @@
     <div>
       {{ DL.SystemSetting.Name }}
     </div>
+    <div (window:resize)="onResize($event)">
+      <ng-container *ngIf="viewWidth > 700">
+        <div style="width: 50px;"></div>
+        <button md-button (click)="LoadFromHeader('website-catalog')" mdTooltip="View catalog" mdTooltipPosition="below">
+          <md-icon>add_shopping_cart</md-icon>
+          <span>Catalog</span>
+        </button>
+        <button md-button (click)="LoadFromHeader('website-reservation')" mdTooltip="View services" mdTooltipPosition="below">
+          <md-icon>event</md-icon>
+          <span>Reserve</span>
+        </button>
+        <button md-button *ngIf="DL.ServiceReservationUserHasItem" (click)="LoadFromHeader('service-booking')" mdTooltip="View booking" mdTooltipPosition="below">
+          <md-icon>bookmark_border</md-icon>
+          <span>Booking</span>
+        </button>
+      </ng-container>
+    </div>
   </div>
   <div class="right">
     <div>
@@ -37,34 +54,34 @@
 <div class="overlay" [style.width]="navWidth" (click)="ToggleNav()">
   <div class="navSide">
     <div class="vBigSpacer">
-      <md-menu #menu="mdMenu" class="menuPublic"></md-menu>
+      <md-menu #menu="mdMenu"></md-menu>
     </div>
-    <button class="public" md-menu-item (click)="LoadPage('website-home')">
+    <button md-menu-item (click)="LoadPage('website-home')">
       <md-icon>home</md-icon>
       <span>Home</span>
     </button>
-    <button class="public" md-menu-item (click)="LoadPage('website-catalog')">
+    <button *ngIf="viewWidth <= 700" md-menu-item (click)="LoadPage('website-catalog')">
       <md-icon>add_shopping_cart</md-icon>
       <span>Catalog</span>
     </button>
-    <button class="public" md-menu-item (click)="LoadPage('website-reservation')">
+    <button *ngIf="viewWidth <= 700" md-menu-item (click)="LoadPage('website-reservation')">
       <md-icon>event</md-icon>
       <span>Reserve</span>
     </button>
     <ng-container *ngIf="DL.UserAccess.MessageView">
-      <button class="public" md-menu-item (click)="LoadPage(DL.UserAccess.MessageManage ? 'message-list' : 'message-message')">
+      <button md-menu-item (click)="LoadPage(DL.UserAccess.MessageManage ? 'message-list' : 'message-message')">
         <md-icon>message</md-icon>
         <span>Message</span>
       </button>
     </ng-container>
     <ng-container *ngIf="DL.ShowcaseUserHasOrder">
-      <button class="public" md-menu-item (click)="LoadPage('showcase-cart')">
+      <button md-menu-item (click)="LoadPage('showcase-cart')">
         <md-icon>shopping_cart</md-icon>
         <span>Cart</span>
       </button>
     </ng-container>
-    <ng-container *ngIf="DL.ServiceReservationUserHasItem">
-      <button class="public" md-menu-item (click)="LoadPage('service-booking')">
+    <ng-container *ngIf="DL.ServiceReservationUserHasItem && viewWidth <= 700">
+      <button md-menu-item (click)="LoadPage('service-booking')">
         <md-icon>bookmark_border</md-icon>
         <span>Booking</span>
       </button>
@@ -178,13 +195,13 @@
       </button>
     </ng-container>
     <ng-container *ngIf="DL.User.UID && DL.UserAccess.CanLogout">
-      <button class="public" md-menu-item (click)="DA.LogOut()">
+      <button md-menu-item (click)="DA.LogOut()">
         <md-icon>exit_to_app</md-icon>
         <span>Log Out</span>
       </button>
     </ng-container>
     <ng-container *ngIf="!DL.User.UID">
-      <button class="public" md-menu-item (click)="LoadPage('user-login')">
+      <button md-menu-item (click)="LoadPage('user-login')">
         <md-icon>lock_open</md-icon>
         <span>Log In</span>
       </button>

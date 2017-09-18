@@ -277,7 +277,7 @@ th {
     .imageContainerRes  { height: 275px; }
     .itemDescriptionRes { height: 75px; }
 }
-  
+
 .container:after {
     content: "";
     display: table;
