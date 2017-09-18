@@ -7,6 +7,10 @@
     padding: 5px;
 }
 
+md-form-field {
+    font-size: 16px;
+}
+
 .cartSelection {
     float: right; 
 }
@@ -17,4 +21,12 @@
 
 .visibility {
     margin-right: 5px;
+}
+
+.longText {
+    width: 250px;
+}
+
+.shortText {
+    width: 120px;
 }

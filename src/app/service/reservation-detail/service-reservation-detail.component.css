@@ -9,3 +9,11 @@
 .itemSub {
     padding: 3px;
 }
+
+.longText {
+    width: 250px;
+}
+
+md-form-field {
+    font-size: 16px;
+}

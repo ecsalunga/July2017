@@ -269,7 +269,7 @@ export class DataAccess {
     }
 
     UserLoad() {
-        this.af.list(this.USERS, { query: { orderByChild: 'Name' } }).first().subscribe(snapshots => {
+        this.af.list(this.USERS, { query: { orderByChild: 'Name' } }).subscribe(snapshots => {
             this.DL.Users = new Array<UserInfo>();
             this.DL.UserAll = new Array<UserInfo>();
             this.DL.UserSelections = new Array<UserInfo>();
@@ -376,7 +376,10 @@ export class DataAccess {
             this.af.list(this.USERS).update(item.key, item);
         else
             this.af.list(this.USERS).push(item);
-        this.UserLoad();
+    }
+
+    public UserDelete(item: UserInfo) {
+        this.af.list(this.USERS).remove(item.key);
     }
 
     public ShowcaseSave(item: ShowcaseInfo) {
@@ -406,7 +409,6 @@ export class DataAccess {
 
     public AccessSave(item: AccessInfo) {
         this.accessDAL.Save(item);
-        this.accessDAL.Load();
     }
 
     public SellInfoSave(item: SellInfo) {

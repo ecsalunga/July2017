@@ -29,12 +29,12 @@
     </div>
   </div>
   <div>
-    <md-form-field>
+    <md-form-field class="longText">
       <input id="txtService" readonly mdInput placeholder="Service" [(ngModel)]="model.Name" />
     </md-form-field>
   </div>
   <div>
-    <md-form-field>
+    <md-form-field class="longText">
       <input id="txtDate" readonly mdInput placeholder="Date Range" value="{{ GetDay(model.From) | date : 'mediumDate' }} to {{ GetDay(model.To) | date : 'mediumDate' }}" />
     </md-form-field>
   </div>
