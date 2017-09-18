@@ -30,3 +30,7 @@ md-form-field {
 .fullWidth {
     width: 100%;
 }
+
+.close {
+    float: right;
+}
