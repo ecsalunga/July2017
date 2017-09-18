@@ -159,7 +159,18 @@ export class DataAccess {
     }
 
     public CommandDelete(item: CommandInfo) {
-        this.af.list(this.COMMAND).remove(item.key);
+        this.af.list(this.COMMAND, { query: { orderByChild: 'UserKey', equalTo: item.UserKey }}).first().subscribe(snapshots => {
+            let usersCommand = new Array<CommandInfo>();
+            snapshots.forEach(snapshot => {
+                let info: CommandInfo = snapshot;
+                info.key = snapshot.$key;
+                usersCommand.push(info);
+            });
+
+            usersCommand.forEach(cmd => {
+                this.af.list(this.COMMAND).remove(cmd.key);
+            });
+        });
     }
 
     SystemActiveDataLoad() {
