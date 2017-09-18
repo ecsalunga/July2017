@@ -1,0 +1,57 @@
+<ng-container *ngFor="let booking of DL.ServiceReservationUser">
+  <div class="item">
+    <div class="itemHeader">
+      <div class="itemName">{{ booking.Status }} {{ GetDate(booking.ActionDate) | date : 'short' }} </div>
+    </div>
+    <div class="subContent">
+      <div>
+        <md-form-field>
+          <input id="txtService" readonly mdInput placeholder="Service" [(ngModel)]="booking.Name" />
+        </md-form-field>
+      </div>
+      <div>
+        <md-form-field>
+          <input id="txtDate" readonly mdInput placeholder="Date Range" value="{{ GetDay(booking.From) | date : 'mediumDate' }} to {{ GetDay(booking.To) | date : 'mediumDate' }}"
+          />
+        </md-form-field>
+      </div>
+      <div>
+        <md-form-field class="shortText">
+          <input id="txtPrice" readonly mdInput placeholder="Price" value="{{ booking.Price | number:'1.2-2' }}" />
+        </md-form-field>
+      </div>
+      <div>
+        <md-form-field class="shortText">
+          <input id="txtQuantity" readonly mdInput placeholder="Number of days" [(ngModel)]="booking.Count" />
+        </md-form-field>
+      </div>
+      <div>
+        <md-form-field class="shortText">
+          <input id="txtTotal" readonly mdInput placeholder="Total" value="{{ booking.Count * booking.Price | number:'1.2-2' }}" />
+        </md-form-field>
+      </div>
+      <div class="hSpacer"></div>
+      <div class="itemControl mainColor">
+        <div class="cartSelection">
+          <div class="visibility" *ngIf="booking.Status != DL.STATUS_REQUESTED && booking.Status != DL.STATUS_CONFIRMED && booking.Status != DL.STATUS_DONE">
+            <button md-raised-button (click)="SetStatusDone(booking)">
+              <md-icon>visibility_off</md-icon>
+              <span>Finished</span>
+            </button>
+          </div>
+          <button md-raised-button (click)="ViewStatus(booking)">
+            <md-icon>event_note</md-icon>
+            <span>Check details</span>
+          </button>
+        </div>
+      </div>
+      <div class="vSmallSpacer"></div>
+    </div>
+  </div>
+</ng-container>
+<div class="rightRow mainColor">
+  <button md-raised-button (click)="LoadList()" mdTooltip="Go to reservation" mdTooltipPosition="above">
+    <md-icon>room_service</md-icon>
+    <span>Go to reservation</span>
+  </button>
+</div>

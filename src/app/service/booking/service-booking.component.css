@@ -1,0 +1,20 @@
+.subContent {
+    margin: 20px;
+}
+
+.itemControl {
+    overflow: auto;
+    padding: 5px;
+}
+
+.cartSelection {
+    float: right; 
+}
+
+.cartSelection div {
+    float: left; 
+}
+
+.visibility {
+    margin-right: 5px;
+}

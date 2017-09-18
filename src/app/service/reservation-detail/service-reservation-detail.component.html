@@ -74,8 +74,11 @@
     </div>
   </ng-container>
   <ng-template #reserveLink>
-    <div class="rightRow">
-      <button md-fab (click)="BackToCart()" mdTooltip="Back to cart" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+    <div class="rightRow mainColor">
+      <button md-raised-button (click)="BackToPublic()" mdTooltip="Back to booking" mdTooltipPosition="above">
+        <md-icon>assignment_return</md-icon>
+        <span>Back to booking</span>
+      </button>
     </div>
   </ng-template>
 </div>

@@ -44,7 +44,7 @@ export class ServiceReservationDetailComponent implements OnInit {
   }
 
   BackToPublic() {
-    this.DL.LoadFromLink("service-reserve");
+    this.DL.LoadFromLink("service-booking");
   }
 
   ngOnInit() {

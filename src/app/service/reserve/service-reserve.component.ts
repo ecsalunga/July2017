@@ -22,6 +22,10 @@ export class ServiceReserveComponent implements OnInit {
     this.ToDate = this.ToDay;
   }
 
+  DataChanged() {
+    this.isReserving = false;
+  }
+
   ShowReserve() {
     this.isReserving = true;
   }
@@ -52,6 +56,9 @@ export class ServiceReserveComponent implements OnInit {
   }
 
   CanAdd(): boolean {
+    if(this.DL.GetKeyDay() > this.core.dateToKeyDay(this.FromDate))
+      return false;
+
     return (this.core.dateToKeyDay(this.ToDate) >= this.core.dateToKeyDay(this.FromDate) 
       && this.core.dateToKeyDay(this.ToDate) >= this.core.dateToKeyDay(this.ToDay));
   }

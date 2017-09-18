@@ -69,6 +69,7 @@ import { WebsiteReservationComponent } from './website/reservation/website-reser
 import { ServiceReserveComponent } from './service/reserve/service-reserve.component';
 import { ServiceReservationComponent } from './service/reservation/service-reservation.component';
 import { ServiceReservationDetailComponent } from './service/reservation-detail/service-reservation-detail.component';
+import { ServiceBookingComponent } from './service/booking/service-booking.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,7 @@ import { ServiceReservationDetailComponent } from './service/reservation-detail/
     MessageListComponent, MessageDetailComponent, MessageMessageComponent,
     MessagePopupComponent, WebsiteCatalogComponent, ServiceScheduleComponent, 
     ServiceWidgetComponent, WebsiteReservationComponent, ServiceReserveComponent,
-    ServiceReservationComponent, ServiceReservationDetailComponent
+    ServiceReservationComponent, ServiceReservationDetailComponent, ServiceBookingComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, MdButtonModule,
@@ -117,7 +118,7 @@ import { ServiceReservationDetailComponent } from './service/reservation-detail/
     MessageDetailComponent, MessageMessageComponent, MessagePopupComponent,
     WebsiteCatalogComponent, ServiceScheduleComponent, ServiceWidgetComponent,
     WebsiteReservationComponent, ServiceReserveComponent, ServiceReservationComponent,
-    ServiceReservationDetailComponent
+    ServiceReservationDetailComponent, ServiceBookingComponent
   ]
 })
 export class AppModule {

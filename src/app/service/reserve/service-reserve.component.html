@@ -17,12 +17,12 @@
       <div>
         <div>
           <md-form-field class="date">
-            <input mdInput [mdDatepicker]="from" placeholder="From Date" [(ngModel)]="FromDate">
+            <input mdInput [mdDatepicker]="from" placeholder="From Date" (dateChange)="DataChanged()" [(ngModel)]="FromDate">
             <md-datepicker-toggle mdSuffix [for]="from"></md-datepicker-toggle>
             <md-datepicker #from></md-datepicker>
           </md-form-field>
           <md-form-field class="date">
-            <input mdInput [mdDatepicker]="to" placeholder="To Date" [(ngModel)]="ToDate">
+            <input mdInput [mdDatepicker]="to" placeholder="To Date" (dateChange)="DataChanged()" [(ngModel)]="ToDate">
             <md-datepicker-toggle mdSuffix [for]="to"></md-datepicker-toggle>
             <md-datepicker #to></md-datepicker>
           </md-form-field>
@@ -48,4 +48,10 @@
       </div>
     </div>
   </div>
+</div>
+<div class="rightRow mainColor">
+  <button md-raised-button (click)="LoadList()" mdTooltip="Go to reservation" mdTooltipPosition="above">
+    <md-icon>room_service</md-icon>
+    <span>Go to reservation</span>
+  </button>
 </div>
