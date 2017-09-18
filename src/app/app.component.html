@@ -9,21 +9,19 @@
       {{ DL.SystemSetting.Name }}
     </div>
     <div (window:resize)="onResize($event)">
-      <ng-container *ngIf="viewWidth > 700">
-        <div style="width: 50px;"></div>
-        <button md-button (click)="LoadFromHeader('website-catalog')" mdTooltip="View catalog" mdTooltipPosition="below">
-          <md-icon>add_shopping_cart</md-icon>
-          <span>Catalog</span>
-        </button>
-        <button md-button (click)="LoadFromHeader('website-reservation')" mdTooltip="View services" mdTooltipPosition="below">
-          <md-icon>event</md-icon>
-          <span>Reserve</span>
-        </button>
-        <button md-button *ngIf="DL.ServiceReservationUserHasItem" (click)="LoadFromHeader('service-booking')" mdTooltip="View booking" mdTooltipPosition="below">
-          <md-icon>bookmark_border</md-icon>
-          <span>Booking</span>
-        </button>
-      </ng-container>
+      <div style="width: 50px;"></div>
+      <button md-button *ngIf="viewWidth > 500" (click)="LoadFromHeader('website-catalog')" mdTooltip="View catalog" mdTooltipPosition="below">
+        <md-icon>add_shopping_cart</md-icon>
+        <span>Catalog</span>
+      </button>
+      <button md-button *ngIf="viewWidth > 600" (click)="LoadFromHeader('website-reservation')" mdTooltip="View services" mdTooltipPosition="below">
+        <md-icon>event</md-icon>
+        <span>Reserve</span>
+      </button>
+      <button md-button *ngIf="DL.ServiceReservationUserHasItem && viewWidth > 700" (click)="LoadFromHeader('service-booking')" mdTooltip="View booking" mdTooltipPosition="below">
+        <md-icon>bookmark_border</md-icon>
+        <span>Booking</span>
+      </button>
     </div>
   </div>
   <div class="right">
@@ -60,11 +58,11 @@
       <md-icon>home</md-icon>
       <span>Home</span>
     </button>
-    <button *ngIf="viewWidth <= 700" md-menu-item (click)="LoadPage('website-catalog')">
+    <button *ngIf="viewWidth <= 500" md-menu-item (click)="LoadPage('website-catalog')">
       <md-icon>add_shopping_cart</md-icon>
       <span>Catalog</span>
     </button>
-    <button *ngIf="viewWidth <= 700" md-menu-item (click)="LoadPage('website-reservation')">
+    <button *ngIf="viewWidth <= 600" md-menu-item (click)="LoadPage('website-reservation')">
       <md-icon>event</md-icon>
       <span>Reserve</span>
     </button>
