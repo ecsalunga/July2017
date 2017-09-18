@@ -1,3 +1,11 @@
 ::ng-deep .mat-select-trigger {
     font-size: inherit;
 }
+
+.shortText {
+    width: 120px;
+}
+
+.itemSub {
+    padding: 3px;
+}

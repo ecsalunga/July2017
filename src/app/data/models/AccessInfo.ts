@@ -28,6 +28,10 @@ export class AccessInfo {
     ServiceScheduleAdd: boolean;
     ServiceScheduleDelete: boolean; 
 
+    ServiceReservationView: boolean;
+    ServiceReservationEdit: boolean;
+    ServiceReservationDelete: boolean; 
+
     ReportView: boolean;
     ReportSearch: boolean;
     ReportBalanceView: boolean;

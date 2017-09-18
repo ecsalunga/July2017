@@ -18,7 +18,7 @@ export class ServiceReservationDetailComponent implements OnInit {
   }
 
   CanSave(): boolean {
-    return (this.DL.UserAccess.ShowcaseOrderEdit && 
+    return (this.DL.UserAccess.ServiceReservationEdit && 
       !(this.model.Status == this.DL.STATUS_DONE));
   }
 
@@ -33,6 +33,10 @@ export class ServiceReservationDetailComponent implements OnInit {
   
   GetDate(keyDay: number): Date {
     return this.core.numberToDate(keyDay);
+  }
+
+  GetDay(keyDay: number): Date {
+    return this.core.numberToDate(parseInt(keyDay + '000000'))
   }
 
   LoadList() {

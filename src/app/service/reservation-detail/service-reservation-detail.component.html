@@ -1,17 +1,17 @@
 <div>
   <div class="item">
     <div class="itemHeader">
-      <div class="itemName">Events</div>
+      <div class="itemName">Actions</div>
     </div>
-    <div>
+    <div class="itemSub">
       <table>
         <thead>
           <tr>
             <th>
-              Time
+              Action
             </th>
             <th>
-              Action
+              Event
             </th>
           </tr>
         </thead>
@@ -21,13 +21,39 @@
               {{ info.Name }}
             </td>
             <td>
-              {{ GetDate(info.Value) | date : 'shortTime' }}
+              {{ GetDate(info.Value) | date : 'short' }}
             </td>
           </tr>
         </ng-container>
       </table>
     </div>
   </div>
+  <div>
+    <md-form-field>
+      <input id="txtService" readonly mdInput placeholder="Service" [(ngModel)]="model.Name" />
+    </md-form-field>
+  </div>
+  <div>
+    <md-form-field>
+      <input id="txtDate" readonly mdInput placeholder="Date Range" value="{{ GetDay(model.From) | date : 'mediumDate' }} to {{ GetDay(model.To) | date : 'mediumDate' }}" />
+    </md-form-field>
+  </div>
+  <div>
+    <md-form-field class="shortText">
+      <input id="txtPrice" readonly mdInput placeholder="Price" value="{{ model.Price | number:'1.2-2' }}" />
+    </md-form-field>
+  </div>
+  <div>
+    <md-form-field class="shortText">
+      <input id="txtQuantity" readonly mdInput placeholder="Number of days" [(ngModel)]="model.Count" />
+    </md-form-field>
+  </div>
+  <div>
+    <md-form-field class="shortText">
+      <input id="txtTotal" readonly mdInput placeholder="Total" value="{{ model.Count * model.Price | number:'1.2-2' }}" />
+    </md-form-field>
+  </div>
+  <div>
   <ng-container *ngIf="DL.SOURCE != DL.PUBLIC; else reserveLink">
     <div>
       <md-form-field class="longText">
