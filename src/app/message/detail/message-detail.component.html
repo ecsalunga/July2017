@@ -1,9 +1,11 @@
 <div>
   <div>
     <md-select class="longText" [disabled]="model.key != null" placeholder="With" [(ngModel)]="user">
-      <md-option *ngFor="let user of this.DL.UserAll" [value]="user">
-        {{ user.Name }}
-      </md-option>
+      <ng-container *ngFor="let user of this.DL.UserAll">
+        <md-option *ngIf="!(!user.UID)" [value]="user">
+          {{ user.Name }}
+        </md-option>
+      </ng-container>
     </md-select>
   </div>
   <div class="hSpacer"></div>

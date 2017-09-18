@@ -17,17 +17,18 @@
       <div>
         <div>
           <md-form-field class="date">
-            <input mdInput [mdDatepicker]="from" placeholder="From Date" (dateChange)="DataChanged()" [(ngModel)]="FromDate">
+            <input mdInput [mdDatepicker]="from" placeholder="From" (dateChange)="DataChanged()" [(ngModel)]="FromDate">
             <md-datepicker-toggle mdSuffix [for]="from"></md-datepicker-toggle>
             <md-datepicker #from></md-datepicker>
           </md-form-field>
           <md-form-field class="date">
-            <input mdInput [mdDatepicker]="to" placeholder="To Date" (dateChange)="DataChanged()" [(ngModel)]="ToDate">
+            <input mdInput [mdDatepicker]="to" placeholder="To" (dateChange)="DataChanged()" [(ngModel)]="ToDate">
             <md-datepicker-toggle mdSuffix [for]="to"></md-datepicker-toggle>
             <md-datepicker #to></md-datepicker>
           </md-form-field>
         </div>
       </div>
+      <div class="hSpacer"></div>
       <div>
         <div *ngIf="!isReserving">
           <button md-raised-button [disabled]="!FromDate || !ToDate || !CanAdd()" (click)="ShowReserve()">
