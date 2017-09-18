@@ -9,7 +9,7 @@
   <div>
     <div class="item">
       <div class="itemHeader">
-        <div class="itemName">User Log In</div>
+        <div class="itemName">Credentials</div>
       </div>
       <div class="subContent">
         <div>
@@ -31,8 +31,11 @@
             </md-error>
           </md-form-field>
         </div>
-        <div>
-          <button md-fab [disabled]="emailFormControl.invalid || passwordFormControl.invalid" (click)="Login()" mdTooltip="Login" mdTooltipPosition="above"><md-icon>lock_open</md-icon></button>
+        <div class="mainColor">
+          <button md-raised-button [disabled]="emailFormControl.invalid || passwordFormControl.invalid" (click)="Login()" mdTooltip="Login" mdTooltipPosition="above">
+            <md-icon>lock_open</md-icon>
+            <span>Log In</span>
+          </button>
         </div>
       </div>
       <div class="vSmallSpacer"></div>

@@ -281,6 +281,7 @@ export class DataLayer {
         this.Conversations = new Array<ConversationInfo>();
         this.ShowcaseUserHasOrder = false;
         this.ShowcaseUserHasOpenCart = false;
+        this.ServiceReservationUserHasItem = false;
     }
 
     public ReportTodayRefresh()

@@ -34,7 +34,10 @@
     </md-form-field>
   </div>
   <div class="hSpacer"></div>
-  <div class="rightRow">
-    <button md-fab [disabled]="emailFormControl.invalid || passwordFormControl.invalid || (password != confirm)" (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+  <div class="rightRow mainColor">
+    <button md-raised-button [disabled]="emailFormControl.invalid || passwordFormControl.invalid || (password != confirm)" (click)="Save()" mdTooltip="Save" mdTooltipPosition="above">
+      <md-icon>save</md-icon>
+      <span>Create</span>
+    </button>
   </div>
 </div>
