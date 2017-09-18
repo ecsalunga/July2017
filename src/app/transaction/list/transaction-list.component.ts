@@ -14,8 +14,14 @@ export class TransactionListComponent implements OnInit {
 
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     if (this.DL.SOURCE == this.DL.MENU) {
-      this.DL.TransactionSelected = this.DL.TransactionsToday;
-      this.DL.ReportSelected = this.DL.ReportToday;
+      if(!this.DL.TransactionsToday){
+        this.ReportDate = new Date();
+        this.TransactionView();
+      }
+      else {
+        this.DL.TransactionSelected = this.DL.TransactionsToday;
+        this.DL.ReportSelected = this.DL.ReportToday;
+      }
     }
     
     this.ReportDate = this.core.numberToDate(parseInt(this.DL.ReportSelected.KeyDay + '000000'));
