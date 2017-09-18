@@ -18,7 +18,7 @@ export class ServiceReservationComponent implements OnInit {
   Select(item: ReservationInfo, index: number) {
     this.DL.ServiceReservationTabIndex = index;
     this.DL.ServiceReservation =  item;
-    //this.DL.LoadFromLink('service-reservation-detail');
+    this.DL.LoadFromLink('service-reservation-detail');
   }
 
   HasClean(): boolean {

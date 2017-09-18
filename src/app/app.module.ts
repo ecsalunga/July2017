@@ -68,6 +68,7 @@ import { ServiceWidgetComponent } from './service/widget/service-widget.componen
 import { WebsiteReservationComponent } from './website/reservation/website-reservation.component';
 import { ServiceReserveComponent } from './service/reserve/service-reserve.component';
 import { ServiceReservationComponent } from './service/reservation/service-reservation.component';
+import { ServiceReservationDetailComponent } from './service/reservation-detail/service-reservation-detail.component';
 
 @NgModule({
   declarations: [
@@ -86,31 +87,17 @@ import { ServiceReservationComponent } from './service/reservation/service-reser
     MessageListComponent, MessageDetailComponent, MessageMessageComponent,
     MessagePopupComponent, WebsiteCatalogComponent, ServiceScheduleComponent, 
     ServiceWidgetComponent, WebsiteReservationComponent, ServiceReserveComponent,
-    ServiceReservationComponent
+    ServiceReservationComponent, ServiceReservationDetailComponent
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MdButtonModule,
-    MdInputModule,
-    MdCheckboxModule,
-    MdCardModule,
-    MdAutocompleteModule,
-    MdSelectModule,
-    MdMenuModule,
-    MdDatepickerModule,
-    MdNativeDateModule,
-    MdIconModule,
-    MdSlideToggleModule,
-    MdSnackBarModule,
-    MdTooltipModule,
-    FormsModule,
-    MdDialogModule,
-    MdTabsModule,
-    ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AngularFireDatabaseModule
+    BrowserModule, BrowserAnimationsModule, MdButtonModule,
+    MdInputModule, MdCheckboxModule, MdCardModule,
+    MdAutocompleteModule, MdSelectModule, MdMenuModule,
+    MdDatepickerModule, MdNativeDateModule, MdIconModule,
+    MdSlideToggleModule, MdSnackBarModule, MdTooltipModule,
+    FormsModule, MdDialogModule, MdTabsModule,
+    ReactiveFormsModule, AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule, AngularFireDatabaseModule
   ],
   providers: [Core, DataAccess, DataLayer],
   bootstrap: [AppComponent],
@@ -129,7 +116,8 @@ import { ServiceReservationComponent } from './service/reservation/service-reser
     ServiceListComponent, ServiceDetailComponent, MessageListComponent,
     MessageDetailComponent, MessageMessageComponent, MessagePopupComponent,
     WebsiteCatalogComponent, ServiceScheduleComponent, ServiceWidgetComponent,
-    WebsiteReservationComponent, ServiceReserveComponent, ServiceReservationComponent
+    WebsiteReservationComponent, ServiceReserveComponent, ServiceReservationComponent,
+    ServiceReservationDetailComponent
   ]
 })
 export class AppModule {

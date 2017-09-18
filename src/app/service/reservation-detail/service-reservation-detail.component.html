@@ -1,0 +1,55 @@
+<div>
+  <div class="item">
+    <div class="itemHeader">
+      <div class="itemName">Events</div>
+    </div>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>
+              Time
+            </th>
+            <th>
+              Action
+            </th>
+          </tr>
+        </thead>
+        <ng-container *ngFor="let info of model.Actions">
+          <tr>
+            <td>
+              {{ info.Name }}
+            </td>
+            <td>
+              {{ GetDate(info.Value) | date : 'shortTime' }}
+            </td>
+          </tr>
+        </ng-container>
+      </table>
+    </div>
+  </div>
+  <ng-container *ngIf="DL.SOURCE != DL.PUBLIC; else reserveLink">
+    <div>
+      <md-form-field class="longText">
+        <input id="txtBuyer" mdInput readonly placeholder="Member" [(ngModel)]="model.MemberName" />
+      </md-form-field>
+    </div>
+    <div class="selectionRow">
+      <md-select [disabled]="model.Status == DL.STATUS_DONE" placeholder="Status" class="longText" [(ngModel)]="selectedStatus">
+        <md-option *ngFor="let status of DL.ServiceReservationStatuses" [value]="status">
+          {{ status }}
+        </md-option>
+      </md-select>
+    </div>
+    <div class="hSpacer"></div>
+    <div class="rightRow">
+      <button md-fab (click)="Save()" mdTooltip="Save" [disabled]="!CanSave()" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+      <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+    </div>
+  </ng-container>
+  <ng-template #reserveLink>
+    <div class="rightRow">
+      <button md-fab (click)="BackToCart()" mdTooltip="Back to cart" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+    </div>
+  </ng-template>
+</div>
