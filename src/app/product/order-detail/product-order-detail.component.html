@@ -94,8 +94,12 @@
   </div>
   </ng-container>
   <ng-template #cartLink>
-    <div class="rightRow">
-      <button md-fab (click)="BackToCart()" mdTooltip="Back to cart" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+    <div class="hSpacer"></div>
+    <div class="rightRow mainColor">
+      <button md-raised-button (click)="BackToCart()" mdTooltip="Back to cart" mdTooltipPosition="above">
+        <md-icon>assignment_return</md-icon>
+        <span>Back to cart</span>
+      </button>
     </div>
   </ng-template>
 </div>
