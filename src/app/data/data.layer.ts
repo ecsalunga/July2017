@@ -138,8 +138,10 @@ export class DataLayer {
     IsAuthenticating: boolean = false;
     IsSystemDataActiveLoaded: boolean = false;
     IsDataActiveLoaded: boolean = false;
+    
     ShowLogin: boolean = true;
     SignupName: string;
+    ViewWidth: number;
 
     DefaultImageURL: string;
     UploadingImageBasePath: string;

@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   constructor(public core: Core, private DA: DataAccess, public DL: DataLayer, private renderer: Renderer) {}
 
   onResize(event) {
-    this.viewWidth = event.target.innerWidth; 
+    this.DL.ViewWidth = event.target.innerWidth; 
   }
 
   LoadPage(name: string) {
@@ -70,6 +70,6 @@ export class AppComponent implements OnInit {
       this.Upload();
     });
 
-    this.viewWidth = window.innerWidth;
+    this.DL.ViewWidth = window.innerWidth;
   }
 }

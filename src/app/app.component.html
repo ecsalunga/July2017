@@ -10,15 +10,15 @@
     </div>
     <div (window:resize)="onResize($event)">
       <div style="width: 50px;"></div>
-      <button md-button *ngIf="viewWidth > 475" (click)="LoadFromHeader('website-catalog')" mdTooltip="View catalog" mdTooltipPosition="below">
+      <button md-button *ngIf="DL.ViewWidth > 475" (click)="LoadFromHeader('website-catalog')" mdTooltip="View catalog" mdTooltipPosition="below">
         <md-icon>add_shopping_cart</md-icon>
         <span>Catalog</span>
       </button>
-      <button md-button *ngIf="viewWidth > 600" (click)="LoadFromHeader('website-reservation')" mdTooltip="View services" mdTooltipPosition="below">
+      <button md-button *ngIf="DL.ViewWidth > 600" (click)="LoadFromHeader('website-reservation')" mdTooltip="View services" mdTooltipPosition="below">
         <md-icon>event</md-icon>
         <span>Reserve</span>
       </button>
-      <button md-button *ngIf="DL.ServiceReservationUserHasItem && viewWidth > 700" (click)="LoadFromHeader('service-booking')" mdTooltip="View booking" mdTooltipPosition="below">
+      <button md-button *ngIf="DL.ServiceReservationUserHasItem && DL.ViewWidth > 700" (click)="LoadFromHeader('service-booking')" mdTooltip="View booking" mdTooltipPosition="below">
         <md-icon>bookmark_border</md-icon>
         <span>Booking</span>
       </button>
@@ -60,11 +60,11 @@
       <md-icon>home</md-icon>
       <span>Home</span>
     </button>
-    <button *ngIf="viewWidth <= 475" md-menu-item (click)="LoadPage('website-catalog')">
+    <button *ngIf="DL.ViewWidth <= 475" md-menu-item (click)="LoadPage('website-catalog')">
       <md-icon>add_shopping_cart</md-icon>
       <span>Catalog</span>
     </button>
-    <button *ngIf="viewWidth <= 600" md-menu-item (click)="LoadPage('website-reservation')">
+    <button *ngIf="DL.ViewWidth <= 600" md-menu-item (click)="LoadPage('website-reservation')">
       <md-icon>event</md-icon>
       <span>Reserve</span>
     </button>
@@ -80,7 +80,7 @@
         <span>Cart</span>
       </button>
     </ng-container>
-    <ng-container *ngIf="DL.ServiceReservationUserHasItem && viewWidth <= 700">
+    <ng-container *ngIf="DL.ServiceReservationUserHasItem && DL.ViewWidth <= 700">
       <button md-menu-item (click)="LoadPage('service-booking')">
         <md-icon>bookmark_border</md-icon>
         <span>Booking</span>
