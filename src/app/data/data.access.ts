@@ -446,6 +446,10 @@ export class DataAccess {
         this.transactionDAL.DeliveryDelete(item);
     }
 
+    public DeliveryToTransaction(info: DeliveryInfo) {
+        this.transactionDAL.DeliveryToTransaction(info);
+    }
+
     public ProductUpdate(infos: Array<SellInfo>) {
         this.productDAL.UpdateProducts(infos);
     }

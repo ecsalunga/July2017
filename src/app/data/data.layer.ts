@@ -42,6 +42,7 @@ export class DataLayer {
     STATUS_REJECTED: string = "Rejected";
     STATUS_NOSHOW: string = "No-show";
     STATUS_DELAYED: string = "Delayed";
+    STATUS_SAVEDTO_TRANSACT: string = "Saved to Transaction";
     STATUS_DONE: string = "Done";
 
     COMMAND_LOGOUT: string = "logout";
@@ -311,6 +312,11 @@ export class DataLayer {
         item.Status = status;
         item.ActionLast = this.GetActionDate();
         let action = new NameValue(item.Status, item.ActionLast);
+        item.Actions.push(action);
+    }
+
+    public DeliveryInjectStatus(item: DeliveryInfo, status: string) {
+        let action = new NameValue(status, this.GetActionDate());
         item.Actions.push(action);
     }
 

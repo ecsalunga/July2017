@@ -18,6 +18,7 @@ export class UserListComponent implements OnInit {
     this.selectedUser.AccessName = this.selectedAccess.Name;
 
     this.DA.UserSave(this.selectedUser);
+    this.DL.Display("User Access", "Set!");
     
     this.selectedUser = null;
     this.selectedAccess = null;

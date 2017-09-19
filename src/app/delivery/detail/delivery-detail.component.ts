@@ -38,6 +38,11 @@ export class DeliveryDetailComponent implements OnInit {
     this.DL.Display("Delivery Details", "Deleted!");
   }
 
+  GenerateTransaction() {
+    this.DA.DeliveryToTransaction(this.model);
+    this.DL.Display("Transaction", "Saved!");
+  }
+
   Save() {
     let isAssign = false;
     if(this.selectedUser.key != this.DL.Delivery.UserKey) {

@@ -33,9 +33,11 @@ export class DeliveryInfo {
     ActionStart: number;
     ActionLast: number;
     Status: string;
+    IsTransaction: boolean;
     Actions: Array<NameValue>;
 
     constructor() {
+        this.IsTransaction = false;
         this.Actions = new Array<NameValue>();
     }
 }

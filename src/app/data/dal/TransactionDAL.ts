@@ -134,16 +134,16 @@ export class TransactionDAL {
     }
 
     public DeliverySave(item: DeliveryInfo) {
-        if(item.Status == this.DL.STATUS_DELIVERED)
-            this.DeliveryDone(item);
-
         if (item.key)
             this.af.list(this.PATH_DELIVERY).update(item.key, item);
         else
             this.af.list(this.PATH_DELIVERY).push(item);
     }
 
-    public DeliveryDone(info: DeliveryInfo) {
+    public DeliveryToTransaction(info: DeliveryInfo) {
+        this.DL.DeliveryInjectStatus(info, this.DL.STATUS_SAVEDTO_TRANSACT);
+        info.IsTransaction = true;
+        this.DeliverySave(info);
         this.Save(info.Transaction);
         this.DA.ProductUpdate(info.Transaction.Items);
         this.DA.ReportTodaySave();

@@ -19,7 +19,7 @@
             <th class="totalColumn">
               Total
             </th>
-            <th class="rightRow">
+            <th *ngIf="order.Status == DL.STATUS_SELECTING" class="rightRow">
               Action
             </th>
           </tr>
@@ -38,10 +38,8 @@
             <td class="totalColumn">
               {{ info.Total | number:'1.2-2' }}
             </td>
-            <td class="rightRow">
-              <ng-container>
-                <button md-mini-fab [disabled]="order.Status != DL.STATUS_SELECTING" color="warn" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
-              </ng-container>
+            <td *ngIf="order.Status == DL.STATUS_SELECTING" class="rightRow">
+              <button md-mini-fab color="warn" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
             </td>
           </tr>
         </ng-container>
@@ -56,7 +54,7 @@
           <td class="totalColumn">
             {{ order.Amount | number:'1.2-2' }}
           </td>
-          <td></td>
+          <td *ngIf="order.Status == DL.STATUS_SELECTING"></td>
         </tr>
       </table>
       <div class="hSpacer"></div>
