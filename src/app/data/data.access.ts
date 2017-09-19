@@ -401,6 +401,20 @@ export class DataAccess {
         this.showcaseDAL.SaveOrder(item);
     }
 
+    public ShowcaseOrderForDelivery(item: OrderInfo) {
+        let info = new TransactionInfo();
+        info.MemberKey = item.MemberKey;
+        info.BuyerName = item.BuyerName;
+        info.UserKey = this.DL.User.key;
+        info.UserName = this.DL.User.Name;
+        info.Items = item.Items;
+        info.Count = item.Count;
+        info.Amount = item.Amount;
+        info.ActionDate = this.DL.GetActionDate();
+        info.KeyDay = this.DL.GetKeyDay();
+        this.DeliveryStart(info);
+    }
+
     public ShowcaseOrderDelete(item: OrderInfo) {
         this.showcaseDAL.DeleteOrder(item);
     }
@@ -450,6 +464,10 @@ export class DataAccess {
         this.transactionDAL.DeliveryToTransaction(info);
     }
 
+    public DeliveryStart(info: TransactionInfo) {
+        this.transactionDAL.DeliveryStart(info);
+    }
+        
     public ProductUpdate(infos: Array<SellInfo>) {
         this.productDAL.UpdateProducts(infos);
     }

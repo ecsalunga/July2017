@@ -73,7 +73,7 @@ export class TransactionDAL {
                 let info: DeliveryInfo = snapshot;
                 info.key = snapshot.$key;
                 this.DL.DeliveryInfos.push(info);
-
+                
                 if(this.DL.DeliveryToggledStamp > 0 && info.ActionStart == this.DL.DeliveryToggledStamp)
                 {
                     this.DL.Delivery = info;
@@ -125,8 +125,10 @@ export class TransactionDAL {
         item.Transaction = info;
         item.ActionStart = this.DL.GetActionDate();
         
-        if(this.DL.ModuleSetting.DeliveryIsToggleSell)
+        if(this.DL.ModuleSetting.DeliveryIsToggleSell) {
             this.DL.DeliveryToggledStamp = item.ActionStart;
+            console.log (this.DL.DeliveryToggledStamp );
+        }
 
         this.DL.DeliveryGetInfo(item);
         this.DL.DeliveryUpdateStatus(item, this.DL.STATUS_CREATED);

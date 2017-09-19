@@ -26,9 +26,16 @@ export class ProductOrderDetailComponent implements OnInit {
     if(this.DL.ShowcaseOrder.Status != this.selectedStatus) {
       this.DL.OrderUpdateStatus(this.model, this.selectedStatus);
       this.DA.ShowcaseOrderSave(this.model);
-      this.DL.Display("Order", "Saved!");
+
+      if(this.selectedStatus == this.DL.STATUS_FOR_DELIVERY) {
+        this.DA.ShowcaseOrderForDelivery(this.model);
+        this.DL.Display("Delivery Info", "Created!");
+      } else {
+        this.DL.Display("Order", "Saved!");
+        this.LoadList();
+      }
     }
-    this.LoadList();
+    
   }
   
   GetDate(keyDay: number): Date {
