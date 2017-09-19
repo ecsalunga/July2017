@@ -1,7 +1,7 @@
 <ng-container *ngFor="let booking of DL.ServiceReservationUser">
   <div class="item">
     <div class="itemHeader">
-      <div class="itemName">{{ booking.Status }} {{ GetDate(booking.ActionDate) | date : 'short' }} </div>
+      <div class="itemName">{{ booking.Status }} ( <span class="mainColor">{{ GetDate(booking.ActionDate) | date : 'short' }}</span> )</div>
     </div>
     <div class="subContent">
       <div>
