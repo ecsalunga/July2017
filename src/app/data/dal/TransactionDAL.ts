@@ -143,6 +143,8 @@ export class TransactionDAL {
     public DeliveryToTransaction(info: DeliveryInfo) {
         this.DL.DeliveryInjectStatus(info, this.DL.STATUS_SAVEDTO_TRANSACT);
         info.IsTransaction = true;
+        info.Transaction.ActionDate = this.DL.GetActionDate();
+        info.Transaction.KeyDay = this.DL.GetKeyDay();
         this.DeliverySave(info);
         this.Save(info.Transaction);
         this.DA.ProductUpdate(info.Transaction.Items);

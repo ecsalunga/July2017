@@ -40,6 +40,7 @@ export class DeliveryDetailComponent implements OnInit {
 
   GenerateTransaction() {
     this.DA.DeliveryToTransaction(this.model);
+    this.LoadList();
     this.DL.Display("Transaction", "Saved!");
   }
 

@@ -1,15 +1,12 @@
 <ng-container *ngFor="let order of DL.ShowcaseUserOrders">
   <div class="item">
     <div class="itemHeader">
-      <div class="itemName">{{ order.Status }} {{ GetDate(order.ActionDate) | date : 'short' }} </div>
+      <div class="itemName">{{ order.Status }} ( {{ GetDate(order.ActionDate) | date : 'short' }} )</div>
     </div>
     <div class="subContent">
       <table>
         <thead>
           <tr>
-            <th>
-              #
-            </th>
             <th>
               Description
             </th>
@@ -24,11 +21,8 @@
             </th>
           </tr>
         </thead>
-        <ng-container *ngFor="let info of order.Items; let num = index;">
+        <ng-container *ngFor="let info of order.Items">
           <tr>
-            <td>
-              {{ (info.Price) ? num+1 : '' }}
-            </td>
             <td>
               {{ info.Description }}
             </td>
@@ -44,7 +38,6 @@
           </tr>
         </ng-container>
         <tr class="blankCell">
-          <td></td>
           <td>
             Total
           </td>
