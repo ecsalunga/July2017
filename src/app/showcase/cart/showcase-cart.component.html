@@ -27,10 +27,10 @@
               {{ info.Description }}
             </td>
             <td class="totalColumn">
-              {{ info.Price | number:'1.2-2' }} x {{ info.Quantity }}
+              {{ DL.CURRENCY }} {{ info.Price | number:'1.2-2' }} x {{ info.Quantity }}
             </td>
             <td class="totalColumn">
-              {{ info.Total | number:'1.2-2' }}
+              {{ DL.CURRENCY }} {{ info.Total | number:'1.2-2' }}
             </td>
             <td *ngIf="order.Status == DL.STATUS_SELECTING" class="rightRow">
               <button md-mini-fab color="warn" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
@@ -45,7 +45,7 @@
             {{ order.Count }}
           </td>
           <td class="totalColumn">
-            {{ order.Amount | number:'1.2-2' }}
+            {{ DL.CURRENCY }} {{ order.Amount | number:'1.2-2' }}
           </td>
           <td *ngIf="order.Status == DL.STATUS_SELECTING"></td>
         </tr>

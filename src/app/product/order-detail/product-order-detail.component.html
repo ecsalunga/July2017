@@ -29,7 +29,7 @@
                   {{ info.Quantity }}
                 </td>
                 <td class="totalColumn">
-                  {{ info.Total | number:'1.2-2'}}
+                  {{ DL.CURRENCY }} {{ info.Total | number:'1.2-2'}}
                 </td>
               </tr>
             </ng-container>
@@ -41,7 +41,7 @@
                 {{ model.Count }}
               </td>
               <td class="totalColumn">
-                {{ model.Amount | number:'1.2-2'}}
+                {{ DL.CURRENCY }} {{ model.Amount | number:'1.2-2'}}
               </td>
             </tr>
           </table>

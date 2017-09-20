@@ -40,7 +40,7 @@
   </div>
   <div>
     <md-form-field class="shortText">
-      <input id="txtPrice" readonly mdInput placeholder="Price" value="{{ model.Price | number:'1.2-2' }}" />
+      <input id="txtPrice" readonly mdInput placeholder="Price" value="{{ DL.CURRENCY }} {{ model.Price | number:'1.2-2' }}" />
     </md-form-field>
   </div>
   <div>
@@ -50,7 +50,7 @@
   </div>
   <div>
     <md-form-field class="shortText">
-      <input id="txtTotal" readonly mdInput placeholder="Total" value="{{ model.Count * model.Price | number:'1.2-2' }}" />
+      <input id="txtTotal" readonly mdInput placeholder="Total" value="{{ DL.CURRENCY }} {{ model.Count * model.Price | number:'1.2-2' }}" />
     </md-form-field>
   </div>
   <div>

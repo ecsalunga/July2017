@@ -17,7 +17,7 @@
       </div>
       <div>
         <md-form-field class="shortText">
-          <input id="txtPrice" readonly mdInput placeholder="Price" value="{{ booking.Price | number:'1.2-2' }}" />
+          <input id="txtPrice" readonly mdInput placeholder="Price" value="{{ DL.CURRENCY }} {{ booking.Price | number:'1.2-2' }}" />
         </md-form-field>
       </div>
       <div>
@@ -27,7 +27,7 @@
       </div>
       <div>
         <md-form-field class="shortText">
-          <input id="txtTotal" readonly mdInput placeholder="Total" value="{{ booking.Count * booking.Price | number:'1.2-2' }}" />
+          <input id="txtTotal" readonly mdInput placeholder="Total" value="{{ DL.CURRENCY }} {{ booking.Count * booking.Price | number:'1.2-2' }}" />
         </md-form-field>
       </div>
       <div class="hSpacer"></div>
