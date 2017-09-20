@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { SnapshotInfo, NameValue } from '../../data/models';
+import { SnapshotInfo, Name2Value } from '../../data/models';
 
 @Component({
   selector: 'snapshot-detail',
@@ -30,9 +30,13 @@ export class SnapshotDetailComponent implements OnInit {
 
       this.model.COHComputed = (this.model.COHStart + this.model.SaleAmount) - this.model.ExpenseAmount
       
-      this.model.Inventory = new Array<NameValue>();
+      this.model.Inventory = new Array<Name2Value>();
       this.DL.Products.forEach(product => {
-        this.model.Inventory.push(new NameValue(product.Description, product.Quantity));
+        if(product.SupportSnapshot) {
+          this.model.Count += product.Quantity;
+          this.model.Total += (product.Quantity * product.Price);
+          this.model.Inventory.push(new Name2Value(product.Description, product.Quantity, product.Price));
+        }
       });
     }
   }

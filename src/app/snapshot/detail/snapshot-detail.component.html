@@ -44,6 +44,12 @@
               <th class="totalColumn">
                 Quantity
               </th>
+              <th class="totalColumn">
+                Price
+              </th>
+              <th class="totalColumn">
+                Total
+              </th>
             </tr>
           </thead>
           <ng-container *ngFor="let info of model.Inventory">
@@ -52,10 +58,28 @@
                 {{ info.Name }}
               </td>
               <td class="totalColumn">
-                {{ info.Value }}
+                {{ info.Value1 | number }}
+              </td>
+              <td class="totalColumn">
+                {{ info.Value2 | number:'1.2-2' }}
+              </td>
+              <td class="totalColumn">
+                {{ info.Value1 * info.Value2 | number:'1.2-2' }}
               </td>
             </tr>
           </ng-container>
+          <tr class="blankCell">
+            <td>
+              Total
+            </td>
+            <td class="totalColumn">
+              {{ model.Count | number }}
+            </td>
+            <td></td>
+            <td class="totalColumn">
+              {{ model.Total | number:'1.2-2'}}
+            </td>
+          </tr>
         </table>
         <div class="vSmallSpacer"></div>
       </div>

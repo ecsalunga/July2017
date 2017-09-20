@@ -5,4 +5,9 @@ export class ProductInfo {
     Price: number;
     Quantity: number;
     QuantityNotify: number;
+    SupportSnapshot: boolean;
+
+    constructor() {
+        this.SupportSnapshot = true;
+    }
 }

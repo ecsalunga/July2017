@@ -8,6 +8,18 @@ export class NameValue {
     }
 }
 
+export class Name2Value {
+    Name: string;
+    Value1: any;
+    Value2: any;
+
+    constructor(name: string, value1: any, value2: any){
+        this.Name = name;
+        this.Value1 = value1;
+        this.Value2 = value2;
+    }
+}
+
 export class CommandInfo {
     key: string;
     UserKey: string;

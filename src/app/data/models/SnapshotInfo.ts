@@ -1,4 +1,4 @@
-import { NameValue } from './';
+import { Name2Value } from './';
 
 export class SnapshotInfo {
     key: string;
@@ -6,7 +6,7 @@ export class SnapshotInfo {
     UserName: string;
     ActionDate: number;
     KeyDay: number;
-    Inventory: Array<NameValue>;
+    Inventory: Array<Name2Value>;
     
     SaleAmount: number;
     ExpenseAmount: number;
@@ -14,9 +14,16 @@ export class SnapshotInfo {
     COHStart: number;
     COHActual: number;
     COHComputed: number;
+    Count: number;
+    Total: number;
     Note: string;
 
     ReviewerKey: string;
     ReviewerName: string;
     ReviewDate: number;
+
+    constructor() {
+        this.Count = 0;
+        this.Total = 0;
+    }
 }
