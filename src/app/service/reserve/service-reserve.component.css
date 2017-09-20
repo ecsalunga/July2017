@@ -25,6 +25,14 @@ md-form-field {
     padding: 10px;
 }
 
+.shortText {
+    width: 120px;
+}
+
+.longText {
+    width: 250px;
+}
+
 .confirm {
     float: left; 
 }

@@ -10,33 +10,57 @@
       <img class="fullWidth" src="{{model.ImageURL}}" />
     </div>
     <div class="itemControl mainColor">
-      <div>
-        {{ DL.CURRENCY }} {{ model.Price | number:'1.2-2' }}
-      </div>
-      <div class="vMediumSpacer"></div>
-      <div>
+      <ng-container *ngIf="!isReserving; else dataReserving;">
         <div>
-          <md-form-field class="date">
-            <input mdInput [mdDatepicker]="from" placeholder="From" (dateChange)="DataChanged()" [(ngModel)]="FromDate">
-            <md-datepicker-toggle mdSuffix [for]="from"></md-datepicker-toggle>
-            <md-datepicker #from></md-datepicker>
-          </md-form-field>
-          <md-form-field class="date">
-            <input mdInput [mdDatepicker]="to" placeholder="To" (dateChange)="DataChanged()" [(ngModel)]="ToDate">
-            <md-datepicker-toggle mdSuffix [for]="to"></md-datepicker-toggle>
-            <md-datepicker #to></md-datepicker>
+          {{ DL.CURRENCY }} {{ model.Price | number:'1.2-2' }}
+        </div>
+        <div class="vMediumSpacer"></div>
+        <div>
+          <div>
+            <md-form-field class="date">
+              <input mdInput [mdDatepicker]="from" placeholder="From" (dateChange)="DataChanged()" [(ngModel)]="FromDate">
+              <md-datepicker-toggle mdSuffix [for]="from"></md-datepicker-toggle>
+              <md-datepicker #from></md-datepicker>
+            </md-form-field>
+            <md-form-field class="date">
+              <input mdInput [mdDatepicker]="to" placeholder="To" (dateChange)="DataChanged()" [(ngModel)]="ToDate">
+              <md-datepicker-toggle mdSuffix [for]="to"></md-datepicker-toggle>
+              <md-datepicker #to></md-datepicker>
+            </md-form-field>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #dataReserving>
+        <div>
+          <md-form-field class="longText">
+            <input id="txtDate" readonly mdInput placeholder="Date Range" value="{{ FromDate | date : 'mediumDate' }} to {{ ToDate | date : 'mediumDate' }}" />
           </md-form-field>
         </div>
-      </div>
+        <div>
+          <md-form-field class="shortText">
+            <input id="txtPrice" readonly mdInput placeholder="Price" value="{{ DL.CURRENCY }} {{ model.Price | number:'1.2-2' }}" />
+          </md-form-field>
+        </div>
+        <div>
+          <md-form-field class="shortText">
+            <input id="txtQuantity" readonly mdInput placeholder="Number of days" value="{{ GetDayCount() }}" />
+          </md-form-field>
+        </div>
+        <div>
+          <md-form-field class="shortText">
+            <input id="txtTotal" readonly mdInput placeholder="Total" value="{{ DL.CURRENCY }} {{ GetDayCount() * model.Price | number:'1.2-2' }}" />
+          </md-form-field>
+        </div>
+      </ng-template>
       <div class="hSpacer"></div>
       <div>
-        <div *ngIf="!isReserving">
+        <ng-container *ngIf="!isReserving; else controlReserving;">
           <button md-raised-button [disabled]="!FromDate || !ToDate || !CanAdd()" (click)="ShowReserve()">
             <md-icon>done</md-icon>
             <span>Reserve</span>
           </button>
-        </div>
-        <div *ngIf="isReserving">
+        </ng-container>
+        <ng-template #controlReserving>
           <div class="confirm">
             <button md-raised-button (click)="HideReserve()">
               <md-icon>assignment_return</md-icon>
@@ -47,7 +71,7 @@
               <span>Confirm</span>
             </button>
           </div>
-        </div>
+        </ng-template>
         <div *ngIf="isReserving && DL.HasMissingProfileData()" class="bad prompt">
           {{ DL.MSG_MISSING_PROFILE_DATA }}
         </div>

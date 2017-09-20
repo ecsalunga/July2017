@@ -41,10 +41,7 @@ export class ServiceReserveComponent implements OnInit {
     info.ItemKey = this.model.key;
     info.Name = this.model.Name;
     info.Price = this.model.Price;
-
-    let timeDiff = Math.abs(this.FromDate.getTime() - this.ToDate.getTime());
-    let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
-    info.Count = diffDays + 1;
+    info.Count = this.GetDayCount();
 
     this.DL.ReservationUpdateStatus(info, this.DL.STATUS_REQUESTED);
     info.From = this.core.dateToKeyDay(this.FromDate);
@@ -53,6 +50,12 @@ export class ServiceReserveComponent implements OnInit {
     this.DA.ServiceReserveSave(info);
     this.DL.Display("Reservation", "Submitted!");
     this.DL.LoadFromLink("service-booking");
+  }
+
+  GetDayCount(): number {
+    let timeDiff = Math.abs(this.FromDate.getTime() - this.ToDate.getTime());
+    let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+    return diffDays + 1;
   }
 
   CanAdd(): boolean {
