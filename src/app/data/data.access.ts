@@ -294,6 +294,10 @@ export class DataAccess {
                     this.DL.Members.push(info);
 
                 this.DL.UserAll.push(info);
+
+                if(this.DL.User.UID != null && this.DL.User.UID == info.UID) {
+                    this.DL.User = info;
+                }
             });
 
             // add walk-in for members

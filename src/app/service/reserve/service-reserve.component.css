@@ -23,4 +23,14 @@ md-form-field {
 .itemControl {
     overflow: auto;
     padding: 10px;
-} 
+}
+
+.confirm {
+    float: left; 
+}
+
+.prompt {
+    float: right; 
+    margin-top: 10px;
+    height: 30px;
+}

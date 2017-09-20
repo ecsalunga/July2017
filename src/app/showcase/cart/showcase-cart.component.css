@@ -18,3 +18,10 @@
 .visibility {
     margin-right: 5px;
 }
+
+.prompt {
+    float: left; 
+    margin-top: 20px;
+    height: 30px;
+    margin-bottom: 10px;
+}

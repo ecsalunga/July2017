@@ -37,14 +37,19 @@
           </button>
         </div>
         <div *ngIf="isReserving">
-          <button md-raised-button (click)="HideReserve()">
-            <md-icon>assignment_return</md-icon>
-            <span>Cancel</span>
-          </button>
-          <button md-raised-button [disabled]="!FromDate || !ToDate || !CanAdd()" (click)="Reserve()">
-            <md-icon>done_all</md-icon>
-            <span>Confirm</span>
-          </button>
+          <div class="confirm">
+            <button md-raised-button (click)="HideReserve()">
+              <md-icon>assignment_return</md-icon>
+              <span>Cancel</span>
+            </button>
+            <button md-raised-button [disabled]="!FromDate || !ToDate || !CanAdd()" (click)="Reserve()">
+              <md-icon>done_all</md-icon>
+              <span>Confirm</span>
+            </button>
+          </div>
+        </div>
+        <div *ngIf="isReserving && DL.HasMissingProfileData()" class="bad prompt">
+          {{ DL.MSG_MISSING_PROFILE_DATA }}
         </div>
       </div>
     </div>

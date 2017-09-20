@@ -13,6 +13,9 @@
             <md-checkbox [(ngModel)]="model.PublicIsNotify">Show Public Notification</md-checkbox>
           </div>
           <div>
+            <md-checkbox [(ngModel)]="model.PromptMissingProfileData">Prompt Missing Profile Data</md-checkbox>
+          </div>
+          <div>
             <md-select placeholder="Default Page" [(ngModel)]="model.DefaultPage">
               <md-option *ngFor="let module of DL.PublicModules" [value]="module.Value">
                 {{ module.Name }}

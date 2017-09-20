@@ -52,6 +52,9 @@
       </table>
       <div class="hSpacer"></div>
       <div class="itemControl mainColor">
+        <div *ngIf="isCheckingout && order.Status == DL.STATUS_SELECTING && DL.HasMissingProfileData()" class="bad prompt">
+          {{ DL.MSG_MISSING_PROFILE_DATA }}
+        </div>
         <div class="cartSelection">
           <div *ngIf="!isCheckingout && order.Status == DL.STATUS_SELECTING">
             <button md-raised-button (click)="ShowCheckout()">

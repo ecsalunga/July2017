@@ -14,6 +14,8 @@ import {
 
 @Injectable()
 export class DataLayer {
+    MSG_MISSING_PROFILE_DATA: string = "Please ensure that your contact/address details are updated by clicking on the top right icon.";
+
     SnackBarConfig: MdSnackBarConfig;
     SnackBarConfigLong: MdSnackBarConfig;
 
@@ -312,6 +314,19 @@ export class DataLayer {
                     this.UserAccess = access;
             });
         }
+    }
+
+    public HasMissingProfileData(): boolean {
+        if(!this.ModuleSetting.PromptMissingProfileData)
+            return false;
+
+        if(!this.User.Address1 && !this.User.Address2)
+            return true;
+
+        if(!this.User.Contact1 && !this.User.Contact2)
+            return true;
+
+        return false;
     }
 
     public DeliveryUpdateStatus(item: DeliveryInfo, status: string) {

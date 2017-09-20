@@ -1,6 +1,7 @@
 export class ModuleSettingInfo {
     ModuleIsNotify: boolean;
     PublicIsNotify: boolean;
+    PromptMissingProfileData: boolean;
    
     DefaultPage: string;
     HomeTitle: string;
