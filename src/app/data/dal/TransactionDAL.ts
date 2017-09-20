@@ -106,6 +106,7 @@ export class TransactionDAL {
         info.Amount = this.DL.SellInfosAmount;
         info.ActionDate = this.DL.GetActionDate();
         info.KeyDay = this.DL.GetKeyDay();
+        info.Source = this.DL.SOURCE_COUNTER;
 
         if(isDelivery) {
             if(this.DL.ModuleSetting.DeliveryIsToggleSell)
@@ -146,6 +147,7 @@ export class TransactionDAL {
         info.IsTransaction = true;
         info.Transaction.ActionDate = this.DL.GetActionDate();
         info.Transaction.KeyDay = this.DL.GetKeyDay();
+        info.Transaction.IsDelivered = true;
         this.DeliverySave(info);
         this.Save(info.Transaction);
         this.DA.ProductUpdate(info.Transaction.Items);

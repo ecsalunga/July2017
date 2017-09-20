@@ -21,6 +21,12 @@ export class TransactionInfo {
     Amount: number;
     ActionDate: number;
     KeyDay: number;
+    Source: string;
+    IsDelivered: boolean;
+
+    constructor() {
+        this.IsDelivered = false;
+    }
 }
 
 export class DeliveryInfo {
