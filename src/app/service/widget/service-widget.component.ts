@@ -16,6 +16,22 @@ export class ServiceWidgetComponent implements OnInit {
     this.DL.LoadFromLink("service-reserve");
   }
 
+  CanBook(): boolean {
+    if(!this.DL.User.IsMember)
+      return false;
+    
+    let openBooking = 0;
+    this.DL.ServiceReservationUser.forEach(book => {
+      if(book.Status == this.DL.STATUS_REQUESTED
+        || book.Status == this.DL.STATUS_IN_PROGRESS
+        || book.Status == this.DL.STATUS_CONFIRMED
+      )
+        openBooking++; 
+    });
+
+    return this.DL.ModuleSetting.ServiceReservationMax > openBooking;
+  }
+
   ngOnInit() {
   }
 }

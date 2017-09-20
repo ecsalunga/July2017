@@ -6,6 +6,7 @@ export class ModuleSettingInfo {
     HomeTitle: string;
 
     ShowcseCartItemMax: number;
+    ServiceReservationMax: number;
 
     DeliveryMaxMinutes: number;
     DeliveryIsToggleSell: boolean;

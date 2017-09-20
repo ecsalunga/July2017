@@ -51,8 +51,8 @@ export class ServiceReserveComponent implements OnInit {
     info.To = this.core.dateToKeyDay(this.ToDate);
 
     this.DA.ServiceReserveSave(info);
-    this.LoadList();
     this.DL.Display("Reservation", "Submitted!");
+    this.DL.LoadFromLink("service-booking");
   }
 
   CanAdd(): boolean {
