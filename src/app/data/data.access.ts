@@ -402,6 +402,23 @@ export class DataAccess {
     }
 
     public ShowcaseOrderForDelivery(item: OrderInfo) {
+        let info = this.createTransactionFromOrder(item);
+        
+        if(this.DL.ModuleSetting.DeliveryIsToggleOrder)
+            this.DL.DeliveryToggledModule = "product-order";
+            
+        this.DL.DeliveryStamp = this.DL.GetActionDate();
+        this.DeliveryStart(info);
+    }
+
+    public ShowcaseOrderToTransaction(item: OrderInfo) {
+        let tran = this.createTransactionFromOrder(item);
+        this.TransactionInfoSave(tran);
+        this.ProductUpdate(tran.Items);
+        this.ReportTodaySave();
+    }
+
+    private createTransactionFromOrder(item: OrderInfo): TransactionInfo {
         let info = new TransactionInfo();
         info.MemberKey = item.MemberKey;
         info.BuyerName = item.BuyerName;
@@ -413,12 +430,7 @@ export class DataAccess {
         info.ActionDate = this.DL.GetActionDate();
         info.KeyDay = this.DL.GetKeyDay();
         info.Source = this.DL.SOURCE_ORDER;
-        
-        if(this.DL.ModuleSetting.DeliveryIsToggleOrder)
-            this.DL.DeliveryToggledModule = "product-order";
-            
-        this.DL.DeliveryStamp = this.DL.GetActionDate();
-        this.DeliveryStart(info);
+        return info;
     }
 
     public ShowcaseOrderDelete(item: OrderInfo) {

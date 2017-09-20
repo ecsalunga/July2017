@@ -21,6 +21,19 @@ export class ProductOrderDetailComponent implements OnInit {
     return (!this.model.HasDelivery && this.model.Status != this.DL.STATUS_SELECTING && this.model.Status != this.DL.STATUS_DONE);
   }
 
+  ShowForTransaction(): boolean {
+    return (!this.model.HasDelivery && !this.model.IsTransaction && this.model.Status == this.DL.STATUS_DONE);
+  }
+
+  GenerateTransaction() {
+    this.DA.ShowcaseOrderToTransaction(this.model);
+    this.DL.OrderInjectStatus(this.model, this.DL.STATUS_SAVEDTO_TRANSACT);
+    this.model.IsTransaction = true;
+    this.DA.ShowcaseOrderSave(this.model);
+    this.LoadList();
+    this.DL.Display("Transaction", "Saved!");
+  }
+
   CanSave(): boolean {
     return (this.DL.UserAccess.ShowcaseOrderEdit && 
       !(this.model.Status == this.DL.STATUS_SELECTING ||  this.model.Status == this.DL.STATUS_DONE));

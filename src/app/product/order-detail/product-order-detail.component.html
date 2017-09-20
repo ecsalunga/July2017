@@ -90,8 +90,9 @@
   <div class="hSpacer"></div>
   <table>
     <tr class="rightRow">
-      <td *ngIf="ShowDeliveryOption()">
-        <button md-fab color="primary" (click)="CreateDelivery()" mdTooltip="Create delivery request" mdTooltipPosition="above"><md-icon>send</md-icon></button>
+      <td>
+        <button *ngIf="ShowForTransaction()"md-fab color="primary" (click)="GenerateTransaction()" mdTooltip="Generate transaction" mdTooltipPosition="above"><md-icon>receipt</md-icon></button>
+        <button *ngIf="ShowDeliveryOption()" md-fab color="primary" (click)="CreateDelivery()" mdTooltip="Create delivery request" mdTooltipPosition="above"><md-icon>send</md-icon></button>
       </td>
       <td>
         <button md-fab (click)="Save()" mdTooltip="Save" [disabled]="!CanSave()" mdTooltipPosition="above"><md-icon>save</md-icon></button>
