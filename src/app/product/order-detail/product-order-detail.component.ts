@@ -17,6 +17,10 @@ export class ProductOrderDetailComponent implements OnInit {
     this.selectedStatus = this.model.Status;
   }
 
+  ShowDeliveryOption(): boolean {
+    return (!this.model.HasDelivery && this.model.Status != this.DL.STATUS_SELECTING && this.model.Status != this.DL.STATUS_DONE);
+  }
+
   CanSave(): boolean {
     return (this.DL.UserAccess.ShowcaseOrderEdit && 
       !(this.model.Status == this.DL.STATUS_SELECTING ||  this.model.Status == this.DL.STATUS_DONE));
@@ -26,16 +30,19 @@ export class ProductOrderDetailComponent implements OnInit {
     if(this.DL.ShowcaseOrder.Status != this.selectedStatus) {
       this.DL.OrderUpdateStatus(this.model, this.selectedStatus);
       this.DA.ShowcaseOrderSave(this.model);
-
-      if(this.selectedStatus == this.DL.STATUS_FOR_DELIVERY) {
-        this.DA.ShowcaseOrderForDelivery(this.model);
-        this.DL.Display("Delivery Info", "Created!");
-      } else {
-        this.DL.Display("Order", "Saved!");
-        this.LoadList();
-      }
+      this.DL.Display("Order", "Saved!");
+      this.LoadList();
     }
-    
+  }
+
+  CreateDelivery() {
+    this.DL.OrderInjectStatus(this.model, this.DL.STATUS_DELIVERY_CREATED);
+    this.DL.OrderUpdateStatus(this.model, this.DL.STATUS_FOR_DELIVERY);
+    this.model.HasDelivery = true;
+    this.DA.ShowcaseOrderSave(this.model);
+    this.DA.ShowcaseOrderForDelivery(this.model);
+    this.selectedStatus = this.DL.STATUS_FOR_DELIVERY;
+    this.DL.Display("Delivery Info", "Created!");
   }
   
   GetDate(keyDay: number): Date {

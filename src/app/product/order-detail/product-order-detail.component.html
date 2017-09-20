@@ -88,10 +88,17 @@
     </md-select>
   </div>
   <div class="hSpacer"></div>
-  <div class="rightRow">
-    <button md-fab (click)="Save()" mdTooltip="Save" [disabled]="!CanSave()" mdTooltipPosition="above"><md-icon>save</md-icon></button>
-    <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
-  </div>
+  <table>
+    <tr class="rightRow">
+      <td *ngIf="ShowDeliveryOption()">
+        <button md-fab color="primary" (click)="CreateDelivery()" mdTooltip="Create delivery request" mdTooltipPosition="above"><md-icon>send</md-icon></button>
+      </td>
+      <td>
+        <button md-fab (click)="Save()" mdTooltip="Save" [disabled]="!CanSave()" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+        <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+      </td>
+    </tr>
+  </table>
   </ng-container>
   <ng-template #cartLink>
     <div class="hSpacer"></div>

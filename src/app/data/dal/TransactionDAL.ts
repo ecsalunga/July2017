@@ -74,7 +74,7 @@ export class TransactionDAL {
                 info.key = snapshot.$key;
                 this.DL.DeliveryInfos.push(info);
                 
-                if(this.DL.DeliveryToggledStamp > 0 && info.ActionStart == this.DL.DeliveryToggledStamp)
+                if(this.DL.DeliveryToggledModule != null && this.DL.DeliveryStamp > 0 && info.ActionStart == this.DL.DeliveryStamp)
                 {
                     this.DL.Delivery = info;
                     this.DL.LoadFromLink("delivery-detail");
@@ -107,8 +107,13 @@ export class TransactionDAL {
         info.ActionDate = this.DL.GetActionDate();
         info.KeyDay = this.DL.GetKeyDay();
 
-        if(isDelivery)
+        if(isDelivery) {
+            if(this.DL.ModuleSetting.DeliveryIsToggleSell)
+                this.DL.DeliveryToggledModule = "product-sell";
+                
+            this.DL.DeliveryStamp = this.DL.GetActionDate();
             this.DeliveryStart(info);
+        }
         else {
             this.Save(info);
             this.DA.ProductUpdate(info.Items);
@@ -123,13 +128,7 @@ export class TransactionDAL {
         item.UserKey = this.DL.UserPending.key;
         item.UserName = this.DL.UserPending.Name;
         item.Transaction = info;
-        item.ActionStart = this.DL.GetActionDate();
-        
-        if(this.DL.ModuleSetting.DeliveryIsToggleSell) {
-            this.DL.DeliveryToggledStamp = item.ActionStart;
-            console.log (this.DL.DeliveryToggledStamp );
-        }
-
+        item.ActionStart = this.DL.DeliveryStamp;
         this.DL.DeliveryGetInfo(item);
         this.DL.DeliveryUpdateStatus(item, this.DL.STATUS_CREATED);
         this.DeliverySave(item);

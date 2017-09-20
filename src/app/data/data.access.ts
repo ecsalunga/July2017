@@ -412,6 +412,11 @@ export class DataAccess {
         info.Amount = item.Amount;
         info.ActionDate = this.DL.GetActionDate();
         info.KeyDay = this.DL.GetKeyDay();
+        
+        if(this.DL.ModuleSetting.DeliveryIsToggleOrder)
+            this.DL.DeliveryToggledModule = "product-order";
+            
+        this.DL.DeliveryStamp = this.DL.GetActionDate();
         this.DeliveryStart(info);
     }
 

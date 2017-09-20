@@ -12,6 +12,7 @@ export class DeliveryDetailComponent implements OnInit {
   model: DeliveryInfo;
   selectedUser: UserInfo;
   selectedStatus: string;
+  toggleModule: string;
 
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     this.model = Object.assign({}, this.DL.Delivery);
@@ -64,13 +65,18 @@ export class DeliveryDetailComponent implements OnInit {
   }
 
   LoadList() {
-    if(this.DL.DeliveryToggledStamp > 0)
-      this.DL.LoadFromLink("product-sell");
-    else
+    if(!this.toggleModule)
       this.DL.LoadFromLink("delivery-list");
+    else
+      this.DL.LoadFromLink(this.toggleModule);
   }
 
   ngOnInit() {
     this.DL.TITLE = "Delivery Details";
+
+    if(this.DL.DeliveryToggledModule != null) {
+      this.toggleModule = this.DL.DeliveryToggledModule;
+      this.DL.DeliveryToggledModule = null;
+    }
   }
 }

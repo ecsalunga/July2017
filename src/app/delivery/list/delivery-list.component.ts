@@ -63,8 +63,7 @@ export class DeliveryListComponent implements OnInit {
     return this.core.numberToDate(actionDate);
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.DL.TITLE = "Delivery List";
-    this.DL.DeliveryToggledStamp = 0;
   }
 }

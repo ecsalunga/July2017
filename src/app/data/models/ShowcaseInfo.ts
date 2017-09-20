@@ -14,9 +14,11 @@ export class OrderInfo {
     Amount: number;
     ActionDate: number;
     Status: string;
+    HasDelivery: boolean;
     Actions: Array<NameValue>;
 
     constructor() {
+        this.HasDelivery = false;
         this.Items = new Array<SellInfo>();
         this.Actions =  new Array<NameValue>();
     }

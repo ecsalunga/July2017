@@ -8,7 +8,8 @@ export class ModuleSettingInfo {
     ShowcseCartItemMax: number;
 
     DeliveryMaxMinutes: number;
-    DeliveryIsToggleSell: boolean
+    DeliveryIsToggleSell: boolean;
+    DeliveryIsToggleOrder: boolean;
 }
 
 export class SystemSettingInfo {

@@ -34,6 +34,7 @@ export class DataLayer {
     STATUS_IN_PROGRESS: string = "In-Progress";
     STATUS_READY_PICKUP: string = "Ready for Pickup";
     STATUS_FOR_DELIVERY: string = "Set for Delivery";
+    STATUS_DELIVERY_CREATED: string = "Delivery Created";
     STATUS_DELIVERED: string = "Delivered";
     STATUS_CANCELLED: string = "Cancelled";
     STATUS_SELECTING: string = "Selecting";
@@ -80,7 +81,8 @@ export class DataLayer {
     Delivery: DeliveryInfo;
     DeliveryInfos: Array<DeliveryInfo>;
     DeliveryStatuses: Array<string>;
-    DeliveryToggledStamp: number = 0;
+    DeliveryStamp: number = 0;
+    DeliveryToggledModule: string = null;
 
     ExpenseTypes: Array<string>;
     ExpensesToday: Array<ExpenseInfo>;
@@ -214,6 +216,7 @@ export class DataLayer {
             this.STATUS_REQUESTED,
             this.STATUS_IN_PROGRESS,
             this.STATUS_READY_PICKUP,
+            this.STATUS_DELIVERY_CREATED,
             this.STATUS_FOR_DELIVERY,
             this.STATUS_DELIVERED,
             this.STATUS_CANCELLED,
@@ -222,6 +225,7 @@ export class DataLayer {
 
         this.ServiceReservationStatuses = [
             this.STATUS_REQUESTED,
+            this.STATUS_IN_PROGRESS,
             this.STATUS_CONFIRMED,
             this.STATUS_REJECTED,
             this.STATUS_DELAYED,
@@ -316,6 +320,11 @@ export class DataLayer {
     }
 
     public DeliveryInjectStatus(item: DeliveryInfo, status: string) {
+        let action = new NameValue(status, this.GetActionDate());
+        item.Actions.push(action);
+    }
+
+    public OrderInjectStatus(item: OrderInfo, status: string) {
         let action = new NameValue(status, this.GetActionDate());
         item.Actions.push(action);
     }

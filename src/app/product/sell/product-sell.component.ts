@@ -106,8 +106,9 @@ export class ProductSellComponent implements OnInit {
 
   CartDone() {
     this.DA.SellInfoDone(this.selectedMember.key, this.selectedMember.Name, this.isDelivery);
-    if(this.isDelivery)
+    if(this.isDelivery) {
       this.DL.Display("Delivery Info", "Created!");
+    }
     else
       this.DL.Display("Transaction", "Saved!");
 
@@ -118,6 +119,5 @@ export class ProductSellComponent implements OnInit {
 
   ngOnInit() {
     this.DL.TITLE = "Sell Product";
-    this.DL.DeliveryToggledStamp = 0;
   }
 }
