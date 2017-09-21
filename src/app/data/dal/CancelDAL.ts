@@ -65,13 +65,16 @@ export class CancelDAL {
         this.Save(info);
 
         // delete transaction
-        this.transactionInfoDelete(this.DL.ReportSelected, this.DL.Transaction.key);
+        this.transactionInfoDelete(this.DL.Transaction.key);
 
         // report recompute
-        this.DA.ReportReGenerateBySelected();
+        let transDate = this.core.keyDayToDate(this.DL.Transaction.KeyDay);
+        let keyDay = this.core.dateToKeyDay(transDate);
+        let keyMonth = this.core.dateToKeyMonth(transDate);
+        this.DA.ReportReGenerate(transDate.getFullYear(), keyMonth, keyDay);
     }
 
-    private transactionInfoDelete(report: ReportInfo, key: string) {
+    private transactionInfoDelete(key: string) {
         this.af.object(this.PATH_TRANSACTION + "/" + key).remove();
     }
 

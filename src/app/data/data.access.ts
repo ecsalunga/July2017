@@ -61,7 +61,7 @@ export class DataAccess {
         this.reportDAL = new ReportDAL(core, DL, this, af);
         this.cancelDAL = new CancelDAL(core, DL, this, af);
         this.transactionDAL = new TransactionDAL(core, DL, this, af);
-        
+
         this.settingDAL = new SettingDAL(DL, af);
         this.accessDAL = new AccessDAL(DL, af);
         this.productDAL = new ProductDAL(DL, af);
@@ -83,11 +83,11 @@ export class DataAccess {
             .createUserWithEmailAndPassword(email, password)
             .then(value => {
                 this.DL.Display("Account", "Created!");
-        })
+            })
             .catch(err => {
                 console.log(err);
                 this.DL.Display("Account", "Create account failed.");
-        });
+            });
     }
 
     public LogIn(email: string, password: string) {
@@ -95,11 +95,11 @@ export class DataAccess {
             .signInWithEmailAndPassword(email, password)
             .then(value => {
                 this.DL.Display("Login", "Successful!");
-        })
+            })
             .catch(err => {
                 console.log(err);
                 this.DL.Display("Login", "Login failed.");
-        });
+            });
     }
 
     public DataLoad() {
@@ -123,17 +123,17 @@ export class DataAccess {
                 let info: CommandInfo = snapshot;
                 info.key = snapshot.$key;
 
-                if(this.DL.User.key == info.UserKey)
+                if (this.DL.User.key == info.UserKey)
                     this.CommandExecute(info);
             });
         });
     }
 
     public CommandExecute(item: CommandInfo) {
-        if(item.ComandType == this.DL.COMMAND_LOGOUT) {
+        if (item.ComandType == this.DL.COMMAND_LOGOUT) {
             this.DL.DisplayLong("Logout Command", "Executed!");
             this.LogOut();
-        } else if(item.ComandType == this.DL.COMMAND_POPCHAT) {
+        } else if (item.ComandType == this.DL.COMMAND_POPCHAT) {
             this.PopChat(item.Data);
         }
 
@@ -142,7 +142,7 @@ export class DataAccess {
 
     public PopChat(conversationKey: string) {
         this.DL.Conversations.forEach(item => {
-            if(item.key == conversationKey){
+            if (item.key == conversationKey) {
                 this.DL.Conversation = item;
 
                 let dialogRef = this.dialog.open(MessagePopupComponent, {
@@ -158,7 +158,7 @@ export class DataAccess {
     }
 
     public CommandDelete(item: CommandInfo) {
-        this.af.list(this.COMMAND, { query: { orderByChild: 'UserKey', equalTo: item.UserKey }}).first().subscribe(snapshots => {
+        this.af.list(this.COMMAND, { query: { orderByChild: 'UserKey', equalTo: item.UserKey } }).first().subscribe(snapshots => {
             let usersCommand = new Array<CommandInfo>();
             snapshots.forEach(snapshot => {
                 let info: CommandInfo = snapshot;
@@ -182,7 +182,7 @@ export class DataAccess {
     }
 
     GeneralActiveDataLoad() {
-        if(!this.DL.IsDataActiveLoaded) {
+        if (!this.DL.IsDataActiveLoaded) {
             this.showcaseDAL.LoadOrder();
             this.serviceDAL.LoadReservation();
             this.messageDAL.Load();
@@ -218,16 +218,15 @@ export class DataAccess {
                 this.DL.User.Name = user.displayName;
                 this.DL.User.Email = user.email;
 
-                if (!this.DL.User.Name)
-                {
-                    if(!this.DL.SignupName)
+                if (!this.DL.User.Name) {
+                    if (!this.DL.SignupName)
                         this.DL.User.Name = this.DL.User.Email;
                     else {
                         this.DL.User.Name = this.DL.SignupName;
                         this.DL.SignupName = null;
                     }
                 }
-                    
+
                 this.DL.User.UID = user.uid;
                 this.DL.User.ImageURL = user.photoURL
                 toSave = true;
@@ -292,7 +291,7 @@ export class DataAccess {
 
                 this.DL.UserAll.push(info);
 
-                if(this.DL.User.UID != null && this.DL.User.UID == info.UID) {
+                if (this.DL.User.UID != null && this.DL.User.UID == info.UID) {
                     this.DL.User = info;
                 }
             });
@@ -372,7 +371,7 @@ export class DataAccess {
     }
 
     public MessageSend(message: string) {
-        if(this.DL.Conversation) {
+        if (this.DL.Conversation) {
             let info = new MessageInfo();
             info.ConversationKey = this.DL.Conversation.key;
             info.ActionDate = this.DL.GetActionDate();
@@ -408,10 +407,10 @@ export class DataAccess {
 
     public ShowcaseOrderForDelivery(item: OrderInfo) {
         let info = this.createTransactionFromOrder(item);
-        
-        if(this.DL.ModuleSetting.DeliveryIsToggleOrder)
+
+        if (this.DL.ModuleSetting.DeliveryIsToggleOrder)
             this.DL.DeliveryToggledModule = "product-order";
-            
+
         this.DL.DeliveryStamp = this.DL.GetActionDate();
         this.DeliveryStart(info);
     }
@@ -489,7 +488,7 @@ export class DataAccess {
     public DeliveryStart(info: TransactionInfo) {
         this.transactionDAL.DeliveryStart(info);
     }
-        
+
     public ProductUpdate(infos: Array<SellInfo>) {
         this.productDAL.UpdateProducts(infos);
     }
@@ -516,10 +515,6 @@ export class DataAccess {
 
     public ReportSave(item: ReportInfo) {
         this.reportDAL.Save(item);
-    }
-
-    public ReportReGenerateBySelected() {
-        this.ReportReGenerate(this.DL.ReportSelected.KeyYear, this.DL.ReportSelected.KeyMonth, this.DL.ReportSelected.KeyDay);
     }
 
     public ModuleSettingSave(item: ModuleSettingInfo) {

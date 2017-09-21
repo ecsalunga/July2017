@@ -14,7 +14,7 @@ export class TransactionDetailComponent implements OnInit {
   
   Cancel() {
     this.DA.TransactionSelectedCancel(this.description);
-    this.LoadList();
+    this.DL.LoadFromMenu("transaction-list");
     this.DL.Display("Transaction Details", "Cancelled!");
   }
 
