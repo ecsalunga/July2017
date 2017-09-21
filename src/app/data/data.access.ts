@@ -113,7 +113,6 @@ export class DataAccess {
 
     public DataSystemLoad() {
         this.expenseDAL.LoadTypes();
-        this.reportDAL.Load();
         this.cancelDAL.Load();
         this.SystemActiveDataLoad();
     }
@@ -176,10 +175,8 @@ export class DataAccess {
     SystemActiveDataLoad() {
         if (!this.DL.IsSystemDataActiveLoaded) {
             this.productDAL.Load();
-            this.transactionDAL.Load();
             this.transactionDAL.LoadSell();
             this.transactionDAL.LoadDelivery();
-            this.expenseDAL.Load();
             this.DL.IsSystemDataActiveLoaded = true;
         }
     }
@@ -329,8 +326,8 @@ export class DataAccess {
         this.showcaseDAL.Load();
     }
 
-    public TransactionSelectedLoad(report: ReportInfo) {
-        this.transactionDAL.LoadByReportInfo(report);
+    public TransactionLoadByKeyDay(keyDay: number) {
+        this.transactionDAL.LoadByKeyDay(keyDay);
     }
 
     public ReportMonthlyLoad(selectedYear: number, selectedMonth: number) {
@@ -339,6 +336,10 @@ export class DataAccess {
 
     public ReportReGenerate(year: number, keyMonth: number, keyDay: number) {
         this.reportDAL.ReGenerate(year, keyMonth, keyDay);
+    }
+
+    public ReportGenerate(year: number, keyMonth: number, keyDay: number, startCOH: number, actualCOH: number) {
+        this.reportDAL.Generate(year, keyMonth, keyDay, startCOH, actualCOH);
     }
 
     public ExpenseSelectedLoad(report: ReportInfo) {
@@ -419,7 +420,6 @@ export class DataAccess {
         let tran = this.createTransactionFromOrder(item);
         this.TransactionInfoSave(tran);
         this.ProductUpdate(tran.Items);
-        this.ReportTodaySave();
     }
 
     private createTransactionFromOrder(item: OrderInfo): TransactionInfo {
@@ -432,7 +432,7 @@ export class DataAccess {
         info.Count = item.Count;
         info.Amount = item.Amount;
         info.ActionDate = this.DL.GetActionDate();
-        info.KeyDay = this.DL.GetKeyDay();
+        info.KeyDay = this.DL.KeyDay;
         info.Source = this.DL.SOURCE_ORDER;
         return info;
     }
@@ -459,7 +459,7 @@ export class DataAccess {
 
     public SnapshotSave(item: SnapshotInfo) {
         this.snapshotDAL.Save(item);
-        this.snapshotDAL.Load(this.DL.ReportToday.KeyDay);
+        this.snapshotDAL.Load(this.DL.KeyDay);
     }
 
     public SellInfoDelete(item: SellInfo) {
@@ -508,30 +508,10 @@ export class DataAccess {
 
     public ExpenseInfoSave(item: ExpenseInfo) {
         this.expenseDAL.Save(item);
-
-        if (item.KeyDay == this.DL.ReportToday.KeyDay)
-            this.ReportTodaySave();
-        else
-            this.ReportReGenerateBySelected()
     }
 
     public ExpenseDelete(item: ExpenseInfo) {
         this.expenseDAL.Delete(item);
-
-        if (item.KeyDay == this.DL.ReportToday.KeyDay)
-            this.ReportTodaySave();
-        else
-            this.ReportReGenerateBySelected()
-    }
-
-    public ReportTodaySave() {
-        let date = new Date();
-        if (this.DL.Date.getDate() != date.getDate()) {
-            this.DL.Date = date;
-            this.DL.ReportTodayRefresh();
-        }
-
-        this.reportDAL.SaveTodayReport();
     }
 
     public ReportSave(item: ReportInfo) {

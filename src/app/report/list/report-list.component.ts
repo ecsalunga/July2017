@@ -27,8 +27,13 @@ export class ReportListComponent implements OnInit {
     this.DL.LoadFromLink("report-detail");
   }
 
+  AddItem(item: ReportInfo) {
+    this.DL.Report = null;
+    this.DL.LoadFromLink("report-detail");
+  }
+
   GetDate(keyDay: number): Date {
-    return this.core.numberToDate(parseInt(keyDay + '000000'))
+    return this.core.keyDayToDate(keyDay);
   }
 
   ngOnInit() {

@@ -9,40 +9,22 @@ export class TransactionDAL {
     PATH_DELIVERY: string = "/transactions/deliveryInfos";
     constructor(private core: Core, private DL: DataLayer, private DA: DataAccess, private af: AngularFireDatabase) {}
 
-    public Load() {
-        this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYDAY, equalTo: this.DL.ReportToday.KeyDay } }).subscribe(snapshots => {
-            this.DL.TransactionsToday = new Array<TransactionInfo>();
-            this.DL.ReportToday.SaleCount = 0;
-            this.DL.ReportToday.SaleAmount = 0;
-
-            snapshots.forEach(snapshot => {
-                let info: TransactionInfo = snapshot;
-                info.key = snapshot.$key;
-                this.DL.TransactionsToday.push(info);
-
-                this.DL.ReportToday.SaleCount += snapshot.Count;
-                this.DL.ReportToday.SaleAmount += snapshot.Amount;
-            });
-            this.DL.TransactionsToday.reverse();
-        });
-    }
-
-    LoadByReportInfo(report: ReportInfo) {
-        this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYDAY, equalTo: report.KeyDay } }).first().subscribe(snapshots => {
-            this.DL.TransactionSelected = new Array<TransactionInfo>();
+    LoadByKeyDay(keyDay: number) {
+        this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYDAY, equalTo: keyDay } }).first().subscribe(snapshots => {
+            this.DL.Transactions = new Array<TransactionInfo>();
             this.DL.ReportSelected.SaleCount = 0;
             this.DL.ReportSelected.SaleAmount = 0;
 
             snapshots.forEach(snapshot => {
                 let info: TransactionInfo = snapshot;
                 info.key = snapshot.$key;
-                this.DL.TransactionSelected.push(info);
+                this.DL.Transactions.push(info);
 
                 this.DL.ReportSelected.SaleCount += snapshot.Count;
                 this.DL.ReportSelected.SaleAmount += snapshot.Amount;
             });
 
-            this.DL.TransactionSelected.reverse();
+            this.DL.Transactions.reverse();
         });
     }
 
@@ -94,7 +76,6 @@ export class TransactionDAL {
             this.af.list(this.PATH_SELL).push(item);
     }
 
-
     public SellDone(memberKey: string, buyerName: string, isDelivery: boolean) {
         let info = new TransactionInfo();
         info.MemberKey = memberKey
@@ -105,7 +86,7 @@ export class TransactionDAL {
         info.Count = this.DL.SellInfosCount;
         info.Amount = this.DL.SellInfosAmount;
         info.ActionDate = this.DL.GetActionDate();
-        info.KeyDay = this.DL.GetKeyDay();
+        info.KeyDay = this.DL.KeyDay;
         info.Source = this.DL.SOURCE_COUNTER;
 
         if(isDelivery) {
@@ -118,7 +99,6 @@ export class TransactionDAL {
         else {
             this.Save(info);
             this.DA.ProductUpdate(info.Items);
-            this.DA.ReportTodaySave();
         }
 
         this.DA.SellInfoClear();
@@ -146,12 +126,11 @@ export class TransactionDAL {
         this.DL.DeliveryInjectStatus(info, this.DL.STATUS_SAVEDTO_TRANSACT);
         info.IsTransaction = true;
         info.Transaction.ActionDate = this.DL.GetActionDate();
-        info.Transaction.KeyDay = this.DL.GetKeyDay();
+        info.Transaction.KeyDay = this.DL.KeyDay;
         info.Transaction.IsDelivered = true;
         this.DeliverySave(info);
         this.Save(info.Transaction);
         this.DA.ProductUpdate(info.Transaction.Items);
-        this.DA.ReportTodaySave();
     }
 
     public DeliveryDelete(item: DeliveryInfo) {

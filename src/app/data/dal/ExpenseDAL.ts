@@ -9,23 +9,6 @@ export class ExpenseDAL {
 
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) {}
 
-    public Load() {
-        this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYDAY, equalTo: this.DL.ReportToday.KeyDay } }).subscribe(snapshots => {
-            this.DL.ExpensesToday = new Array<ExpenseInfo>();
-            this.DL.ReportToday.ExpenseAmount = 0;
-            this.DL.ReportToday.ExpenseCount = 0;
-
-            snapshots.forEach(snapshot => {
-                let info: ExpenseInfo = snapshot;
-                info.key = snapshot.$key;
-                this.DL.ExpensesToday.push(info);
-                this.DL.ReportToday.ExpenseCount++;
-                this.DL.ReportToday.ExpenseAmount += snapshot.Amount;
-            });
-            this.DL.ExpensesToday.reverse();
-        });
-    }
-
     public LoadTypes() {
         this.af.object(this.PATH_TYPES).first().subscribe(snapshot => {
             if (snapshot.$exists())

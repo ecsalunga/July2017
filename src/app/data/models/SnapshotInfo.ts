@@ -8,12 +8,7 @@ export class SnapshotInfo {
     KeyDay: number;
     Inventory: Array<Name2Value>;
     
-    SaleAmount: number;
-    ExpenseAmount: number;
-
-    COHStart: number;
     COHActual: number;
-    COHComputed: number;
     Count: number;
     Total: number;
     Note: string;

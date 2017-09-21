@@ -78,6 +78,11 @@ export class Core {
         return new Date(year, month-1, day, hour, minute, second);
     }
 
+    keyDayToDate(keyDay: number): Date
+    {
+        return this.numberToDate(parseInt(keyDay + '000000'));
+    }
+
     az(val: number) : string {
         let num = val.toString();
         if(num.length < 2)

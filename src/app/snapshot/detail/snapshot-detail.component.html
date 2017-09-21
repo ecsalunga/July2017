@@ -1,27 +1,7 @@
 <div>
   <div>
     <md-form-field>
-      <input id="txtExpenses" readonly mdInput placeholder="Expenses" value="{{ model.ExpenseAmount | number:'1.2-2'}}" />
-    </md-form-field>
-  </div>
-  <div>
-    <md-form-field>
-      <input id="txtSales" readonly mdInput placeholder="Sales" value="{{ model.SaleAmount | number:'1.2-2'}}" />
-    </md-form-field>
-  </div>
-  <div>
-    <md-form-field>
-      <input id="txtCOHStart" readonly mdInput placeholder="Starting cash on-hand" value="{{ model.COHStart | number:'1.2-2'}}" />
-    </md-form-field>
-  </div>
-  <div>
-    <md-form-field>
-      <input id="txtCOHComputed" readonly mdInput placeholder="Computed cash on-hand" value="{{ model.COHComputed | number:'1.2-2'}}" />
-    </md-form-field>
-  </div>
-  <div>
-    <md-form-field>
-      <input id="txtCOHActual" [readonly]="DL.Snapshot" (click)="$event.target.select()" type="number" mdInput placeholder="Actual cash on-hand" [(ngModel)]="model.COHActual" />
+      <input id="txtCOHActual" [readonly]="DL.Snapshot" type="number" mdInput placeholder="Cash on-hand" [(ngModel)]="model.COHActual" />
     </md-form-field>
   </div>
   <div>

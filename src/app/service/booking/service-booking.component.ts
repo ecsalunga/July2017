@@ -16,7 +16,7 @@ export class ServiceBookingComponent implements OnInit {
   }
 
   GetDay(keyDay: number): Date {
-    return this.core.numberToDate(parseInt(keyDay + '000000'))
+    return this.core.keyDayToDate(keyDay);
   }
 
   SetStatusDone(item: ReservationInfo) {

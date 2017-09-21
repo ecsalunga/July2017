@@ -14,17 +14,11 @@ export class TransactionListComponent implements OnInit {
 
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     if (this.DL.SOURCE == this.DL.MENU) {
-      if(!this.DL.TransactionsToday){
-        this.ReportDate = new Date();
-        this.TransactionView();
-      }
-      else {
-        this.DL.TransactionSelected = this.DL.TransactionsToday;
-        this.DL.ReportSelected = this.DL.ReportToday;
-      }
+      this.ReportDate = new Date();
+      this.TransactionView();
     }
-    
-    this.ReportDate = this.core.numberToDate(parseInt(this.DL.ReportSelected.KeyDay + '000000'));
+    else
+      this.ReportDate = this.core.keyDayToDate(this.DL.ReportSelected.KeyDay);
   }
 
   SelectTransaction(info: TransactionInfo) {
@@ -37,7 +31,7 @@ export class TransactionListComponent implements OnInit {
     this.DL.ReportSelected.KeyDay = this.core.dateToKeyDay(this.ReportDate);
     this.DL.ReportSelected.KeyMonth = this.core.dateToKeyMonth(this.ReportDate);
     this.DL.ReportSelected.KeyYear = this.ReportDate.getFullYear();
-    this.DA.TransactionSelectedLoad(this.DL.ReportSelected);
+    this.DA.TransactionLoadByKeyDay(this.DL.ReportSelected.KeyDay);
     this.DL.GotoTop();
   }
 

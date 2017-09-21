@@ -18,18 +18,8 @@ export class SnapshotDetailComponent implements OnInit {
       this.model = new SnapshotInfo();
       this.model.UserKey = this.DL.User.key;
       this.model.UserName = this.DL.User.Name;
-      this.model.KeyDay = this.DL.ReportToday.KeyDay;
-      
-      let start = 0;
-      if(this.DL.ReportToday.COHStart)
-        start = this.DL.ReportToday.COHStart;
+      this.model.KeyDay = this.DL.KeyDay;
 
-      this.model.COHStart = start;
-      this.model.ExpenseAmount = this.DL.ReportToday.ExpenseAmount;
-      this.model.SaleAmount = this.DL.ReportToday.SaleAmount;
-
-      this.model.COHComputed = (this.model.COHStart + this.model.SaleAmount) - this.model.ExpenseAmount
-      
       this.model.Inventory = new Array<Name2Value>();
       this.DL.Products.forEach(product => {
         if(product.SupportSnapshot) {

@@ -1,7 +1,9 @@
 <div>
   <div>
-    <md-form-field>
-      <input id="txtDate" mdInput [readonly]="true" placeholder="Cashflow Date" value="{{ GetDate(model.KeyDay) | date : 'yyyy-MM-dd' }}" />
+    <md-form-field class="date">
+      <input mdInput [disabled]="!isNew" [mdDatepicker]="picker" placeholder="Report Date" [(ngModel)]="selectedDate">
+      <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+      <md-datepicker #picker></md-datepicker>
     </md-form-field>
   </div>
   <div>
@@ -9,7 +11,7 @@
       <input id="txtCOHStart" [disabled]="!DL.UserAccess.ReportBalanceStartEdit" (click)="$event.target.select()" type="number" mdInput placeholder="Starting cash on-hand" [(ngModel)]="model.COHStart" />
     </md-form-field>
   </div>
-  <div>
+  <div *ngIf="!isNew">
     <md-form-field class="longText">
       <input id="txtCOHComputed" [readonly]="true" mdInput placeholder="Computed cash on-hand" value="{{ GetComputed() | number:'1.2-2'}}" />
     </md-form-field>
@@ -23,10 +25,10 @@
   <table>
     <tr class="rightRow">
       <td>
-        <button md-fab (click)="Regenerate()" [disabled]="!DL.UserAccess.ReportRegenerate" mdTooltip="Regenerate" mdTooltipPosition="above"><md-icon>autorenew</md-icon></button>
+        <button *ngIf="!isNew" md-fab (click)="Regenerate()" [disabled]="!DL.UserAccess.ReportRegenerate" mdTooltip="Regenerate" mdTooltipPosition="above"><md-icon>autorenew</md-icon></button>
       </td>
       <td>
-        <button md-fab (click)="Save()" [disabled]="!DL.UserAccess.ReportBalanceStartEdit && !DL.UserAccess.ReportBalanceActualEdit" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+        <button md-fab (click)="Save()" [disabled]="!selectedDate || !DL.UserAccess.ReportBalanceStartEdit && !DL.UserAccess.ReportBalanceActualEdit" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
         <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
       </td>
     </tr>

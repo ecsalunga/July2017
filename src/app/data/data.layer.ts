@@ -73,8 +73,7 @@ export class DataLayer {
     ServiceReservationTabIndex: number = 0;
 
     Transaction: TransactionInfo;
-    TransactionsToday: Array<TransactionInfo>;
-    TransactionSelected: Array<TransactionInfo>;
+    Transactions: Array<TransactionInfo>;
     
     TransactionCancels: Array<CancelInfo>;
     TransactionCancelSelected: Array<CancelInfo>;
@@ -96,7 +95,6 @@ export class DataLayer {
 
     Report: ReportInfo;
     Reports: Array<ReportInfo>;
-    ReportToday: ReportInfo;
     ReportSelected: ReportInfo;
     ReportYears: Array<number>;
 
@@ -141,7 +139,7 @@ export class DataLayer {
     Messages: Array<MessageInfo>;
 
     Months: Array<NameValue>;
-    Date: Date = new Date();
+    Date: Date;
     AccessTypes: Array<NameValue>;
 
     IsAuthenticating: boolean = false;
@@ -161,13 +159,16 @@ export class DataLayer {
     Modules: Array<NameValue>;
     PublicModules: Array<NameValue>;
 
+    KeyDay: number;
+    KeyMonth: number;
+    KeyYear: number;
+
     constructor(private core: Core, private snackBar: MdSnackBar) {
+        this.SetKeyDates();
         this.InitCollections();
-        this.ReportTodayRefresh();
-        this.ReportSelected = this.ReportToday;
         
         this.ReportYears = new Array<number>();
-        for (let x = this.ReportToday.KeyYear - 5; x <= this.ReportToday.KeyYear; x++) {
+        for (let x = this.KeyYear - 5; x <= this.KeyYear; x++) {
             this.ReportYears.push(x);
         }
 
@@ -268,6 +269,13 @@ export class DataLayer {
         this.SnackBarConfigLong.duration = 10000;
     }
 
+    public SetKeyDates() {
+        this.Date = new Date();
+        this.KeyDay = this.core.dateToKeyDay(this.Date);
+        this.KeyMonth = this.core.dateToKeyMonth(this.Date);
+        this.KeyYear = this.Date.getFullYear();
+    }
+
     public InitCollections() {
         this.ShowcaseOrders = new Array<OrderInfo>();
         this.ShowcaseUserDoneOrders = new Array<OrderInfo>();
@@ -297,14 +305,6 @@ export class DataLayer {
         this.ShowcaseUserHasOrder = false;
         this.ShowcaseUserHasOpenCart = false;
         this.ServiceReservationUserHasItem = false;
-    }
-
-    public ReportTodayRefresh()
-    {
-        this.ReportToday = new ReportInfo();
-        this.ReportToday.KeyDay = this.core.dateToKeyDay(this.Date);
-        this.ReportToday.KeyMonth = this.core.dateToKeyMonth(this.Date);
-        this.ReportToday.KeyYear = this.Date.getFullYear();
     }
 
     public SetPermission() {
@@ -380,14 +380,6 @@ export class DataLayer {
 
     public GetActionDate(): number {
         return this.core.dateToNumber(new Date());
-    }
-
-    public GetKeyDay(): number {
-        return this.core.dateToKeyDay(this.Date);
-    }
-
-    public GetKeyMonth(): number {
-        return this.core.dateToKeyMonth(this.Date);
     }
 
     public LoadFromMenu(name: string) {

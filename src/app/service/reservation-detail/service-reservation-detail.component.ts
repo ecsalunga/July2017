@@ -36,7 +36,7 @@ export class ServiceReservationDetailComponent implements OnInit {
   }
 
   GetDay(keyDay: number): Date {
-    return this.core.numberToDate(parseInt(keyDay + '000000'))
+    return this.core.keyDayToDate(keyDay);
   }
 
   LoadList() {

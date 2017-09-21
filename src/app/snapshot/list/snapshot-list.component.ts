@@ -13,10 +13,10 @@ export class SnapshotListComponent implements OnInit {
 
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     if(this.DL.SOURCE == this.DL.MENU) {
-      this.LoadSnapshots(this.DL.ReportToday.KeyDay);
+      this.LoadSnapshots(this.DL.KeyDay);
     }
 
-    this.selectedDate = this.core.numberToDate(parseInt(this.DL.ReportSelected.KeyDay + '000000'));
+    this.selectedDate = this.core.keyDayToDate(this.DL.ReportSelected.KeyDay);
   }
 
   LoadSnapshots(keyDay: number) {

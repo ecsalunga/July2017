@@ -36,7 +36,7 @@ export class ShowcaseScheduleComponent implements OnInit {
   }
 
   GetDate(keyDay: number): Date {
-    return this.core.numberToDate(parseInt(keyDay + '000000'))
+    return this.core.keyDayToDate(keyDay);
   }
 
   AddSchedule() {

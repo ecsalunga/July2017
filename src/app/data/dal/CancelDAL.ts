@@ -9,7 +9,7 @@ export class CancelDAL {
     constructor(private core: Core, private DL: DataLayer, private DA: DataAccess, private af: AngularFireDatabase) {}
 
     public Load() {
-        this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYMONTH, equalTo: this.DL.ReportToday.KeyMonth }}).first().subscribe(snapshots => {
+        this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYMONTH, equalTo: this.DL.KeyMonth }}).first().subscribe(snapshots => {
             this.DL.TransactionCancels = new Array<CancelInfo>();
             snapshots.forEach(snapshot => {
                 let info: CancelInfo = snapshot;
@@ -21,7 +21,7 @@ export class CancelDAL {
     }
 
     public LoadByKeyMonth(keyMonth: number) {
-        if(this.DL.ReportToday.KeyMonth == keyMonth) {
+        if(this.DL.KeyMonth == keyMonth) {
             this.Load();
             this.DL.TransactionCancelSelected = this.DL.TransactionCancels;
         }

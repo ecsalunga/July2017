@@ -21,8 +21,7 @@ export class ReportExpenseComponent implements OnInit {
 
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) { 
     this.DL.ExpenseSelected = this.DL.ExpensesToday;
-    this.DL.ReportSelected = this.DL.ReportToday;
-    this.ReportDate = this.core.numberToDate(parseInt(this.DL.ReportSelected.KeyDay + '000000'));
+    this.ReportDate = this.core.keyDayToDate(this.DL.KeyDay);
 
     this.ctrl = new FormControl();
     this.filteredExpenses = this.ctrl.valueChanges

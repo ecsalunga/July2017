@@ -5,3 +5,7 @@ md-form-field {
 .longText {
     width: 300px;
 }
+
+.date {
+    width: 120px;
+} 
