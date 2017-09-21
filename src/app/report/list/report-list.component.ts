@@ -27,7 +27,7 @@ export class ReportListComponent implements OnInit {
     this.DL.LoadFromLink("report-detail");
   }
 
-  AddItem(item: ReportInfo) {
+  AddItem() {
     this.DL.Report = null;
     this.DL.LoadFromLink("report-detail");
   }
