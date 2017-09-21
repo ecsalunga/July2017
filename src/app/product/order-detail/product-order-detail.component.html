@@ -95,7 +95,8 @@
         <button *ngIf="ShowDeliveryOption()" md-fab color="primary" (click)="CreateDelivery()" mdTooltip="Create delivery request" mdTooltipPosition="above"><md-icon>send</md-icon></button>
       </td>
       <td>
-        <button md-fab (click)="Save()" mdTooltip="Save" [disabled]="!CanSave()" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+        <button *ngIf="model.Status == DL.STATUS_DONE" md-fab color="warn" (click)="Delete()" [disabled]="!DL.UserAccess.ShowcaseOrderDelete" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
+        <button *ngIf="CanSave()"  md-fab (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
         <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
       </td>
     </tr>

@@ -48,6 +48,12 @@ export class ProductOrderDetailComponent implements OnInit {
     }
   }
 
+  Delete() {
+    this.DA.ShowcaseOrderDelete(this.model);
+    this.DL.Display("Order", "Deleted!");
+    this.LoadList();
+  }
+
   CreateDelivery() {
     this.DL.OrderInjectStatus(this.model, this.DL.STATUS_DELIVERY_CREATED);
     this.DL.OrderUpdateStatus(this.model, this.DL.STATUS_FOR_DELIVERY);

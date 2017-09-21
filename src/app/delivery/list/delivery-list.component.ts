@@ -43,7 +43,7 @@ export class DeliveryListComponent implements OnInit {
   HasClean(): boolean {
     let hasClean = false
     this.DL.DeliveryInfos.forEach(item => {
-      if(item.Status == this.DL.STATUS_DELIVERED || item.Status == this.DL.STATUS_CANCELLED)
+      if((item.Status == this.DL.STATUS_DELIVERED && item.IsTransaction) || item.Status == this.DL.STATUS_CANCELLED)
         hasClean = true;
     });
 
@@ -52,7 +52,7 @@ export class DeliveryListComponent implements OnInit {
 
   CleanDelete() {
     this.DL.DeliveryInfos.forEach(item => {
-      if(item.Status == this.DL.STATUS_DELIVERED || item.Status == this.DL.STATUS_CANCELLED)
+      if((item.Status == this.DL.STATUS_DELIVERED && item.IsTransaction) || item.Status == this.DL.STATUS_CANCELLED)
         this.DA.DeliveryDelete(item);
     });
 

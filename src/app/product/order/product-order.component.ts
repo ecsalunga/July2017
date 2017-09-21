@@ -24,7 +24,7 @@ export class ProductOrderComponent implements OnInit {
   HasClean(): boolean {
     let hasClean = false
     this.DL.ShowcaseUserDoneOrders.forEach(item => {
-      if(item.Status == this.DL.STATUS_DONE)
+      if(item.Status == this.DL.STATUS_DONE  && (item.IsTransaction || item.HasDelivery))
         hasClean = true;
     });
 
@@ -33,7 +33,7 @@ export class ProductOrderComponent implements OnInit {
 
   CleanDelete() {
     this.DL.ShowcaseUserDoneOrders.forEach(item => {
-      if(item.Status == this.DL.STATUS_DONE)
+      if(item.Status == this.DL.STATUS_DONE  && (item.IsTransaction || item.HasDelivery))
         this.DA.ShowcaseOrderDelete(item);
     });
 
