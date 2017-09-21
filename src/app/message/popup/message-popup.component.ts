@@ -14,6 +14,7 @@ export class MessagePopupComponent implements OnInit {
   chatMessages: ViewContainerRef;
   DA: DataAccess;
   DL: DataLayer;
+  ConvoWith: string;
 
   message: string;
 
@@ -24,6 +25,7 @@ export class MessagePopupComponent implements OnInit {
       this.ScrollBottom();
     });
     this.DA.MessageGet(this.DL.Conversation);
+    this.ConvoWith = this.DL.Conversation.FromKey == this.DL.User.key ? this.DL.Conversation.ToName : this.DL.Conversation.FromName;
   }
 
   Close(): void {
