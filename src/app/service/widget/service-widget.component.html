@@ -1,14 +1,14 @@
 <div class="container">
   <ng-container *ngFor="let item of DL.ServiceToday">
-    <div class="half column">
+    <div class="{{ this.DL.ServiceTodayCount > 1 ? 'columnRes' : 'column' }}">
       <div class="item">
         <div class="itemHeader">
           <div class="itemName">{{ item.Name }}</div>
         </div>
-        <div class="itemDescriptionRes">
+        <div class="{{ this.DL.ServiceTodayCount > 1 ? 'itemDescriptionRes' : 'itemDescription' }}">
           {{ item.Description }}
         </div>
-        <div class="imageContainerRes">
+        <div class="{{ this.DL.ServiceTodayCount > 1 ? 'imageContainerRes' : 'imageContainer' }}">
           <img class="fullWidth" src="{{item.ImageURL}}" />
         </div>
         <div class="itemControl mainColor">

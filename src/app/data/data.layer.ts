@@ -61,6 +61,7 @@ export class DataLayer {
     Service: ServiceInfo;
     Services: Array<ServiceInfo>;
     ServiceToday: Array<ServiceInfo>;
+    ServiceTodayCount: number;
 
     ServiceReservation: ReservationInfo;
     ServiceReservationUser: Array<ReservationInfo>;
@@ -119,12 +120,13 @@ export class DataLayer {
     Showcase: ShowcaseInfo;
     Showcases: Array<ShowcaseInfo>;
     ShowcaseToday: Array<ShowcaseInfo>;
+    ShowCaseTodayCount: number; 
 
     ShowcaseOrder: OrderInfo;
     ShowcaseOrders: Array<OrderInfo>;
-
     ShowcaseUserOrders: Array<OrderInfo>;
     ShowcaseUserSelectingOrders: Array<OrderInfo>;
+
     ShowcaseUserDoneOrders: Array<OrderInfo>;
     ShowcaseUserHasOrder: boolean = false;
     ShowcaseUserHasOpenCart: boolean = false;

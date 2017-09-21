@@ -248,16 +248,6 @@ th {
     font-weight: bold;
 }
 
-.itemDescriptionRes {
-    padding: 20px;
-    color: gray;
-}
-
-.imageContainerRes {
-    height: 100%;
-    overflow: hidden;
-}
-
 .itemFooter {
     padding: 20px;
 }
@@ -274,10 +264,35 @@ th {
     float: left;
     box-sizing: border-box; 
 }
+
+.itemDescription {
+    padding: 20px;
+    color: gray;
+}
+
+.imageContainer {
+    height: 100%;
+    overflow: hidden;
+}
+
+.columnRes {
+    width: 100%;
+    float: left;
+    box-sizing: border-box; 
+}
+
+.imageContainerRes {
+    height: 100%;
+    overflow: hidden;
+}
+
+.itemDescriptionRes {
+    padding: 20px;
+    color: gray;
+}
   
 @media (min-width: 720px) {
-    .column             { margin-left: 2%; }
-    .half.column        { width: 47%; }
+    .columnRes          { margin-left: 2%; width: 47%; }
     .imageContainerRes  { height: 275px; }
     .itemDescriptionRes { height: 75px; }
 }

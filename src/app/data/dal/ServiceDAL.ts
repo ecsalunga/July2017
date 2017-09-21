@@ -31,6 +31,8 @@ export class ServiceDAL {
                         this.DL.ServiceToday.push(info);
                 }
             });
+
+            this.DL.ServiceTodayCount = this.DL.ServiceToday.length;
         });
     }
 

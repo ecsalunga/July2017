@@ -32,6 +32,8 @@ export class ShowcaseDAL {
                         this.DL.ShowcaseToday.push(info);
                 }
             });
+            
+            this.DL.ShowCaseTodayCount = this.DL.ShowcaseToday.length;
         });
     }
 

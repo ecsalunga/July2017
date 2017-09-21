@@ -10,16 +10,6 @@ md-form-field {
     width: 120px;
 }
 
-.itemDescription {
-    padding: 20px;
-    color: gray;
-}
-
-.imageContainer {
-    height: 100%;
-    overflow: hidden;
-}
-
 .itemControl {
     overflow: auto;
     padding: 10px;
