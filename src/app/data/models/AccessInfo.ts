@@ -34,10 +34,15 @@ export class AccessInfo {
 
     ReportView: boolean;
     ReportSearch: boolean;
+    
     ReportBalanceView: boolean;
-    ReportBalanceStartEdit: boolean;
-    ReportBalanceActualEdit: boolean;
-    ReportRegenerate: boolean;
+    ReportBalanceAdd: boolean;
+    ReportBalanceEdit: boolean;
+
+    ReportBalanceEditDate: boolean;
+    ReportBalanceViewComputed: boolean;
+    ReportBalanceRegenerate: boolean;
+
     ReportBalanceSummaryView: boolean;
 
     SellView: boolean;

@@ -236,13 +236,28 @@
               </md-slide-toggle>
             </td>
             <td class="subAccess">
-              <md-slide-toggle [(ngModel)]="model.ReportBalanceStartEdit">
-                Edit Start
+              <md-slide-toggle [(ngModel)]="model.ReportBalanceAdd">
+                Add
               </md-slide-toggle>
             </td>
             <td>
-              <md-slide-toggle [(ngModel)]="model.ReportBalanceActualEdit">
-                Edit Actual
+              <md-slide-toggle [(ngModel)]="model.ReportBalanceEdit">
+                Edit
+              </md-slide-toggle>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3" class="accessLabel">Generating</td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <md-slide-toggle [(ngModel)]="model.ReportBalanceViewComputed">
+                View Computed
+              </md-slide-toggle>
+            </td>
+            <td>
+              <md-slide-toggle [(ngModel)]="model.ReportBalanceEditDate">
+                Edit Date
               </md-slide-toggle>
             </td>
           </tr>
@@ -253,7 +268,7 @@
               </md-slide-toggle>
             </td>
             <td>
-              <md-slide-toggle [(ngModel)]="model.ReportRegenerate">
+              <md-slide-toggle [(ngModel)]="model.ReportBalanceRegenerate">
                 Regenerate
               </md-slide-toggle>
             </td>
