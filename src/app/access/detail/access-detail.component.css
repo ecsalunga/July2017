@@ -2,10 +2,6 @@
     font-size: inherit;
 }
 
-::ng-deep .mat-select-trigger {
-    font-size: inherit;
-}
-
 .accessLabel {
     height: 25px;
     vertical-align: bottom;
