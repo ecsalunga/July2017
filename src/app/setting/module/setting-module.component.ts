@@ -20,6 +20,10 @@ export class SettingModuleComponent implements OnInit {
     this.DL.Display("Module Settings", "Saved!");
   }
 
+  ExpenseLoadType() {
+    this.DL.LoadFromLink("setting-module-expense-type");
+  }
+
   ShowcaseUpdate() {
     let items = new Array<ShowcaseInfo>();
     this.DL.Showcases.forEach(showcase => {

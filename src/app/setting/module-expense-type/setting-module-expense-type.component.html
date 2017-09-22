@@ -1,0 +1,43 @@
+<div>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th class="rightRow">
+            Action
+          </th>
+        </tr>
+      </thead>
+      <ng-container *ngFor="let item of DL.ExpenseTypes">
+        <tr>
+          <td>
+            {{ item.Name }}
+          </td>
+          <td class="rightRow">
+              <button md-mini-fab color="warn" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
+          </td>
+        </tr>
+      </ng-container>
+    </table>
+    <div class="hSpacer"></div>
+    <table>
+      <tr class="rightRow">
+        <td class="selectionRow" style="width: 60%">
+          <md-form-field class="longText">
+            <input id="txtName" mdInput placeholder="Name" [(ngModel)]="name" />
+          </md-form-field>
+        </td>
+        <td></td>
+      </tr>
+      <tr class="rightRow">
+        <td>
+          <button md-fab (click)="Save()" [disabled]="!name" mdTooltip="Add to expense" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+        </td>
+        <td>
+          <button md-fab (click)="Back()" mdTooltip="Back module setting" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+        </td>
+      </tr>
+    </table>
+  </div>

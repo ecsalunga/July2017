@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { ExpenseInfo } from '../../data/models';
+import { ExpenseInfo, NameValue } from '../../data/models';
 
 @Component({
   selector: 'report-expense-detail',
@@ -10,6 +10,7 @@ import { ExpenseInfo } from '../../data/models';
 })
 export class ReportExpenseDetailComponent implements OnInit {
   selectedDate: Date;
+  selectedType: NameValue;
   model: ExpenseInfo;
   
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
@@ -20,6 +21,10 @@ export class ReportExpenseDetailComponent implements OnInit {
   Save() {
     this.model.UserKey = this.DL.User.key;
     this.model.UserName = this.DL.User.Name;
+
+    this.model.TypeName = this.selectedType.Name;
+    this.model.TypeKey = this.selectedType.Value;
+
     this.model.ActionDate = this.DL.GetActionDate();
     this.model.KeyDay = this.core.dateToKeyDay(this.selectedDate);
     this.model.KeyMonth = this.core.dateToKeyMonth(this.selectedDate);

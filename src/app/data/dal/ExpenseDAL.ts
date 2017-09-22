@@ -1,6 +1,6 @@
 import { Core } from './../../core';
 import { DataLayer } from './../data.layer';
-import { ExpenseInfo } from '../models';
+import { ExpenseInfo, NameValue } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class ExpenseDAL {
@@ -24,6 +24,29 @@ export class ExpenseDAL {
             this.DL.Expenses.sort((item1, item2) => item1.KeyDay - item2.KeyDay);
             this.DL.Expenses.reverse();
         });
+    }
+
+    LoadTypes() {
+        this.af.list(this.PATH_TYPES).first().subscribe(snapshots => {
+            this.DL.ExpenseTypes = new Array<NameValue>();
+
+            snapshots.forEach(snapshot => {
+                let info: NameValue = snapshot;
+                info.Value = snapshot.$key;
+                this.DL.ExpenseTypes.push(info);
+            });
+
+            this.DL.ExpenseTypes.sort((item1, item2) => item1.Name.localeCompare(item2.Name));
+        });
+    }
+
+    public TypeSave(name: string) {
+        let item = new NameValue(name, null);
+        this.af.list(this.PATH_TYPES).push(item);
+    }
+
+    public TypeDelete(item: NameValue) {
+        this.af.list(this.PATH_TYPES).remove(item.Value);
     }
 
     public Save(item: ExpenseInfo) {

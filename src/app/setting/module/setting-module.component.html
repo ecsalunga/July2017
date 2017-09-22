@@ -31,7 +31,6 @@
               <input id="txtHomeTitle" mdInput placeholder="Title" [(ngModel)]="model.HomeTitle" />
             </md-form-field>
           </div>
-          <div class="vSmallSpacer"></div>
           <div class="configLabel">
             Showcase
           </div>
@@ -70,6 +69,15 @@
             <md-form-field>
               <input id="txtServiceReservationMax" type="number" mdInput placeholder="Max open booking" [(ngModel)]="model.ServiceReservationMax" />
             </md-form-field>
+          </div>
+          <div class="configLabel">
+            Expense
+          </div>
+          <div>
+            <button md-raised-button (click)="ExpenseLoadType()">
+              <md-icon>list</md-icon>
+              <span>Expense Types...</span>
+            </button>
           </div>
         </td>
       </tr>

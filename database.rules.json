@@ -45,12 +45,15 @@
       ".indexOn": "Name"
     },
     "expenses": {
-      ".read": "true",
-      ".write": "true",
       "items": {
         ".read": "true",
         ".write": "true",
         ".indexOn": "KeyMonth"
+      },
+      "types": {
+        ".read": "true",
+        ".write": "true",
+        ".indexOn": "Name"
       }
     },
     "transactions": {

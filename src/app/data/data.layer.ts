@@ -9,7 +9,7 @@ import {
     CancelInfo, DeliveryInfo, ModuleSettingInfo,
     SystemSettingInfo, SnapshotInfo, OrderInfo,
     ServiceInfo, ConversationInfo, MessageInfo,
-    ReservationInfo
+    ReservationInfo, Name2Value
 } from './models';
 
 @Injectable()
@@ -89,6 +89,7 @@ export class DataLayer {
     DeliveryToggledModule: string = null;
 
     Expenses: Array<ExpenseInfo>;
+    ExpenseTypes: Array<NameValue>;
     ExpenseTotal: number = 0;
 
     Report: ReportInfo;
@@ -284,6 +285,8 @@ export class DataLayer {
         this.ServiceReservationActive = new Array<ReservationInfo>();
         this.ServiceReservationDone = new Array<ReservationInfo>();
         this.ServiceReservationNew = new Array<ReservationInfo>();
+
+        this.ExpenseTypes = new Array<NameValue>();
     }
 
     public SetSystemConfig() {
