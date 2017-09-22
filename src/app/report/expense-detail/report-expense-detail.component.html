@@ -1,3 +1,25 @@
-<p>
-  report-expense-detail works!
-</p>
+<div>
+  <div>
+    <md-form-field class="date">
+      <input mdInput [disabled]="!DL.UserAccess.ReportBalanceEditDate" [mdDatepicker]="picker" placeholder="Expense Date"
+        [(ngModel)]="selectedDate">
+      <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+      <md-datepicker #picker></md-datepicker>
+    </md-form-field>
+  </div>
+  <div>
+    <md-form-field class="longText">
+      <input id="txtDescription" mdInput placeholder="Description" [(ngModel)]="model.Description" />
+    </md-form-field>
+  </div>
+  <div>
+    <md-form-field>
+      <input id="txtAmount" type="number" mdInput placeholder="Amount" [(ngModel)]="model.Amount" />
+    </md-form-field>
+  </div>
+</div>
+<div class="hSpacer"></div>
+<div class="rightRow">
+  <button md-fab (click)="Save()" [disabled]="!model.Description ||  !model.Amount || model.Amount <= 0" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+  <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+</div>

@@ -88,10 +88,8 @@ export class DataLayer {
     DeliveryStamp: number = 0;
     DeliveryToggledModule: string = null;
 
-    ExpenseTypes: Array<string>;
-    ExpensesToday: Array<ExpenseInfo>;
     Expenses: Array<ExpenseInfo>;
-    ExpenseAmount: number = 0;
+    ExpenseTotal: number = 0;
 
     Report: ReportInfo;
     Reports: Array<ReportInfo>;

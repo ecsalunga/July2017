@@ -39,11 +39,6 @@ export class SettingModuleComponent implements OnInit {
     this.DL.Display("Showcase", "Updated!");
   }
 
-  ClearAutocomplete() {
-    this.DA.ExpenseTypeClear();
-    this.DL.Display("Expense Types", "Cleared!");
-  }
-
   ngOnInit() {
     this.DL.TITLE = "Module Settings";
   }

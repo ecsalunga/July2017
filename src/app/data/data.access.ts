@@ -112,7 +112,6 @@ export class DataAccess {
     }
 
     public DataSystemLoad() {
-        this.expenseDAL.LoadTypes();
         this.cancelDAL.Load();
         this.SystemActiveDataLoad();
     }
@@ -343,10 +342,6 @@ export class DataAccess {
 
     public ExpenseMonthlyLoad(selectedYear: number, selectedMonth: number) {
         this.expenseDAL.LoadByYearAndMonth(selectedYear, selectedMonth);
-    }
-
-    public ExpenseTypeClear() {
-        this.expenseDAL.TypeDelete();
     }
 
     public ProductSave(item: ProductInfo) {

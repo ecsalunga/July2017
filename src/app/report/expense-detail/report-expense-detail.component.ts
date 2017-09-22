@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Core } from '../../core';
+import { DataAccess, DataLayer } from '../../data';
+import { ExpenseInfo } from '../../data/models';
 
 @Component({
   selector: 'report-expense-detail',
@@ -6,10 +9,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./report-expense-detail.component.css']
 })
 export class ReportExpenseDetailComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  selectedDate: Date;
+  model: ExpenseInfo;
+  
+  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
+    this.model = new ExpenseInfo();
+    this.selectedDate = new Date();
   }
 
+  Save() {
+    this.model.UserKey = this.DL.User.key;
+    this.model.UserName = this.DL.User.Name;
+    this.model.ActionDate = this.DL.GetActionDate();
+    this.model.KeyDay = this.core.dateToKeyDay(this.selectedDate);
+    this.model.KeyMonth = this.core.dateToKeyMonth(this.selectedDate);
+    this.model.KeyYear = this.selectedDate.getFullYear();
+
+    this.DA.ExpenseInfoSave(this.model);
+    this.DL.Display("Expense", "Saved!");
+    this.LoadList();
+  }
+
+  LoadList() {
+    this.DL.LoadFromLink("report-expense");
+  }
+
+  ngOnInit() {
+    this.DL.TITLE = "Expense Details";
+  }
 }

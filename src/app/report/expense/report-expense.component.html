@@ -39,13 +39,13 @@
       </tr> 
     </ng-container>
     <tr class="blankCell">
-      <td></td>
       <td>
         Total
       </td>
       <td></td>
+      <td></td>
       <td class="totalColumn">
-        {{ DL.ReportSelected.ExpenseAmount | number:'1.2-2'}}
+        {{ DL.ExpenseTotal | number:'1.2-2'}}
       </td>
       <td></td>
     </tr>
@@ -54,12 +54,12 @@
   <table>
     <tr class="rightRow">
       <td class="selectionRow" style="width: 60%">
-        <md-select [disabled]="!DL.UserAccess.ReportSearch" placeholder="Year" [(ngModel)]="yearSelected">
+        <md-select [disabled]="!DL.UserAccess.ExpenseSearch" placeholder="Year" [(ngModel)]="yearSelected">
           <md-option *ngFor="let year of DL.ReportYears" [value]="year">
             {{year}}
           </md-option>
         </md-select>
-        <md-select [disabled]="!DL.UserAccess.ReportSearch" placeholder="Month" [(ngModel)]="monthSelected">
+        <md-select [disabled]="!DL.UserAccess.ExpenseSearch" placeholder="Month" [(ngModel)]="monthSelected">
           <md-option *ngFor="let month of DL.Months" [value]="month.Value">
             {{month.Name}}
           </md-option>
