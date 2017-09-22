@@ -55,7 +55,7 @@ export class DataAccess {
     StorageRef: firebase.storage.Reference = firebase.storage().ref();
 
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase, private afAuth: AngularFireAuth, private dialog: MdDialog) {
-        this.expenseDAL = new ExpenseDAL(core, DL, af);
+        this.expenseDAL = new ExpenseDAL(core, DL, this, af);
         this.showcaseDAL = new ShowcaseDAL(core, DL, af);
         this.serviceDAL = new ServiceDAL(core, DL, af);
         this.reportDAL = new ReportDAL(core, DL, this, af);

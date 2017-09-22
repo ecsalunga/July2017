@@ -1,5 +1,5 @@
 import { Core } from './../../core';
-import { DataLayer } from './../data.layer';
+import { DataLayer, DataAccess } from './../';
 import { ExpenseInfo, NameValue } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
@@ -7,7 +7,7 @@ export class ExpenseDAL {
     PATH: string = "/expenses/items";
     PATH_TYPES: string = "/expenses/types";
 
-    constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) {}
+    constructor(private core: Core, private DL: DataLayer, private DA: DataAccess, private af: AngularFireDatabase) {}
 
     LoadByYearAndMonth(selectedYear: number, selectedMonth: number) {
         this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYMONTH, equalTo: parseInt(selectedYear + this.core.az(selectedMonth)) }}).first().subscribe(snapshots => {
@@ -51,9 +51,17 @@ export class ExpenseDAL {
 
     public Save(item: ExpenseInfo) {
         this.af.list(this.PATH).push(item);
+        this.ProcessReGenerate(item);
     }
 
     public Delete(item: ExpenseInfo) {
         this.af.list(this.PATH).remove(item.key);
+        this.ProcessReGenerate(item);
+    }
+
+    private ProcessReGenerate(item: ExpenseInfo) {
+        if(item.KeyDay != this.DL.KeyDay) {
+            this.DA.ReportReGenerate(item.KeyYear, item.KeyMonth, item.KeyDay);
+        }
     }
 }
