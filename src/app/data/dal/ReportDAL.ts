@@ -45,9 +45,6 @@ export class ReportDAL {
         report.KeyMonth = keyMonth;
         report.KeyDay = keyDay;
 
-        let transaction = new TransactionInfo();
-        let expense = new ExpenseInfo();
-
         this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYMONTH, equalTo: report.KeyMonth } }).first().subscribe(snapshots => {
             snapshots.forEach(snapshot => {
                 if(snapshot.KeyDay == report.KeyDay) {
@@ -69,9 +66,6 @@ export class ReportDAL {
         report.KeyDay = keyDay;
         report.COHStart = startCOH;
         report.COHActual = actualCOH;
-
-        let transaction = new TransactionInfo();
-        let expense = new ExpenseInfo();
 
         // remove existing
         this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYMONTH, equalTo: report.KeyMonth } }).first().subscribe(snapshots => {
