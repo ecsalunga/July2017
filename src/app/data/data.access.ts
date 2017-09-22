@@ -500,8 +500,8 @@ export class DataAccess {
         this.productDAL.UpdateProducts(infos);
     }
 
-    public TransactionSelectedCancel(description: string) {
-        this.cancelDAL.CancelSelected(description);
+    public TransactionCancel(description: string, tran: TransactionInfo) {
+        this.cancelDAL.CancelSelected(description, tran);
     }
 
     public TransactionInfoSave(item: TransactionInfo) {

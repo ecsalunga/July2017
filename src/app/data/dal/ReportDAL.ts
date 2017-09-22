@@ -90,31 +90,32 @@ export class ReportDAL {
         let transaction = new TransactionInfo();
         let expense = new ExpenseInfo();
 
+        // remove existing
         this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYMONTH, equalTo: report.KeyMonth } }).first().subscribe(snapshots => {
             snapshots.forEach(snapshot => {
                 if(snapshot.KeyDay == report.KeyDay) {
                     this.af.list(this.PATH).remove(snapshot.$key);
                 }
             });
+        });
 
-            // get transactions
-            this.af.list(this.PATH_TRANSACTION, { query: { orderByChild: this.DL.KEYDAY, equalTo: report.KeyDay } }).first().subscribe(snapshots => {
+        // get transactions
+        this.af.list(this.PATH_TRANSACTION, { query: { orderByChild: this.DL.KEYDAY, equalTo: report.KeyDay } }).first().subscribe(snapshots => {
+            snapshots.forEach(snapshot => {
+                report.SaleCount += snapshot.Count;
+                report.SaleAmount += snapshot.Amount;
+            });
+
+            // get expenses
+            this.af.list(this.PATH_EXPENSE, { query: { orderByChild: this.DL.KEYDAY, equalTo: keyDay } }).first().subscribe(snapshots => {
                 snapshots.forEach(snapshot => {
-                    report.SaleCount += snapshot.Count;
-                    report.SaleAmount += snapshot.Amount;
+                    report.ExpenseCount++;
+                    report.ExpenseAmount += snapshot.Amount;
                 });
 
-                // get expenses
-                this.af.list(this.PATH_EXPENSE, { query: { orderByChild: this.DL.KEYDAY, equalTo: keyDay } }).first().subscribe(snapshots => {
-                    snapshots.forEach(snapshot => {
-                        report.ExpenseCount++;
-                        report.ExpenseAmount += snapshot.Amount;
-                    });
-
-                    // save
-                    if(report.SaleAmount != 0 || report.ExpenseAmount != 0)
-                        this.af.list(this.PATH).push(report);
-                });
+                // save
+                if(report.SaleAmount != 0 || report.ExpenseAmount != 0)
+                    this.af.list(this.PATH).push(report);
             });
         });
     }

@@ -20,11 +20,11 @@ export class CancelDAL {
         });
     }
 
-    public CancelSelected(description: string) {
+    public CancelSelected(description: string, tran: TransactionInfo) {
         let items = Array<ProductInfo>();
 
         // update in memory first to prevent data sync issue
-        this.DL.Transaction.Items.forEach(sell => {
+        tran.Items.forEach(sell => {
             this.DL.Products.forEach(product => {
                 if (sell.Code == product.Code) {
                     product.Quantity += sell.Quantity;
@@ -41,19 +41,21 @@ export class CancelDAL {
         // save cancel info
         let info = new CancelInfo();
         info.Description = description;
-        info.Amount = this.DL.Transaction.Amount;
+        info.Amount = tran.Amount;
         info.ActionDate = this.core.dateToNumber(new Date());
         info.KeyMonth = this.core.dateToKeyMonth(this.DL.Date);
         this.Save(info);
 
         // delete transaction
-        this.transactionInfoDelete(this.DL.Transaction.key);
+        this.transactionInfoDelete(tran.key);
 
-        // report recompute
-        let transDate = this.core.keyDayToDate(this.DL.Transaction.KeyDay);
-        let keyDay = this.core.dateToKeyDay(transDate);
-        let keyMonth = this.core.dateToKeyMonth(transDate);
-        this.DA.ReportReGenerate(transDate.getFullYear(), keyMonth, keyDay);
+        if(tran.KeyDay != this.DL.KeyDay) {
+            // report recompute
+            let transDate = this.core.keyDayToDate(tran.KeyDay);
+            let keyDay = this.core.dateToKeyDay(transDate);
+            let keyMonth = this.core.dateToKeyMonth(transDate);
+            this.DA.ReportReGenerate(transDate.getFullYear(), keyMonth, keyDay);
+        }
     }
 
     private transactionInfoDelete(key: string) {

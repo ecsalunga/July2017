@@ -13,7 +13,7 @@ export class TransactionDetailComponent implements OnInit {
   constructor(private core: Core, public DL: DataLayer, private DA: DataAccess) { }
   
   Cancel() {
-    this.DA.TransactionSelectedCancel(this.description);
+    this.DA.TransactionCancel(this.description, this.DL.Transaction);
     this.DL.LoadFromMenu("transaction-list");
     this.DL.Display("Transaction Details", "Cancelled!");
   }
