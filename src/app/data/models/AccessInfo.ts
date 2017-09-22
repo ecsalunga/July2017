@@ -12,6 +12,7 @@ export class AccessInfo {
     ExpenseView: boolean;
     ExpenseAdd: boolean;
     ExpenseDelete: boolean;
+    ExpenseEditDate: boolean;
     ExpenseSearch: boolean;
 
     ProductView: boolean;
@@ -42,7 +43,6 @@ export class AccessInfo {
     ReportBalanceEditDate: boolean;
     ReportBalanceViewComputed: boolean;
     ReportBalanceRegenerate: boolean;
-
     ReportBalanceSummaryView: boolean;
 
     SellView: boolean;

@@ -63,7 +63,12 @@
       </td>
     </tr>
     <tr>
-      <td colspan="3">
+      <td>
+        <md-slide-toggle [(ngModel)]="model.ExpenseEditDate">
+          Edit Date
+        </md-slide-toggle>
+      </td>
+      <td colspan="2">
         <md-slide-toggle [(ngModel)]="model.ExpenseSearch">
           Search
         </md-slide-toggle>

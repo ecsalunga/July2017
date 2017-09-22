@@ -1,7 +1,7 @@
 <div>
   <div>
     <md-form-field class="date">
-      <input mdInput [disabled]="!DL.UserAccess.ReportBalanceEditDate" [mdDatepicker]="picker" placeholder="Expense Date"
+      <input mdInput [disabled]="!DL.UserAccess.ExpenseEditDate" [mdDatepicker]="picker" placeholder="Expense Date"
         [(ngModel)]="selectedDate">
       <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
       <md-datepicker #picker></md-datepicker>

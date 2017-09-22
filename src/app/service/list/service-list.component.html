@@ -22,10 +22,10 @@
     <ng-container *ngFor="let item of DL.Services">
       <tr>
         <td>
-          {{item.Name}}
+          {{ item.Name }}
         </td>
         <td>
-          {{item.Price | number:'1.2-2'}}
+          {{ item.Price | number:'1.2-2' }}
         </td>
         <td class="{{ (Visibility(item) == 'Yes') ?  'good' : 'bad' }}">
           {{ Visibility(item) }}
