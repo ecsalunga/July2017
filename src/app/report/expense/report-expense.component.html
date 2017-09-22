@@ -3,10 +3,13 @@
     <thead>
       <tr>
         <th>
+          Date
+        </th>
+        <th>
           Description
         </th>
         <th>
-          Date
+          Created
         </th>
         <th class="totalColumn">
           Amount
@@ -16,25 +19,27 @@
         </th>
       </tr>
     </thead>
-    <ng-container *ngFor="let info of DL.ExpenseSelected">
+    <ng-container *ngFor="let info of DL.Expenses">
       <tr>
         <td>
-          {{info.Description}}
+          {{ GetDate(info.KeyDay) | date : 'yyyy-MM-dd' }}
+        </td>
+        <td>
+          {{ info.Description }}
         </td>
         <td>
           {{ this.core.numberToDate(info.ActionDate) | date : 'short' }}
         </td>
         <td class="totalColumn">
-          {{info.Amount | number:'1.2-2'}}
+          {{ info.Amount | number:'1.2-2' }}
         </td>
         <td class="rightRow">
-          <ng-container *ngIf="info.ActionDate">
-            <button md-mini-fab color="warn" [disabled]="!DL.UserAccess.ExpenseDelete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
-          </ng-container>
+          <button md-mini-fab color="warn" [disabled]="!DL.UserAccess.ExpenseDelete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
         </td>
       </tr> 
     </ng-container>
     <tr class="blankCell">
+      <td></td>
       <td>
         Total
       </td>
@@ -49,32 +54,25 @@
   <table>
     <tr class="rightRow">
       <td class="selectionRow" style="width: 60%">
-        <md-form-field>
-          <input id="txtDescription" mdInput [disabled]="!DL.UserAccess.ExpenseAdd" placeholder="Description" [mdAutocomplete]="auto" [formControl]="ctrl" [(ngModel)]="description">
-        </md-form-field>
-        <md-autocomplete #auto="mdAutocomplete">
-          <md-option *ngFor="let expense of filteredExpenses | async" [value]="expense">
-            {{ expense }}
+        <md-select [disabled]="!DL.UserAccess.ReportSearch" placeholder="Year" [(ngModel)]="yearSelected">
+          <md-option *ngFor="let year of DL.ReportYears" [value]="year">
+            {{year}}
           </md-option>
-        </md-autocomplete>
-        <md-form-field>
-          <input id="txtAmount" type="number" mdInput [disabled]="!DL.UserAccess.ExpenseAdd" placeholder="Amount" [(ngModel)]="amount" />
-        </md-form-field>
+        </md-select>
+        <md-select [disabled]="!DL.UserAccess.ReportSearch" placeholder="Month" [(ngModel)]="monthSelected">
+          <md-option *ngFor="let month of DL.Months" [value]="month.Value">
+            {{month.Name}}
+          </md-option>
+        </md-select>
       </td>
-      <td class="selectionRow">
-        <md-form-field class="date">
-          <input mdInput [disabled]="!DL.UserAccess.ExpenseSearch" [mdDatepicker]="picker" placeholder="Report Date" [(ngModel)]="ReportDate">
-          <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-          <md-datepicker #picker></md-datepicker>
-        </md-form-field>
-      </td>
+      <td></td>
     </tr>
     <tr class="rightRow">
       <td>
-        <button md-fab [disabled]="!DL.UserAccess.ExpenseAdd || !description || !amount || !ReportDate" (click)="AddExpense()" mdTooltip="Add to expenses" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+        <button md-fab [disabled]="!DL.UserAccess.ExpenseSearch" (click)="View()" mdTooltip="View expenses" mdTooltipPosition="above"><md-icon>search</md-icon></button>
       </td>
       <td>
-        <button md-fab [disabled]="!ReportDate || !DL.UserAccess.ExpenseSearch" (click)="ExpenseView()" mdTooltip="View expenses" mdTooltipPosition="above"><md-icon>search</md-icon></button>
+        <button md-fab [disabled]="!DL.UserAccess.ExpenseAdd" (click)="AddItem()" mdTooltip="Add" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
       </td>
     </tr>
   </table>

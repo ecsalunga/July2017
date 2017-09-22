@@ -341,8 +341,8 @@ export class DataAccess {
         this.reportDAL.Generate(year, keyMonth, keyDay, startCOH, actualCOH);
     }
 
-    public ExpenseSelectedLoad(report: ReportInfo) {
-        this.expenseDAL.LoadByReport(report);
+    public ExpenseMonthlyLoad(selectedYear: number, selectedMonth: number) {
+        this.expenseDAL.LoadByYearAndMonth(selectedYear, selectedMonth);
     }
 
     public ExpenseTypeClear() {

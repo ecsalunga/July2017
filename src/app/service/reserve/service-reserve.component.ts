@@ -71,6 +71,6 @@ export class ServiceReserveComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Reservation";
+    this.DL.TITLE = "Reservation Request";
   }
 }

@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/map';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
 import { ExpenseInfo, ReportInfo } from '../../data/models';
@@ -12,54 +9,34 @@ import { ExpenseInfo, ReportInfo } from '../../data/models';
   styleUrls: ['./report-expense.component.css']
 })
 export class ReportExpenseComponent implements OnInit {
-  ctrl: FormControl;
-  filteredExpenses: any;
-
-  description: string;
-  amount: number;
-  ReportDate: Date;
+  yearSelected: number;
+  monthSelected: number;
 
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) { 
-    this.DL.ExpenseSelected = this.DL.ExpensesToday;
-    this.ReportDate = this.core.keyDayToDate(this.DL.KeyDay);
-
-    this.ctrl = new FormControl();
-    this.filteredExpenses = this.ctrl.valueChanges
-        .startWith(null)
-        .map(name => this.FilterExpenses(name));
+    this.yearSelected = this.DL.Date.getFullYear();
+    this.monthSelected = this.DL.Date.getMonth()+1;
+    this.View();
   }
 
   Delete(item: ExpenseInfo) {
     this.DA.ExpenseDelete(item);
-    this.ExpenseView();
+    this.View();
   }
 
-  FilterExpenses(val: string) {
-    return val ? this.DL.ExpenseTypes.filter(s => s.toLowerCase().indexOf(val.toLowerCase()) === 0) : this.DL.ExpenseTypes;
+  AddItem() {
+    this.DL.Report = null;
+    this.DL.LoadFromLink("report-expense-detail");
   }
 
-  AddExpense() {
-    let info = new ExpenseInfo();
-    info.Description = this.description;
-    info.Amount = this.amount;
-    info.ActionDate = this.core.dateToNumber(new Date());
-    info.KeyDay = this.core.dateToKeyDay(this.ReportDate);
-    this.DA.ExpenseInfoSave(info);
-    
-    this.amount = null;
-    this.description = "";
-    this.ExpenseView();
+  GetDate(keyDay: number): Date {
+    return this.core.keyDayToDate(keyDay);
   }
 
-  ExpenseView() {
-    this.DL.ReportSelected = new ReportInfo();
-    this.DL.ReportSelected.KeyDay = this.core.dateToKeyDay(this.ReportDate);
-    this.DL.ReportSelected.KeyMonth = this.core.dateToKeyMonth(this.ReportDate);
-    this.DL.ReportSelected.KeyYear = this.ReportDate.getFullYear();
-    this.DA.ExpenseSelectedLoad(this.DL.ReportSelected);
+  View() {
+    this.DA.ExpenseMonthlyLoad(this.yearSelected, this.monthSelected)
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Expenses";
+    this.DL.TITLE = "Expense List";
   }
 }

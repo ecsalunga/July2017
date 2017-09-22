@@ -90,7 +90,7 @@ export class DataLayer {
 
     ExpenseTypes: Array<string>;
     ExpensesToday: Array<ExpenseInfo>;
-    ExpenseSelected: Array<ExpenseInfo>;
+    Expenses: Array<ExpenseInfo>;
     ExpenseAmount: number = 0;
 
     Report: ReportInfo;
