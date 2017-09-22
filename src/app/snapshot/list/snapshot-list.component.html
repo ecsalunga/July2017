@@ -30,8 +30,8 @@
         <td>
           {{ info.ReviewerName }}
         </td>
-        <td class="totalColumn {{ (info.COHActual == info.COHComputed) ? 'good' : 'bad' }}">
-          {{info.COHActual | number:'1.2-2'}}
+        <td class="totalColumn">
+          {{ info.COHActual | number:'1.2-2' }}
         </td>
         <td class="rightRow">
           <button md-mini-fab (click)="SelectItem(info)" mdTooltip="View"><md-icon>pageview</md-icon></button>
