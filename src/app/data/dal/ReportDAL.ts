@@ -58,24 +58,7 @@ export class ReportDAL {
             });
 
             // get transactions
-            this.af.list(this.PATH_TRANSACTION, { query: { orderByChild: this.DL.KEYDAY, equalTo: report.KeyDay } }).first().subscribe(snapshots => {
-                snapshots.forEach(snapshot => {
-                    report.SaleCount += snapshot.Count;
-                    report.SaleAmount += snapshot.Amount;
-                });
-
-                // get expenses
-                this.af.list(this.PATH_EXPENSE, { query: { orderByChild: this.DL.KEYDAY, equalTo: keyDay } }).first().subscribe(snapshots => {
-                    snapshots.forEach(snapshot => {
-                        report.ExpenseCount++;
-                        report.ExpenseAmount += snapshot.Amount;
-                    });
-
-                    // save
-                    if(report.SaleAmount != 0 || report.ExpenseAmount != 0)
-                        this.af.list(this.PATH).push(report);
-                });
-            });
+            this.CreateReport(report);
         });
     }
 
@@ -99,6 +82,10 @@ export class ReportDAL {
             });
         });
 
+        this.CreateReport(report);
+    }
+
+    private CreateReport(report: ReportInfo) {
         // get transactions
         this.af.list(this.PATH_TRANSACTION, { query: { orderByChild: this.DL.KEYDAY, equalTo: report.KeyDay } }).first().subscribe(snapshots => {
             snapshots.forEach(snapshot => {
@@ -107,7 +94,7 @@ export class ReportDAL {
             });
 
             // get expenses
-            this.af.list(this.PATH_EXPENSE, { query: { orderByChild: this.DL.KEYDAY, equalTo: keyDay } }).first().subscribe(snapshots => {
+            this.af.list(this.PATH_EXPENSE, { query: { orderByChild: this.DL.KEYDAY, equalTo: report.KeyDay } }).first().subscribe(snapshots => {
                 snapshots.forEach(snapshot => {
                     report.ExpenseCount++;
                     report.ExpenseAmount += snapshot.Amount;
