@@ -40,7 +40,6 @@ export class ReportDetailComponent implements OnInit {
       this.model.KeyYear = this.selectedDate.getFullYear();
       this.DA.ReportGenerate(this.model.KeyYear, this.model.KeyMonth, this.model.KeyDay, this.model.COHStart, this.model.COHActual);
       this.DL.Display("Cashflow Generation", "Issued!");
-      this.DL.LoadFromMenu("report-list");
     }
     else {
       this.DA.ReportSave(this.model);
@@ -56,7 +55,6 @@ export class ReportDetailComponent implements OnInit {
   Regenerate() {
     this.DA.ReportReGenerate(this.model.KeyYear, this.model.KeyMonth, this.model.KeyDay);
     this.DL.Display("Cashflow Regeneration", "Issued!");
-    this.DL.LoadFromMenu("report-list");
   }
 
   GetComputed() : number {
@@ -73,5 +71,10 @@ export class ReportDetailComponent implements OnInit {
 
   ngOnInit() {
     this.DL.TITLE = "Cashflow Details";
+
+    this.DA.DataLoaded.subscribe(data => {
+      if(data == this.DL.DATA_REPORT)
+        this.DL.LoadFromMenu("report-list");
+    });
   }
 }

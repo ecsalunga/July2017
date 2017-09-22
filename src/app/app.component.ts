@@ -63,7 +63,8 @@ export class AppComponent implements OnInit {
     this.core.imageSelector = this.imageSelector;
     this.DA.DataLoad();
     this.DA.DataLoaded.subscribe(data => {
-      this.loader =  this.hide;
+      if(data == this.DL.DATA_USER)
+        this.loader =  this.hide;
     });
 
     this.renderer.listen(this.imageSelector.element.nativeElement, 'change', (event) => {

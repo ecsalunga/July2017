@@ -97,6 +97,8 @@ export class ReportDAL {
                 // save
                 if(report.SaleAmount != 0 || report.ExpenseAmount != 0)
                     this.af.list(this.PATH).push(report);
+                
+                this.DA.DataLoaded.emit(this.DL.DATA_REPORT);
             });
         });
     }

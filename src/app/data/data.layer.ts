@@ -50,6 +50,9 @@ export class DataLayer {
     STATUS_SAVEDTO_TRANSACT: string = "Saved to Transaction";
     STATUS_DONE: string = "Done";
 
+    DATA_USER: string = "user";
+    DATA_REPORT: string = "report";
+
     COMMAND_LOGOUT: string = "logout";
     COMMAND_POPCHAT: string = "popchat";
 
