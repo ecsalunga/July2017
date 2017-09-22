@@ -8,8 +8,8 @@ export class CancelDAL {
     PATH_TRANSACTION: string = "/transactions/items";
     constructor(private core: Core, private DL: DataLayer, private DA: DataAccess, private af: AngularFireDatabase) {}
 
-    public Load() {
-        this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYMONTH, equalTo: this.DL.KeyMonth }}).first().subscribe(snapshots => {
+    LoadByYearAndMonth(selectedYear: number, selectedMonth: number) {
+        this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYMONTH, equalTo: parseInt(selectedYear + this.core.az(selectedMonth)) }}).first().subscribe(snapshots => {
             this.DL.TransactionCancels = new Array<CancelInfo>();
             snapshots.forEach(snapshot => {
                 let info: CancelInfo = snapshot;
@@ -18,24 +18,6 @@ export class CancelDAL {
 
             this.DL.TransactionCancels.reverse();
         });
-    }
-
-    public LoadByKeyMonth(keyMonth: number) {
-        if(this.DL.KeyMonth == keyMonth) {
-            this.Load();
-            this.DL.TransactionCancelSelected = this.DL.TransactionCancels;
-        }
-        else {
-            this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYMONTH, equalTo: keyMonth }}).first().subscribe(snapshots => {
-                this.DL.TransactionCancelSelected = new Array<CancelInfo>();
-                snapshots.forEach(snapshot => {
-                    let info: CancelInfo = snapshot;
-                    this.DL.TransactionCancelSelected.push(info);
-                });
-
-                this.DL.TransactionCancelSelected.reverse();
-            });
-        }
     }
 
     public CancelSelected(description: string) {
@@ -80,6 +62,5 @@ export class CancelDAL {
 
     public Save(item: CancelInfo) {
         this.af.list(this.PATH).push(item);
-        this.LoadByKeyMonth(item.KeyMonth);
     }
 }

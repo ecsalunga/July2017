@@ -112,7 +112,6 @@ export class DataAccess {
     }
 
     public DataSystemLoad() {
-        this.cancelDAL.Load();
         this.expenseDAL.LoadTypes();
         this.SystemActiveDataLoad();
     }
@@ -313,8 +312,8 @@ export class DataAccess {
         });
     }
 
-    public TransactionCancelLoad(keyMonth: number) {
-        this.cancelDAL.LoadByKeyMonth(keyMonth);
+    public TransactionCancelMonthlyLoad(selectedYear: number, selectedMonth: number) {
+        this.cancelDAL.LoadByYearAndMonth(selectedYear, selectedMonth);
     }
 
     public SnapshotLoad(keyDay: number) {

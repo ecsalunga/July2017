@@ -74,9 +74,7 @@ export class DataLayer {
 
     Transaction: TransactionInfo;
     Transactions: Array<TransactionInfo>;
-    
     TransactionCancels: Array<CancelInfo>;
-    TransactionCancelSelected: Array<CancelInfo>;
 
     SellInfos: Array<SellInfo>;
     SellInfosAmount: number = 0;
@@ -286,6 +284,7 @@ export class DataLayer {
         this.ServiceReservationDone = new Array<ReservationInfo>();
         this.ServiceReservationNew = new Array<ReservationInfo>();
 
+        this.TransactionCancels = new Array<CancelInfo>();
         this.ExpenseTypes = new Array<NameValue>();
     }
 

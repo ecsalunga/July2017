@@ -10,7 +10,7 @@ export class ExpenseDAL {
     constructor(private core: Core, private DL: DataLayer, private af: AngularFireDatabase) {}
 
     LoadByYearAndMonth(selectedYear: number, selectedMonth: number) {
-        this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYMONTH, equalTo: parseInt(selectedYear + this.core.az(selectedMonth)) } }).first().subscribe(snapshots => {
+        this.af.list(this.PATH, { query: { orderByChild: this.DL.KEYMONTH, equalTo: parseInt(selectedYear + this.core.az(selectedMonth)) }}).first().subscribe(snapshots => {
             this.DL.Expenses = new Array<ExpenseInfo>();
             this.DL.ExpenseTotal = 0;
 
