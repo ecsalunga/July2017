@@ -40,6 +40,8 @@ export class CancelDAL {
 
         // save cancel info
         let info = new CancelInfo();
+        info.UserKey = this.DL.User.key;
+        info.UserName = this.DL.User.Name;
         info.Description = description;
         info.Amount = tran.Amount;
         info.ActionDate = this.core.dateToNumber(new Date());
