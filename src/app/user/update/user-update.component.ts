@@ -14,7 +14,7 @@ export class UserUpdateComponent implements OnInit {
   isLoaded: boolean = true;
   nameValidator = new FormControl('', [Validators.required]);
   
-  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
+  constructor(private core: Core, public DA: DataAccess, public DL: DataLayer) {
     this.model = Object.assign({}, this.DL.User);
   }
 
