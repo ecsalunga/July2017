@@ -18,7 +18,10 @@ export class ProductOrderDetailComponent implements OnInit {
   }
 
   ShowDeliveryOption(): boolean {
-    return (!this.model.HasDelivery && this.model.Status != this.DL.STATUS_SELECTING && this.model.Status != this.DL.STATUS_DONE);
+    return (!this.model.HasDelivery 
+      && this.model.Status != this.DL.STATUS_SELECTING 
+      && this.model.Status != this.DL.STATUS_CANCELLED 
+      && this.model.Status != this.DL.STATUS_DONE);
   }
 
   ShowForTransaction(): boolean {
@@ -36,11 +39,14 @@ export class ProductOrderDetailComponent implements OnInit {
 
   CanSave(): boolean {
     return (this.DL.UserAccess.ShowcaseOrderEdit && 
-      !(this.model.Status == this.DL.STATUS_SELECTING ||  this.model.Status == this.DL.STATUS_DONE));
+      !(this.model.Status == this.DL.STATUS_SELECTING 
+        || this.model.Status == this.DL.STATUS_CANCELLED
+        || this.model.Status == this.DL.STATUS_DONE));
   }
 
   CanDelete(): boolean {
-    return (this.model.Status == this.DL.STATUS_CANCELLED || (this.model.Status == this.DL.STATUS_DONE && (this.model.IsTransaction || this.model.HasDelivery)));
+    return (this.model.Status == this.DL.STATUS_CANCELLED 
+      || (this.model.Status == this.DL.STATUS_DONE && (this.model.IsTransaction || this.model.HasDelivery)));
   }
 
   Save() {

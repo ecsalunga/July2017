@@ -6,13 +6,13 @@
           Member
         </th>
         <th>
+          Source
+        </th>
+        <th>
           Time
         </th>
         <th class="totalColumn">
-          Count
-        </th>
-        <th class="totalColumn">
-          Amount
+          Amount / QTY
         </th>
         <th class="rightRow">
           Action
@@ -25,13 +25,13 @@
           {{ tran.BuyerName }}
         </td>
         <td>
+          {{ tran.Source }}
+        </td>
+        <td>
           {{ this.core.numberToDate(tran.ActionDate) | date : 'shortTime' }}
         </td>
         <td class="totalColumn">
-          {{ tran.Count }}
-        </td>
-        <td class="totalColumn">
-          {{ tran.Amount | number:'1.2-2' }}
+          {{ tran.Amount | number:'1.2-2' }} / {{ tran.Count }}
         </td>
         <td class="rightRow">
           <button md-mini-fab [disabled]="!DL.UserAccess.TransactionDetail" (click)="SelectTransaction(tran)" mdTooltip="View"><md-icon>pageview</md-icon></button>
@@ -42,14 +42,9 @@
       <td>
         Total
       </td>
-      <td></td>
-      <td class="totalColumn">
-        {{ DL.ReportSelected.SaleCount }}
+      <td class="totalColumn" colspan="3">
+        {{ DL.ReportSelected.SaleAmount | number:'1.2-2' }} / {{ DL.ReportSelected.SaleCount }}
       </td>
-      <td class="totalColumn">
-        {{ DL.ReportSelected.SaleAmount | number:'1.2-2' }}
-      </td>
-      <td></td>
       <td></td>
     </tr>
   </table>

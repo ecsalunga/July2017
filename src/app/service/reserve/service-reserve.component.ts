@@ -22,10 +22,6 @@ export class ServiceReserveComponent implements OnInit {
     this.ToDate = this.ToDay;
   }
 
-  DataChanged() {
-    this.isReserving = false;
-  }
-
   ShowReserve() {
     this.isReserving = true;
   }

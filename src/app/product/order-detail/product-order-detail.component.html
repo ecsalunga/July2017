@@ -81,7 +81,7 @@
     </md-form-field>
   </div>
   <div class="selectionRow">
-    <md-select [disabled]="model.Status == DL.STATUS_SELECTING || model.Status == DL.STATUS_DONE" placeholder="Status" class="longText" [(ngModel)]="selectedStatus">
+    <md-select [disabled]="!CanSave()" placeholder="Status" class="longText" [(ngModel)]="selectedStatus">
       <md-option *ngFor="let status of DL.ShowcaseOrderStatuses" [value]="status">
         {{ status }}
       </md-option>
