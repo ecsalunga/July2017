@@ -9,9 +9,9 @@
     <div class="imageContainer">
       <img class="fullWidth" src="{{model.ImageURL}}" />
     </div>
-    <div class="itemControl mainColor">
+    <div class="itemControl">
       <ng-container *ngIf="!isReserving; else dataReserving;">
-        <div>
+        <div class="cartPrice mainColor">
           {{ DL.CURRENCY }} {{ model.Price | number:'1.2-2' }}
         </div>
         <div class="vMediumSpacer"></div>
@@ -53,7 +53,7 @@
         </div>
       </ng-template>
       <div class="hSpacer"></div>
-      <div>
+      <div class="mainColor">
         <ng-container *ngIf="!isReserving; else controlReserving;">
           <button md-raised-button [disabled]="!FromDate || !ToDate || !CanAdd()" (click)="ShowReserve()">
             <md-icon>done</md-icon>
