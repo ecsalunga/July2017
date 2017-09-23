@@ -1,9 +1,4 @@
-import { ProductInfo, SellInfo, NameValue } from './';
-
-export class ScheduleInfo {
-    From: number;
-    To: number;
-}
+import { ProductInfo, SellInfo, NameValue, ScheduleInfo } from './';
 
 export class OrderInfo {
     key: string;
@@ -28,7 +23,9 @@ export class OrderInfo {
 
 export class ShowcaseInfo {
     key: string;
-    Product: ProductInfo;
+    ProductCode: string;
+    ProductName: string;
+    ProductPrice: number;
     Description: string;
     Order: number;
     MaxCart: number;

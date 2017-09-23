@@ -10,31 +10,34 @@ import { ShowcaseInfo, ProductInfo } from '../../data/models';
 })
 export class ShowcaseDetailComponent implements OnInit {
   model: ShowcaseInfo;
+  selectedProduct: ProductInfo;
   isLoaded: boolean = true; 
 
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     if (this.DL.Showcase) {
       this.model = Object.assign({}, this.DL.Showcase);
-      if(this.model.Product) {
-        this.DL.Products.forEach(product => {
-          if(this.model.Product.key == product.key) 
-            this.model.Product = product;
-        });
-      }
+      this.DL.Products.forEach(product => {
+        if(this.model.ProductCode == product.Code) 
+          this.selectedProduct = product;
+      });
     }
     else
       this.model = new ShowcaseInfo(this.DL.DefaultImageURL);
   }
 
   IsSaveDisabled() : boolean {
-    return !this.model.Product || (!this.DL.UserAccess.ShowcaseEdit && !(!this.model.key)) || (!this.DL.UserAccess.ShowcaseAdd && !this.model.key);
+    return !this.selectedProduct || (!this.DL.UserAccess.ShowcaseEdit && !(!this.model.key)) || (!this.DL.UserAccess.ShowcaseAdd && !this.model.key);
   }
 
   SelectFile() {
-    this.DL.SelectImage("images/showscase/");
+    this.DL.SelectImage("images/showcase/");
   }
 
   Save() {
+    this.model.ProductCode = this.selectedProduct.Code;
+    this.model.ProductName = this.selectedProduct.Description;
+    this.model.ProductPrice = this.selectedProduct.Price;
+
     this.DA.ShowcaseSave(this.model);
     this.LoadList();
     this.DL.Display("Showcase Details", "Saved!");

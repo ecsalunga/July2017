@@ -20,6 +20,11 @@ export class Name2Value {
     }
 }
 
+export class ScheduleInfo {
+    From: number;
+    To: number;
+}
+
 export class CommandInfo {
     key: string;
     UserKey: string;

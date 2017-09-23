@@ -158,15 +158,8 @@ export class DataAccess {
 
     public CommandDelete(item: CommandInfo) {
         this.af.list(this.COMMAND, { query: { orderByChild: 'UserKey', equalTo: item.UserKey } }).first().subscribe(snapshots => {
-            let usersCommand = new Array<CommandInfo>();
             snapshots.forEach(snapshot => {
-                let info: CommandInfo = snapshot;
-                info.key = snapshot.$key;
-                usersCommand.push(info);
-            });
-
-            usersCommand.forEach(cmd => {
-                this.af.list(this.COMMAND).remove(cmd.key);
+                this.af.list(this.COMMAND).remove(snapshot.$key);
             });
         });
     }
@@ -212,7 +205,7 @@ export class DataAccess {
                 this.DL.User.AccessName = "Default";
                 this.DL.User.IsSystemUser = this.DL.UserIsDefaultSystemUser;
                 this.DL.User.IsMember = true
-                this.DL.User.JoinDate = this.core.dateToNumber(this.DL.Date);
+                this.DL.User.JoinDate = this.DL.GetActionDate();
 
                 this.DL.User.Name = user.displayName;
                 this.DL.User.Email = user.email;

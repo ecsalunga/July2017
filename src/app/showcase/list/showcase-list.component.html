@@ -22,10 +22,10 @@
     <ng-container *ngFor="let item of DL.Showcases">
       <tr>
         <td>
-          {{ item.Product.Description }}
+          {{ item.ProductName }}
         </td>
         <td>
-          {{ item.Product.Price | number:'1.2-2' }}
+          {{ item.ProductPrice | number:'1.2-2' }}
         </td>
         <td class="{{ (Visibility(item) == 'Yes') ?  'good' : 'bad' }}">
           {{ Visibility(item) }}

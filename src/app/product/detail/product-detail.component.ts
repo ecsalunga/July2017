@@ -66,6 +66,18 @@ export class ProductDetailComponent implements OnInit {
 
     if(validated) {
       this.DA.ProductSave(this.model);
+
+      // update showcase
+      this.DL.Showcases.forEach(item => {
+        if(this.model.Code == item.ProductCode) {
+          if(this.model.Description != item.ProductName || this.model.Price != item.ProductPrice) {
+            item.ProductName = this.model.Description;
+            item.ProductPrice = this.model.Price;
+            this.DA.ShowcaseSave(item);
+          }
+        }
+      });
+      
       this.LoadList();
       this.DL.Display("Product Details", "Saved!");
     }

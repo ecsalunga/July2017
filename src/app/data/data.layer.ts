@@ -30,7 +30,7 @@ export class DataLayer {
     COMPONENT: string;
     SOURCE: string;
     SOURCE_COUNTER: string = "Counter";
-    SOURCE_ORDER: string = "Order";
+    SOURCE_ORDER: string = "Online Order";
     TITLE: string;
 
     STATUS_CREATED: string = "Created";

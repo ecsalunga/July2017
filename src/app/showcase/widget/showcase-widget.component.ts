@@ -23,7 +23,7 @@ export class ShowcaseWidgetComponent implements OnInit {
       if(order.Status == this.DL.STATUS_SELECTING) {
         hasOpen = true;
         order.Items.forEach(cItem => {
-          if(item.Product.Code == cItem.Code) {
+          if(item.ProductCode == cItem.Code) {
             isAllowed = (item.MaxCart == null || cItem.Quantity < item.MaxCart);
           }
         });
@@ -48,7 +48,7 @@ export class ShowcaseWidgetComponent implements OnInit {
         let exists = false;
         order.Items.forEach(cItem => {
           // update
-          if(item.Product.Code == cItem.Code) {
+          if(item.ProductCode == cItem.Code) {
             exists = true;
             cItem.Quantity++;
             cItem.Total = cItem.Price * cItem.Quantity;
@@ -80,7 +80,7 @@ export class ShowcaseWidgetComponent implements OnInit {
       order.BuyerName = this.DL.User.Name;
       
       order.Count = 1;
-      order.Amount = item.Product.Price;
+      order.Amount = item.ProductPrice;
       this.DL.OrderUpdateStatus(order, this.DL.STATUS_SELECTING);
       quantity = 1;
 
@@ -88,14 +88,14 @@ export class ShowcaseWidgetComponent implements OnInit {
       this.DA.ShowcaseOrderSave(order);
     }
 
-    this.DL.DisplayPublic(item.Product.Description, quantity + " " + (quantity == 1 ? "item":"items") + " to cart.");
+    this.DL.DisplayPublic(item.ProductName, quantity + " " + (quantity == 1 ? "item":"items") + " to cart.");
   }
 
   createSell(item: ShowcaseInfo): SellInfo {
     let sell = new SellInfo();
-    sell.Code = item.Product.Code;
-    sell.Description = item.Product.Description;
-    sell.Price = item.Product.Price;
+    sell.Code = item.ProductCode;
+    sell.Description = item.ProductName;
+    sell.Price = item.ProductPrice;
     sell.Quantity = 1
     sell.Total = sell.Quantity * sell.Price;
     return sell;

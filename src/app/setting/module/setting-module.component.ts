@@ -24,25 +24,6 @@ export class SettingModuleComponent implements OnInit {
     this.DL.LoadFromLink("setting-module-expense-type");
   }
 
-  ShowcaseUpdate() {
-    let items = new Array<ShowcaseInfo>();
-    this.DL.Showcases.forEach(showcase => {
-      this.DL.Products.forEach(product => {
-        if(showcase.Product.key == product.key) {
-          showcase.Product = product;
-        }
-      });
-      items.push(showcase);
-    });
-
-    items.forEach(item => {
-      this.DA.ShowcaseSaveOnly(item);
-    });
-
-    this.DA.ShowcasesLoad();
-    this.DL.Display("Showcase", "Updated!");
-  }
-
   ngOnInit() {
     this.DL.TITLE = "Module Settings";
   }

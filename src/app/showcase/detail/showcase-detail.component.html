@@ -1,6 +1,6 @@
 <div>
   <div>
-    <md-select class="longText" placeholder="Product" [(ngModel)]="model.Product">
+    <md-select class="longText" placeholder="Product" [(ngModel)]="selectedProduct">
       <md-option *ngFor="let product of DL.Products" [value]="product">
         {{ product.Description }} ({{ product.Code }})
       </md-option>
