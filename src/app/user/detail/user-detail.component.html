@@ -57,14 +57,14 @@
   </div>
   <div class="hSpacer"></div>
   <table>
-      <tr class="rightRow">
-        <td>
-          <button md-fab (click)="Logout()" [disabled]="!DL.UserAccess.UserCommandLogout" mdTooltip="Logout" mdTooltipPosition="above"><md-icon>exit_to_app</md-icon></button>
-        </td>
-        <td>
-          <button md-fab (click)="Save()" [disabled]="nameValidator.invalid || !DL.UserAccess.UserEdit" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
-          <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
-        </td>
-      </tr>
-    </table>
+    <tr class="rightRow">
+      <td>
+        <button md-fab (click)="Logout()" [disabled]="!DL.UserAccess.UserCommandLogout" mdTooltip="Logout" mdTooltipPosition="above"><md-icon>exit_to_app</md-icon></button>
+      </td>
+      <td>
+        <button md-fab (click)="Save()" [disabled]="nameValidator.invalid || !DL.UserAccess.UserEdit" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+        <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+      </td>
+    </tr>
+  </table>
 </div>

@@ -41,10 +41,20 @@
     </div>
   </div>
   <div class="hSpacer"></div>
-  <div class="rightRow mainColor">
-    <button md-raised-button (click)="Save()" [disabled]="nameValidator.invalid || !DL.UserAccess.UserProfileEdit" mdTooltip="Save" mdTooltipPosition="above">
-      <md-icon>save</md-icon>
-      <span>Update</span>
-    </button>
-  </div>
+  <table>
+    <tr class="rightRow mainColor">
+      <td>
+        <button md-raised-button (click)="DA.LogOut()" [disabled]="!DL.UserAccess.CanLogout" mdTooltip="Log Out" mdTooltipPosition="above">
+          <md-icon>exit_to_app</md-icon>
+          <span>Log Out</span>
+        </button>
+      </td>
+      <td>
+        <button md-raised-button (click)="Save()" [disabled]="nameValidator.invalid || !DL.UserAccess.UserProfileEdit" mdTooltip="Save" mdTooltipPosition="above">
+          <md-icon>save</md-icon>
+          <span>Update</span>
+        </button>
+      </td>
+    </tr>
+  </table>
 </div>
