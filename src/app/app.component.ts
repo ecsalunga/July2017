@@ -44,15 +44,24 @@ export class AppComponent implements OnInit {
   }
 
   Upload() {
-    let selectedFile = (<HTMLInputElement>this.imageSelector.element.nativeElement).files[0];
+    let nativeElement = (<HTMLInputElement>this.imageSelector.element.nativeElement);
+    let selectedFile = nativeElement.files[0];
     if(selectedFile.type.indexOf("image") > -1) {
-      this.DA.DataChecked.emit(true);
-      let fRef = this.DA.StorageRef.child(this.DL.UploadingImageBasePath + selectedFile.name);
-      fRef.put(selectedFile).then(snapshot => {
-        this.DA.ImageUploaded.emit(snapshot.downloadURL);
-      });
+      if((selectedFile.size / 1024) <= this.DL.SystemSetting.ImageSize) {
+        this.DA.DataChecked.emit(true);
+        let fRef = this.DA.StorageRef.child(this.DL.UploadingImageBasePath + selectedFile.name);
+        fRef.put(selectedFile).then(snapshot => {
+          this.DA.ImageUploaded.emit(snapshot.downloadURL);
+          nativeElement.value = "";
+        });
+      } else {
+        nativeElement.value = "";
+        this.DA.DataChecked.emit(false);
+        this.DL.Display("Image", "Please select image with maximum " + this.DL.SystemSetting.ImageSize + " KB size.");
+      }
     }
     else {
+      nativeElement.value = "";
       this.DA.DataChecked.emit(false);
       this.DL.Display("Image", "Please select valid image file.");
     }

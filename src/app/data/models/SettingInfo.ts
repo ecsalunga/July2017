@@ -18,6 +18,7 @@ export class SystemSettingInfo {
     Name: string;
     Footer: string;
     CurrencySymbol: string;
+    ImageSize: number;
     
     NotificationDuration: number;
     NotificationSlowDuration: number;

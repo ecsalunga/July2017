@@ -18,6 +18,11 @@
         <input id="txtCurrencySymbol" mdInput placeholder="Currency Symbol" [(ngModel)]="model.CurrencySymbol" />
       </md-form-field>
     </div>
+    <div>
+      <md-form-field>
+        <input id="txtImageSize" type="number" mdInput placeholder="Max Image KB" [(ngModel)]="model.ImageSize" />
+      </md-form-field>
+    </div>
     <div class="imageContainer">
       <img class="fullWidth" src="{{model.DefaultImageURL}}" (load)="ImageLoaded()">
       <div class="imageEdit" [hidden]="!isLoaded || !DL.UserAccess.SystemSettingEdit">
