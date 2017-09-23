@@ -31,6 +31,7 @@ export class DataLayer {
     SOURCE: string;
     SOURCE_COUNTER: string = "Counter";
     SOURCE_ORDER: string = "Online Order";
+    SOURCE_RESERVATION: string = "Reservation";
     TITLE: string;
 
     STATUS_CREATED: string = "Created";
@@ -362,6 +363,11 @@ export class DataLayer {
         item.Status = status;
         item.ActionDate = this.GetActionDate();
         let action = new NameValue(item.Status, item.ActionDate);
+        item.Actions.push(action);
+    }
+
+    public ReservationInjectStatus(item: ReservationInfo, status: string) {
+        let action = new NameValue(status, this.GetActionDate());
         item.Actions.push(action);
     }
 

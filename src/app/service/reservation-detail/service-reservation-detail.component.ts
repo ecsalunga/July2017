@@ -19,7 +19,7 @@ export class ServiceReservationDetailComponent implements OnInit {
 
   CanSave(): boolean {
     return (this.DL.UserAccess.ServiceReservationEdit && 
-      !(this.model.Status == this.DL.STATUS_DONE));
+      (this.model.Status != this.DL.STATUS_DONE));
   }
 
   Save() {
@@ -28,6 +28,21 @@ export class ServiceReservationDetailComponent implements OnInit {
       this.DA.ServiceReserveSave(this.model);
       this.DL.Display("Reservation", "Saved!");
     }
+    this.LoadList();
+  }
+
+  GenerateTransaction() {
+    this.DA.ServiceReservationToTransaction(this.model);
+    this.DL.ReservationInjectStatus(this.model, this.DL.STATUS_SAVEDTO_TRANSACT);
+    this.model.IsTransaction = true;
+    this.DA.ServiceReserveSave(this.model);
+    this.LoadList();
+    this.DL.Display("Transaction", "Saved!");
+  }
+
+  Delete() {
+    this.DA.ServiceReserveDelete(this.model);
+    this.DL.Display("Reservation", "Deleted!");
     this.LoadList();
   }
   

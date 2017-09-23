@@ -28,9 +28,11 @@ export class ReservationInfo {
     Count: number;
     ActionDate: number;
     Status: string;
+    IsTransaction: boolean;
     Actions: Array<NameValue>;
 
     constructor() {
+        this.IsTransaction = false;
         this.Actions =  new Array<NameValue>();
     }
 }

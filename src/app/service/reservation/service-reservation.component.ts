@@ -24,7 +24,7 @@ export class ServiceReservationComponent implements OnInit {
   HasClean(): boolean {
     let hasClean = false
     this.DL.ServiceReservationDone.forEach(item => {
-      if(item.Status == this.DL.STATUS_DONE)
+      if(item.IsTransaction && item.Status == this.DL.STATUS_DONE)
         hasClean = true;
     });
 
@@ -33,7 +33,7 @@ export class ServiceReservationComponent implements OnInit {
 
   CleanDelete() {
     this.DL.ServiceReservationDone.forEach(item => {
-      if(item.Status == this.DL.STATUS_DONE)
+      if(item.IsTransaction && item.Status == this.DL.STATUS_DONE)
         this.DA.ServiceReserveDelete(item);
     });
 

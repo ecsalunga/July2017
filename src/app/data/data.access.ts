@@ -440,6 +440,35 @@ export class DataAccess {
         this.showcaseDAL.DeleteOrder(item);
     }
 
+    public ServiceReservationToTransaction(item: ReservationInfo) {
+        let tran = this.createTransactionFromReservation(item);
+        this.TransactionInfoSave(tran);
+    }
+
+    private createTransactionFromReservation(item: ReservationInfo): TransactionInfo {
+        let info = new TransactionInfo();
+        info.MemberKey = item.MemberKey;
+        info.BuyerName = item.MemberName
+        info.UserKey = this.DL.User.key;
+        info.UserName = this.DL.User.Name;
+        
+        info.Items = new Array<SellInfo>();
+        let sell = new SellInfo();
+        sell.Code = "Service";
+        sell.Description = item.Name;
+        sell.Price = item.Price;
+        sell.Quantity = item.Count;
+        sell.Total = item.Price * item.Count;
+        info.Items.push(sell);
+
+        info.Count = sell.Quantity;
+        info.Amount = sell.Total;
+        info.ActionDate = this.DL.GetActionDate();
+        info.KeyDay = this.DL.KeyDay;
+        info.Source = this.DL.SOURCE_RESERVATION;
+        return info;
+    }
+
     public ServiceReserveSave(item: ReservationInfo) {
         this.serviceDAL.SaveReservation(item);
     }
