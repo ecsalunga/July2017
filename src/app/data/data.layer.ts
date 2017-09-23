@@ -31,7 +31,7 @@ export class DataLayer {
     SOURCE: string;
     SOURCE_COUNTER: string = "Counter";
     SOURCE_ORDER: string = "Online Order";
-    SOURCE_RESERVATION: string = "Reservation";
+    SOURCE_RESERVATION: string = "Booking";
     TITLE: string;
 
     STATUS_CREATED: string = "Created";
