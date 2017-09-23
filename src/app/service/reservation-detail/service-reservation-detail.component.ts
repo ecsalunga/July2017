@@ -18,8 +18,13 @@ export class ServiceReservationDetailComponent implements OnInit {
   }
 
   CanSave(): boolean {
-    return (this.DL.UserAccess.ServiceReservationEdit && 
-      (this.model.Status != this.DL.STATUS_DONE));
+    return (this.DL.UserAccess.ServiceReservationEdit 
+      && this.model.Status != this.DL.STATUS_DONE 
+      && this.model.Status != this.DL.STATUS_CANCELLED);
+  }
+
+  CanDelete(): boolean {
+    return (this.model.Status == this.DL.STATUS_CANCELLED || (this.model.Status == this.DL.STATUS_DONE && this.model.IsTransaction));
   }
 
   Save() {

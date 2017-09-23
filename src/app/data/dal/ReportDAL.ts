@@ -39,7 +39,6 @@ export class ReportDAL {
     }
 
     public ReGenerate(year: number, keyMonth: number, keyDay: number) {
-        // get report for that day
         let report = new ReportInfo();
         report.KeyYear = year;
         report.KeyMonth = keyMonth;

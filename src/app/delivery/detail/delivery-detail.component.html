@@ -108,7 +108,7 @@
         <button md-fab color="primary" (click)="GenerateTransaction()" mdTooltip="Generate transaction" mdTooltipPosition="above"><md-icon>receipt</md-icon></button>
       </td>
       <td>
-        <button md-fab color="warn" *ngIf="IsDone()" (click)="Delete()" [disabled]="!DL.UserAccess.DeliveryDelete" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
+        <button md-fab color="warn" *ngIf="CanDelete()" (click)="Delete()" [disabled]="!DL.UserAccess.DeliveryDelete" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
         <button md-fab *ngIf="!IsDone()" (click)="Save()" [disabled]="!DL.UserAccess.DeliveryEdit" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
         <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
       </td>

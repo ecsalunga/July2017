@@ -60,8 +60,6 @@ export class ExpenseDAL {
     }
 
     private ProcessReGenerate(item: ExpenseInfo) {
-        if(item.KeyDay != this.DL.KeyDay) {
-            this.DA.ReportReGenerate(item.KeyYear, item.KeyMonth, item.KeyDay);
-        }
+        this.DA.ReportReGenerate(item.KeyDay);
     }
 }

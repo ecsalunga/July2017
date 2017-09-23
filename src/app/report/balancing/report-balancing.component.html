@@ -6,16 +6,16 @@
           Date
         </th>
         <th class="totalColumn">
-          Start CoH
-        </th>
-        <th class="totalColumn">
           Sales
         </th>
         <th class="totalColumn">
           Expenses
         </th>
+        <th class="totalColumn">
+          Start CoH
+        </th>
         <th class="totalColumn" mdTooltip="Computed vs Actual CoH">
-          C/A CoH
+          A/C CoH
         </th>
       </tr>
     </thead>
@@ -25,16 +25,16 @@
           {{ GetDate(item.KeyDay) | date : 'yyyy-MM-dd' }}
         </td>
         <td class="totalColumn">
-          {{item.COHStart | number:'1.2-2'}}
-        </td>
-        <td class="totalColumn">
           {{item.SaleAmount | number:'1.2-2'}}
         </td>
         <td class="totalColumn">
           {{item.ExpenseAmount | number:'1.2-2'}}
         </td>
+        <td class="totalColumn">
+          {{item.COHStart | number:'1.2-2'}}
+        </td>
         <td class="totalColumn {{ (GetComputed(item) == GetActual(item)) ?  'good' : 'bad' }}">
-          {{ GetComputed(item) | number:'1.2-2' }} / {{ GetActual(item) | number:'1.2-2'}}
+          {{ GetActual(item) | number:'1.2-2'}} / {{ GetComputed(item) | number:'1.2-2' }}
         </td>
       </tr>
     </ng-container>

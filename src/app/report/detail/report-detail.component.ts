@@ -38,7 +38,7 @@ export class ReportDetailComponent implements OnInit {
       this.model.KeyDay = this.core.dateToKeyDay(this.selectedDate);
       this.model.KeyMonth = this.core.dateToKeyMonth(this.selectedDate);
       this.model.KeyYear = this.selectedDate.getFullYear();
-      this.DA.ReportGenerate(this.model.KeyYear, this.model.KeyMonth, this.model.KeyDay, this.model.COHStart, this.model.COHActual);
+      this.DA.ReportGenerate(this.model.KeyDay, this.model.COHStart, this.model.COHActual);
       this.DL.Display("Cashflow Generation", "Issued!");
     }
     else {
@@ -53,7 +53,7 @@ export class ReportDetailComponent implements OnInit {
   }
 
   Regenerate() {
-    this.DA.ReportReGenerate(this.model.KeyYear, this.model.KeyMonth, this.model.KeyDay);
+    this.DA.ReportReGenerate(this.model.KeyDay);
     this.DL.Display("Cashflow Regeneration", "Issued!");
   }
 
@@ -73,8 +73,10 @@ export class ReportDetailComponent implements OnInit {
     this.DL.TITLE = "Cashflow Details";
 
     this.DA.DataLoaded.subscribe(data => {
-      if(data == this.DL.DATA_REPORT)
+      if(data == this.DL.DATA_REPORT && this.DL.COMPONENT == "report-detail") {
         this.DL.LoadFromMenu("report-list");
+        this.DL.Display("Cashflow Regeneration", "Completed!");
+      }
     });
   }
 }

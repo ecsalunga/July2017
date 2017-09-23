@@ -39,6 +39,10 @@ export class ProductOrderDetailComponent implements OnInit {
       !(this.model.Status == this.DL.STATUS_SELECTING ||  this.model.Status == this.DL.STATUS_DONE));
   }
 
+  CanDelete(): boolean {
+    return (this.model.Status == this.DL.STATUS_CANCELLED || (this.model.Status == this.DL.STATUS_DONE && (this.model.IsTransaction || this.model.HasDelivery)));
+  }
+
   Save() {
     if(this.DL.ShowcaseOrder.Status != this.selectedStatus) {
       this.DL.OrderUpdateStatus(this.model, this.selectedStatus);

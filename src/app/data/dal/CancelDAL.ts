@@ -50,14 +50,7 @@ export class CancelDAL {
 
         // delete transaction
         this.transactionInfoDelete(tran.key);
-
-        // report recompute
-        if(tran.KeyDay != this.DL.KeyDay) {
-            let transDate = this.core.keyDayToDate(tran.KeyDay);
-            let keyDay = this.core.dateToKeyDay(transDate);
-            let keyMonth = this.core.dateToKeyMonth(transDate);
-            this.DA.ReportReGenerate(transDate.getFullYear(), keyMonth, keyDay);
-        }
+        this.DA.ReportReGenerate(tran.KeyDay);
     }
 
     private transactionInfoDelete(key: string) {

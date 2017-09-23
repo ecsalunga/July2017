@@ -33,6 +33,10 @@ export class DeliveryDetailComponent implements OnInit {
     return (this.model.Status == this.DL.STATUS_DELIVERED || this.model.Status == this.DL.STATUS_CANCELLED);
   }
 
+  CanDelete(): boolean {
+    return ((this.model.Status == this.DL.STATUS_DELIVERED && this.model.IsTransaction) || this.model.Status == this.DL.STATUS_CANCELLED);
+  }
+
   Delete() {
     this.DA.DeliveryDelete(this.model);
     this.LoadList();

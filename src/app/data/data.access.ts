@@ -325,12 +325,16 @@ export class DataAccess {
         this.reportDAL.LoadByYearAndMonth(selectedYear, selectedMonth);
     }
 
-    public ReportReGenerate(year: number, keyMonth: number, keyDay: number) {
-        this.reportDAL.ReGenerate(year, keyMonth, keyDay);
+    public ReportReGenerate(keyDay: number) {
+        let date = this.core.keyDayToDate(keyDay);
+        let keyMonth = this.core.dateToKeyMonth(date);
+        this.reportDAL.ReGenerate(date.getFullYear(), keyMonth, keyDay);
     }
 
-    public ReportGenerate(year: number, keyMonth: number, keyDay: number, startCOH: number, actualCOH: number) {
-        this.reportDAL.Generate(year, keyMonth, keyDay, startCOH, actualCOH);
+    public ReportGenerate(keyDay: number, startCOH: number, actualCOH: number) {
+        let date = this.core.keyDayToDate(keyDay);
+        let keyMonth = this.core.dateToKeyMonth(date);
+        this.reportDAL.Generate(date.getFullYear(), keyMonth, keyDay, startCOH, actualCOH);
     }
 
     public ExpenseMonthlyLoad(selectedYear: number, selectedMonth: number) {
@@ -528,6 +532,7 @@ export class DataAccess {
 
     public TransactionInfoSave(item: TransactionInfo) {
         this.transactionDAL.Save(item);
+        this.ReportReGenerate(item.KeyDay);
     }
 
     public CancelInfoSave(item: CancelInfo) {

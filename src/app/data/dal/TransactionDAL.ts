@@ -97,7 +97,7 @@ export class TransactionDAL {
             this.DeliveryStart(info);
         }
         else {
-            this.Save(info);
+            this.DA.TransactionInfoSave(info);
             this.DA.ProductUpdate(info.Items);
         }
 
@@ -129,7 +129,7 @@ export class TransactionDAL {
         info.Transaction.KeyDay = this.DL.KeyDay;
         info.Transaction.IsDelivered = true;
         this.DeliverySave(info);
-        this.Save(info.Transaction);
+        this.DA.TransactionInfoSave(info.Transaction);
         this.DA.ProductUpdate(info.Transaction.Items);
     }
 
