@@ -61,7 +61,10 @@
           </button>
         </ng-container>
         <ng-template #controlReserving>
-          <div class="confirm">
+          <div *ngIf="isReserving && DL.HasMissingProfileData()" class="bad warning">
+            {{ DL.MSG_MISSING_PROFILE_DATA }}
+          </div>
+          <div>
             <button md-raised-button (click)="HideReserve()">
               <md-icon>assignment_return</md-icon>
               <span>Cancel</span>
@@ -72,9 +75,6 @@
             </button>
           </div>
         </ng-template>
-        <div *ngIf="isReserving && DL.HasMissingProfileData()" class="bad prompt">
-          {{ DL.MSG_MISSING_PROFILE_DATA }}
-        </div>
       </div>
     </div>
   </div>

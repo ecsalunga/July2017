@@ -11,17 +11,14 @@
     float: right; 
 }
 
-.cartSelection div {
-    float: left; 
+.cartSelection .controls {
+    float: right; 
 }
 
 .visibility {
     margin-right: 5px;
 }
 
-.prompt {
-    float: left; 
-    margin-top: 20px;
-    height: 30px;
+.warning {
     margin-bottom: 10px;
 }

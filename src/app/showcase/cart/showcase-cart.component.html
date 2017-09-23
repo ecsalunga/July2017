@@ -52,9 +52,6 @@
       </table>
       <div class="hSpacer"></div>
       <div class="itemControl mainColor">
-        <div *ngIf="isCheckingout && order.Status == DL.STATUS_SELECTING && DL.HasMissingProfileData()" class="bad prompt">
-          {{ DL.MSG_MISSING_PROFILE_DATA }}
-        </div>
         <div class="cartSelection">
           <div *ngIf="!isCheckingout && order.Status == DL.STATUS_SELECTING">
             <button md-raised-button (click)="ShowCheckout()">
@@ -63,14 +60,19 @@
             </button>
           </div>
           <div *ngIf="isCheckingout && order.Status == DL.STATUS_SELECTING">
-            <button md-raised-button (click)="HideCheckout()">
+            <div *ngIf="DL.HasMissingProfileData()" class="bad warning">
+              {{ DL.MSG_MISSING_PROFILE_DATA }}
+            </div>
+            <div class="controls">
+              <button md-raised-button (click)="HideCheckout()">
               <md-icon>assignment_return</md-icon>
               <span>Cancel</span>
             </button>
-            <button md-raised-button (click)="Checkout(order)">
+              <button md-raised-button (click)="Checkout(order)">
               <md-icon>done_all</md-icon>
               <span>Confirm</span>
             </button>
+            </div>
           </div>
           <div *ngIf="order.Status != DL.STATUS_SELECTING && order.Status != DL.STATUS_DONE">
             <div class="visibility" *ngIf="order.Status == DL.STATUS_DELIVERED || order.Status == DL.STATUS_CANCELLED">

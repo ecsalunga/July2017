@@ -23,12 +23,7 @@ md-form-field {
     width: 250px;
 }
 
-.confirm {
-    float: left; 
-}
-
-.prompt {
-    float: right; 
-    margin-top: 10px;
-    height: 30px;
+.warning {
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
