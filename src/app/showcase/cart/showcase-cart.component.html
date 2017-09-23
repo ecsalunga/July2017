@@ -27,10 +27,10 @@
               {{ info.Description }}
             </td>
             <td class="totalColumn">
-              {{ DL.CURRENCY }} {{ info.Price | number:'1.2-2' }} x {{ info.Quantity }}
+              {{ info.Price | number:'1.2-2' }} x {{ info.Quantity }}
             </td>
             <td class="totalColumn">
-              {{ DL.CURRENCY }} {{ info.Total | number:'1.2-2' }}
+              {{ info.Total | number:'1.2-2' }}
             </td>
             <td *ngIf="order.Status == DL.STATUS_SELECTING" class="rightRow">
               <button md-mini-fab color="warn" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
