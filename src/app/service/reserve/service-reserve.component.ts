@@ -39,7 +39,7 @@ export class ServiceReserveComponent implements OnInit {
     info.Price = this.model.Price;
     info.Count = this.GetDayCount();
 
-    this.DL.ReservationUpdateStatus(info, this.DL.STATUS_REQUESTED);
+    this.DL.StatusUpdate(info, this.DL.STATUS_REQUESTED);
     info.From = this.core.dateToKeyDay(this.FromDate);
     info.To = this.core.dateToKeyDay(this.ToDate);
 

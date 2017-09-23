@@ -1,4 +1,4 @@
-import { NameValue } from './';
+import { NameValue, IStatus } from './';
 
 export class SellInfo {
     key: string;
@@ -29,7 +29,7 @@ export class TransactionInfo {
     }
 }
 
-export class DeliveryInfo {
+export class DeliveryInfo implements IStatus {
     key: string;
     UserKey: string;
     UserName: string;
@@ -37,7 +37,7 @@ export class DeliveryInfo {
     Address: string;
     Contact: string;
     ActionStart: number;
-    ActionLast: number;
+    ActionDate: number;
     Status: string;
     IsTransaction: boolean;
     Actions: Array<NameValue>;

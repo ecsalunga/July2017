@@ -1,7 +1,7 @@
 export { AccessInfo } from './AccessInfo';
 export { CancelInfo } from './CancelInfo';
 export { ExpenseInfo } from './ExpenseInfo';
-export { NameValue, Name2Value, CommandInfo, ScheduleInfo } from './Utils';
+export { NameValue, Name2Value, CommandInfo, ScheduleInfo, IStatus } from './Utils';
 export { ProductInfo } from './ProductInfo';
 export { ReportInfo } from './ReportInfo';
 export { ShowcaseInfo, OrderInfo } from './ShowcaseInfo';

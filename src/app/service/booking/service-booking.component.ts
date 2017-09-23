@@ -20,7 +20,7 @@ export class ServiceBookingComponent implements OnInit {
   }
 
   SetStatusDone(item: ReservationInfo) {
-    this.DL.ReservationUpdateStatus(item, this.DL.STATUS_DONE);
+    this.DL.StatusUpdate(item, this.DL.STATUS_DONE);
     this.DA.ServiceReserveSave(item);
     this.DL.DisplayPublic("Reservation", "Hidden!");
     if(!this.DL.ServiceReservationUserHasItem) {

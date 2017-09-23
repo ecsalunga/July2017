@@ -1,3 +1,9 @@
+export interface IStatus {
+    ActionDate: number;
+    Status: string;
+    Actions: Array<NameValue>;
+}
+
 export class NameValue {
     Name: string;
     Value: any;

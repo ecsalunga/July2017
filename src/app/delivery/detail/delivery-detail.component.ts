@@ -26,7 +26,7 @@ export class DeliveryDetailComponent implements OnInit {
   Assign() {
     this.model.UserKey = this.selectedUser.key;
     this.model.UserName = this.selectedUser.Name;
-    this.DL.DeliveryUpdateStatus(this.model, this.DL.STATUS_ASSIGNED);
+    this.DL.StatusUpdate(this.model, this.DL.STATUS_ASSIGNED);
   }
 
   IsDone(): boolean {
@@ -57,7 +57,7 @@ export class DeliveryDetailComponent implements OnInit {
     }
 
     if(this.selectedStatus != this.DL.Delivery.Status && !(isAssign && this.selectedStatus == this.DL.STATUS_ASSIGNED))
-      this.DL.DeliveryUpdateStatus(this.model, this.selectedStatus);
+      this.DL.StatusUpdate(this.model, this.selectedStatus);
 
     this.DA.DeliverySave(this.model);
     this.LoadList();

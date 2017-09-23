@@ -1,6 +1,6 @@
-import { ProductInfo, SellInfo, NameValue, ScheduleInfo } from './';
+import { ProductInfo, SellInfo, NameValue, ScheduleInfo, IStatus } from './';
 
-export class OrderInfo {
+export class OrderInfo implements IStatus {
     key: string;
     MemberKey: string;
     BuyerName: string;

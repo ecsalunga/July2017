@@ -29,7 +29,7 @@ export class ServiceReservationDetailComponent implements OnInit {
 
   Save() {
     if(this.DL.ServiceReservation.Status != this.selectedStatus) {
-      this.DL.ReservationUpdateStatus(this.model, this.selectedStatus);
+      this.DL.StatusUpdate(this.model, this.selectedStatus);
       this.DA.ServiceReserveSave(this.model);
       this.DL.Display("Reservation", "Saved!");
     }
@@ -38,7 +38,7 @@ export class ServiceReservationDetailComponent implements OnInit {
 
   GenerateTransaction() {
     this.DA.ServiceReservationToTransaction(this.model);
-    this.DL.ReservationInjectStatus(this.model, this.DL.STATUS_SAVEDTO_TRANSACT);
+    this.DL.StatusInject(this.model, this.DL.STATUS_SAVEDTO_TRANSACT);
     this.model.IsTransaction = true;
     this.DA.ServiceReserveSave(this.model);
     this.LoadList();

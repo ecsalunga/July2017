@@ -9,7 +9,7 @@ import {
     CancelInfo, DeliveryInfo, ModuleSettingInfo,
     SystemSettingInfo, SnapshotInfo, OrderInfo,
     ServiceInfo, ConversationInfo, MessageInfo,
-    ReservationInfo, Name2Value
+    ReservationInfo, Name2Value, IStatus
 } from './models';
 
 @Injectable()
@@ -335,38 +335,14 @@ export class DataLayer {
         return false;
     }
 
-    public DeliveryUpdateStatus(item: DeliveryInfo, status: string) {
-        item.Status = status;
-        item.ActionLast = this.GetActionDate();
-        let action = new NameValue(item.Status, item.ActionLast);
-        item.Actions.push(action);
-    }
-
-    public DeliveryInjectStatus(item: DeliveryInfo, status: string) {
-        let action = new NameValue(status, this.GetActionDate());
-        item.Actions.push(action);
-    }
-
-    public OrderInjectStatus(item: OrderInfo, status: string) {
-        let action = new NameValue(status, this.GetActionDate());
-        item.Actions.push(action);
-    }
-
-    public OrderUpdateStatus(item: OrderInfo, status: string) {
+    public StatusUpdate(item: IStatus, status: string) {
         item.Status = status;
         item.ActionDate = this.GetActionDate();
         let action = new NameValue(item.Status, item.ActionDate);
         item.Actions.push(action);
     }
 
-    public ReservationUpdateStatus(item: ReservationInfo, status: string) {
-        item.Status = status;
-        item.ActionDate = this.GetActionDate();
-        let action = new NameValue(item.Status, item.ActionDate);
-        item.Actions.push(action);
-    }
-
-    public ReservationInjectStatus(item: ReservationInfo, status: string) {
+    public StatusInject(item: IStatus, status: string) {
         let action = new NameValue(status, this.GetActionDate());
         item.Actions.push(action);
     }

@@ -32,7 +32,7 @@ export class DeliveryListComponent implements OnInit {
       start.setMinutes(start.getMinutes() + this.DL.ModuleSetting.DeliveryMaxMinutes)
 
       if(item.Status == this.DL.STATUS_DELIVERED || item.Status == this.DL.STATUS_CANCELLED)
-        last = this.core.numberToDate(item.ActionLast);
+        last = this.core.numberToDate(item.ActionDate);
       
       late = (last > start);
     } 

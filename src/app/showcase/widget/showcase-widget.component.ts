@@ -81,7 +81,7 @@ export class ShowcaseWidgetComponent implements OnInit {
       
       order.Count = 1;
       order.Amount = item.ProductPrice;
-      this.DL.OrderUpdateStatus(order, this.DL.STATUS_SELECTING);
+      this.DL.StatusUpdate(order, this.DL.STATUS_SELECTING);
       quantity = 1;
 
       order.Items.push(this.createSell(item));

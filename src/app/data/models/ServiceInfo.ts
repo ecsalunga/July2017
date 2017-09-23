@@ -1,4 +1,4 @@
-import { ScheduleInfo, NameValue } from './';
+import { ScheduleInfo, NameValue, IStatus } from './';
 
 export class ServiceInfo {
     key: string;
@@ -16,7 +16,7 @@ export class ServiceInfo {
     }
 }
 
-export class ReservationInfo {
+export class ReservationInfo implements IStatus {
     key: string;
     MemberKey: string;
     MemberName: string;

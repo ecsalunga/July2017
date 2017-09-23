@@ -30,7 +30,7 @@ export class ProductOrderDetailComponent implements OnInit {
 
   GenerateTransaction() {
     this.DA.ShowcaseOrderToTransaction(this.model);
-    this.DL.OrderInjectStatus(this.model, this.DL.STATUS_SAVEDTO_TRANSACT);
+    this.DL.StatusInject(this.model, this.DL.STATUS_SAVEDTO_TRANSACT);
     this.model.IsTransaction = true;
     this.DA.ShowcaseOrderSave(this.model);
     this.LoadList();
@@ -51,7 +51,7 @@ export class ProductOrderDetailComponent implements OnInit {
 
   Save() {
     if(this.DL.ShowcaseOrder.Status != this.selectedStatus) {
-      this.DL.OrderUpdateStatus(this.model, this.selectedStatus);
+      this.DL.StatusUpdate(this.model, this.selectedStatus);
       this.DA.ShowcaseOrderSave(this.model);
       this.DL.Display("Order", "Saved!");
       this.LoadList();
@@ -65,8 +65,8 @@ export class ProductOrderDetailComponent implements OnInit {
   }
 
   CreateDelivery() {
-    this.DL.OrderInjectStatus(this.model, this.DL.STATUS_DELIVERY_CREATED);
-    this.DL.OrderUpdateStatus(this.model, this.DL.STATUS_FOR_DELIVERY);
+    this.DL.StatusInject(this.model, this.DL.STATUS_DELIVERY_CREATED);
+    this.DL.StatusUpdate(this.model, this.DL.STATUS_FOR_DELIVERY);
     this.model.HasDelivery = true;
     this.DA.ShowcaseOrderSave(this.model);
     this.DA.ShowcaseOrderForDelivery(this.model);

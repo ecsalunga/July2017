@@ -111,7 +111,7 @@ export class TransactionDAL {
         item.Transaction = info;
         item.ActionStart = this.DL.DeliveryStamp;
         this.DL.DeliveryGetInfo(item);
-        this.DL.DeliveryUpdateStatus(item, this.DL.STATUS_CREATED);
+        this.DL.StatusUpdate(item, this.DL.STATUS_CREATED);
         this.DeliverySave(item);
     }
 
@@ -123,7 +123,7 @@ export class TransactionDAL {
     }
 
     public DeliveryToTransaction(info: DeliveryInfo) {
-        this.DL.DeliveryInjectStatus(info, this.DL.STATUS_SAVEDTO_TRANSACT);
+        this.DL.StatusInject(info, this.DL.STATUS_SAVEDTO_TRANSACT);
         info.IsTransaction = true;
         info.Transaction.ActionDate = this.DL.GetActionDate();
         info.Transaction.KeyDay = this.DL.KeyDay;
