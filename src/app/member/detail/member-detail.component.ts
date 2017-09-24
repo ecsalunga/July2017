@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { UserInfo } from '../../data/models';
+import { UserInfo, CommandInfo } from '../../data/models';
 
 @Component({
   selector: 'member-detail',
@@ -29,6 +29,15 @@ export class MemberDetailComponent implements OnInit {
 
   IsHidden() : boolean {
     return !this.isLoaded || (!this.DL.UserAccess.MemberEdit && !(!this.model.key));
+  }
+
+  Logout() {
+    let info = new CommandInfo();
+    info.ComandType = this.DL.COMMAND_LOGOUT;
+    info.UserKey = this.model.key;
+
+    this.DA.CommandSave(info);
+    this.DL.Display("Command", "Issued!");
   }
 
   Save() {

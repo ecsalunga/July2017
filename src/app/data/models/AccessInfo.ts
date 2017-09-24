@@ -81,6 +81,7 @@ export class AccessInfo {
     MemberView: boolean;
     MemberAdd: boolean;
     MemberEdit: boolean;
+    MemberLogout: boolean;
 
     ModuleSettingView: boolean;
     ModuleSettingEdit: boolean;
