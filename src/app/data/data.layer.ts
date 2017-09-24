@@ -45,6 +45,7 @@ export class DataLayer {
     STATUS_SELECTING: string = "Selecting";
     STATUS_REQUESTED: string = "Requested";
     STATUS_CONFIRMED: string = "Confirmed";
+    STATUS_CHECKEDIN: string = "Checked-In";
     STATUS_REJECTED: string = "Rejected";
     STATUS_NOSHOW: string = "No-show";
     STATUS_DELAYED: string = "Delayed";
@@ -236,6 +237,7 @@ export class DataLayer {
             this.STATUS_REQUESTED,
             this.STATUS_IN_PROGRESS,
             this.STATUS_CONFIRMED,
+            this.STATUS_CHECKEDIN,
             this.STATUS_REJECTED,
             this.STATUS_DELAYED,
             this.STATUS_NOSHOW,
