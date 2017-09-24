@@ -92,7 +92,7 @@
     <tr class="rightRow">
       <td>
         <button *ngIf="ShowForTransaction()"md-fab color="primary" (click)="GenerateTransaction()" mdTooltip="Generate transaction" mdTooltipPosition="above"><md-icon>receipt</md-icon></button>
-        <button *ngIf="ShowDeliveryOption()" md-fab color="primary" (click)="CreateDelivery()" mdTooltip="Create delivery request" mdTooltipPosition="above"><md-icon>send</md-icon></button>
+        <button *ngIf="ShowDeliveryOption()" md-fab color="primary" (click)="CreateDelivery()" mdTooltip="Create delivery request" mdTooltipPosition="above"><md-icon>local_shipping</md-icon></button>
       </td>
       <td>
         <button *ngIf="CanDelete()" md-fab color="warn" (click)="Delete()" [disabled]="!DL.UserAccess.ShowcaseOrderDelete" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>

@@ -266,6 +266,7 @@ export class DataAccess {
         this.af.list(this.USERS, { query: { orderByChild: 'Name' } }).subscribe(snapshots => {
             this.DL.Users = new Array<UserInfo>();
             this.DL.UserAll = new Array<UserInfo>();
+            this.DL.UserBorrow = new Array<UserInfo>();
             this.DL.UserSelections = new Array<UserInfo>();
 
             this.DL.Members = new Array<UserInfo>();
@@ -280,6 +281,9 @@ export class DataAccess {
 
                 if (info.IsMember)
                     this.DL.Members.push(info);
+
+                if(info.Items != null && info.Items.length > 0)
+                    this.DL.UserBorrow.push(info);
 
                 this.DL.UserAll.push(info);
 

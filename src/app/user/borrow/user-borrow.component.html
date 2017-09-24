@@ -1,3 +1,40 @@
-<p>
-  user-borrow works!
-</p>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Address
+        </th>
+        <th>
+          Contact #
+        </th>
+        <th class="rightRow">
+          Action
+        </th>
+      </tr>
+    </thead>
+    <ng-container *ngFor="let member of DL.UserBorrow">
+      <tr>
+        <td>
+          {{member.Name}}
+        </td>
+        <td>
+          {{member.Address1}}
+        </td>
+        <td>
+          {{member.Contact1}}
+        </td>
+        <td class="rightRow">
+          <button md-mini-fab (click)="SelectItem(member)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
+        </td> 
+      </tr>
+    </ng-container>
+  </table>
+  <div class="hSpacer"></div>
+  <div class="rightRow">
+    <button md-fab (click)="AddItem()" [disabled]="!DL.UserAccess.MemberAdd" mdTooltip="Add" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+  </div>
+</div>

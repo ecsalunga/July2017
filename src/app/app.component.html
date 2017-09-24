@@ -98,6 +98,12 @@
         <span>Product</span>
       </button>
     </ng-container>
+    <ng-container *ngIf="DL.UserAccess.ProductView">
+      <button md-menu-item (click)="LoadPage('user-borrow')">
+        <md-icon>card_giftcard</md-icon>
+        <span>Borrow</span>
+      </button>
+    </ng-container>
     <ng-container *ngIf="DL.UserAccess.ServiceView">
       <button md-menu-item (click)="LoadPage('service-list')">
         <md-icon>room_service</md-icon>
@@ -118,7 +124,7 @@
     </ng-container>
     <ng-container *ngIf="DL.UserAccess.DeliveryView">
       <button md-menu-item (click)="LoadPage('delivery-list')">
-        <md-icon>send</md-icon>
+        <md-icon>local_shipping</md-icon>
         <span>Delivery</span>
       </button>
     </ng-container>
