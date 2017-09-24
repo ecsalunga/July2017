@@ -12,10 +12,20 @@ export class UserInfo {
     Contact1: string;
     Contact2: string;
     JoinDate: number;
+    Items: Array<BorrowInfo>;
     IsSystemUser: boolean;
     IsMember: boolean;
 
     constructor(defaultImageURL: string) {
         this.SystemImageURL = defaultImageURL;
     }
+}
+
+export class BorrowInfo {
+    Code: string;
+    Name: string;
+    BorrowType: string;
+    Count: number;
+    ActionDate: number;
+    ReturnDate: number;
 }

@@ -72,6 +72,7 @@ import { ServiceReservationDetailComponent } from './service/reservation-detail/
 import { ServiceBookingComponent } from './service/booking/service-booking.component';
 import { ReportExpenseDetailComponent } from './report/expense-detail/report-expense-detail.component';
 import { SettingModuleExpenseTypeComponent } from './setting/module-expense-type/setting-module-expense-type.component';
+import { UserBorrowComponent } from './user/borrow/user-borrow.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,7 @@ import { SettingModuleExpenseTypeComponent } from './setting/module-expense-type
     MessagePopupComponent, WebsiteCatalogComponent, ServiceScheduleComponent, 
     ServiceWidgetComponent, WebsiteReservationComponent, ServiceReserveComponent,
     ServiceReservationComponent, ServiceReservationDetailComponent, ServiceBookingComponent, 
-    ReportExpenseDetailComponent, SettingModuleExpenseTypeComponent
+    ReportExpenseDetailComponent, SettingModuleExpenseTypeComponent, UserBorrowComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, MdButtonModule,
@@ -122,7 +123,7 @@ import { SettingModuleExpenseTypeComponent } from './setting/module-expense-type
     WebsiteCatalogComponent, ServiceScheduleComponent, ServiceWidgetComponent,
     WebsiteReservationComponent, ServiceReserveComponent, ServiceReservationComponent,
     ServiceReservationDetailComponent, ServiceBookingComponent, ReportExpenseDetailComponent,
-    SettingModuleExpenseTypeComponent
+    SettingModuleExpenseTypeComponent, UserBorrowComponent
   ]
 })
 export class AppModule {

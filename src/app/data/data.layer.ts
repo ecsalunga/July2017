@@ -103,9 +103,12 @@ export class DataLayer {
 
     User: UserInfo;
     UserSelected: UserInfo;
+
     Users: Array<UserInfo>;
     UserAll: Array<UserInfo>;
     UserSelections: Array<UserInfo>;
+    UserBorrow: Array<UserInfo>;
+    
     UserAccess: AccessInfo;
     UserPending: UserInfo;
     UserIsDefaultSystemUser: boolean;
