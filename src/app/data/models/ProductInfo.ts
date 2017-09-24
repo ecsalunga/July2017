@@ -6,8 +6,10 @@ export class ProductInfo {
     Quantity: number;
     QuantityNotify: number;
     SupportSnapshot: boolean;
+    SupportBorrow: boolean;
 
     constructor() {
+        this.SupportBorrow = false;
         this.SupportSnapshot = true;
     }
 }

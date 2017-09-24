@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { ServiceInfo, ReservationInfo } from '../../data/models';
+import { ServiceInfo, ReservationInfo, UserInfo } from '../../data/models';
 
 @Component({
   selector: 'service-reserve',
@@ -14,12 +14,19 @@ export class ServiceReserveComponent implements OnInit {
   ToDay: Date;
   model: ServiceInfo;
   isReserving: boolean = false;
+  selectedMember: UserInfo;
 
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     this.model = Object.assign({}, this.DL.Service);
     this.ToDay = new Date();
     this.FromDate = this.ToDay;
     this.ToDate = this.ToDay;
+
+    this.DL.Members.forEach(member => {
+      if(this.DL.User.key == member.key) {
+        this.selectedMember = member;
+      }
+    });
   }
 
   ShowReserve() {
@@ -32,8 +39,8 @@ export class ServiceReserveComponent implements OnInit {
 
   Reserve() {
     let info = new ReservationInfo();
-    info.MemberKey = this.DL.User.key;
-    info.MemberName = this.DL.User.Name;
+    info.MemberKey = this.selectedMember.key;
+    info.MemberName = this.selectedMember.Name;
     info.ItemKey = this.model.key;
     info.Name = this.model.Name;
     info.Price = this.model.Price;
@@ -45,7 +52,10 @@ export class ServiceReserveComponent implements OnInit {
 
     this.DA.ServiceReserveSave(info);
     this.DL.Display("Reservation", "Submitted!");
-    this.DL.LoadFromLink("service-booking");
+    if(this.selectedMember.key == this.DL.User.key)
+      this.DL.LoadFromLink("service-booking");
+    else
+      this.LoadList();
   }
 
   GetDayCount(): number {
@@ -55,7 +65,7 @@ export class ServiceReserveComponent implements OnInit {
   }
 
   CanAdd(): boolean {
-    if(this.DL.KeyDay > this.core.dateToKeyDay(this.FromDate))
+    if(this.DL.KeyDay > this.core.dateToKeyDay(this.FromDate) || !this.selectedMember)
       return false;
 
     return (this.core.dateToKeyDay(this.ToDate) >= this.core.dateToKeyDay(this.FromDate) 

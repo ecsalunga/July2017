@@ -31,7 +31,8 @@ export class AccessInfo {
 
     ServiceReservationView: boolean;
     ServiceReservationEdit: boolean;
-    ServiceReservationDelete: boolean; 
+    ServiceReservationDelete: boolean;
+    ServiceReserveMember: boolean;
 
     ReportView: boolean;
     ReportSearch: boolean;

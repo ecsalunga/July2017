@@ -290,12 +290,19 @@ th {
     padding: 20px;
     color: gray;
 }
+
+.sellLongTextRes {
+    width: 180px;
+}
   
 @media (min-width: 720px) {
     .columnRes          { margin-left: 2%; width: 47%; }
     .imageContainerRes  { height: 275px; }
     .itemDescriptionRes { height: 75px; }
+
+    .sellLongTextRes    { width: 250px; }
 }
+
 
 .container:after {
     content: "";

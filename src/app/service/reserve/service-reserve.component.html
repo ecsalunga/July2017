@@ -29,6 +29,13 @@
             </md-form-field>
           </div>
         </div>
+        <div *ngIf="DL.UserAccess.ServiceReserveMember">
+          <md-select class="longText" placeholder="Member" [(ngModel)]="selectedMember">
+            <md-option *ngFor="let member of DL.Members" [value]="member">
+              {{ member.Name }}
+            </md-option>
+          </md-select>
+        </div>
       </ng-container>
       <ng-template #dataReserving>
         <div>
@@ -49,6 +56,11 @@
         <div>
           <md-form-field class="shortText">
             <input id="txtTotal" readonly mdInput placeholder="Total" value="{{ DL.CURRENCY }} {{ GetDayCount() * model.Price | number:'1.2-2' }}" />
+          </md-form-field>
+        </div>
+        <div>
+          <md-form-field class="longText">
+            <input id="txtMember" readonly mdInput placeholder="Member" [(ngModel)]="selectedMember.Name" />
           </md-form-field>
         </div>
       </ng-template>

@@ -53,7 +53,7 @@
     <table [hidden]="!DL.UserAccess.SellAdd">
       <tr class="rightRow">
         <td class="selectionRow" style="width: 60%">
-          <md-select class="longText" placeholder="Product" [(ngModel)]="model" (change)="ProductSelected()">
+          <md-select class="sellLongTextRes" placeholder="Product" [(ngModel)]="model" (change)="ProductSelected()">
             <md-option *ngFor="let product of DL.ProductSelections" [value]="product">
               {{ product.Description }} ({{ product.Code }})
             </md-option>
