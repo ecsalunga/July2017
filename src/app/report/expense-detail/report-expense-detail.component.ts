@@ -11,11 +11,23 @@ import { ExpenseInfo, NameValue } from '../../data/models';
 export class ReportExpenseDetailComponent implements OnInit {
   selectedDate: Date;
   selectedType: NameValue;
+  isNew: boolean;
   model: ExpenseInfo;
   
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
-    this.model = new ExpenseInfo();
-    this.selectedDate = new Date();
+    if(this.DL.Expense) {
+      this.model = Object.assign({}, this.DL.Expense);
+      this.selectedDate = this.core.keyDayToDate(this.model.KeyDay);
+      this.isNew = false;
+      this.DL.ExpenseTypes.forEach(item => {
+        if(this.model.TypeKey == item.Value)
+          this.selectedType = item;
+      });
+    } else {
+      this.model = new ExpenseInfo();
+      this.selectedDate = new Date();
+      this.isNew = true;
+    }
   }
 
   Save() {
@@ -32,6 +44,12 @@ export class ReportExpenseDetailComponent implements OnInit {
 
     this.DA.ExpenseInfoSave(this.model);
     this.DL.Display("Expense", "Saved!");
+    this.LoadList();
+  }
+
+  Delete() {
+    this.DA.ExpenseDelete(this.model);
+    this.DL.Display("Expense", "Deleted!");
     this.LoadList();
   }
 

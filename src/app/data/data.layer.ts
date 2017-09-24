@@ -90,6 +90,7 @@ export class DataLayer {
     DeliveryStamp: number = 0;
     DeliveryToggledModule: string = null;
 
+    Expense: ExpenseInfo;
     Expenses: Array<ExpenseInfo>;
     ExpenseTypes: Array<NameValue>;
     ExpenseTotal: number = 0;

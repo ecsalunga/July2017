@@ -18,13 +18,13 @@ export class ReportExpenseComponent implements OnInit {
     this.View();
   }
 
-  Delete(item: ExpenseInfo) {
-    this.DA.ExpenseDelete(item);
-    this.View();
+  SelectItem(item: ExpenseInfo) {
+    this.DL.Expense = item;
+    this.DL.LoadFromLink("report-expense-detail");
   }
 
   AddItem() {
-    this.DL.Report = null;
+    this.DL.Expense= null;
     this.DL.LoadFromLink("report-expense-detail");
   }
 
