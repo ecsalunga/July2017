@@ -62,6 +62,8 @@ export class DataLayer {
     Products: Array<ProductInfo>;
     ProductDiscount: ProductInfo;
     ProductSelections: Array<ProductInfo>;
+    ProductBorrow: Array<ProductInfo>;
+    ProductBorrowCount: number = 0;
 
     Service: ServiceInfo;
     Services: Array<ServiceInfo>;

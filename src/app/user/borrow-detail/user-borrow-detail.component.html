@@ -1,0 +1,27 @@
+<div>
+  <div>
+    <md-select class="sellLongTextRes" placeholder="Product" [(ngModel)]="model" (change)="ProductSelected()">
+      <md-option *ngFor="let product of DL.ProductBorrow" [value]="product">
+        {{ product.Description }} ({{ product.Code }})
+      </md-option>
+    </md-select>
+  </div>
+  <div>
+    <md-select placeholder="Quantity" [(ngModel)]="selectedQuantity">
+      <md-option *ngFor="let quantity of quantities" [value]="quantity">
+        {{quantity}}
+      </md-option>
+    </md-select>
+  </div>
+</div>
+<div class="hSpacer"></div>
+<table>
+  <tr class="rightRow">
+    <td>
+    </td>
+    <td>
+      <button md-fab (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+      <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+    </td>
+  </tr>
+</table>

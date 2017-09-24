@@ -9,16 +9,24 @@ export class ProductDAL {
     public Load() {
         this.af.list(this.PATH, { query: { orderByChild: 'Description' } }).subscribe(snapshots => {
             this.DL.Products = new Array<ProductInfo>();
+            this.DL.ProductBorrow = new Array<ProductInfo>();
             this.DL.ProductSelections = new Array<ProductInfo>();
+            this.DL.ProductBorrowCount = 0;
 
             snapshots.forEach(snapshot => {
                 let info: ProductInfo = snapshot;
                 info.key = snapshot.$key;
                 this.DL.Products.push(info);
+                
                 if (info.Quantity > 0)
                     this.DL.ProductSelections.push(info);
+                
+                if(info.SupportBorrow)
+                    this.DL.ProductBorrow.push(info);
             });
 
+            this.DL.ProductBorrowCount = this.DL.ProductBorrow.length;
+            
             if(this.DL.UserAccess.SellDiscount)
                 this.DL.ProductSelections.push(this.DL.ProductDiscount);
         });
