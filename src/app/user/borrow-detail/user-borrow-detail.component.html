@@ -1,11 +1,67 @@
 <div>
+  <div class="item">
+    <div class="itemHeader">
+      <div class="itemName">Borrowed</div>
+    </div>
+    <div class="itemSub">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              Product
+            </th>
+            <th>
+              QTY
+            </th>
+            <th>
+              Borrow
+            </th>
+            <th>
+              Return
+            </th>
+            <th class="rightRow">
+              Action
+            </th>
+          </tr>
+        </thead>
+        <ng-container *ngFor="let info of borrowInfos">
+          <tr>
+            <td>
+              {{ info.Name }}
+            </td>
+            <td>
+              {{ info.Count }}
+            </td>
+            <td>
+              {{ GetDate(info.ActionDate) | date : 'short' }}
+            </td>
+            <td>
+              {{ GetDay(info.ReturnDate) | date : 'yyyy-MM-dd' }}
+            </td>
+            <td class="rightRow">
+              <button md-mini-fab color="warn" *ngIf="DL.UserAccess.SellDelete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
+            </td>
+          </tr>
+        </ng-container>
+      </table>
+    </div>
+  </div>
   <div>
-    <md-select class="sellLongTextRes" placeholder="Product" [(ngModel)]="model" (change)="ProductSelected()">
+    <md-select class="longText" placeholder="Member" [(ngModel)]="selectedMember" (change)="UserSelected()">
+      <md-option *ngFor="let member of this.DL.UserAll" [value]="member">
+        {{ member.Name }}
+      </md-option>
+    </md-select>
+  </div>
+  <div class="vSmallSpacer"></div>
+  <div>
+    <md-select class="longText" placeholder="Product" [(ngModel)]="selectedProduct" (change)="ProductSelected()">
       <md-option *ngFor="let product of DL.ProductBorrow" [value]="product">
         {{ product.Description }} ({{ product.Code }})
       </md-option>
     </md-select>
   </div>
+  <div class="vSmallSpacer"></div>
   <div>
     <md-select placeholder="Quantity" [(ngModel)]="selectedQuantity">
       <md-option *ngFor="let quantity of quantities" [value]="quantity">
@@ -14,10 +70,19 @@
     </md-select>
   </div>
 </div>
+<div class="vSmallSpacer"></div>
+<div>
+  <md-form-field class="date">
+    <input mdInput [mdDatepicker]="from" placeholder="Return Date" [(ngModel)]="returnDate">
+    <md-datepicker-toggle mdSuffix [for]="from"></md-datepicker-toggle>
+    <md-datepicker #from></md-datepicker>
+  </md-form-field>
+</div>
 <div class="hSpacer"></div>
 <table>
   <tr class="rightRow">
     <td>
+      <button md-fab (click)="AddItem()" [disabled]="DL.ProductBorrowCount <= 0 || !DL.UserAccess.MemberAdd" mdTooltip="Add" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
     </td>
     <td>
       <button md-fab (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>

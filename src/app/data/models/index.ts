@@ -6,7 +6,7 @@ export { ProductInfo } from './ProductInfo';
 export { ReportInfo } from './ReportInfo';
 export { ShowcaseInfo, OrderInfo } from './ShowcaseInfo';
 export { SellInfo, TransactionInfo, DeliveryInfo } from './TransactionInfo';
-export { UserInfo } from './UserInfo';
+export { UserInfo, BorrowInfo } from './UserInfo';
 export { ModuleSettingInfo, SystemSettingInfo } from './SettingInfo';
 export { SnapshotInfo } from './SnapshotInfo';
 export { ServiceInfo, ReservationInfo } from './ServiceInfo';

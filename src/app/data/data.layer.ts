@@ -55,6 +55,8 @@ export class DataLayer {
     DATA_USER: string = "user";
     DATA_REPORT: string = "report";
 
+    BORROW_PRODUCT: string = "Product";
+
     COMMAND_LOGOUT: string = "logout";
     COMMAND_POPCHAT: string = "popchat";
 

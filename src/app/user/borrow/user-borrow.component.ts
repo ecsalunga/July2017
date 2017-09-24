@@ -10,15 +10,18 @@ import { UserInfo } from '../../data/models';
 })
 export class UserBorrowComponent implements OnInit {
   constructor(private core: Core, public DL: DataLayer) {}
-  
-  SelectItem(item: UserInfo) {
-    this.DL.UserSelected = item;
+
+  Manage() {
     this.DL.LoadFromLink("user-borrow-detail");
   }
 
-  AddItem(){
-    this.DL.UserSelected = null;
-    this.DL.LoadFromLink("user-borrow-detail");
+  GetCount(item: UserInfo): number {
+    let count = 0;
+    item.Items.forEach(borrow => {
+      count += borrow.Count;
+    });
+    
+    return count;
   }
 
   ngOnInit() { 

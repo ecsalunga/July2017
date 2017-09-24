@@ -3,9 +3,13 @@ md-form-field {
 }
 
 .longText {
-    width: 180px;
+    width: 225px;
 }
 
 .shortText {
     width: 80px;
+}
+
+.date {
+    width: 120px;
 }

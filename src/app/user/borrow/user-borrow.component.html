@@ -11,30 +11,30 @@
         <th>
           Contact #
         </th>
-        <th class="rightRow">
-          Action
+        <th>
+          QTY
         </th>
       </tr>
     </thead>
     <ng-container *ngFor="let member of DL.UserBorrow">
       <tr>
         <td>
-          {{member.Name}}
+          {{ member.Name }}
         </td>
         <td>
-          {{member.Address1}}
+          {{ member.Address1 }}
         </td>
         <td>
-          {{member.Contact1}}
+          {{ member.Contact1 }}
         </td>
-        <td class="rightRow">
-          <button md-mini-fab (click)="SelectItem(member)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
-        </td> 
+        <td>
+          {{ GetCount(member) }}
+        </td>
       </tr>
     </ng-container>
   </table>
   <div class="hSpacer"></div>
   <div class="rightRow">
-    <button md-fab (click)="AddItem()" [disabled]="DL.ProductBorrowCount <= 0 || !DL.UserAccess.MemberAdd" mdTooltip="Add" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+    <button md-fab (click)="Manage()" [disabled]="DL.ProductBorrowCount <= 0 || !DL.UserAccess.MemberAdd" mdTooltip="Manage list" mdTooltipPosition="above"><md-icon>list</md-icon></button>
   </div>
 </div>
