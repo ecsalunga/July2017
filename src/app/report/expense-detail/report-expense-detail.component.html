@@ -25,6 +25,11 @@
       <input id="txtAmount" [readonly]="!isNew" type="number" mdInput placeholder="Amount" [(ngModel)]="model.Amount" />
     </md-form-field>
   </div>
+  <div>
+    <md-form-field class="longText">
+      <input id="txtReference" [readonly]="!isNew"  mdInput placeholder="Reference" [(ngModel)]="model.Reference" />
+    </md-form-field>
+  </div>
   <div *ngIf="!isNew">
     <md-form-field class="longText">
       <input id="txtUser" mdInput readonly placeholder="User" [(ngModel)]="model.UserName" />

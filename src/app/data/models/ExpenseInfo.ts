@@ -7,6 +7,7 @@ export class ExpenseInfo {
     TypeKey: string;
     
     Description: string;
+    Reference: string;
     Amount: number;
 
     ActionDate: number;
