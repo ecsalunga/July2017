@@ -59,6 +59,7 @@ export class DataAccess {
         this.reportDAL = new ReportDAL(core, DL, this, af);
         this.cancelDAL = new CancelDAL(core, DL, this, af);
         this.transactionDAL = new TransactionDAL(core, DL, this, af);
+        this.messageDAL = new MessageDAL(DL, this, af);
 
         this.showcaseDAL = new ShowcaseDAL(core, DL, af);
         this.serviceDAL = new ServiceDAL(core, DL, af);
@@ -66,7 +67,13 @@ export class DataAccess {
         this.accessDAL = new AccessDAL(DL, af);
         this.productDAL = new ProductDAL(DL, af);
         this.snapshotDAL = new SnapshotDAL(DL, af);
-        this.messageDAL = new MessageDAL(DL, af);
+
+        this.DataLoaded.subscribe(data => {
+            if(data == this.DL.DATA_CONVERSATION && !this.DL.IsCommandLoaded) {
+                this.DL.IsCommandLoaded = true;
+                this.CommandLoad();
+            } 
+        });
     }
 
     public LogInWithFacebook() {
@@ -83,11 +90,11 @@ export class DataAccess {
             .createUserWithEmailAndPassword(email, password)
             .then(value => {
                 this.DL.Display("Account", "Created!");
-            })
+        })
             .catch(err => {
                 console.log(err);
                 this.DL.Display("Account", "Create account failed.");
-            });
+        });
     }
 
     public LogIn(email: string, password: string) {
@@ -95,11 +102,11 @@ export class DataAccess {
             .signInWithEmailAndPassword(email, password)
             .then(value => {
                 this.DL.Display("Login", "Successful!");
-            })
+        })
             .catch(err => {
                 console.log(err);
                 this.DL.Display("Login", "Login failed.");
-            });
+        });
     }
 
     public DataLoad() {
@@ -136,7 +143,7 @@ export class DataAccess {
             this.PopChat(item.Data);
         }
 
-        this.CommandDelete(item);
+        this.CommandDelete(item.UserKey);
     }
 
     public PopChat(conversationKey: string) {
@@ -153,11 +160,16 @@ export class DataAccess {
     }
 
     public CommandSave(item: CommandInfo) {
-        this.af.list(this.COMMAND).push(item);
+        this.af.list(this.COMMAND, { query: { orderByChild: 'UserKey', equalTo: item.UserKey } }).first().subscribe(snapshots => {
+            snapshots.forEach(snapshot => {
+                this.af.list(this.COMMAND).remove(snapshot.$key);
+            });
+            this.af.list(this.COMMAND).push(item);
+        });
     }
 
-    public CommandDelete(item: CommandInfo) {
-        this.af.list(this.COMMAND, { query: { orderByChild: 'UserKey', equalTo: item.UserKey } }).first().subscribe(snapshots => {
+    public CommandDelete(userKey: string) {
+        this.af.list(this.COMMAND, { query: { orderByChild: 'UserKey', equalTo: userKey } }).first().subscribe(snapshots => {
             snapshots.forEach(snapshot => {
                 this.af.list(this.COMMAND).remove(snapshot.$key);
             });
@@ -177,7 +189,6 @@ export class DataAccess {
             this.showcaseDAL.LoadOrder();
             this.serviceDAL.LoadReservation();
             this.messageDAL.Load();
-            this.CommandLoad();
             this.DL.IsDataActiveLoaded = true
         }
     }
@@ -238,9 +249,8 @@ export class DataAccess {
             this.DL.User.ActionDate = this.DL.GetActionDate();
             this.UserSave(this.DL.User);
 
-            if (this.DL.User.IsMember || this.DL.User.IsSystemUser) {
+            if (this.DL.User.IsMember || this.DL.User.IsSystemUser)
                 this.GeneralActiveDataLoad();
-            }
 
             if (this.DL.User.IsSystemUser) {
                 this.DataSystemLoad();

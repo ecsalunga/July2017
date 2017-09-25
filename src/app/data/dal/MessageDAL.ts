@@ -1,5 +1,5 @@
 import { EventEmitter } from '@angular/core';
-import { DataLayer } from './../data.layer';
+import { DataLayer, DataAccess} from './../';
 import { ConversationInfo, MessageInfo } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
@@ -8,7 +8,7 @@ export class MessageDAL {
     PATH: string = "/messages/conversations";
     PATH_MESSAGE: string = "/messages/items";
 
-    constructor(private DL: DataLayer, private af: AngularFireDatabase) { }
+    constructor(private DL: DataLayer, private DA: DataAccess, private af: AngularFireDatabase) { }
 
     public Load() {
         this.af.list(this.PATH, { query: { orderByChild: 'ActionDate' } }).subscribe(snapshots => {
@@ -20,6 +20,9 @@ export class MessageDAL {
                 if(this.DL.User.key == info.FromKey || this.DL.User.key == info.ToKey)
                     this.DL.Conversations.push(info);
             });
+
+            if(!this.DL.IsCommandLoaded)
+                this.DA.DataLoaded.emit(this.DL.DATA_CONVERSATION);
         });
 
         this.af.list(this.PATH_MESSAGE, { query: { orderByChild: 'ConversationKey' } }).subscribe(snapshots => {
