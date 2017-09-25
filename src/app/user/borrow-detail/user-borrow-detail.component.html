@@ -56,26 +56,13 @@
   <ng-container *ngIf="selectedMember != null">
     <div class="vSmallSpacer"></div>
     <div>
-      <md-form-field class="longText">
-        <input id="txtAddress1" readonly mdInput placeholder="Address #1" [(ngModel)]="selectedMember.Address1" />
-      </md-form-field>
+        Address: {{ contactInfo.Value1 }}
     </div>
     <div>
-      <md-form-field class="longText">
-        <input id="txtAddress2" readonly mdInput placeholder="Address #2" [(ngModel)]="selectedMember.Address2" />
-      </md-form-field>
-    </div>
-    <div>
-      <md-form-field>
-        <input id="txtContact1" readonly mdInput placeholder="Contact #1" [(ngModel)]="selectedMember.Contact1" />
-      </md-form-field>
-    </div>
-    <div>
-      <md-form-field>
-        <input id="txtContact2" readonly mdInput placeholder="Contact #2" [(ngModel)]="selectedMember.Contact2" />
-      </md-form-field>
+        Contact: {{ contactInfo.Value2 }}
     </div>
   </ng-container>
+  <div class="vSmallSpacer"></div>
   <div>
     <md-select class="longText" placeholder="Product" [(ngModel)]="selectedProduct" (change)="ProductSelected()">
       <md-option *ngFor="let product of DL.ProductBorrow" [value]="product">

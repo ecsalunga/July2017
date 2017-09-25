@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { ProductInfo, UserInfo, BorrowInfo } from '../../data/models';
+import { ProductInfo, UserInfo, BorrowInfo, Name2Value } from '../../data/models';
 
 @Component({
   selector: 'user-borrow-detail',
@@ -16,6 +16,7 @@ export class UserBorrowDetailComponent implements OnInit {
   selectedMember: UserInfo;
   borrowInfos: Array<BorrowInfo>;
   isNew: boolean = true;
+  contactInfo: Name2Value;
 
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     this.borrowInfos = new Array<BorrowInfo>();
@@ -24,6 +25,7 @@ export class UserBorrowDetailComponent implements OnInit {
         if(this.DL.UserSelected.key == user.key) {
           this.selectedMember = user;
           this.isNew = false;
+          this.contactInfo = this.DL.UserGetContactInfo(user.key);
           user.Items.forEach(borrow => {
             this.borrowInfos.push(borrow);
           });
@@ -97,6 +99,8 @@ export class UserBorrowDetailComponent implements OnInit {
         this.borrowInfos.push(borrow);
       });
     }
+
+    this.contactInfo = this.DL.UserGetContactInfo(this.selectedMember.key);
   }
 
   ProductSelected() {

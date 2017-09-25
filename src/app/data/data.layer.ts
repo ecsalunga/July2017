@@ -358,12 +358,20 @@ export class DataLayer {
     }
 
     public DeliveryGetInfo(item: DeliveryInfo) {
-        this.Members.forEach(info => {
-            if(item.Transaction.MemberKey == info.key) {
-                item.Address = info.Address1 + this.appendIfSet(info.Address2);
-                item.Contact = info.Contact1 + this.appendIfSet(info.Contact2);
+        let contactInfo = this.UserGetContactInfo(item.Transaction.MemberKey);
+        item.Address = contactInfo.Value1;
+        item.Contact = contactInfo.Value2;
+    }
+
+    public UserGetContactInfo(key: string): Name2Value {
+        let contactInfo = new Name2Value(key, "", "");
+        this.UserAll.forEach(info => {
+            if(info.key == key) {
+                contactInfo.Value1 = info.Address1 + this.appendIfSet(info.Address2);
+                contactInfo.Value2 = info.Contact1 + this.appendIfSet(info.Contact2);
             }
         });
+        return contactInfo;
     }
     
     private appendIfSet(value: string): string {
