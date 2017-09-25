@@ -281,8 +281,10 @@ export class DataAccess {
 
                 this.DL.UserAll.push(info);
 
-                if(this.DL.COMPONENT == "product-sell" && this.DL.UserSelected != null && this.DL.UserSelected.UID == info.UID)
+                if(this.DL.COMPONENT == "product-sell" && this.DL.UserSelected != null && this.DL.UserSelected.UID == info.UID) {
                     this.DL.UserSelected = info;
+                    this.DL.ComputeUserSellInfo(info);
+                }
 
                 if (this.DL.User.UID != null && this.DL.User.UID == info.UID)
                     this.DL.User = info;
