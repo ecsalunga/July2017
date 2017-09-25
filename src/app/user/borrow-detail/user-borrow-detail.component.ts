@@ -26,7 +26,7 @@ export class UserBorrowDetailComponent implements OnInit {
           this.selectedMember = user;
           this.isNew = false;
           this.contactInfo = this.DL.UserGetContactInfo(user.key);
-          user.Items.forEach(borrow => {
+          user.Borrows.forEach(borrow => {
             this.borrowInfos.push(borrow);
           });
         }
@@ -86,7 +86,7 @@ export class UserBorrowDetailComponent implements OnInit {
   }
 
   Save() {
-    this.selectedMember.Items = this.borrowInfos;
+    this.selectedMember.Borrows = this.borrowInfos;
     this.DA.UserSave(this.selectedMember);
     this.DL.Display("Borrow", "Saved!");
     this.LoadList();
@@ -94,8 +94,8 @@ export class UserBorrowDetailComponent implements OnInit {
 
   UserSelected() {
     this.borrowInfos = new Array<BorrowInfo>();
-    if(this.selectedMember.Items != null && this.selectedMember.Items.length > 0) {
-      this.selectedMember.Items.forEach(borrow => {
+    if(this.selectedMember.Borrows != null && this.selectedMember.Borrows.length > 0) {
+      this.selectedMember.Borrows.forEach(borrow => {
         this.borrowInfos.push(borrow);
       });
     }

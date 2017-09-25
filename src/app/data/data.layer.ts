@@ -373,6 +373,18 @@ export class DataLayer {
         });
         return contactInfo;
     }
+
+    public ComputeUserSellInfo(user: UserInfo) {
+        this.SellInfosAmount = 0;
+        this.SellInfosCount = 0;
+
+        if(user.Sells != null && user.Sells.length > 0) {
+            user.Sells.forEach(sell => {
+                this.SellInfosAmount += sell.Total;
+                this.SellInfosCount += sell.Quantity;
+            });
+        }
+    }
     
     private appendIfSet(value: string): string {
         if(value)

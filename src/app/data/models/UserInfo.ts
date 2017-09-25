@@ -1,3 +1,5 @@
+import { SellInfo } from './';
+
 export class UserInfo {
     key: string;
     Name: string;
@@ -12,7 +14,9 @@ export class UserInfo {
     Contact1: string;
     Contact2: string;
     JoinDate: number;
-    Items: Array<BorrowInfo>;
+    Borrows: Array<BorrowInfo>;
+    Sells: Array<SellInfo>;
+    ActionDate: number;
     IsSystemUser: boolean;
     IsMember: boolean;
 

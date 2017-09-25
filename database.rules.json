@@ -62,10 +62,6 @@
         ".write": "true",
         ".indexOn": "KeyDay"
       },
-      "sellInfos": {
-        ".read": "true",
-        ".write": "true"
-      },
       "deliveryInfos": {
         ".read": "true",
         ".write": "true"

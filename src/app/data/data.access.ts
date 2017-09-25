@@ -167,7 +167,6 @@ export class DataAccess {
     SystemActiveDataLoad() {
         if (!this.DL.IsSystemDataActiveLoaded) {
             this.productDAL.Load();
-            this.transactionDAL.LoadSell();
             this.transactionDAL.LoadDelivery();
             this.DL.IsSystemDataActiveLoaded = true;
         }
@@ -193,7 +192,6 @@ export class DataAccess {
                 return;
             }
 
-            let toSave = false;
             this.DL.UserAll.forEach(u => {
                 if (user.uid == u.UID || user.email == u.Email)
                     this.DL.User = u;
@@ -221,32 +219,24 @@ export class DataAccess {
 
                 this.DL.User.UID = user.uid;
                 this.DL.User.ImageURL = user.photoURL
-                toSave = true;
             }
 
             // update system record
-            if (user.photoURL && this.DL.User.ImageURL != user.photoURL) {
+            if (user.photoURL && this.DL.User.ImageURL != user.photoURL)
                 this.DL.User.ImageURL = user.photoURL;
-                toSave = true;
-            }
 
-            if (!this.DL.User.ImageURL) {
+            if (!this.DL.User.ImageURL)
                 this.DL.User.ImageURL = this.DL.DefaultImageURL;
-                toSave = true;
-            }
 
-            if (this.DL.User.Email != user.email) {
+            if (this.DL.User.Email != user.email)
                 this.DL.User.Email = user.email;
-                toSave = true;
-            }
 
-            if ((!this.DL.User.SystemImageURL || this.DL.User.SystemImageURL == this.DL.DefaultImageURL) && user.photoURL) {
+            if ((!this.DL.User.SystemImageURL || this.DL.User.SystemImageURL == this.DL.DefaultImageURL) && user.photoURL)
                 this.DL.User.SystemImageURL = user.photoURL;
-                toSave = true;
-            }
 
-            if (toSave)
-                this.UserSave(this.DL.User);
+            // update action date
+            this.DL.User.ActionDate = this.DL.GetActionDate();
+            this.UserSave(this.DL.User);
 
             if (this.DL.User.IsMember || this.DL.User.IsSystemUser) {
                 this.GeneralActiveDataLoad();
@@ -282,7 +272,7 @@ export class DataAccess {
                 if (info.IsMember)
                     this.DL.Members.push(info);
 
-                if(info.Items != null && info.Items.length > 0)
+                if(info.Borrows != null && info.Borrows.length > 0)
                     this.DL.UserBorrow.push(info);
 
                 this.DL.UserAll.push(info);
@@ -489,21 +479,37 @@ export class DataAccess {
         this.accessDAL.Save(item);
     }
 
-    public SellInfoSave(item: SellInfo) {
-        this.transactionDAL.SellSave(item);
+    public SellInfoAdd(user: UserInfo, item: SellInfo) {
+        if(user.Sells == null)
+            user.Sells = new Array<SellInfo>();
+
+        user.Sells.push(item);
+        this.userUpdateSell(user);
+    }
+
+    public SellInfoRequestDelete(user: UserInfo, item: SellInfo) {
+        item.ForDelete = true;
+        this.userUpdateSell(user);
+    }
+
+    public SellInfoDelete(user: UserInfo, item: SellInfo) {
+        user.Sells = user.Sells.filter(s => !(s.Code == item.Code));
+        this.userUpdateSell(user);
+    }
+
+    public SellInfoClear(user: UserInfo) {
+        user.Sells = new Array<SellInfo>();
+        this.userUpdateSell(user);
+    }
+
+    private userUpdateSell(user: UserInfo) {
+        this.UserSave(user);
+        this.DL.ComputeUserSellInfo(user);
     }
 
     public SnapshotSave(item: SnapshotInfo) {
         this.snapshotDAL.Save(item);
         this.snapshotDAL.Load(this.DL.KeyDay);
-    }
-
-    public SellInfoDelete(item: SellInfo) {
-        this.transactionDAL.SellDelete(item);
-    }
-
-    public SellInfoClear() {
-        this.transactionDAL.SellClear();
     }
 
     public SellInfoDone(memberKey: string, buyerName: string, isDelivery: boolean) {

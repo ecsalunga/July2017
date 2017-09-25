@@ -21,7 +21,7 @@ export class ProductSellComponent implements OnInit {
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) { }
 
   AddProduct() {
-    let duplicate: SellInfo;
+    let exists = false;
     let item = new SellInfo();
 
     item.Code = this.model.Code;
@@ -37,15 +37,13 @@ export class ProductSellComponent implements OnInit {
       item.Quantity = this.selectedQuantity;
 
       // merge items
-      this.DL.SellInfos.forEach(info => {
-        if(info.Code == item.Code) {
-          duplicate = info;
-          item.Quantity += info.Quantity;
-        }
-      });
-
-      if(duplicate) {
-          this.DA.SellInfoDelete(duplicate);
+      if(this.DL.User.Sells != null && this.DL.User.Sells.length > 0) {
+        this.DL.User.Sells.forEach(info => {
+          if(info.Code == item.Code) {
+            item.Quantity += info.Quantity;
+            exists = true;
+          }
+        });
       }
 
       // re-evaluate quantity
@@ -56,7 +54,12 @@ export class ProductSellComponent implements OnInit {
       });
       item.Total = item.Quantity * item.Price;
     }
-    this.DA.SellInfoSave(item);
+
+    if(!exists)
+      this.DA.SellInfoAdd(this.DL.User, item);
+
+    this.DL.ComputeUserSellInfo(this.DL.User);
+    //this.DA.SellInfoSave(item);
     this.ClearSelection();
   }
 
@@ -87,13 +90,12 @@ export class ProductSellComponent implements OnInit {
   }
 
   Delete(info: SellInfo) {
-     this.DA.SellInfoDelete(info);
+     this.DA.SellInfoDelete(this.DL.User, info);
      this.isPaying = false;
   }
 
   RequestDelete(info: SellInfo) {
-    info.ForDelete = true;
-    this.DA.SellInfoSave(info);
+    this.DA.SellInfoRequestDelete(this.DL.User, info);
   }
   
   CartOpen() {

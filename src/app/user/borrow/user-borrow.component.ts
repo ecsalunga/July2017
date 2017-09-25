@@ -23,7 +23,7 @@ export class UserBorrowComponent implements OnInit {
 
   GetCount(item: UserInfo): number {
     let count = 0;
-    item.Items.forEach(borrow => {
+    item.Borrows.forEach(borrow => {
       count += borrow.Count;
     });
     

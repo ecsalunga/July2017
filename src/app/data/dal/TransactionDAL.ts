@@ -5,7 +5,6 @@ import { AngularFireDatabase } from 'angularfire2/database';
 
 export class TransactionDAL {
     PATH: string = "/transactions/items";
-    PATH_SELL: string = "/transactions/sellInfos";
     PATH_DELIVERY: string = "/transactions/deliveryInfos";
     constructor(private core: Core, private DL: DataLayer, private DA: DataAccess, private af: AngularFireDatabase) {}
 
@@ -25,25 +24,6 @@ export class TransactionDAL {
             });
 
             this.DL.Transactions.reverse();
-        });
-    }
-
-    public LoadSell() {
-        this.af.list(this.PATH_SELL).subscribe(snapshots => {
-            this.DL.SellInfos = new Array<SellInfo>();
-            this.DL.SellInfosAmount = 0;
-            this.DL.SellInfosCount = 0;
-
-            snapshots.forEach(snapshot => {
-                let info: SellInfo = snapshot;
-                info.key = snapshot.$key;
-                this.DL.SellInfos.push(info);
-
-                if(info.Code != this.DL.KEYDISCOUNT)
-                    this.DL.SellInfosCount += info.Quantity;
-
-                this.DL.SellInfosAmount += info.Total;
-            });
         });
     }
 
@@ -69,20 +49,13 @@ export class TransactionDAL {
         this.af.list(this.PATH).push(item);
     }
 
-    public SellSave(item: SellInfo) {
-        if (item.key)
-            this.af.list(this.PATH_SELL).update(item.key, item);
-        else
-            this.af.list(this.PATH_SELL).push(item);
-    }
-
     public SellDone(memberKey: string, buyerName: string, isDelivery: boolean) {
         let info = new TransactionInfo();
         info.MemberKey = memberKey
         info.BuyerName = buyerName;
         info.UserKey = this.DL.User.key;
         info.UserName = this.DL.User.Name;
-        info.Items = this.DL.SellInfos;
+        info.Items = this.DL.User.Sells;
         info.Count = this.DL.SellInfosCount;
         info.Amount = this.DL.SellInfosAmount;
         info.ActionDate = this.DL.GetActionDate();
@@ -101,7 +74,7 @@ export class TransactionDAL {
             this.DA.ProductUpdate(info.Items);
         }
 
-        this.DA.SellInfoClear();
+        this.DA.SellInfoClear(this.DL.User);
     }
 
     public DeliveryStart(info: TransactionInfo) {
@@ -135,13 +108,5 @@ export class TransactionDAL {
 
     public DeliveryDelete(item: DeliveryInfo) {
         this.af.list(this.PATH_DELIVERY).remove(item.key);
-    }
-
-    public SellDelete(item: SellInfo) {
-        this.af.list(this.PATH_SELL).remove(item.key);
-    }
-
-    public SellClear() {
-        this.af.list(this.PATH_SELL).remove();
     }
 }
