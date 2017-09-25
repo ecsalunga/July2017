@@ -65,6 +65,62 @@
       </div>
     </div>
   </div>
+  <div *ngIf="model.BorrowCount > 0">
+    <div class="item">
+      <div class="itemHeader">
+        <div class="itemName">Borrow
+      </div>
+      <div class="subContent">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                Name
+              </th>
+              <th class="totalColumn">
+                Quantity
+              </th>
+              <th class="totalColumn">
+                Price
+              </th>
+              <th class="totalColumn">
+                Total
+              </th>
+            </tr>
+          </thead>
+          <ng-container *ngFor="let info of model.Borrow">
+            <tr>
+              <td>
+                {{ info.Name }}
+              </td>
+              <td class="totalColumn">
+                {{ info.Value1 | number }}
+              </td>
+              <td class="totalColumn">
+                {{ info.Value2 | number:'1.2-2' }}
+              </td>
+              <td class="totalColumn">
+                {{ info.Value1 * info.Value2 | number:'1.2-2' }}
+              </td>
+            </tr>
+          </ng-container>
+          <tr class="blankCell">
+            <td>
+              Total
+            </td>
+            <td class="totalColumn">
+              {{ model.BorrowCount | number }}
+            </td>
+            <td></td>
+            <td class="totalColumn">
+              {{ model.BorrowTotal | number:'1.2-2'}}
+            </td>
+          </tr>
+        </table>
+        <div class="vSmallSpacer"></div>
+      </div>
+    </div>
+  </div>
   <div class="hSpacer"></div>
   <div class="rightRow">
     <button md-fab *ngIf="DL.Snapshot && !model.ReviewerKey" (click)="Accept()" [disabled]="!DL.UserAccess.SnapshotReview" mdTooltip="Validate" mdTooltipPosition="above"><md-icon>done</md-icon></button>

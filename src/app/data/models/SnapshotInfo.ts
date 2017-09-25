@@ -7,10 +7,14 @@ export class SnapshotInfo {
     ActionDate: number;
     KeyDay: number;
     Inventory: Array<Name2Value>;
-    
+    Borrow: Array<Name2Value>;
+
     COHActual: number;
     Count: number;
     Total: number;
+
+    BorrowCount: number;
+    BorrowTotal: number;
     Note: string;
 
     ReviewerKey: string;
@@ -20,5 +24,7 @@ export class SnapshotInfo {
     constructor() {
         this.Count = 0;
         this.Total = 0;
+        this.BorrowCount = 0;
+        this.BorrowTotal = 0;
     }
 }
