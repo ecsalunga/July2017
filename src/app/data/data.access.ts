@@ -281,9 +281,11 @@ export class DataAccess {
 
                 this.DL.UserAll.push(info);
 
-                if (this.DL.User.UID != null && this.DL.User.UID == info.UID) {
+                if(this.DL.COMPONENT == "product-sell" && this.DL.UserSelected != null && this.DL.UserSelected.UID == info.UID)
+                    this.DL.UserSelected = info;
+
+                if (this.DL.User.UID != null && this.DL.User.UID == info.UID)
                     this.DL.User = info;
-                }
             });
 
             // add walk-in for members
