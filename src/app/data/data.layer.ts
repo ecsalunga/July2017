@@ -111,6 +111,7 @@ export class DataLayer {
     UserAll: Array<UserInfo>;
     UserSelections: Array<UserInfo>;
     UserBorrow: Array<UserInfo>;
+    UserSeller: Array<UserInfo>;
     
     UserAccess: AccessInfo;
     UserPending: UserInfo;

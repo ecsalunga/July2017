@@ -45,7 +45,8 @@ export class ProductSellComponent implements OnInit {
       if(this.DL.UserSelected.Sells != null && this.DL.UserSelected.Sells.length > 0) {
         this.DL.UserSelected.Sells.forEach(info => {
           if(info.Code == item.Code) {
-            item.Quantity += info.Quantity;
+            info.Quantity += item.Quantity;
+            info.Total = info.Quantity * info.Price;
             exists = true;
           }
         });
@@ -62,6 +63,10 @@ export class ProductSellComponent implements OnInit {
 
     if(!exists)
       this.DA.SellInfoAdd(this.DL.UserSelected, item);
+    else {
+      this.DA.UserSave(this.DL.UserSelected);
+      this.DL.ComputeUserSellInfo(this.DL.UserSelected);
+    }
 
     this.DL.ComputeUserSellInfo(this.DL.UserSelected);
     this.ClearSelection();

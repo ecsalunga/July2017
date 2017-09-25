@@ -122,6 +122,12 @@
         <span>Sell</span>
       </button>
     </ng-container>
+    <ng-container *ngIf="DL.UserAccess.SellManageSeller">
+      <button md-menu-item (click)="LoadPage('user-seller')">
+        <md-icon>list</md-icon>
+        <span>Seller</span>
+      </button>
+    </ng-container>
     <ng-container *ngIf="DL.UserAccess.DeliveryView">
       <button md-menu-item (click)="LoadPage('delivery-list')">
         <md-icon>local_shipping</md-icon>

@@ -50,6 +50,7 @@ export class AccessInfo {
     SellAdd: boolean;
     SellDelete: boolean;
     SellDiscount: boolean;
+    SellManageSeller: boolean;
 
     ShowcaseView: boolean;
     ShowcaseAdd: boolean;

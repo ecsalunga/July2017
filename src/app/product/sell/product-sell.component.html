@@ -16,7 +16,7 @@
         </th>
       </tr>
     </thead>
-    <ng-container *ngFor="let info of DL.User.Sells">
+    <ng-container *ngFor="let info of DL.UserSelected.Sells">
       <tr class="{{ info.ForDelete ? 'bad' : '' }}">
         <td>
           {{info.Description}}

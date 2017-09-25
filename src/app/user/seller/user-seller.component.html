@@ -1,0 +1,36 @@
+<div>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Total
+          </th>
+          <th>
+            QTY
+          </th>
+          <th class="rightRow">
+            Action
+          </th>
+        </tr>
+      </thead>
+      <ng-container *ngFor="let user of DL.UserSeller">
+        <tr class="{{ HasDelete(user) ? 'bad' : '' }}">
+          <td>
+            {{ user.Name }}
+          </td>
+          <td>
+            {{ GetTotal(user) }}
+          </td>
+          <td>
+            {{ GetCount(user) }}
+          </td>
+          <td class="rightRow">
+            <button md-mini-fab (click)="SelectItem(user)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
+          </td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
