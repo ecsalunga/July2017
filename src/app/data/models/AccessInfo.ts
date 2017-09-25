@@ -78,6 +78,11 @@ export class AccessInfo {
     UserAccessEdit: boolean;
     UserGroupEdit: boolean;
 
+    BorrowView: boolean;
+    BorrowAdd: boolean;
+    BorrowEdit: boolean;
+    BorrowDelete: boolean;
+
     MemberView: boolean;
     MemberAdd: boolean;
     MemberEdit: boolean;

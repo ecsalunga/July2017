@@ -11,7 +11,13 @@ import { UserInfo } from '../../data/models';
 export class UserBorrowComponent implements OnInit {
   constructor(private core: Core, public DL: DataLayer) {}
 
-  Manage() {
+  AddItem() {
+    this.DL.UserSelected = null;
+    this.DL.LoadFromLink("user-borrow-detail");
+  }
+
+  SelectItem(user: UserInfo) {
+    this.DL.UserSelected = user;
     this.DL.LoadFromLink("user-borrow-detail");
   }
 

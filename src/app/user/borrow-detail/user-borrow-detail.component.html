@@ -3,7 +3,7 @@
     <div class="itemHeader">
       <div class="itemName">Borrowed</div>
     </div>
-    <div class="itemSub">
+    <div class="subContent">
       <table>
         <thead>
           <tr>
@@ -39,7 +39,7 @@
               {{ GetDay(info.ReturnDate) | date : 'yyyy-MM-dd' }}
             </td>
             <td class="rightRow">
-              <button md-mini-fab color="warn" *ngIf="DL.UserAccess.SellDelete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
+              <button md-mini-fab color="warn" [disabled]="!DL.UserAccess.BorrowDelete" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
             </td>
           </tr>
         </ng-container>
@@ -47,13 +47,35 @@
     </div>
   </div>
   <div>
-    <md-select class="longText" placeholder="Member" [(ngModel)]="selectedMember" (change)="UserSelected()">
+    <md-select [disabled]="!isNew" class="longText" placeholder="Member" [(ngModel)]="selectedMember" (change)="UserSelected()">
       <md-option *ngFor="let member of this.DL.UserAll" [value]="member">
         {{ member.Name }}
       </md-option>
     </md-select>
   </div>
-  <div class="vSmallSpacer"></div>
+  <ng-container *ngIf="selectedMember != null">
+    <div class="vSmallSpacer"></div>
+    <div>
+      <md-form-field class="longText">
+        <input id="txtAddress1" readonly mdInput placeholder="Address #1" [(ngModel)]="selectedMember.Address1" />
+      </md-form-field>
+    </div>
+    <div>
+      <md-form-field class="longText">
+        <input id="txtAddress2" readonly mdInput placeholder="Address #2" [(ngModel)]="selectedMember.Address2" />
+      </md-form-field>
+    </div>
+    <div>
+      <md-form-field>
+        <input id="txtContact1" readonly mdInput placeholder="Contact #1" [(ngModel)]="selectedMember.Contact1" />
+      </md-form-field>
+    </div>
+    <div>
+      <md-form-field>
+        <input id="txtContact2" readonly mdInput placeholder="Contact #2" [(ngModel)]="selectedMember.Contact2" />
+      </md-form-field>
+    </div>
+  </ng-container>
   <div>
     <md-select class="longText" placeholder="Product" [(ngModel)]="selectedProduct" (change)="ProductSelected()">
       <md-option *ngFor="let product of DL.ProductBorrow" [value]="product">
@@ -82,10 +104,10 @@
 <table>
   <tr class="rightRow">
     <td>
-      <button md-fab (click)="AddItem()" [disabled]="DL.ProductBorrowCount <= 0 || !DL.UserAccess.MemberAdd" mdTooltip="Add" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+      <button md-fab (click)="AddItem()" [disabled]="!CanAdd()" mdTooltip="Add" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
     </td>
     <td>
-      <button md-fab (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+      <button *ngIf="CanSave()" md-fab (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
       <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
     </td>
   </tr>

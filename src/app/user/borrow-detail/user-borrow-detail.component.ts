@@ -10,15 +10,46 @@ import { ProductInfo, UserInfo, BorrowInfo } from '../../data/models';
 })
 export class UserBorrowDetailComponent implements OnInit {
   selectedProduct: ProductInfo;
-  returnDate: Date;
+  returnDate: Date = new Date();
   selectedQuantity: number = 1;
   quantities: Array<number>;
   selectedMember: UserInfo;
   borrowInfos: Array<BorrowInfo>;
+  isNew: boolean = true;
 
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     this.borrowInfos = new Array<BorrowInfo>();
-    this.returnDate = new Date();
+    if(this.DL.UserSelected != null) {
+      this.DL.UserAll.forEach(user => {
+        if(this.DL.UserSelected.key == user.key) {
+          this.selectedMember = user;
+          this.isNew = false;
+          user.Items.forEach(borrow => {
+            this.borrowInfos.push(borrow);
+          });
+        }
+      });
+    }
+  }
+
+  CanAdd(): boolean {
+    if(!this.CanSave())
+      return false;
+    
+    if(!this.selectedMember || !this.selectedProduct || !this.returnDate || this.selectedQuantity <= 0)
+      return false;
+
+    return true;
+  }
+
+  CanSave(): boolean {
+    if(this.isNew && !this.DL.UserAccess.BorrowAdd)
+    return false;
+  
+    if(!this.isNew && !this.DL.UserAccess.BorrowEdit)
+      return false;
+
+    return true;
   }
 
   GetDate(dateNumber: number): Date {
@@ -56,6 +87,7 @@ export class UserBorrowDetailComponent implements OnInit {
     this.selectedMember.Items = this.borrowInfos;
     this.DA.UserSave(this.selectedMember);
     this.DL.Display("Borrow", "Saved!");
+    this.LoadList();
   }
 
   UserSelected() {
