@@ -512,8 +512,8 @@ export class DataAccess {
         this.snapshotDAL.Load(this.DL.KeyDay);
     }
 
-    public SellInfoDone(memberKey: string, buyerName: string, isDelivery: boolean) {
-        this.transactionDAL.SellDone(memberKey, buyerName, isDelivery);
+    public SellInfoDone(user: UserInfo, memberKey: string, buyerName: string, isDelivery: boolean) {
+        this.transactionDAL.SellDone(user, memberKey, buyerName, isDelivery);
     }
 
     public DeliverySave(item: DeliveryInfo) {

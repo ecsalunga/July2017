@@ -117,7 +117,7 @@
       </button>
     </ng-container>
     <ng-container *ngIf="DL.UserAccess.SellView">
-      <button md-menu-item (click)="LoadPage('product-sell')">
+      <button md-menu-item (click)="LoadPageWithNullSelectedUser('product-sell')">
         <md-icon>payment</md-icon>
         <span>Sell</span>
       </button>

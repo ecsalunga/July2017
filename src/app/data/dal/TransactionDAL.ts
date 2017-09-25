@@ -1,6 +1,6 @@
 import { Core } from './../../core';
 import { DataLayer, DataAccess } from './../../data';
-import { SellInfo, TransactionInfo, ReportInfo, DeliveryInfo, NameValue } from '../models';
+import { SellInfo, TransactionInfo, ReportInfo, DeliveryInfo, NameValue, UserInfo } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class TransactionDAL {
@@ -49,13 +49,13 @@ export class TransactionDAL {
         this.af.list(this.PATH).push(item);
     }
 
-    public SellDone(memberKey: string, buyerName: string, isDelivery: boolean) {
+    public SellDone(user: UserInfo,  memberKey: string, buyerName: string, isDelivery: boolean) {
         let info = new TransactionInfo();
         info.MemberKey = memberKey
         info.BuyerName = buyerName;
-        info.UserKey = this.DL.User.key;
-        info.UserName = this.DL.User.Name;
-        info.Items = this.DL.User.Sells;
+        info.UserKey = user.key;
+        info.UserName = user.Name;
+        info.Items = user.Sells;
         info.Count = this.DL.SellInfosCount;
         info.Amount = this.DL.SellInfosAmount;
         info.ActionDate = this.DL.GetActionDate();
@@ -74,7 +74,7 @@ export class TransactionDAL {
             this.DA.ProductUpdate(info.Items);
         }
 
-        this.DA.SellInfoClear(this.DL.User);
+        this.DA.SellInfoClear(user);
     }
 
     public DeliveryStart(info: TransactionInfo) {

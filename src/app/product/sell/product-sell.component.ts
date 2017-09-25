@@ -18,7 +18,12 @@ export class ProductSellComponent implements OnInit {
   isDelivery: boolean = false;
   isDiscount: boolean = false;
 
-  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) { }
+  constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
+    if(this.DL.UserSelected == null)
+      this.DL.UserSelected = this.DL.User;
+
+    this.DL.ComputeUserSellInfo(this.DL.UserSelected);
+  }
 
   AddProduct() {
     let exists = false;
@@ -37,8 +42,8 @@ export class ProductSellComponent implements OnInit {
       item.Quantity = this.selectedQuantity;
 
       // merge items
-      if(this.DL.User.Sells != null && this.DL.User.Sells.length > 0) {
-        this.DL.User.Sells.forEach(info => {
+      if(this.DL.UserSelected.Sells != null && this.DL.UserSelected.Sells.length > 0) {
+        this.DL.UserSelected.Sells.forEach(info => {
           if(info.Code == item.Code) {
             item.Quantity += info.Quantity;
             exists = true;
@@ -56,10 +61,9 @@ export class ProductSellComponent implements OnInit {
     }
 
     if(!exists)
-      this.DA.SellInfoAdd(this.DL.User, item);
+      this.DA.SellInfoAdd(this.DL.UserSelected, item);
 
-    this.DL.ComputeUserSellInfo(this.DL.User);
-    //this.DA.SellInfoSave(item);
+    this.DL.ComputeUserSellInfo(this.DL.UserSelected);
     this.ClearSelection();
   }
 
@@ -90,12 +94,12 @@ export class ProductSellComponent implements OnInit {
   }
 
   Delete(info: SellInfo) {
-     this.DA.SellInfoDelete(this.DL.User, info);
+     this.DA.SellInfoDelete(this.DL.UserSelected, info);
      this.isPaying = false;
   }
 
   RequestDelete(info: SellInfo) {
-    this.DA.SellInfoRequestDelete(this.DL.User, info);
+    this.DA.SellInfoRequestDelete(this.DL.UserSelected, info);
   }
   
   CartOpen() {
@@ -107,7 +111,7 @@ export class ProductSellComponent implements OnInit {
   }
 
   CartDone() {
-    this.DA.SellInfoDone(this.selectedMember.key, this.selectedMember.Name, this.isDelivery);
+    this.DA.SellInfoDone(this.DL.UserSelected, this.selectedMember.key, this.selectedMember.Name, this.isDelivery);
     if(this.isDelivery) {
       this.DL.Display("Delivery Info", "Created!");
     }

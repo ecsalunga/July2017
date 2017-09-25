@@ -85,7 +85,6 @@ export class DataLayer {
     Transactions: Array<TransactionInfo>;
     TransactionCancels: Array<CancelInfo>;
 
-    SellInfos: Array<SellInfo>;
     SellInfosAmount: number = 0;
     SellInfosCount: number = 0;
 
@@ -169,6 +168,7 @@ export class DataLayer {
     Modules: Array<NameValue>;
     PublicModules: Array<NameValue>;
 
+    ActionDate: number;
     KeyDay: number;
     KeyMonth: number;
     KeyYear: number;
@@ -282,6 +282,7 @@ export class DataLayer {
 
     public SetKeyDates() {
         this.Date = new Date();
+        this.ActionDate = this.core.dateToNumber(this.Date);
         this.KeyDay = this.core.dateToKeyDay(this.Date);
         this.KeyMonth = this.core.dateToKeyMonth(this.Date);
         this.KeyYear = this.Date.getFullYear();
@@ -394,7 +395,8 @@ export class DataLayer {
     }
 
     public GetActionDate(): number {
-        return this.core.dateToNumber(new Date());
+        this.SetKeyDates()
+        return this.ActionDate;
     }
 
     public LoadFromMenu(name: string) {

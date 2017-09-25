@@ -30,6 +30,11 @@ export class AppComponent implements OnInit {
     this.DL.LoadFromMenu(name);
   }
 
+  LoadPageWithNullSelectedUser(name: string) {
+    this.DL.UserSelected = null;
+    this.DL.LoadFromMenu(name);
+  }
+
   Login() {
     this.LoadFromHeader('user-login');
   }
