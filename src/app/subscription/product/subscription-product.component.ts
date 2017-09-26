@@ -26,9 +26,6 @@ export class SubscriptionProductComponent implements OnInit {
   }
 
   CanAdd(): boolean {
-    if(!this.CanSave())
-      return false;
-    
     if(!this.selectedProduct)
       return false;
     
@@ -43,7 +40,7 @@ export class SubscriptionProductComponent implements OnInit {
   }
 
   CanSave(): boolean {
-    if(!this.DL.UserAccess.BorrowEdit)
+    if(!this.DL.UserAccess.SubscriptionProductAdd && !this.DL.UserAccess.SubscriptionProductDelete)
       return false;
 
     return true;

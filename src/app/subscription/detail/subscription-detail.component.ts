@@ -25,18 +25,14 @@ export class SubscriptionDetailComponent implements OnInit {
       this.model = new SubscriptionInfo(this.DL.DefaultImageURL);
   }
 
-  IsSaveDisabled() : boolean {
-    return (!this.DL.UserAccess.ServiceEdit && !(!this.model.key)) || (!this.DL.UserAccess.ServiceAdd && !this.model.key);
-  }
-
   CanSave(): boolean {
     if(this.codeValidator.invalid || this.nameValidator.invalid || this.priceValidator.invalid)
       return false;
     
-    if(this.model.key && !this.DL.UserAccess.ServiceEdit)
+    if(this.model.key && !this.DL.UserAccess.SubscriptionEdit)
       return false;
 
-    if(!this.model.key && !this.DL.UserAccess.ServiceAdd)
+    if(!this.model.key && !this.DL.UserAccess.SubscriptionAdd)
       return false;
 
     return true;

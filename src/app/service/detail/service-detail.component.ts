@@ -25,10 +25,6 @@ export class ServiceDetailComponent implements OnInit {
       this.model = new ServiceInfo(this.DL.DefaultImageURL);
   }
 
-  IsSaveDisabled() : boolean {
-    return (!this.DL.UserAccess.ServiceEdit && !(!this.model.key)) || (!this.DL.UserAccess.ServiceAdd && !this.model.key);
-  }
-
   CanSave(): boolean {
     if(this.codeValidator.invalid || this.nameValidator.invalid || this.priceValidator.invalid)
       return false;

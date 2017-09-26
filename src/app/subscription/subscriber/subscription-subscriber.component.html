@@ -22,7 +22,7 @@
           {{ GetDate(item.Value2) | date : 'short' }}
         </td>
         <td class="rightRow">
-          <button md-mini-fab color="warn" [disabled]="!DL.UserAccess.BorrowDelete" (click)="Delete(item)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
+          <button md-mini-fab color="warn" [disabled]="!DL.UserAccess.SubscriptionSubscriberDelete" (click)="Delete(item)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
         </td>
       </tr>
     </ng-container>
@@ -32,7 +32,7 @@
 <table>
   <tr class="rightRow">
     <td class="selectionRow">
-      <md-select placeholder="Member" class="longText" [(ngModel)]="selectedMember">
+      <md-select [disabled]="!this.DL.UserAccess.SubscriptionSubscriberAdd" placeholder="Member" class="longText" [(ngModel)]="selectedMember">
         <ng-container *ngFor="let member of this.DL.Members">
           <md-option *ngIf="!Exists(member)" [value]="member">
             {{ member.Name }}
@@ -44,7 +44,7 @@
   </tr>
   <tr class="rightRow">
     <td>
-      <button md-fab (click)="AddItem()" [disabled]="!CanAdd()" mdTooltip="Add" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+      <button md-fab (click)="AddItem()" [disabled]="!this.DL.UserAccess.SubscriptionSubscriberAdd || !this.selectedMember" mdTooltip="Add" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
     </td>
     <td style="width: 50%">
       <button *ngIf="CanSave()" md-fab (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>

@@ -57,7 +57,17 @@ export class AccessInfo {
     ShowcaseEdit: boolean;
     ShowcaseScheduleView: boolean;
     ShowcaseScheduleAdd: boolean;
-    ShowcaseScheduleDelete: boolean; 
+    ShowcaseScheduleDelete: boolean;
+
+    SubscriptionView: boolean;
+    SubscriptionAdd: boolean;
+    SubscriptionEdit: boolean;
+    SubscriptionProductView: boolean;
+    SubscriptionProductAdd: boolean;
+    SubscriptionProductDelete: boolean;
+    SubscriptionSubscriberView: boolean;
+    SubscriptionSubscriberAdd: boolean;
+    SubscriptionSubscriberDelete: boolean;
 
     ShowcaseOrderView: boolean;
     ShowcaseOrderEdit: boolean;

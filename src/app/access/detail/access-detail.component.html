@@ -176,6 +176,78 @@
       </td>
     </tr>
     <tr>
+      <td colspan="3" class="accessLabel">Subscription</td>
+    </tr>
+    <tr>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.SubscriptionView">
+          View
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.SubscriptionAdd">
+          Add
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.SubscriptionEdit">
+          Edit
+        </md-slide-toggle>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table style="margin-left: 10px;">
+          <tr>
+            <td colspan="3" class="accessLabel">Product</td>
+          </tr>
+          <tr>
+            <td class="subAccess">
+              <md-slide-toggle [(ngModel)]="model.SubscriptionProductView">
+                View
+              </md-slide-toggle>
+            </td>
+            <td class="subAccess">
+              <md-slide-toggle [(ngModel)]="model.SubscriptionProductAdd">
+                Add
+              </md-slide-toggle>
+            </td>
+            <td>
+              <md-slide-toggle [(ngModel)]="model.SubscriptionProductDelete">
+                Delete
+              </md-slide-toggle>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table style="margin-left: 10px;">
+          <tr>
+            <td colspan="3" class="accessLabel">Subscriber</td>
+          </tr>
+          <tr>
+            <td class="subAccess">
+              <md-slide-toggle [(ngModel)]="model.SubscriptionSubscriberView">
+                View
+              </md-slide-toggle>
+            </td>
+            <td class="subAccess">
+              <md-slide-toggle [(ngModel)]="model.SubscriptionSubscriberAdd">
+                Add
+              </md-slide-toggle>
+            </td>
+            <td>
+              <md-slide-toggle [(ngModel)]="model.SubscriptionSubscriberDelete">
+                Delete
+              </md-slide-toggle>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
       <td colspan="3" class="accessLabel">Service</td>
     </tr>
     <tr>

@@ -23,18 +23,8 @@ export class SubscriptionSubscriberComponent implements OnInit {
     }
   }
 
-  CanAdd(): boolean {
-    if(!this.CanSave())
-      return false;
-    
-    if(!this.selectedMember)
-      return false;
-
-    return true;
-  }
-
   CanSave(): boolean {
-    if(!this.DL.UserAccess.BorrowEdit)
+    if(!this.DL.UserAccess.SubscriptionSubscriberAdd && !this.DL.UserAccess.SubscriptionSubscriberDelete)
       return false;
 
     return true;

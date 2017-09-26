@@ -40,7 +40,7 @@
     </div>
     <div class="hSpacer"></div>
     <div class="rightRow">
-      <button md-fab [disabled]="IsSaveDisabled()" (click)="Save()" [disabled]="!CanSave()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+      <button md-fab (click)="Save()" [disabled]="!CanSave()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
       <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
     </div>
   </div>
