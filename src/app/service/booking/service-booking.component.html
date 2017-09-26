@@ -33,7 +33,7 @@
       <div class="hSpacer"></div>
       <div class="itemControl mainColor">
         <div class="cartSelection">
-          <div class="visibility" *ngIf="booking.Status != DL.STATUS_REQUESTED && booking.Status != DL.STATUS_CONFIRMED && booking.Status != DL.STATUS_DONE">
+          <div class="visibility" *ngIf="IsDoneVisible(booking)">
             <button md-raised-button (click)="SetStatusDone(booking)">
               <md-icon>visibility_off</md-icon>
               <span>Finished</span>

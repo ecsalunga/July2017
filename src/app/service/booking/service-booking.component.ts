@@ -19,6 +19,13 @@ export class ServiceBookingComponent implements OnInit {
     return this.core.keyDayToDate(keyDay);
   }
 
+  IsDoneVisible(booking: ReservationInfo): boolean {
+    return (booking.Status != this.DL.STATUS_REQUESTED 
+      && booking.Status != this.DL.STATUS_CONFIRMED
+      && booking.Status != this.DL.STATUS_CHECKEDIN  
+      && booking.Status != this.DL.STATUS_DONE);
+  }
+
   SetStatusDone(item: ReservationInfo) {
     this.DL.StatusUpdate(item, this.DL.STATUS_DONE);
     this.DA.ServiceReserveSave(item);

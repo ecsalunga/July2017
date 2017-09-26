@@ -51,7 +51,6 @@ export class ServiceDAL {
                 if(info.Status == this.DL.STATUS_REQUESTED)
                     this.DL.ServiceReservationNew.push(info);
                 else if(info.Status == this.DL.STATUS_CONFIRMED 
-                    || info.Status == this.DL.STATUS_IN_PROGRESS
                     || info.Status == this.DL.STATUS_CHECKEDIN)
                     this.DL.ServiceReservationActive.push(info);
                 else
