@@ -21,6 +21,10 @@ export class ServiceReservationComponent implements OnInit {
     this.DL.LoadFromLink('service-reservation-detail');
   }
 
+  IsDue(item: ReservationInfo) {
+    return (item.From <= this.DL.KeyDay && item.Status != this.DL.STATUS_CHECKEDIN);
+  }
+
   HasClean(): boolean {
     let hasClean = false
     this.DL.ServiceReservationDone.forEach(item => {

@@ -17,7 +17,7 @@
       </tr>
     </thead>
     <ng-container *ngFor="let member of DL.UserBorrow">
-      <tr  class="{{ HasDueBorrow(member) ? 'bad' : '' }}">
+      <tr class="{{ HasDueBorrow(member) ? 'bad' : '' }}">
         <td>
           {{ member.Name }}
         </td>
