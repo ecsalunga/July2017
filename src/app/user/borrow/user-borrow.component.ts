@@ -21,6 +21,15 @@ export class UserBorrowComponent implements OnInit {
     this.DL.LoadFromLink("user-borrow-detail");
   }
 
+  HasDueBorrow(item: UserInfo) {
+    let hasDue = false;
+    item.Borrows.forEach(borrow => {
+      if(borrow.ReturnDate <= this.DL.KeyDay)
+        hasDue = true;
+    });
+    return hasDue;
+  }
+
   GetCount(item: UserInfo): number {
     let count = 0;
     item.Borrows.forEach(borrow => {
