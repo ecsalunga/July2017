@@ -64,6 +64,7 @@ export class ServiceDAL {
             });
 
             // sort by event date from
+            this.DL.ServiceReservationNew.sort((item1, item2) => item1.From - item2.From);
             this.DL.ServiceReservationActive.sort((item1, item2) => item1.From - item2.From);
 
             this.DL.ServiceReservationDone.reverse();
