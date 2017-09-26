@@ -27,6 +27,7 @@ export class MessageMessageComponent implements OnInit {
       info.UserKey = (this.DL.User.key != this.DL.Conversation.FromKey ? this.DL.Conversation.FromKey : this.DL.Conversation.ToKey);
       info.Data = this.DL.Conversation.key;
       this.DA.CommandSave(info);
+      this.DL.Display("Popup Command", "Submitted!");
     }
   }
 
