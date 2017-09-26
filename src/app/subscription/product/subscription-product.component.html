@@ -1,55 +1,73 @@
 <div>
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Date
-        </th>
-        <th class="rightRow">
-          Action
-        </th>
-      </tr>
-    </thead>
-    <ng-container *ngFor="let item of prices">
-      <tr>
-        <td>
-          {{ item.Name }}
-        </td>
-        <td>
-          {{ item.Value2 | number:'1.2-2'}}
-        </td>
-        <td class="rightRow">
-          <button md-mini-fab color="warn" [disabled]="!DL.UserAccess.BorrowDelete" (click)="Delete(item)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
-        </td>
-      </tr>
+  <div class="item">
+    <div class="itemHeader">
+      <div class="itemName">Product List</div>
+    </div>
+    <div class="subContent">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              Name
+            </th>
+            <th>
+              Price
+            </th>
+            <th>
+              Quota
+            </th>
+            <th class="rightRow">
+              Action
+            </th>
+          </tr>
+        </thead>
+        <ng-container *ngFor="let item of products">
+          <tr>
+            <td>
+              {{ item.Name }}
+            </td>
+            <td>
+              {{ item.Price | number:'1.2-2'}}
+            </td>
+            <td>
+              {{ item.Quota }}
+            </td>
+            <td class="rightRow">
+              <button md-mini-fab color="warn" [disabled]="!DL.UserAccess.BorrowDelete" (click)="Delete(item)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
+            </td>
+          </tr>
+        </ng-container>
+      </table>
+    </div>
+  </div>
+</div>
+<div>
+  <md-select class="longText" placeholder="Product" [(ngModel)]="selectedProduct" (change)="ProductSelected()">
+    <ng-container *ngFor="let product of DL.Products">
+      <md-option *ngIf="!Exists(product)" [value]="product">
+        {{ product.Description }} ({{ product.Code }})
+      </md-option>
     </ng-container>
-  </table>
+  </md-select>
+</div>
+<div class="vSmallSpacer"></div>
+<div>
+  <md-form-field class="shortText">
+    <input id="txtPrice" type="number" mdInput placeholder="Price" [(ngModel)]="price" />
+  </md-form-field>
+</div>
+<div>
+  <md-form-field class="shortText">
+    <input id="txtQuota" type="number" mdInput placeholder="Quota" [(ngModel)]="quota" />
+  </md-form-field>
 </div>
 <div class="hSpacer"></div>
 <table>
   <tr class="rightRow">
-    <td class="selectionRow">
-      <md-select class="longText" placeholder="Product" [(ngModel)]="selectedProduct" (change)="ProductSelected()">
-        <ng-container *ngFor="let product of DL.Products">
-          <md-option *ngIf="!Exists(product)" [value]="product">
-            {{ product.Description }} ({{ product.Code }})
-          </md-option>
-        </ng-container>
-      </md-select>
-      <md-form-field class="shortText">
-        <input id="txtPrice" type="number" mdInput placeholder="Price" [(ngModel)]="price" />
-      </md-form-field>
-    </td>
-    <td></td>
-  </tr>
-  <tr class="rightRow">
     <td>
       <button md-fab (click)="AddItem()" [disabled]="!CanAdd()" mdTooltip="Add" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
     </td>
-    <td style="width: 50%">
+    <td>
       <button *ngIf="CanSave()" md-fab (click)="Save()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
       <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
     </td>

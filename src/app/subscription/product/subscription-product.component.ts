@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { SubscriptionInfo, ProductInfo, Name2Value } from '../../data/models';
+import { SubscriptionInfo, ProductInfo, PromoInfo } from '../../data/models';
 
 @Component({
   selector: 'subscription-product',
@@ -11,15 +11,16 @@ import { SubscriptionInfo, ProductInfo, Name2Value } from '../../data/models';
 export class SubscriptionProductComponent implements OnInit {
   model: SubscriptionInfo;
   selectedProduct: ProductInfo;
-  prices: Array<Name2Value>;
+  products: Array<PromoInfo>;
   price: number;
+  quota: number;
 
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
-    this.prices = new Array<Name2Value>();
+    this.products = new Array<PromoInfo>();
     this.model = Object.assign({}, this.DL.Subscription);
-    if(this.model.Prices != null && this.model.Prices.length > 0) {
-      this.model.Prices.forEach(sub => {
-        this.prices.push(sub);
+    if(this.model.Products != null && this.model.Products.length > 0) {
+      this.model.Products.forEach(product => {
+        this.products.push(product);
       });
     }
   }
@@ -49,23 +50,28 @@ export class SubscriptionProductComponent implements OnInit {
   }
 
   AddItem() {
-    let item = new Name2Value(this.selectedProduct.Description, this.selectedProduct.Code, this.price );
-    this.prices.push(item);
-    this.prices.sort((item1, item2) => item1.Name.localeCompare(item2.Name));
+    let item = new PromoInfo();
+    item.Code = this.selectedProduct.Code;
+    item.Name = this.selectedProduct.Description
+    item.Quota = this.quota;
+    item.Price = this.price;
+    this.products.push(item);
+    this.products.sort((item1, item2) => item1.Name.localeCompare(item2.Name));
     this.ClearSelection();
   }
 
-  Delete(item: Name2Value) {
-    this.prices = this.prices.filter(s => !(s.Value1 == item.Value1));
+  Delete(item: PromoInfo) {
+    this.products = this.products.filter(s => !(s.Code == item.Code));
   }
 
   ClearSelection() {
     this.selectedProduct = null;
     this.price = null;
+    this.quota = null;
   }
 
   Save() {
-    this.model.Prices = this.prices;
+    this.model.Products = this.products;
     this.DA.SubscriptionSave(this.model);
     this.DL.Display("Product List", "Saved!");
     this.LoadList();
@@ -73,8 +79,8 @@ export class SubscriptionProductComponent implements OnInit {
 
   Exists(product: ProductInfo): boolean {
     let exists = false;
-    this.prices.forEach(item => {
-      if(item.Value1 == product.Code)
+    this.products.forEach(item => {
+      if(item.Code == product.Code)
         exists = true;
     });
     return exists;
@@ -85,6 +91,6 @@ export class SubscriptionProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Product List";
+    this.DL.TITLE = "Product Bundle";
   }
 }

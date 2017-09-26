@@ -6,15 +6,20 @@ export class SubscriptionInfo {
     Name: string;
     Price: number;
     Description: string;
-    Prices: Array<Name2Value>;
-    Schedules: Array<ScheduleInfo>;
+    Products: Array<PromoInfo>;
     Subscribers: Array<Name2Value>;
     ImageURL: string;
     
     constructor(defaultImageURL: string) {
         this.Subscribers = new Array<Name2Value>();
-        this.Prices = new Array<Name2Value>();
-        this.Schedules = new Array<ScheduleInfo>();
+        this.Products = new Array<PromoInfo>();
         this.ImageURL = defaultImageURL;
     }
+}
+
+export class PromoInfo {
+    Code: string;
+    Name: string;
+    Price: number;
+    Quota: number;
 }
