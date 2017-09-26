@@ -78,6 +78,7 @@ import { UserSellerComponent } from './user/seller/user-seller.component';
 import { SubscriptionListComponent } from './subscription/list/subscription-list.component';
 import { SubscriptionDetailComponent } from './subscription/detail/subscription-detail.component';
 import { SubscriptionSubscriberComponent } from './subscription/subscriber/subscription-subscriber.component';
+import { SubscriptionProductComponent } from './subscription/product/subscription-product.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,8 @@ import { SubscriptionSubscriberComponent } from './subscription/subscriber/subsc
     ServiceReservationComponent, ServiceReservationDetailComponent, ServiceBookingComponent, 
     ReportExpenseDetailComponent, SettingModuleExpenseTypeComponent, UserBorrowComponent,
     UserBorrowDetailComponent, UserSellerComponent, SubscriptionListComponent,
-    SubscriptionDetailComponent, SubscriptionSubscriberComponent
+    SubscriptionDetailComponent, SubscriptionSubscriberComponent, SubscriptionProductComponent,
+    SubscriptionProductComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, MdButtonModule,
@@ -132,7 +134,7 @@ import { SubscriptionSubscriberComponent } from './subscription/subscriber/subsc
     ServiceReservationDetailComponent, ServiceBookingComponent, ReportExpenseDetailComponent,
     SettingModuleExpenseTypeComponent, UserBorrowComponent, UserBorrowDetailComponent,
     UserSellerComponent, SubscriptionListComponent, SubscriptionDetailComponent,
-    SubscriptionSubscriberComponent
+    SubscriptionSubscriberComponent, SubscriptionProductComponent
   ]
 })
 export class AppModule {

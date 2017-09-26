@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
       } else {
         nativeElement.value = "";
         this.DA.DataChecked.emit(false);
-        this.DL.Display("Image", "Please select image with maximum " + this.DL.SystemSetting.ImageSize + " KB size.");
+        this.DL.Display("Image", "Image more than " + this.DL.SystemSetting.ImageSize + " KB size.");
       }
     }
     else {
