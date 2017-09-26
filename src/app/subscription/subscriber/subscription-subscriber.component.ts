@@ -47,7 +47,7 @@ export class SubscriptionSubscriberComponent implements OnInit {
   AddItem() {
     let item = new Name2Value(this.selectedMember.Name, this.selectedMember.key, this.DL.GetActionDate() );
     this.subscribers.push(item);
-    this.subscribers.sort((item1, item2) => item1.Value2 - item2.Value2);
+    this.subscribers.sort((item1, item2) => item1.Name.localeCompare(item2.Name));
     this.ClearSelection();
   }
 
@@ -80,6 +80,6 @@ export class SubscriptionSubscriberComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Subscriber Management";
+    this.DL.TITLE = "Subscriber List";
   }
 }
