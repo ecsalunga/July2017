@@ -25,7 +25,7 @@
           </tr>
         </thead>
         <ng-container *ngFor="let info of borrowInfos">
-          <tr>
+          <tr class="{{ IsDue(info) ? 'bad' : '' }}">
             <td>
               {{ info.Name }}
             </td>

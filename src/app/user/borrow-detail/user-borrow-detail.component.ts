@@ -71,11 +71,16 @@ export class UserBorrowDetailComponent implements OnInit {
     info.Count = this.selectedQuantity;
     info.ReturnDate = this.core.dateToKeyDay(this.returnDate);
     this.borrowInfos.push(info);
+    this.borrowInfos.sort((item1, item2) => item1.ReturnDate - item2.ReturnDate);
     this.ClearSelection();
   }
 
   Delete(item: BorrowInfo) {
     this.borrowInfos = this.borrowInfos.filter(b => !(b.ActionDate == item.ActionDate && b.Code == item.Code));
+  }
+
+  IsDue(item: BorrowInfo): boolean {
+    return (item.ReturnDate <= this.DL.KeyDay)
   }
 
   ClearSelection() {
