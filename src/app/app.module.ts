@@ -75,6 +75,8 @@ import { SettingModuleExpenseTypeComponent } from './setting/module-expense-type
 import { UserBorrowComponent } from './user/borrow/user-borrow.component';
 import { UserBorrowDetailComponent } from './user/borrow-detail/user-borrow-detail.component';
 import { UserSellerComponent } from './user/seller/user-seller.component';
+import { SubscriptionListComponent } from './subscription/list/subscription-list.component';
+import { SubscriptionDetailComponent } from './subscription/detail/subscription-detail.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +97,8 @@ import { UserSellerComponent } from './user/seller/user-seller.component';
     ServiceWidgetComponent, WebsiteReservationComponent, ServiceReserveComponent,
     ServiceReservationComponent, ServiceReservationDetailComponent, ServiceBookingComponent, 
     ReportExpenseDetailComponent, SettingModuleExpenseTypeComponent, UserBorrowComponent,
-    UserBorrowDetailComponent, UserSellerComponent
+    UserBorrowDetailComponent, UserSellerComponent, SubscriptionListComponent,
+    SubscriptionDetailComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, MdButtonModule,
@@ -127,7 +130,7 @@ import { UserSellerComponent } from './user/seller/user-seller.component';
     WebsiteReservationComponent, ServiceReserveComponent, ServiceReservationComponent,
     ServiceReservationDetailComponent, ServiceBookingComponent, ReportExpenseDetailComponent,
     SettingModuleExpenseTypeComponent, UserBorrowComponent, UserBorrowDetailComponent,
-    UserSellerComponent
+    UserSellerComponent, SubscriptionListComponent, SubscriptionDetailComponent
   ]
 })
 export class AppModule {

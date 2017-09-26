@@ -110,6 +110,12 @@
         <span>Service</span>
       </button>
     </ng-container>
+    <ng-container *ngIf="DL.UserAccess.ServiceView">
+      <button md-menu-item (click)="LoadPage('subscription-list')">
+        <md-icon>subscriptions</md-icon>
+        <span>Subscription</span>
+      </button>
+    </ng-container>
     <ng-container *ngIf="DL.UserAccess.ShowcaseView">
       <button md-menu-item (click)="LoadPage('showcase-list')">
         <md-icon>shop</md-icon>

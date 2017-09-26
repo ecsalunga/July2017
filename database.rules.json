@@ -103,6 +103,13 @@
         ".write": "true",
         ".indexOn": "ConversationKey"
       }
+    },
+    "subscriptions": {
+      "items": {
+        ".read": "true",
+        ".write": "true",
+        ".indexOn": "Name"
+      }
     }
   }
 }

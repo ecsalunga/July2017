@@ -9,7 +9,8 @@ import {
     CancelInfo, DeliveryInfo, ModuleSettingInfo,
     SystemSettingInfo, SnapshotInfo, OrderInfo,
     ServiceInfo, ConversationInfo, MessageInfo,
-    ReservationInfo, Name2Value, IStatus
+    ReservationInfo, Name2Value, IStatus,
+    SubscriptionInfo
 } from './models';
 
 @Injectable()
@@ -131,6 +132,9 @@ export class DataLayer {
     Showcases: Array<ShowcaseInfo>;
     ShowcaseToday: Array<ShowcaseInfo>;
     ShowCaseTodayCount: number; 
+
+    Subscription: SubscriptionInfo;
+    Subscriptions: Array<SubscriptionInfo>;
 
     ShowcaseOrder: OrderInfo;
     ShowcaseOrders: Array<OrderInfo>;
@@ -307,6 +311,8 @@ export class DataLayer {
         this.ExpenseTypes = new Array<NameValue>();
         this.Messages = new Array<MessageInfo>();
         this.Conversations = new Array<ConversationInfo>();
+
+        this.Subscriptions = new Array<SubscriptionInfo>();
     }
 
     public SetSystemConfig() {

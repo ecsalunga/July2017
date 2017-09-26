@@ -1,0 +1,34 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Price
+        </th>
+        <th class="rightRow" style="width: 30%;">
+          Action
+        </th>
+      </tr>
+    </thead>
+    <ng-container *ngFor="let item of DL.Subscriptions">
+      <tr>
+        <td>
+          {{ item.Name }}
+        </td>
+        <td>
+          {{ item.Price | number:'1.2-2' }}
+        </td>
+        <td class="rightRow">
+          <button md-mini-fab (click)="SelectItem(item)" mdTooltip="View"><md-icon>pageview</md-icon></button>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+  <div class="hSpacer"></div>
+  <div class="rightRow">
+    <button md-fab [disabled]="!DL.UserAccess.ShowcaseAdd" (click)="AddItem()" mdTooltip="Add" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+  </div>
+</div>

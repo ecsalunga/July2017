@@ -16,6 +16,7 @@ import { SettingDAL } from './dal/SettingDAL';
 import { SnapshotDAL } from './dal/SnapshotDAL';
 import { ServiceDAL } from './dal/ServiceDAL';
 import { MessageDAL } from './dal/MessageDAL';
+import { SubscriptionDAL } from './dal/SubscriptionDAL';
 
 import { MdDialog } from '@angular/material';
 import { MessagePopupComponent } from '../message/popup/message-popup.component';
@@ -28,7 +29,7 @@ import {
     CancelInfo, DeliveryInfo, ModuleSettingInfo,
     SystemSettingInfo, SnapshotInfo, OrderInfo,
     ServiceInfo, CommandInfo, ConversationInfo,
-    MessageInfo, ReservationInfo
+    MessageInfo, ReservationInfo, SubscriptionInfo
 } from './models';
 
 @Injectable()
@@ -48,6 +49,7 @@ export class DataAccess {
     snapshotDAL: SnapshotDAL;
     serviceDAL: ServiceDAL;
     messageDAL: MessageDAL;
+    subscriptionDAL: SubscriptionDAL;
 
     USERS: string = "/users";
     SETTING: string = "/setting";
@@ -67,6 +69,7 @@ export class DataAccess {
         this.accessDAL = new AccessDAL(DL, af);
         this.productDAL = new ProductDAL(DL, af);
         this.snapshotDAL = new SnapshotDAL(DL, af);
+        this.subscriptionDAL = new SubscriptionDAL(core, DL, af);
 
         this.DataLoaded.subscribe(data => {
             if(data == this.DL.DATA_CONVERSATION && !this.DL.IsCommandLoaded) {
@@ -114,6 +117,7 @@ export class DataAccess {
         this.settingDAL.SystemLoad();
         this.settingDAL.ModuleLoad();
         this.showcaseDAL.Load();
+        this.subscriptionDAL.Load();
         this.serviceDAL.Load();
         this.UserLoad();
     }
@@ -325,10 +329,6 @@ export class DataAccess {
         this.snapshotDAL.Load(keyDay);
     }
 
-    public ShowcasesLoad() {
-        this.showcaseDAL.Load();
-    }
-
     public TransactionLoadByKeyDay(keyDay: number) {
         this.transactionDAL.LoadByKeyDay(keyDay);
     }
@@ -408,13 +408,14 @@ export class DataAccess {
         this.af.list(this.USERS).remove(item.key);
     }
 
-    public ShowcaseSave(item: ShowcaseInfo) {
-        this.showcaseDAL.Save(item);
-        this.ShowcasesLoad();
+    public SubscriptionSave(item: SubscriptionInfo) {
+        this.subscriptionDAL.Save(item);
+        this.subscriptionDAL.Load();
     }
 
-    public ShowcaseSaveOnly(item: ShowcaseInfo) {
+    public ShowcaseSave(item: ShowcaseInfo) {
         this.showcaseDAL.Save(item);
+        this.showcaseDAL.Load();
     }
 
     public ShowcaseOrderSave(item: OrderInfo) {
