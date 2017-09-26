@@ -28,7 +28,7 @@ export class ProductDetailComponent implements OnInit {
     if(this.descriptionValidator.invalid || this.descriptionValidator.invalid || this.priceValidator.invalid)
       return false;
     
-    if(this.model.Code == this.DL.KEYDISCOUNT)
+    if(this.model.Code == this.DL.KEYDISCOUNT || this.model.Code == this.DL.KEYSUBSCRIPTION)
       return false;
 
     if(this.model.key && !this.DL.UserAccess.ProductEdit)

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { ProductInfo, UserInfo, SellInfo } from '../../data/models';
+import { ProductInfo, UserInfo, SellInfo, SubscriptionInfo } from '../../data/models';
 
 @Component({
   selector: 'product-sell',
@@ -63,10 +63,8 @@ export class ProductSellComponent implements OnInit {
 
     if(!exists)
       this.DA.SellInfoAdd(this.DL.UserSelected, item);
-    else {
+    else
       this.DA.UserSave(this.DL.UserSelected);
-      this.DL.ComputeUserSellInfo(this.DL.UserSelected);
-    }
 
     this.DL.ComputeUserSellInfo(this.DL.UserSelected);
     this.ClearSelection();
@@ -100,7 +98,7 @@ export class ProductSellComponent implements OnInit {
 
   Delete(info: SellInfo) {
      this.DA.SellInfoDelete(this.DL.UserSelected, info);
-     this.isPaying = false;
+     this.CartOpen();
   }
 
   RequestDelete(info: SellInfo) {
@@ -109,10 +107,18 @@ export class ProductSellComponent implements OnInit {
   
   CartOpen() {
     this.isPaying = false;
+    if(this.DL.UserSelected.Sells.some(sell => sell.Code == this.DL.KEYSUBSCRIPTION)) {
+      this.DL.UserSelected.Sells = this.DL.UserSelected.Sells.filter(s => !(s.Code == this.DL.KEYSUBSCRIPTION));
+      this.DL.ComputeUserSellInfo(this.DL.UserSelected);
+    }
   }
 
   CartClose() {
     this.isPaying = true;
+    if(this.selectedMember.key != this.DL.MemberWalkIn.key) {
+      this.DL.SellSubscription(this.DL.UserSelected);
+      this.DL.ComputeUserSellInfo(this.DL.UserSelected);
+    }
   }
 
   CartDone() {

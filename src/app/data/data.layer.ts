@@ -23,6 +23,7 @@ export class DataLayer {
     KEYDAY: string = "KeyDay";
     KEYMONTH: string = "KeyMonth";
     KEYDISCOUNT: string = "X";
+    KEYSUBSCRIPTION: string = "S";
 
     MENU: string = "MENU";
     LINK: string = "LINK";
@@ -396,6 +397,50 @@ export class DataLayer {
                 this.SellInfosAmount += sell.Total;
                 this.SellInfosCount += sell.Quantity;
             });
+        }
+    }
+
+    SellSubscription(user: UserInfo) {
+        let userSub: SubscriptionInfo = null;
+        if(this.Subscriptions.length > 0) {
+            this.Subscriptions.forEach(sub => {
+            // check if user is subscriber
+            let isUserSub = false;
+            if(sub.Subscribers != null && sub.Subscribers.length > 0
+                && sub.Products != null && sub.Products.length > 0) {
+                sub.Subscribers.forEach(u => {
+                if(u.Value1 == user.key)
+                    isUserSub = true;
+                });
+            }
+
+            if(isUserSub)
+                userSub = sub;
+            });
+        }
+
+        // user in subscription
+        if(userSub != null) {
+            let total = 0;
+            user.Sells.forEach(sell => {
+                userSub.Products.forEach(prod => {
+                    if(sell.Code == prod.Code) {
+                        let discount = ((sell.Price - prod.Price) * sell.Quantity);
+                        total += discount; 
+                    }
+                });
+            });
+    
+            if(total != 0) {
+                let info = new SellInfo();
+                info.Code = this.KEYSUBSCRIPTION;
+                info.Description = userSub.Name;
+            
+                info.Price = total;
+                info.Quantity = 1;
+                info.Total = info.Price * -1;
+                user.Sells.push(info);
+            }
         }
     }
     
