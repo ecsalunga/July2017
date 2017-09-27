@@ -400,7 +400,7 @@ export class DataLayer {
         }
     }
 
-    SellSubscription(user: UserInfo, member: UserInfo): boolean {
+    SellSubscription(sells: Array<SellInfo>, member: UserInfo): boolean {
         let hasAdjustment = false;
         let userSub: SubscriptionInfo = null;
         
@@ -424,7 +424,7 @@ export class DataLayer {
         // user in subscription
         if(userSub != null) {
             let total = 0;
-            user.Sells.forEach(sell => {
+            sells.forEach(sell => {
                 userSub.Products.forEach(prod => {
                     if(sell.Code == prod.Code) {
                         let discount = ((sell.Price - prod.Price) * sell.Quantity);
@@ -441,7 +441,7 @@ export class DataLayer {
                 info.Price = total;
                 info.Quantity = 1;
                 info.Total = info.Price * -1;
-                user.Sells.push(info);
+                sells.push(info);
                 hasAdjustment = true;
             }
         }

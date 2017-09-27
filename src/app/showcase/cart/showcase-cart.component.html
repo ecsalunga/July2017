@@ -32,7 +32,7 @@
             <td class="totalColumn">
               {{ info.Total | number:'1.2-2' }}
             </td>
-            <td *ngIf="order.Status == DL.STATUS_SELECTING" class="rightRow">
+            <td *ngIf="order.Status == DL.STATUS_SELECTING && info.Code != DL.KEYSUBSCRIPTION" class="rightRow">
               <button md-mini-fab color="warn" (click)="Delete(info)" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
             </td>
           </tr>
@@ -54,7 +54,7 @@
       <div class="itemControl mainColor">
         <div class="cartSelection">
           <div *ngIf="!isCheckingout && order.Status == DL.STATUS_SELECTING">
-            <button md-raised-button (click)="ShowCheckout()">
+            <button md-raised-button (click)="ShowCheckout(order)">
               <md-icon>done</md-icon>
               <span>Checkout</span>
             </button>
@@ -64,7 +64,7 @@
               {{ DL.MSG_MISSING_PROFILE_DATA }}
             </div>
             <div class="controls">
-              <button md-raised-button (click)="HideCheckout()">
+              <button md-raised-button (click)="HideCheckout(order)">
               <md-icon>assignment_return</md-icon>
               <span>Cancel</span>
             </button>

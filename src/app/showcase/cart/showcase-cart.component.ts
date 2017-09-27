@@ -11,18 +11,42 @@ import { SellInfo, OrderInfo } from '../../data/models';
 export class ShowcaseCartComponent implements OnInit {
   isCheckingout: boolean = false;
 
-  constructor(private core: Core, public DL: DataLayer, private DA: DataAccess) { }
+  constructor(private core: Core, public DL: DataLayer, private DA: DataAccess) { 
+    this.DL.ShowcaseUserOrders.forEach(item => {
+      if(item.Status == this.DL.STATUS_SELECTING)
+        this.removeSusbscription(item);
+    });
+  }
   
   GetDate(keyDay: number): Date {
     return this.core.numberToDate(keyDay);
   }
 
-  ShowCheckout() {
+  ShowCheckout(item: OrderInfo) {
     this.isCheckingout = true;
+    if(this.DL.SellSubscription(item.Items, this.DL.User))
+      this.updateOrderComputation(item);
   }
 
-  HideCheckout() {
+  private updateOrderComputation(order: OrderInfo) {
+    order.Count = 0;
+    order.Amount = 0;
+    order.Items.forEach(item => {
+      order.Count+= item.Quantity;
+      order.Amount+= item.Total;
+    });
+  }
+
+  HideCheckout(item: OrderInfo) {
+    this.removeSusbscription(item);
     this.isCheckingout = false;
+  }
+
+  private removeSusbscription(item: OrderInfo) {
+    if(item.Items.some(sell => sell.Code == this.DL.KEYSUBSCRIPTION)) {
+      item.Items = item.Items.filter(s => !(s.Code == this.DL.KEYSUBSCRIPTION));
+      this.updateOrderComputation(item);
+    }
   }
 
   Checkout(item: OrderInfo) {
@@ -49,6 +73,9 @@ export class ShowcaseCartComponent implements OnInit {
   Delete(info: SellInfo) {
     this.DL.ShowcaseUserOrders.forEach(order => {
       if(order.Status == this.DL.STATUS_SELECTING) {
+        this.removeSusbscription(order);
+        this.isCheckingout = false;
+
         let count = 0;
         let amount = 0;
         let items = new Array<SellInfo>();

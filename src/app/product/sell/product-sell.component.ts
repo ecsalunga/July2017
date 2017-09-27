@@ -122,7 +122,7 @@ export class ProductSellComponent implements OnInit {
   CartClose() {
     this.isPaying = true;
     if(this.selectedMember.key != this.DL.MemberWalkIn.key) {
-      if(this.DL.SellSubscription(this.DL.UserSelected, this.selectedMember))
+      if(this.DL.SellSubscription(this.DL.UserSelected.Sells, this.selectedMember))
         this.DL.ComputeUserSellInfo(this.DL.UserSelected);
     }
   }
