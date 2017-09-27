@@ -503,28 +503,24 @@ export class DataAccess {
             user.Sells = new Array<SellInfo>();
 
         user.Sells.push(item);
-        this.userUpdateSell(user);
+        this.UserSave(user);
     }
 
     public SellInfoRequestDelete(user: UserInfo, item: SellInfo) {
         item.ForDelete = true;
-        this.userUpdateSell(user);
+        this.UserSave(user);
     }
 
     public SellInfoDelete(user: UserInfo, item: SellInfo) {
         user.Sells = user.Sells.filter(s => !(s.Code == item.Code));
-        this.userUpdateSell(user);
+        this.UserSave(user);
     }
 
     public SellInfoClear(user: UserInfo) {
         user.Sells = new Array<SellInfo>();
-        this.userUpdateSell(user);
+        this.UserSave(user);
     }
 
-    private userUpdateSell(user: UserInfo) {
-        this.UserSave(user);
-        this.DL.ComputeUserSellInfo(user);
-    }
 
     public SnapshotSave(item: SnapshotInfo) {
         this.snapshotDAL.Save(item);

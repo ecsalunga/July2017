@@ -400,8 +400,10 @@ export class DataLayer {
         }
     }
 
-    SellSubscription(user: UserInfo, member: UserInfo) {
+    SellSubscription(user: UserInfo, member: UserInfo): boolean {
+        let hasAdjustment = false;
         let userSub: SubscriptionInfo = null;
+        
         if(this.Subscriptions.length > 0) {
             this.Subscriptions.forEach(sub => {
             // check if user is subscriber
@@ -440,8 +442,11 @@ export class DataLayer {
                 info.Quantity = 1;
                 info.Total = info.Price * -1;
                 user.Sells.push(info);
+                hasAdjustment = true;
             }
         }
+
+        return hasAdjustment;
     }
     
     private appendIfSet(value: string): string {
