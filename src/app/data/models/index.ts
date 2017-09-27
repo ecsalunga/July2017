@@ -11,4 +11,4 @@ export { ModuleSettingInfo, SystemSettingInfo } from './SettingInfo';
 export { SnapshotInfo } from './SnapshotInfo';
 export { ServiceInfo, ReservationInfo } from './ServiceInfo';
 export { ConversationInfo, MessageInfo } from './MessageInfo';
-export { SubscriptionInfo, PromoInfo } from './SubscriptionInfo';
+export { SubscriptionInfo, PromoInfo, QuotaInfo, PurchaseInfo } from './SubscriptionInfo';

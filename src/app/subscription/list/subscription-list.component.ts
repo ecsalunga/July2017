@@ -22,6 +22,10 @@ export class SubscriptionListComponent implements OnInit {
     this.DL.LoadFromLink("subscription-subscriber");
   }
 
+  QuotaReport() {
+    this.DL.LoadFromLink("subscription-quota");
+  }
+
   Product(item: SubscriptionInfo) {
     this.DL.Subscription = item;
     this.DL.LoadFromLink("subscription-product");

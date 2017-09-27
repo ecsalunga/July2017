@@ -23,3 +23,31 @@ export class PromoInfo {
     Price: number;
     Quota: number;
 }
+
+export class QuotaInfo {
+    key: string;
+    SubscriptionKey: string;
+    SubscriptionName: string;
+    ActionDate: number;
+    From: number;
+    To: number;
+    Subscribers: Array<Name2Value>;
+    Products: Array<PromoInfo>;
+    Purchases: Array<PurchaseInfo>;
+
+    constructor() {
+        this.Subscribers = new Array<Name2Value>();
+        this.Products = new Array<PromoInfo>();
+        this.Purchases = new Array<PurchaseInfo>();
+    }
+}
+
+export class PurchaseInfo {
+    MemberKey: string;
+    MemberName: string;
+    items: Array<Name2Value>;
+
+    constructor() {
+        this.items = new Array<Name2Value>();
+    }
+}

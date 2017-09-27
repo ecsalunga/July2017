@@ -30,7 +30,14 @@
     </ng-container>
   </table>
   <div class="hSpacer"></div>
-  <div class="rightRow">
-    <button md-fab [disabled]="!DL.UserAccess.SubscriptionAdd" (click)="AddItem()" mdTooltip="Add" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
-  </div>
+  <table>
+    <tr class="rightRow">
+      <td>
+        <button md-fab (click)="QuotaReport()" [disabled]="!DL.UserAccess.ReportBalanceRegenerate" mdTooltip="Quota Report" mdTooltipPosition="above"><md-icon>assignment</md-icon></button>
+      </td>
+      <td>
+        <button md-fab [disabled]="!DL.UserAccess.SubscriptionAdd" (click)="AddItem()" mdTooltip="Add" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+      </td>
+    </tr>
+  </table>
 </div>

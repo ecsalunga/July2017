@@ -29,7 +29,8 @@ import {
     CancelInfo, DeliveryInfo, ModuleSettingInfo,
     SystemSettingInfo, SnapshotInfo, OrderInfo,
     ServiceInfo, CommandInfo, ConversationInfo,
-    MessageInfo, ReservationInfo, SubscriptionInfo
+    MessageInfo, ReservationInfo, SubscriptionInfo,
+    QuotaInfo
 } from './models';
 
 @Injectable()
@@ -118,6 +119,7 @@ export class DataAccess {
         this.settingDAL.ModuleLoad();
         this.showcaseDAL.Load();
         this.subscriptionDAL.Load();
+        this.subscriptionDAL.LoadQuota();
         this.serviceDAL.Load();
         this.UserLoad();
     }
@@ -411,6 +413,10 @@ export class DataAccess {
     public SubscriptionSave(item: SubscriptionInfo) {
         this.subscriptionDAL.Save(item);
         this.subscriptionDAL.Load();
+    }
+
+    public SubscriptionQuotaGenerate(item: QuotaInfo) {
+        this.subscriptionDAL.GenerateQuota(item, item.From);
     }
 
     public ShowcaseSave(item: ShowcaseInfo) {

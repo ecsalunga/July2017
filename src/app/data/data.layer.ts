@@ -10,7 +10,7 @@ import {
     SystemSettingInfo, SnapshotInfo, OrderInfo,
     ServiceInfo, ConversationInfo, MessageInfo,
     ReservationInfo, Name2Value, IStatus,
-    SubscriptionInfo
+    SubscriptionInfo, QuotaInfo, PurchaseInfo
 } from './models';
 
 @Injectable()
@@ -136,6 +136,7 @@ export class DataLayer {
 
     Subscription: SubscriptionInfo;
     Subscriptions: Array<SubscriptionInfo>;
+    SubscriptionQuotas: Array<QuotaInfo>;
 
     ShowcaseOrder: OrderInfo;
     ShowcaseOrders: Array<OrderInfo>;

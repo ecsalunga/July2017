@@ -109,6 +109,11 @@
         ".read": "true",
         ".write": "true",
         ".indexOn": "Name"
+      },
+      "quotas": {
+        ".read": "true",
+        ".write": "true",
+        ".indexOn": "ActionDate"
       }
     }
   }
