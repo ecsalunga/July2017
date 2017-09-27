@@ -40,7 +40,7 @@ export class SubscriptionDAL {
                         purchase = quota.Purchases.find(pur => pur.MemberKey == info.MemberKey);
 
                     info.Items.forEach(sell => {
-                        if(sell.Code != this.DL.KEYSUBSCRIPTION) {
+                        if(sell.Code != this.DL.KEYSUBSCRIPTION && sell.Code != this.DL.KEYDISCOUNT) {
                             if(purchase.items.some(p => (p.Name == sell.Description && p.Value2 == info.KeyDay))) {
                                 let item = purchase.items.find(p => (p.Name == sell.Description && p.Value2 == info.KeyDay));
                                 item.Value1 += sell.Quantity;
