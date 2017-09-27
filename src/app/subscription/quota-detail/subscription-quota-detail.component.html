@@ -26,6 +26,11 @@
           </tr>
         </ng-container>
       </table>
+      <div class="vSmallSpacer"></div>
+      <div>
+        <md-checkbox [(ngModel)]="quotaOnly">Show quota only</md-checkbox>
+      </div>
+      <div class="vSmallSpacer"></div>
     </div>
   </div>
 </div>
@@ -52,7 +57,7 @@
             </tr>
           </thead>
           <ng-container *ngFor="let item of purchase.items">
-            <tr class="{{ InQuota(item.Name) ? 'quota' : '' }}">
+            <tr *ngIf="!quotaOnly || (quotaOnly && InQuota(item.Name))" class="{{ !quotaOnly && InQuota(item.Name) ? 'quota' : '' }}">
               <td>
                 {{ item.Name }}
               </td>
@@ -65,6 +70,7 @@
             </tr>
           </ng-container>
         </table>
+        <div class="vSmallSpacer"></div>
       </div>
     </div>
   </div>

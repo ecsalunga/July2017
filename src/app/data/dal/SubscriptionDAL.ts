@@ -27,31 +27,7 @@ export class SubscriptionDAL {
                 let info: TransactionInfo = snapshot;
                 
                 if(quota.Subscribers.some(mem => info.MemberKey == mem.Value1))
-                {
-                    let purchase: PurchaseInfo = null;
-
-                    if(!quota.Purchases.some(pur => info.MemberKey == pur.MemberKey)) {
-                        purchase = new PurchaseInfo();
-                        purchase.MemberKey = info.MemberKey;
-                        purchase.MemberName = info.BuyerName;
-                        quota.Purchases.push(purchase);
-                    }
-                    else
-                        purchase = quota.Purchases.find(pur => pur.MemberKey == info.MemberKey);
-
-                    info.Items.forEach(sell => {
-                        if(sell.Code != this.DL.KEYSUBSCRIPTION && sell.Code != this.DL.KEYDISCOUNT) {
-                            if(purchase.items.some(p => (p.Name == sell.Description && p.Value2 == info.KeyDay))) {
-                                let item = purchase.items.find(p => (p.Name == sell.Description && p.Value2 == info.KeyDay));
-                                item.Value1 += sell.Quantity;
-                            }
-                            else {
-                                let item = new Name2Value(sell.Description, sell.Quantity, info.KeyDay);
-                                purchase.items.push(item);
-                            }
-                        }
-                    });
-                }
+                    this.transactionToQuota(info, quota);
             });
 
             if(quota.To == keyDay) {
@@ -64,6 +40,32 @@ export class SubscriptionDAL {
                 date.setDate(date.getDate() + 1);
                 let nextKeyDay = this.core.dateToKeyDay(date);
                 this.GenerateQuota(quota, nextKeyDay);
+            }
+        });
+    }
+
+    private transactionToQuota(info: TransactionInfo, quota: QuotaInfo) {
+        let purchase: PurchaseInfo = null;
+        
+        if(!quota.Purchases.some(pur => info.MemberKey == pur.MemberKey)) {
+            purchase = new PurchaseInfo();
+            purchase.MemberKey = info.MemberKey;
+            purchase.MemberName = info.BuyerName;
+            quota.Purchases.push(purchase);
+        }
+        else
+            purchase = quota.Purchases.find(pur => pur.MemberKey == info.MemberKey);
+
+        info.Items.forEach(sell => {
+            if(sell.Code != this.DL.KEYSUBSCRIPTION && sell.Code != this.DL.KEYDISCOUNT) {
+                if(purchase.items.some(p => (p.Name == sell.Description && p.Value2 == info.KeyDay))) {
+                    let item = purchase.items.find(p => (p.Name == sell.Description && p.Value2 == info.KeyDay));
+                    item.Value1 += sell.Quantity;
+                }
+                else {
+                    let item = new Name2Value(sell.Description, sell.Quantity, info.KeyDay);
+                    purchase.items.push(item);
+                }
             }
         });
     }
