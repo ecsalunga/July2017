@@ -400,7 +400,7 @@ export class DataLayer {
         }
     }
 
-    SellSubscription(user: UserInfo) {
+    SellSubscription(user: UserInfo, member: UserInfo) {
         let userSub: SubscriptionInfo = null;
         if(this.Subscriptions.length > 0) {
             this.Subscriptions.forEach(sub => {
@@ -409,7 +409,7 @@ export class DataLayer {
             if(sub.Subscribers != null && sub.Subscribers.length > 0
                 && sub.Products != null && sub.Products.length > 0) {
                 sub.Subscribers.forEach(u => {
-                if(u.Value1 == user.key)
+                if(u.Value1 == member.key)
                     isUserSub = true;
                 });
             }

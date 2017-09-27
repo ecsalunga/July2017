@@ -97,8 +97,14 @@ export class ProductSellComponent implements OnInit {
   }
 
   Delete(info: SellInfo) {
+    if(info.Code == this.DL.KEYSUBSCRIPTION) {
+      this.DL.UserSelected.Sells = this.DL.UserSelected.Sells.filter(s => !(s.Code == this.DL.KEYSUBSCRIPTION));
+      this.DL.ComputeUserSellInfo(this.DL.UserSelected);
+    } 
+    else {
      this.DA.SellInfoDelete(this.DL.UserSelected, info);
      this.CartOpen();
+    }
   }
 
   RequestDelete(info: SellInfo) {
@@ -116,7 +122,7 @@ export class ProductSellComponent implements OnInit {
   CartClose() {
     this.isPaying = true;
     if(this.selectedMember.key != this.DL.MemberWalkIn.key) {
-      this.DL.SellSubscription(this.DL.UserSelected);
+      this.DL.SellSubscription(this.DL.UserSelected, this.selectedMember);
       this.DL.ComputeUserSellInfo(this.DL.UserSelected);
     }
   }
