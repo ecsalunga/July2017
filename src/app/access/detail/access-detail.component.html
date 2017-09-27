@@ -248,6 +248,32 @@
       </td>
     </tr>
     <tr>
+      <td colspan="3">
+        <table style="margin-left: 10px;">
+          <tr>
+            <td colspan="3" class="accessLabel">Report</td>
+          </tr>
+          <tr>
+            <td class="subAccess">
+              <md-slide-toggle [(ngModel)]="model.SubscriptionReportView">
+                View
+              </md-slide-toggle>
+            </td>
+            <td class="subAccess">
+              <md-slide-toggle [(ngModel)]="model.SubscriptionReportAdd">
+                Add
+              </md-slide-toggle>
+            </td>
+            <td>
+              <md-slide-toggle [(ngModel)]="model.SubscriptionReportDelete">
+                Delete
+              </md-slide-toggle>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
       <td colspan="3" class="accessLabel">Service</td>
     </tr>
     <tr>

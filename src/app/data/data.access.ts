@@ -416,6 +416,11 @@ export class DataAccess {
         this.subscriptionDAL.GenerateQuota(item, item.From);
     }
 
+    public SubscriptionQuotaDelete(item: QuotaInfo) {
+        this.subscriptionDAL.DeleteQuota(item);
+        this.subscriptionDAL.LoadQuota();
+    }
+
     public ShowcaseSave(item: ShowcaseInfo) {
         this.showcaseDAL.Save(item);
         this.showcaseDAL.Load();

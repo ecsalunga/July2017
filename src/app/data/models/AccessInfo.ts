@@ -68,6 +68,9 @@ export class AccessInfo {
     SubscriptionSubscriberView: boolean;
     SubscriptionSubscriberAdd: boolean;
     SubscriptionSubscriberDelete: boolean;
+    SubscriptionReportView: boolean;
+    SubscriptionReportAdd: boolean;
+    SubscriptionReportDelete: boolean;
 
     ShowcaseOrderView: boolean;
     ShowcaseOrderEdit: boolean;

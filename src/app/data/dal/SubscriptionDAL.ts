@@ -57,6 +57,7 @@ export class SubscriptionDAL {
             if(quota.To == keyDay) {
                 this.SaveQuota(quota);
                 this.LoadQuota();
+                this.DL.Display("Quota Report", "Generated!");
             }
             else {
                 let date = this.core.keyDayToDate(keyDay);
@@ -79,6 +80,10 @@ export class SubscriptionDAL {
 
             this.DL.SubscriptionQuotas.reverse();
         });
+    }
+
+    public DeleteQuota(item: QuotaInfo) {
+        this.af.list(this.PATH_QUOTA).remove(item.key);
     }
 
     public Save(item: SubscriptionInfo) {

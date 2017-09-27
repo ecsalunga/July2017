@@ -14,7 +14,11 @@ md-form-field {
     width: 225px;
 }
 
+table { 
+    border-collapse: collapse; 
+}
+
 .quota {
-    color: green;
-    font-weight: bold; 
+    font-weight: bold;
+    border: 1px solid green;
 }

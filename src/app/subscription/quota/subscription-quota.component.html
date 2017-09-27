@@ -66,7 +66,7 @@
 <table>
   <tr class="rightRow">
     <td>
-      <button md-fab (click)="Generate()" [disabled]="!DL.UserAccess.ReportBalanceRegenerate || !CanGenerate()" mdTooltip="Generate Report" mdTooltipPosition="above"><md-icon>assignment</md-icon></button>
+      <button md-fab (click)="Generate()" [disabled]="!DL.UserAccess.SubscriptionReportAdd || !CanGenerate()" mdTooltip="Create Report" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
     </td>
     <td>
       <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>

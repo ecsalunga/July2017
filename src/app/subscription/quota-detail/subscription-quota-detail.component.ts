@@ -27,6 +27,12 @@ export class SubscriptionQuotaDetailComponent implements OnInit {
     })
     return inQuota;
   }
+
+  Delete() {
+    this.DA.SubscriptionQuotaDelete(this.model);
+    this.LoadList();
+    this.DL.Display("Quota Report", "Deleted!");
+  }
  
   LoadList() {
     this.DL.LoadFromLink("subscription-quota");

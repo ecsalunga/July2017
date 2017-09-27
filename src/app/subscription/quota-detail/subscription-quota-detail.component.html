@@ -70,8 +70,15 @@
   </div>
 </ng-container>
 <div class="hSpacer"></div>
-<div class="rightRow">
-  <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
-</div>
+<table>
+  <tr class="rightRow">
+    <td>
+      <button md-fab color="warn" (click)="Delete()" [disabled]="!DL.UserAccess.SubscriptionReportDelete" mdTooltip="Delete" mdTooltipPosition="above"><md-icon>delete</md-icon></button>
+    </td>
+    <td>
+      <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+    </td>
+  </tr>
+</table>
       
     
