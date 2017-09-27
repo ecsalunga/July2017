@@ -80,6 +80,7 @@ import { SubscriptionDetailComponent } from './subscription/detail/subscription-
 import { SubscriptionSubscriberComponent } from './subscription/subscriber/subscription-subscriber.component';
 import { SubscriptionProductComponent } from './subscription/product/subscription-product.component';
 import { SubscriptionQuotaComponent } from './subscription/quota/subscription-quota.component';
+import { SubscriptionQuotaDetailComponent } from './subscription/quota-detail/subscription-quota-detail.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,7 @@ import { SubscriptionQuotaComponent } from './subscription/quota/subscription-qu
     ReportExpenseDetailComponent, SettingModuleExpenseTypeComponent, UserBorrowComponent,
     UserBorrowDetailComponent, UserSellerComponent, SubscriptionListComponent,
     SubscriptionDetailComponent, SubscriptionSubscriberComponent, SubscriptionProductComponent,
-    SubscriptionProductComponent, SubscriptionQuotaComponent
+    SubscriptionProductComponent, SubscriptionQuotaComponent, SubscriptionQuotaDetailComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, MdButtonModule,
@@ -135,7 +136,8 @@ import { SubscriptionQuotaComponent } from './subscription/quota/subscription-qu
     ServiceReservationDetailComponent, ServiceBookingComponent, ReportExpenseDetailComponent,
     SettingModuleExpenseTypeComponent, UserBorrowComponent, UserBorrowDetailComponent,
     UserSellerComponent, SubscriptionListComponent, SubscriptionDetailComponent,
-    SubscriptionSubscriberComponent, SubscriptionProductComponent, SubscriptionQuotaComponent
+    SubscriptionSubscriberComponent, SubscriptionProductComponent, SubscriptionQuotaComponent,
+    SubscriptionQuotaDetailComponent
   ]
 })
 export class AppModule {

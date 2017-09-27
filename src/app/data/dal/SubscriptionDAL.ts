@@ -1,6 +1,6 @@
 import { Core } from './../../core';
 import { DataLayer } from './../data.layer';
-import { ServiceInfo, SubscriptionInfo, QuotaInfo, TransactionInfo, PurchaseInfo } from '../models';
+import { ServiceInfo, SubscriptionInfo, QuotaInfo, TransactionInfo, PurchaseInfo, Name2Value } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class SubscriptionDAL {
@@ -39,14 +39,31 @@ export class SubscriptionDAL {
                     else
                         purchase = quota.Purchases.find(pur => pur.MemberKey == info.MemberKey);
 
-                    // [pending] Append purchases here
+                    info.Items.forEach(sell => {
+                        if(sell.Code != this.DL.KEYSUBSCRIPTION) {
+                            if(purchase.items.some(p => (p.Name == sell.Description && p.Value2 == info.KeyDay))) {
+                                let item = purchase.items.find(p => (p.Name == sell.Description && p.Value2 == info.KeyDay));
+                                item.Value1 += sell.Quantity;
+                            }
+                            else {
+                                let item = new Name2Value(sell.Description, sell.Quantity, info.KeyDay);
+                                purchase.items.push(item);
+                            }
+                        }
+                    });
                 }
             });
 
-            if(quota.To == keyDay)
+            if(quota.To == keyDay) {
                 this.SaveQuota(quota);
-            else
-                this.GenerateQuota(quota, keyDay++);
+                this.LoadQuota();
+            }
+            else {
+                let date = this.core.keyDayToDate(keyDay);
+                date.setDate(date.getDate() + 1);
+                let nextKeyDay = this.core.dateToKeyDay(date);
+                this.GenerateQuota(quota, nextKeyDay);
+            }
         });
     }
 
@@ -59,6 +76,8 @@ export class SubscriptionDAL {
                 info.key = snapshot.$key;
                 this.DL.SubscriptionQuotas.push(info);
             });
+
+            this.DL.SubscriptionQuotas.reverse();
         });
     }
 

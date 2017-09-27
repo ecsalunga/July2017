@@ -1,0 +1,77 @@
+<div>
+  <div class="item">
+    <div class="itemHeader">
+      <div class="itemName">Quota</div>
+    </div>
+    <div class="subContent">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              Name
+            </th>
+            <th>
+              QTY
+            </th>
+          </tr>
+        </thead>
+        <ng-container *ngFor="let item of model.Products">
+          <tr>
+            <td>
+              {{ item.Name }}
+            </td>
+            <td>
+              {{ item.Quota }}
+            </td>
+          </tr>
+        </ng-container>
+      </table>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngFor="let purchase of model.Purchases">
+  <div>
+    <div class="item">
+      <div class="itemHeader">
+        <div class="itemName">{{ purchase.MemberName }}</div>
+      </div>
+      <div class="subContent">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                Name
+              </th>
+              <th>
+                QTY
+              </th>
+              <th>
+                Date
+              </th>
+            </tr>
+          </thead>
+          <ng-container *ngFor="let item of purchase.items">
+            <tr class="{{ InQuota(item.Name) ? 'quota' : '' }}">
+              <td>
+                {{ item.Name }}
+              </td>
+              <td>
+                {{ item.Value1 }}
+              </td>
+              <td>
+                {{ GetDay(item.Value2) | date : 'yyyy-MM-dd' }}
+              </td>
+            </tr>
+          </ng-container>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<div class="hSpacer"></div>
+<div class="rightRow">
+  <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+</div>
+      
+    

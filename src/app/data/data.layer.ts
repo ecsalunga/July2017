@@ -136,6 +136,7 @@ export class DataLayer {
 
     Subscription: SubscriptionInfo;
     Subscriptions: Array<SubscriptionInfo>;
+    SubscriptionQuota: QuotaInfo;
     SubscriptionQuotas: Array<QuotaInfo>;
 
     ShowcaseOrder: OrderInfo;

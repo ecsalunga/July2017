@@ -104,9 +104,6 @@ export class DataAccess {
     public LogIn(email: string, password: string) {
         this.afAuth.auth
             .signInWithEmailAndPassword(email, password)
-            .then(value => {
-                this.DL.Display("Login", "Successful!");
-        })
             .catch(err => {
                 console.log(err);
                 this.DL.Display("Login", "Login failed.");

@@ -1,43 +1,46 @@
-<table>
-  <thead>
-    <tr>
-      <th>
-        Name
-      </th>
-      <th>
-        Created
-      </th>
-      <th>
-        From
-      </th>
-      <th>
-        To
-      </th>
-      <th class="rightRow">
-        Action
-      </th>
-    </tr>
-  </thead>
-  <ng-container *ngFor="let item of DL.SubscriptionQuotas">
-    <tr>
-      <td>
-        {{ item.SubscriptionName }}
-      </td>
-      <td>
-        {{ GetDate(item.ActionDate) | date : 'short' }}
-      </td>
-      <td>
-        {{ GetDay(item.From) | date : 'yyyy-MM-dd' }}
-      </td>
-      <td>
-        {{ GetDay(item.To) | date : 'yyyy-MM-dd' }}
-      </td>
-      <td class="rightRow">
-        <button md-mini-fab (click)="SelectItem(item)" mdTooltip="View"><md-icon>pageview</md-icon></button>
-      </td>
-    </tr>
-  </ng-container>
-</table>
+<div>
+  <div class="item">
+    <div class="itemHeader">
+      <div class="itemName">Generated Report</div>
+    </div>
+    <div class="subContent">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              Name
+            </th>
+            <th>
+              From
+            </th>
+            <th>
+              To
+            </th>
+            <th class="rightRow">
+              Action
+            </th>
+          </tr>
+        </thead>
+        <ng-container *ngFor="let item of DL.SubscriptionQuotas">
+          <tr>
+            <td>
+              {{ item.SubscriptionName }}
+            </td>
+            <td>
+              {{ GetDay(item.From) | date : 'yyyy-MM-dd' }}
+            </td>
+            <td>
+              {{ GetDay(item.To) | date : 'yyyy-MM-dd' }}
+            </td>
+            <td class="rightRow">
+              <button md-mini-fab (click)="SelectItem(item)" mdTooltip="View"><md-icon>pageview</md-icon></button>
+            </td>
+          </tr>
+        </ng-container>
+      </table>
+    </div>
+  </div>
+</div>
 <div>
   <md-form-field class="date">
     <input mdInput [disabled]="!DL.UserAccess.ShowcaseScheduleAdd" [mdDatepicker]="from" placeholder="From Date" [(ngModel)]="FromDate">
@@ -63,7 +66,7 @@
 <table>
   <tr class="rightRow">
     <td>
-      <button md-fab (click)="Generate()" [disabled]="!DL.UserAccess.ReportBalanceRegenerate" mdTooltip="Generate Report" mdTooltipPosition="above"><md-icon>assignment</md-icon></button>
+      <button md-fab (click)="Generate()" [disabled]="!DL.UserAccess.ReportBalanceRegenerate || !CanGenerate()" mdTooltip="Generate Report" mdTooltipPosition="above"><md-icon>assignment</md-icon></button>
     </td>
     <td>
       <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
