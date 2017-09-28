@@ -45,6 +45,7 @@ export class QuotaInfo {
 export class PurchaseInfo {
     MemberKey: string;
     MemberName: string;
+    HadQuota: boolean;
     items: Array<Name2Value>;
 
     constructor() {

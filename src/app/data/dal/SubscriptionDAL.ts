@@ -31,6 +31,7 @@ export class SubscriptionDAL {
             });
 
             if(quota.To == keyDay) {
+                this.processQuotaReach(quota);
                 this.SaveQuota(quota);
                 this.LoadQuota();
                 this.DL.Display("Quota Report", "Generated!");
@@ -42,6 +43,22 @@ export class SubscriptionDAL {
                 this.GenerateQuota(quota, nextKeyDay);
             }
         });
+    }
+
+    private processQuotaReach(quota: QuotaInfo) {
+        quota.Purchases.forEach(purchase => {
+            purchase.HadQuota = true;
+            quota.Products.forEach(product => {
+                let buyCount = 0;
+                purchase.items.forEach(item => {
+                    if(item.Name == product.Name)
+                        buyCount+= item.Value1;
+                });
+
+                if(product.Quota > buyCount)
+                    purchase.HadQuota = false;
+            });
+        })
     }
 
     private transactionToQuota(info: TransactionInfo, quota: QuotaInfo) {

@@ -28,7 +28,10 @@
       </table>
       <div class="vSmallSpacer"></div>
       <div>
-        <md-checkbox [(ngModel)]="quotaOnly">Show quota only</md-checkbox>
+        <md-checkbox [(ngModel)]="quotaOnly">Quota only</md-checkbox>
+      </div>
+      <div>
+        <md-checkbox [(ngModel)]="needReminder">Need reminder only</md-checkbox>
       </div>
       <div class="vSmallSpacer"></div>
     </div>
@@ -36,7 +39,7 @@
 </div>
 
 <ng-container *ngFor="let purchase of model.Purchases">
-  <div>
+  <div *ngIf="!needReminder || !purchase.HadQuota">
     <div class="item">
       <div class="itemHeader">
         <div class="itemName">{{ purchase.MemberName }}</div>
@@ -57,7 +60,7 @@
             </tr>
           </thead>
           <ng-container *ngFor="let item of purchase.items">
-            <tr *ngIf="!quotaOnly || (quotaOnly && InQuota(item.Name))" class="{{ !quotaOnly && InQuota(item.Name) ? 'quota' : '' }}">
+            <tr *ngIf="!quotaOnly || InQuota(item.Name)" class="{{ !quotaOnly && InQuota(item.Name) ? 'quota' : '' }}">
               <td>
                 {{ item.Name }}
               </td>
