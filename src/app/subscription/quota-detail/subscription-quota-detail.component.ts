@@ -10,7 +10,7 @@ import { QuotaInfo } from '../../data/models';
 })
 export class SubscriptionQuotaDetailComponent implements OnInit {
   model: QuotaInfo;
-  quotaOnly: boolean = false;
+  quotaOnly: boolean = true;
   needReminder: boolean = false;
 
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
