@@ -29,6 +29,15 @@ export class TransactionInfo {
     }
 }
 
+export class CancelInfo {
+    UserKey: string;
+    UserName: string;
+    Description: string;
+    Transaction: TransactionInfo;
+    ActionDate: number;
+    KeyMonth: number;
+}
+
 export class DeliveryInfo implements IStatus {
     key: string;
     UserKey: string;

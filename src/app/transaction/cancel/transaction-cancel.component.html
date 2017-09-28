@@ -14,6 +14,9 @@
         <th class="totalColumn">
           Amount
         </th>
+        <th class="rightRow">
+          Action
+        </th>
       </tr>
     </thead>
     <ng-container *ngFor="let info of DL.TransactionCancels">
@@ -28,7 +31,10 @@
           {{ info.UserName }}
         </td>
         <td class="totalColumn">
-          {{info.Amount | number:'1.2-2'}}
+          {{info.Transaction.Amount | number:'1.2-2'}}
+        </td>
+        <td class="rightRow">
+          <button md-mini-fab [disabled]="!DL.UserAccess.TransactionDetail" (click)="SelectTransaction(info)" mdTooltip="View"><md-icon>pageview</md-icon></button>
         </td>
       </tr>
     </ng-container>

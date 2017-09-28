@@ -88,6 +88,7 @@ export class DataLayer {
     Transaction: TransactionInfo;
     Transactions: Array<TransactionInfo>;
     TransactionCancels: Array<CancelInfo>;
+    TransactionFromList: string = null;
 
     SellInfosAmount: number = 0;
     SellInfosCount: number = 0;

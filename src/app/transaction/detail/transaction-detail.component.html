@@ -72,7 +72,7 @@
   </div>
   <div class="hSpacer"></div>
   <table>
-    <tr class="rightRow">
+    <tr *ngIf="FromList()" class="rightRow">
       <td class="selectionRow">
         <md-form-field class="longText">
           <input id="txtDescription" [disabled]="!DL.UserAccess.ProductCancel" mdInput placeholder="Reason for cancel" [(ngModel)]="description" />
@@ -81,7 +81,7 @@
       <td></td>
     </tr>
     <tr class="rightRow">
-      <td>
+      <td *ngIf="FromList()">
         <button md-fab [disabled]="!description || !DL.UserAccess.ProductCancel" (click)="Cancel()" mdTooltip="Cancel transaction" mdTooltipPosition="above"><md-icon>restore</md-icon></button>
       </td>
       <td>

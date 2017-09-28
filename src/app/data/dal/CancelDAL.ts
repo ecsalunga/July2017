@@ -43,7 +43,7 @@ export class CancelDAL {
         info.UserKey = this.DL.User.key;
         info.UserName = this.DL.User.Name;
         info.Description = description;
-        info.Amount = tran.Amount;
+        info.Transaction = tran;
         info.ActionDate = this.core.dateToNumber(new Date());
         info.KeyMonth = this.core.dateToKeyMonth(this.DL.Date);
         this.Save(info);

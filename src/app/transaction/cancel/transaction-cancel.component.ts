@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { ExpenseInfo, ReportInfo } from '../../data/models';
+import { CancelInfo } from '../../data/models';
 
 @Component({
   selector: 'transaction-cancel',
@@ -16,6 +16,12 @@ export class TransactionCancelComponent implements OnInit {
     this.yearSelected = this.DL.Date.getFullYear();
     this.monthSelected = this.DL.Date.getMonth()+1;
     this.Filter();
+  }
+
+  SelectTransaction(info: CancelInfo) {
+    this.DL.TransactionFromList = "transaction-cancel";
+    this.DL.Transaction = info.Transaction;
+    this.DL.LoadFromLink("transaction-detail");
   }
 
   Filter() {

@@ -19,7 +19,11 @@ export class TransactionDetailComponent implements OnInit {
   }
 
   LoadList() {
-    this.DL.LoadFromLink("transaction-list");
+    this.DL.LoadFromLink(this.DL.TransactionFromList);
+  }
+
+  FromList(): boolean {
+    return this.DL.TransactionFromList == 'transaction-list';
   }
 
   ngOnInit() {

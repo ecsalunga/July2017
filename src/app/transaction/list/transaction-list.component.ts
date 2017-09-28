@@ -22,6 +22,7 @@ export class TransactionListComponent implements OnInit {
   }
 
   SelectTransaction(info: TransactionInfo) {
+    this.DL.TransactionFromList = "transaction-list";
     this.DL.Transaction = info;
     this.DL.LoadFromLink("transaction-detail");
   }
