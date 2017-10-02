@@ -81,6 +81,10 @@ import { SubscriptionSubscriberComponent } from './subscription/subscriber/subsc
 import { SubscriptionProductComponent } from './subscription/product/subscription-product.component';
 import { SubscriptionQuotaComponent } from './subscription/quota/subscription-quota.component';
 import { SubscriptionQuotaDetailComponent } from './subscription/quota-detail/subscription-quota-detail.component';
+import { ArticleListComponent } from './article/list/article-list.component';
+import { ArticleDetailComponent } from './article/detail/article-detail.component';
+import { WebsiteArticleComponent } from './website/article/website-article.component';
+import { WebsiteArticleFullComponent } from './website/article-full/website-article-full.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +107,9 @@ import { SubscriptionQuotaDetailComponent } from './subscription/quota-detail/su
     ReportExpenseDetailComponent, SettingModuleExpenseTypeComponent, UserBorrowComponent,
     UserBorrowDetailComponent, UserSellerComponent, SubscriptionListComponent,
     SubscriptionDetailComponent, SubscriptionSubscriberComponent, SubscriptionProductComponent,
-    SubscriptionProductComponent, SubscriptionQuotaComponent, SubscriptionQuotaDetailComponent
+    SubscriptionProductComponent, SubscriptionQuotaComponent, SubscriptionQuotaDetailComponent,
+    ArticleListComponent, ArticleDetailComponent, WebsiteArticleComponent, 
+    WebsiteArticleFullComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, MdButtonModule,
@@ -137,7 +143,8 @@ import { SubscriptionQuotaDetailComponent } from './subscription/quota-detail/su
     SettingModuleExpenseTypeComponent, UserBorrowComponent, UserBorrowDetailComponent,
     UserSellerComponent, SubscriptionListComponent, SubscriptionDetailComponent,
     SubscriptionSubscriberComponent, SubscriptionProductComponent, SubscriptionQuotaComponent,
-    SubscriptionQuotaDetailComponent
+    SubscriptionQuotaDetailComponent, ArticleListComponent, ArticleDetailComponent,
+    WebsiteArticleComponent, WebsiteArticleFullComponent
   ]
 })
 export class AppModule {

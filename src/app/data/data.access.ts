@@ -17,6 +17,7 @@ import { SnapshotDAL } from './dal/SnapshotDAL';
 import { ServiceDAL } from './dal/ServiceDAL';
 import { MessageDAL } from './dal/MessageDAL';
 import { SubscriptionDAL } from './dal/SubscriptionDAL';
+import { ArticleDAL } from './dal/ArticleDAL';
 
 import { MdDialog } from '@angular/material';
 import { MessagePopupComponent } from '../message/popup/message-popup.component';
@@ -30,7 +31,7 @@ import {
     SystemSettingInfo, SnapshotInfo, OrderInfo,
     ServiceInfo, CommandInfo, ConversationInfo,
     MessageInfo, ReservationInfo, SubscriptionInfo,
-    QuotaInfo
+    QuotaInfo, ArticleInfo
 } from './models';
 
 @Injectable()
@@ -51,6 +52,7 @@ export class DataAccess {
     serviceDAL: ServiceDAL;
     messageDAL: MessageDAL;
     subscriptionDAL: SubscriptionDAL;
+    articleDAL: ArticleDAL;
 
     USERS: string = "/users";
     SETTING: string = "/setting";
@@ -71,6 +73,7 @@ export class DataAccess {
         this.productDAL = new ProductDAL(DL, af);
         this.snapshotDAL = new SnapshotDAL(DL, af);
         this.subscriptionDAL = new SubscriptionDAL(core, DL, af);
+        this.articleDAL = new ArticleDAL(DL, af);
 
         this.DataLoaded.subscribe(data => {
             if(data == this.DL.DATA_CONVERSATION && !this.DL.IsCommandLoaded) {
@@ -114,15 +117,16 @@ export class DataAccess {
         this.accessDAL.Load();
         this.settingDAL.SystemLoad();
         this.settingDAL.ModuleLoad();
+        this.articleDAL.Load();
         this.showcaseDAL.Load();
         this.subscriptionDAL.Load();
-        this.subscriptionDAL.LoadQuota();
         this.serviceDAL.Load();
         this.UserLoad();
     }
 
     public DataSystemLoad() {
         this.expenseDAL.LoadTypes();
+        this.subscriptionDAL.LoadQuota();
         this.SystemActiveDataLoad();
     }
 
@@ -366,6 +370,11 @@ export class DataAccess {
 
     public ProductSave(item: ProductInfo) {
         this.productDAL.Save(item);
+    }
+
+    public ArticleSave(item: ArticleInfo) {
+        this.articleDAL.Save(item);
+        this.articleDAL.Load();
     }
 
     public ServiceSave(item: ServiceInfo) {

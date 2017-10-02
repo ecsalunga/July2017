@@ -9,6 +9,10 @@ export class AccessInfo {
     AccessAdd: boolean;
     AccessEdit: boolean;
 
+    ArticleView: boolean;
+    ArticleAdd: boolean;
+    ArticleEdit: boolean;
+
     ExpenseView: boolean;
     ExpenseAdd: boolean;
     ExpenseDelete: boolean;

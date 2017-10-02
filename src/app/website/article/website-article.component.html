@@ -1,0 +1,24 @@
+<div class="container">
+  <ng-container *ngFor="let item of DL.ArticleLive">
+    <div class="{{ this.DL.ArticleCount > 1 ? 'columnRes' : 'column' }}">
+      <div class="item">
+        <div class="itemHeader">
+          <div class="itemName">{{ item.Title }}</div>
+        </div>
+        <div class="{{ this.DL.ArticleCount > 1 ? 'itemDescriptionRes' : 'itemDescription' }}">
+          <div class="blurb" [innerHTML]="item.Blurb"></div>
+        </div>
+        <div class="itemControl mainColor">
+          <div class="cartSelection">
+            <div>
+              <button md-raised-button (click)="View(item)">
+                <md-icon>more</md-icon>
+                <span>More</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

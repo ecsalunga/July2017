@@ -10,7 +10,8 @@ import {
     SystemSettingInfo, SnapshotInfo, OrderInfo,
     ServiceInfo, ConversationInfo, MessageInfo,
     ReservationInfo, Name2Value, IStatus,
-    SubscriptionInfo, QuotaInfo, PurchaseInfo
+    SubscriptionInfo, QuotaInfo, PurchaseInfo,
+    ArticleInfo
 } from './models';
 
 @Injectable()
@@ -111,6 +112,11 @@ export class DataLayer {
 
     User: UserInfo;
     UserSelected: UserInfo;
+
+    Articles: Array<ArticleInfo>;
+    Article: ArticleInfo;
+    ArticleLive: Array<ArticleInfo>;
+    ArticleCount: number;
 
     Users: Array<UserInfo>;
     UserAll: Array<UserInfo>;

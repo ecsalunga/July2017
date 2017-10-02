@@ -9,7 +9,7 @@ import { UserInfo } from '../../data/models';
   styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit {
-
+  
   constructor(private core: Core, public DL: DataLayer) {}
 
   SelectItem(item: UserInfo) {

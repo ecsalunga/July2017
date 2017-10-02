@@ -11,3 +11,4 @@ export { SnapshotInfo } from './SnapshotInfo';
 export { ServiceInfo, ReservationInfo } from './ServiceInfo';
 export { ConversationInfo, MessageInfo } from './MessageInfo';
 export { SubscriptionInfo, PromoInfo, QuotaInfo, PurchaseInfo } from './SubscriptionInfo';
+export { ArticleInfo } from './ArticleInfo';

@@ -68,6 +68,12 @@
       <md-icon>event</md-icon>
       <span>Reserve</span>
     </button>
+    <ng-container *ngIf="DL.ArticleCount > 0">
+      <button md-menu-item (click)="LoadPage('website-article')">
+        <md-icon>event_note</md-icon>
+        <span>Article</span>
+      </button>
+    </ng-container>
     <ng-container *ngIf="DL.UserAccess.MessageView">
       <button md-menu-item (click)="LoadPage(DL.UserAccess.MessageManage ? 'message-list' : 'message-message')">
         <md-icon>message</md-icon>
@@ -186,6 +192,12 @@
       <button md-menu-item (click)="LoadPage('snapshot-list')">
         <md-icon>photo_camera</md-icon>
         <span>Snapshot</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.UserAccess.ArticleView">
+      <button md-menu-item (click)="LoadPage('article-list')">
+        <md-icon>event_note</md-icon>
+        <span>Article</span>
       </button>
     </ng-container>
     <ng-container *ngIf="DL.UserAccess.UserView">

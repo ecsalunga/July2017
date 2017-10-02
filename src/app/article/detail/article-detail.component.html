@@ -1,0 +1,34 @@
+<div>
+    <div>
+      <md-form-field>
+        <input id="txtTitle" mdInput placeholder="Title" [(ngModel)]="model.Title" />
+      </md-form-field>
+    </div>
+    <div>
+      <md-form-field>
+        <input id="txtAuthor" mdInput placeholder="Author" [(ngModel)]="model.Author" />
+      </md-form-field>
+    </div>
+    <div>
+      <md-form-field class="fullWidth">
+        <textarea id="txtBlurb" mdInput placeholder="Blurb" [(ngModel)]="model.Blurb">
+        </textarea>
+      </md-form-field>
+    </div>
+    <div>
+      <md-form-field class="fullWidth">
+        <textarea id="txtContent" class="content" mdInput placeholder="Content" [(ngModel)]="model.Content">
+        </textarea>
+      </md-form-field>
+    </div>
+    <td>
+      <md-slide-toggle [(ngModel)]="model.IsActive">
+        Active
+      </md-slide-toggle>
+    </td>
+    <div class="hSpacer"></div>
+    <div class="rightRow">
+      <button md-fab (click)="Save()" [disabled]="!CanSave()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>
+      <button md-fab (click)="LoadList()" mdTooltip="Back to list" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+    </div>
+  </div>

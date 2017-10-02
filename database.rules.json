@@ -92,6 +92,11 @@
       ".write": "true",
       ".indexOn": "KeyDay"
     },
+    "articles": {
+      ".read": "true",
+      ".write": "true",
+      ".indexOn": "Title"
+    },
     "messages": {
       "conversations": {
         ".read": "true",
