@@ -31,6 +31,14 @@
               <input id="txtHomeTitle" mdInput placeholder="Title" [(ngModel)]="model.HomeTitle" />
             </md-form-field>
           </div>
+          <div>
+            <md-select placeholder="Article" [(ngModel)]="model.HomeArticleKey">
+              <md-option *ngFor="let item of DL.Articles" [value]="item.key">
+                {{ item.Title }}
+              </md-option>
+            </md-select>
+          </div>
+          <div class="vSmallSpacer"></div>
           <div class="configLabel">
             Showcase
           </div>

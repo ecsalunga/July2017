@@ -10,7 +10,7 @@ import { Core } from '../../core';
 })
 export class WebsiteArticleFullComponent implements OnInit {
  
-  constructor(private core: Core, public DL: DataLayer, private DA: DataAccess) {}
+  constructor(private core: Core, public DL: DataLayer, private DA: DataAccess) { }
 
   LoadList() {
     this.DL.LoadFromLink("website-article");

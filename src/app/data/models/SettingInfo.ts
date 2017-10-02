@@ -5,6 +5,7 @@ export class ModuleSettingInfo {
    
     DefaultPage: string;
     HomeTitle: string;
+    HomeArticleKey: string;
 
     ShowcseCartItemMax: number;
     ServiceReservationMax: number;

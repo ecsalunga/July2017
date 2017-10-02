@@ -115,9 +115,9 @@ export class DataAccess {
 
     public DataLoad() {
         this.accessDAL.Load();
+        this.articleDAL.Load();
         this.settingDAL.SystemLoad();
         this.settingDAL.ModuleLoad();
-        this.articleDAL.Load();
         this.showcaseDAL.Load();
         this.subscriptionDAL.Load();
         this.serviceDAL.Load();
