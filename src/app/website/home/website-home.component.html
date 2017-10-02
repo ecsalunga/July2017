@@ -8,7 +8,7 @@
       {{ GetDate(DL.Article.ActionDate) | date : 'short' }}
     </div>
     <div class="hSpacer"></div>
-    <div class="mainColor">
+    <div *ngIf="DL.ArticleCount > 0" class="mainColor">
       <button md-raised-button (click)="LoadList()">
         <md-icon>list</md-icon>
         <span>More</span>
