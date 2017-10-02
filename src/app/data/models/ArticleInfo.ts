@@ -3,7 +3,7 @@ export class ArticleInfo {
     Title: string;
     Blurb: string;
     Content: string;
-    Authour: string;
+    Author: string;
     IsActive: boolean;
     ActionDate: number;
 }
