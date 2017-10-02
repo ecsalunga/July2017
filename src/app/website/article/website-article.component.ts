@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { DataLayer, DataAccess } from '../../data';
 import { ArticleInfo } from '../../data/models';
 
@@ -8,7 +8,7 @@ import { ArticleInfo } from '../../data/models';
   styleUrls: ['./website-article.component.css']
 })
 export class WebsiteArticleComponent implements OnInit {
-  
+
   constructor(public DL: DataLayer, private DA: DataAccess) {}
   
   View(item: ArticleInfo) {

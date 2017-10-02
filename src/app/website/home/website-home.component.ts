@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DataLayer, DataAccess } from '../../data';
 import { Core } from '../../core';
 
@@ -8,6 +8,8 @@ import { Core } from '../../core';
   styleUrls: ['./website-home.component.css']
 })
 export class WebsiteHomeComponent implements OnInit {
+  @ViewChild('Content') dataContent: ElementRef;
+
   constructor(private core: Core, public DL: DataLayer, private DA: DataAccess) {
     this.DL.Articles.forEach(item => {
       if(item.key == this.DL.ModuleSetting.HomeArticleKey)
@@ -25,5 +27,6 @@ export class WebsiteHomeComponent implements OnInit {
 
   ngOnInit() {
     this.DL.TITLE = this.DL.ModuleSetting.HomeTitle;
+    this.dataContent.nativeElement.innerHTML = this.DL.Article.Content;
   }
 }

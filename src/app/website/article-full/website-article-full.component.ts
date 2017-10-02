@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DataLayer, DataAccess } from '../../data';
 import { ArticleInfo } from '../../data/models';
 import { Core } from '../../core';
@@ -9,7 +9,8 @@ import { Core } from '../../core';
   styleUrls: ['./website-article-full.component.css']
 })
 export class WebsiteArticleFullComponent implements OnInit {
- 
+  @ViewChild('Content') dataContent: ElementRef;
+
   constructor(private core: Core, public DL: DataLayer, private DA: DataAccess) { }
 
   LoadList() {
@@ -22,5 +23,6 @@ export class WebsiteArticleFullComponent implements OnInit {
 
   ngOnInit() {
     this.DL.TITLE = this.DL.Article.Title;
+    this.dataContent.nativeElement.innerHTML = this.DL.Article.Content;
   }
 }

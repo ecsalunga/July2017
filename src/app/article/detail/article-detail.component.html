@@ -10,22 +10,17 @@
       </md-form-field>
     </div>
     <div>
-      <md-form-field class="fullWidth">
-        <textarea id="txtBlurb" mdInput placeholder="Blurb" [(ngModel)]="model.Blurb">
-        </textarea>
-      </md-form-field>
+      <textarea id="txtBlurb"></textarea>
     </div>
     <div>
-      <md-form-field class="fullWidth">
-        <textarea id="txtContent" class="content" mdInput placeholder="Content" [(ngModel)]="model.Content">
-        </textarea>
-      </md-form-field>
+      <textarea id="txtContent"></textarea>
     </div>
-    <td>
+    <div class="vSmallSpacer"></div>
+    <div>
       <md-slide-toggle [(ngModel)]="model.IsActive">
         Active
       </md-slide-toggle>
-    </td>
+    </div>
     <div class="hSpacer"></div>
     <div class="rightRow">
       <button md-fab (click)="Save()" [disabled]="!CanSave()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>

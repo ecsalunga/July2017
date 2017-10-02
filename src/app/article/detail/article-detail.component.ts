@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
 import { ArticleInfo } from '../../data/models';
@@ -8,8 +8,10 @@ import { ArticleInfo } from '../../data/models';
   templateUrl: './article-detail.component.html',
   styleUrls: ['./article-detail.component.css']
 })
-export class ArticleDetailComponent implements OnInit {
+export class ArticleDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   model: ArticleInfo;
+  editorBlurb: any;
+  editorContent: any;
 
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     if (this.DL.Article)
@@ -40,6 +42,44 @@ export class ArticleDetailComponent implements OnInit {
 
   LoadList() {
     this.DL.LoadFromLink("article-list");
+  }
+
+  ngAfterViewInit() {
+    tinymce.init({
+      selector: '#txtBlurb',
+      menubar: false,
+      toolbar: 'undo redo |  formatselect | bold italic |  removeformat',
+      skin_url: 'assets/skins/lightgray',
+      height : 100,
+      setup: editor => {
+        this.editorBlurb = editor;
+        editor.on('change', () => {
+          this.model.Blurb = editor.getContent();
+        });
+      },
+    });
+    tinymce.activeEditor.setContent(this.model.Blurb);
+
+    tinymce.init({
+      selector: '#txtContent',
+      menubar: false,
+      plugins: ['paste', 'textcolor', 'table'],
+      toolbar: 'undo redo |  formatselect | bold italic underline forecolor backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat',
+      skin_url: 'assets/skins/lightgray',
+      height : 250,
+      setup: editor => {
+        this.editorContent = editor;
+        editor.on('change', () => {
+          this.model.Content = editor.getContent();
+        });
+      },
+    });
+    tinymce.activeEditor.setContent(this.model.Content);
+  }
+
+  ngOnDestroy() {
+    tinymce.remove(this.editorBlurb);
+    tinymce.remove(this.editorContent);
   }
 
   ngOnInit() {
