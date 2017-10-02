@@ -4,7 +4,7 @@
 
 .itemControl {
     overflow: auto;
-    padding: 5px;
+    padding: 10px;
 } 
 
 .cartPrice {
@@ -14,11 +14,6 @@
     height: 30px;
 }
 
-.cartSelection {
+.selection {
     float: right; 
-}
-
-.cartSelection div {
-    margin: 5px;
-    float: left; 
 }
