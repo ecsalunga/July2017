@@ -18,7 +18,7 @@ export class DeliveryListComponent implements OnInit {
 
   Visible(item: DeliveryInfo): boolean {
     let view = true;
-    if(!this.DL.UserAccess.DeliveryDoneView && (item.Status == this.DL.STATUS_DELIVERED || item.Status == this.DL.STATUS_CANCELLED))
+    if(!this.DL.UserAccess.DeliveryDoneView && ((item.Status == this.DL.STATUS_DELIVERED && item.IsTransaction) || item.Status == this.DL.STATUS_CANCELLED))
       view = false;
 
     return view;

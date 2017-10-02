@@ -343,7 +343,12 @@
             </td>
           </tr>
           <tr>
-            <td class="subAccess" colspan="3">
+            <td class="subAccess">
+              <md-slide-toggle [(ngModel)]="model.ServiceReservationDoneView">
+                View Done
+              </md-slide-toggle>
+            </td>
+            <td class="subAccess" colspan="2">
               <md-slide-toggle [(ngModel)]="model.ServiceReserveMember">
                 Reserve Member
               </md-slide-toggle>

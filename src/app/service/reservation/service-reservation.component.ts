@@ -35,6 +35,14 @@ export class ServiceReservationComponent implements OnInit {
     return hasClean;
   }
 
+  Visible(item: ReservationInfo): boolean {
+    let view = true;
+    if(!this.DL.UserAccess.ServiceReservationDoneView && ((item.Status == this.DL.STATUS_DONE && item.IsTransaction) || item.Status == this.DL.STATUS_CANCELLED))
+      view = false;
+
+    return view;
+  }
+
   CleanDelete() {
     this.DL.ServiceReservationDone.forEach(item => {
       if((item.IsTransaction && item.Status == this.DL.STATUS_DONE) || item.Status == this.DL.STATUS_CANCELLED)

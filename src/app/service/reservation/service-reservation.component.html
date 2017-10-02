@@ -120,23 +120,25 @@
             </tr>
           </thead>
           <ng-container *ngFor="let item of DL.ServiceReservationDone">
-            <tr>
-              <td>
-                {{ GetDate(item.ActionDate) | date : 'short' }}
-              </td>
-              <td>
-                {{ item.MemberName }}
-              </td>
-              <td>
-                {{ item.Status }}
-              </td>
-              <td class="totalColumn">
-                {{ item.Price * item.Count | number:'1.2-2' }} / {{ item.Count }}
-              </td>
-              <td class="rightRow">
-                <button md-mini-fab (click)="Select(item, 2)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
-              </td>
-            </tr>
+            <ng-container *ngIf="Visible(item)">
+              <tr>
+                <td>
+                  {{ GetDate(item.ActionDate) | date : 'short' }}
+                </td>
+                <td>
+                  {{ item.MemberName }}
+                </td>
+                <td>
+                  {{ item.Status }}
+                </td>
+                <td class="totalColumn">
+                  {{ item.Price * item.Count | number:'1.2-2' }} / {{ item.Count }}
+                </td>
+                <td class="rightRow">
+                  <button md-mini-fab (click)="Select(item, 2)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
+                </td>
+              </tr>
+            </ng-container>
           </ng-container>
         </table>
         <div class="hSpacer"></div>

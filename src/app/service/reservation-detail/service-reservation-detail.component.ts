@@ -36,6 +36,11 @@ export class ServiceReservationDetailComponent implements OnInit {
     this.LoadList();
   }
 
+  ShowGenerateTransaction(): boolean {
+    return (!this.model.IsTransaction 
+      && (this.model.Status == this.DL.STATUS_DONE || this.model.Status == this.DL.STATUS_CHECKOUT));
+  }
+
   GenerateTransaction() {
     this.DA.ServiceReservationToTransaction(this.model);
     this.DL.StatusInject(this.model, this.DL.STATUS_SAVEDTO_TRANSACT);

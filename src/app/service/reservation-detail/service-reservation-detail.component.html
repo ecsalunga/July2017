@@ -70,7 +70,7 @@
     <div class="hSpacer"></div>
     <table>
         <tr class="rightRow">
-          <td *ngIf="!model.IsTransaction && model.Status == DL.STATUS_DONE">
+          <td *ngIf="ShowGenerateTransaction()">
             <button md-fab color="primary" (click)="GenerateTransaction()" mdTooltip="Generate transaction" mdTooltipPosition="above"><md-icon>receipt</md-icon></button>
           </td>
           <td>
