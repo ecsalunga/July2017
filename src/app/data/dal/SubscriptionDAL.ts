@@ -48,16 +48,19 @@ export class SubscriptionDAL {
     private processQuotaReach(quota: QuotaInfo) {
         quota.Purchases.forEach(purchase => {
             purchase.HadQuota = true;
-            quota.Products.forEach(product => {
-                let buyCount = 0;
-                purchase.items.forEach(item => {
-                    if(item.Name == product.Name)
-                        buyCount+= item.Value1;
-                });
 
-                if(product.Quota > buyCount)
-                    purchase.HadQuota = false;
-            });
+            if(quota.Products != null && quota.Products.length > 0) {
+                quota.Products.forEach(product => {
+                    let buyCount = 0;
+                    purchase.items.forEach(item => {
+                        if(item.Name == product.Name)
+                            buyCount+= item.Value1;
+                    });
+
+                    if(product.Quota > buyCount)
+                        purchase.HadQuota = false;
+                });
+            }
         })
     }
 

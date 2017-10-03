@@ -23,10 +23,12 @@ export class SubscriptionQuotaDetailComponent implements OnInit {
 
   InQuota(name: string): boolean {
     let inQuota = false;
-    this.model.Products.forEach(p => {
-      if(p.Name == name)
-        inQuota = true;
-    })
+    if(this.model.Products != null && this.model.Products.length > 0) {
+      this.model.Products.forEach(p => {
+        if(p.Name == name)
+          inQuota = true;
+      });
+    }
     return inQuota;
   }
 

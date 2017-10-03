@@ -27,9 +27,10 @@ export class SubscriptionQuotaComponent implements OnInit {
     let quota = new QuotaInfo()
     quota.SubscriptionKey = this.model.key;
     quota.SubscriptionName = this.model.Name;
-    quota.Products = this.model.Products.filter(product => (product.Quota > 0));
+    if(this.model.Products != null && this.model.Products.length > 0)
+      quota.Products = this.model.Products.filter(product => (product.Quota > 0));
+    
     quota.Subscribers = this.model.Subscribers;
-
     if(quota.Subscribers != null && quota.Subscribers.length > 0) {
       quota.Subscribers.forEach(sub => {
         let purchase = new PurchaseInfo();
