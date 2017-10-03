@@ -10,11 +10,14 @@ import { QuotaInfo } from '../../data/models';
 })
 export class SubscriptionQuotaDetailComponent implements OnInit {
   model: QuotaInfo;
-  quotaOnly: boolean = true;
+  quotaOnly: boolean = false;
   needReminder: boolean = false;
+  hasProduct: boolean = false;
 
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     this.model = this.DL.SubscriptionQuota;
+    if(this.model.Products != null && this.model.Products.length > 0)
+      this.hasProduct = true;
   }
 
   GetDay(keyDay: number): Date {
@@ -23,7 +26,7 @@ export class SubscriptionQuotaDetailComponent implements OnInit {
 
   InQuota(name: string): boolean {
     let inQuota = false;
-    if(this.model.Products != null && this.model.Products.length > 0) {
+    if(this.hasProduct) {
       this.model.Products.forEach(p => {
         if(p.Name == name)
           inQuota = true;
