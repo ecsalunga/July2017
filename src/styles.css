@@ -293,6 +293,10 @@ th {
 .sellLongTextRes {
     width: 180px;
 }
+
+.longRes {
+    width: 175px;
+}
   
 @media (min-width: 720px) {
     .columnRes          { margin-left: 2%; width: 47%; }
@@ -300,6 +304,7 @@ th {
     .itemDescriptionRes { height: 75px; }
 
     .sellLongTextRes    { width: 250px; }
+    .longRes            { width: 250px; }
 }
 
 

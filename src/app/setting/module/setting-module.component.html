@@ -16,7 +16,7 @@
             <md-checkbox [(ngModel)]="model.PromptMissingProfileData">Prompt Missing Profile Data</md-checkbox>
           </div>
           <div>
-            <md-select placeholder="Default Page" [(ngModel)]="model.DefaultPage">
+            <md-select class="longRes" placeholder="Default Page" [(ngModel)]="model.DefaultPage">
               <md-option *ngFor="let module of DL.PublicModules" [value]="module.Value">
                 {{ module.Name }}
               </md-option>
@@ -32,7 +32,7 @@
             </md-form-field>
           </div>
           <div>
-            <md-select placeholder="Article" [(ngModel)]="model.HomeArticleKey">
+            <md-select class="longRes" placeholder="Article" [(ngModel)]="model.HomeArticleKey">
               <md-option *ngFor="let item of DL.Articles" [value]="item.key">
                 {{ item.Title }}
               </md-option>

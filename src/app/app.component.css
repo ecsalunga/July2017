@@ -25,3 +25,19 @@
     font-weight: bold;
     font-size: 14px;
 }
+
+
+.brand {
+    float: right;
+    font-size: 9px;
+    color: silver;
+    margin-right: 5px;
+    margin-top: 35px
+}
+
+.brand a {
+    text-decoration: none;
+    font-size: 9px;
+    color: silver;
+    font-weight: bold;
+}
