@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { SubscriptionInfo, QuotaInfo } from '../../data/models';
+import { SubscriptionInfo, QuotaInfo, PurchaseInfo } from '../../data/models';
 
 @Component({
   selector: 'subscription-quota',
@@ -29,12 +29,24 @@ export class SubscriptionQuotaComponent implements OnInit {
     quota.SubscriptionName = this.model.Name;
     quota.Products = this.model.Products.filter(product => (product.Quota > 0));
     quota.Subscribers = this.model.Subscribers;
-    quota.ActionDate = this.DL.GetActionDate();
-    quota.From = this.core.dateToKeyDay(this.FromDate);
-    quota.To = this.core.dateToKeyDay(this.ToDate);
 
-    this.DA.SubscriptionQuotaGenerate(quota);
-    this.DL.Display("Quota Generation", "Issued!");
+    if(quota.Subscribers != null && quota.Subscribers.length > 0) {
+      quota.Subscribers.forEach(sub => {
+        let purchase = new PurchaseInfo();
+        purchase.MemberKey = sub.Value1;
+        purchase.MemberName = sub.Name;
+        quota.Purchases.push(purchase);
+      });
+  
+      quota.ActionDate = this.DL.GetActionDate();
+      quota.From = this.core.dateToKeyDay(this.FromDate);
+      quota.To = this.core.dateToKeyDay(this.ToDate);
+  
+      this.DA.SubscriptionQuotaGenerate(quota);
+      this.DL.Display("Quota Generation", "Issued!");
+    }
+    else
+      this.DL.Display("Quota Subscribers", "Not Found!");
   }
 
   CanGenerate(): boolean {

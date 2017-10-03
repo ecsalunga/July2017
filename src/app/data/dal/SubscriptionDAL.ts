@@ -30,7 +30,7 @@ export class SubscriptionDAL {
                     this.transactionToQuota(info, quota);
             });
 
-            if(quota.To == keyDay) {
+            if(quota.To <= keyDay) {
                 this.processQuotaReach(quota);
                 this.SaveQuota(quota);
                 this.LoadQuota();
@@ -62,16 +62,7 @@ export class SubscriptionDAL {
     }
 
     private transactionToQuota(info: TransactionInfo, quota: QuotaInfo) {
-        let purchase: PurchaseInfo = null;
-        
-        if(!quota.Purchases.some(pur => info.MemberKey == pur.MemberKey)) {
-            purchase = new PurchaseInfo();
-            purchase.MemberKey = info.MemberKey;
-            purchase.MemberName = info.BuyerName;
-            quota.Purchases.push(purchase);
-        }
-        else
-            purchase = quota.Purchases.find(pur => pur.MemberKey == info.MemberKey);
+        let purchase: PurchaseInfo = quota.Purchases.find(pur => pur.MemberKey == info.MemberKey);
 
         info.Items.forEach(sell => {
             if(sell.Code != this.DL.KEYSUBSCRIPTION && sell.Code != this.DL.KEYDISCOUNT) {
