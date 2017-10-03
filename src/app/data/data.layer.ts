@@ -25,6 +25,8 @@ export class DataLayer {
     KEYMONTH: string = "KeyMonth";
     KEYDISCOUNT: string = "X";
     KEYSUBSCRIPTION: string = "S";
+    KEYALLUSERS: string = "All Users";
+    KEYMEMBERS: string = "All Members";
 
     MENU: string = "MENU";
     LINK: string = "LINK";
@@ -143,6 +145,7 @@ export class DataLayer {
 
     Subscription: SubscriptionInfo;
     Subscriptions: Array<SubscriptionInfo>;
+    SubscriptionQuotaSelection: Array<SubscriptionInfo>;
     SubscriptionQuota: QuotaInfo;
     SubscriptionQuotas: Array<QuotaInfo>;
 

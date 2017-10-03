@@ -35,7 +35,7 @@ export class SubscriptionQuotaDetailComponent implements OnInit {
   Delete() {
     this.DA.SubscriptionQuotaDelete(this.model);
     this.LoadList();
-    this.DL.Display("Quota Report", "Deleted!");
+    this.DL.Display("Purchase Report", "Deleted!");
   }
  
   LoadList() {
@@ -43,6 +43,6 @@ export class SubscriptionQuotaDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Quota Report Details";
+    this.DL.TITLE = "Purchase Report Details";
   }
 }

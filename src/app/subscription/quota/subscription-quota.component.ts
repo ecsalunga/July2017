@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Core } from '../../core';
 import { DataAccess, DataLayer } from '../../data';
-import { SubscriptionInfo, QuotaInfo, PurchaseInfo } from '../../data/models';
+import { SubscriptionInfo, QuotaInfo, PurchaseInfo, Name2Value } from '../../data/models';
 
 @Component({
   selector: 'subscription-quota',
@@ -27,10 +27,26 @@ export class SubscriptionQuotaComponent implements OnInit {
     let quota = new QuotaInfo()
     quota.SubscriptionKey = this.model.key;
     quota.SubscriptionName = this.model.Name;
-    if(this.model.Products != null && this.model.Products.length > 0)
-      quota.Products = this.model.Products.filter(product => (product.Quota > 0));
-    
-    quota.Subscribers = this.model.Subscribers;
+
+    if(this.model.key == this.DL.KEYALLUSERS) {
+      this.DL.UserAll.forEach(user => {
+        let item = new Name2Value(user.Name, user.key, this.DL.GetActionDate() );
+        quota.Subscribers.push(item);
+      });
+    }
+    else if(this.model.key == this.DL.KEYMEMBERS) {
+      this.DL.Members.forEach(user => {
+        let item = new Name2Value(user.Name, user.key, this.DL.GetActionDate() );
+        quota.Subscribers.push(item);
+      });
+    }
+    else {
+      if(this.model.Products != null && this.model.Products.length > 0)
+        quota.Products = this.model.Products.filter(product => (product.Quota > 0));
+      
+      quota.Subscribers = this.model.Subscribers;
+    }
+
     if(quota.Subscribers != null && quota.Subscribers.length > 0) {
       quota.Subscribers.forEach(sub => {
         let purchase = new PurchaseInfo();
@@ -44,10 +60,10 @@ export class SubscriptionQuotaComponent implements OnInit {
       quota.To = this.core.dateToKeyDay(this.ToDate);
   
       this.DA.SubscriptionQuotaGenerate(quota);
-      this.DL.Display("Quota Generation", "Issued!");
+      this.DL.Display("Purchase Report Generation", "Issued!");
     }
     else
-      this.DL.Display("Quota Subscribers", "Not Found!");
+      this.DL.Display("Purchase Report Audiance", "Not Found!");
   }
 
   CanGenerate(): boolean {
@@ -81,6 +97,6 @@ export class SubscriptionQuotaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Quota Report";
+    this.DL.TITLE = "Purchase Report";
   }
 }

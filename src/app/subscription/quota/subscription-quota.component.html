@@ -56,8 +56,8 @@
   </md-form-field>
 </div>
 <div>
-  <md-select class="longText" placeholder="Subscription" [(ngModel)]="model">
-    <md-option *ngFor="let item of DL.Subscriptions" [value]="item">
+  <md-select class="longText" placeholder="Purchase Report For" [(ngModel)]="model">
+    <md-option *ngFor="let item of DL.SubscriptionQuotaSelection" [value]="item">
       {{ item.Name }}
     </md-option>
   </md-select>

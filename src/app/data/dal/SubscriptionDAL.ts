@@ -18,6 +18,18 @@ export class SubscriptionDAL {
                 info.key = snapshot.$key;
                 this.DL.Subscriptions.push(info);
             });
+            
+            this.DL.SubscriptionQuotaSelection = new Array<SubscriptionInfo>();
+            let subAll = new SubscriptionInfo(this.DL.DefaultImageURL);
+            subAll.key = this.DL.KEYALLUSERS;
+            subAll.Name = this.DL.KEYALLUSERS;
+            this.DL.SubscriptionQuotaSelection.push(subAll);
+
+            let subMembers = new SubscriptionInfo(this.DL.DefaultImageURL);
+            subMembers.key = this.DL.KEYMEMBERS;
+            subMembers.Name = this.DL.KEYMEMBERS;
+            this.DL.SubscriptionQuotaSelection.push(subMembers);
+            this.DL.SubscriptionQuotaSelection = this.DL.SubscriptionQuotaSelection.concat(this.DL.Subscriptions);
         });
     }
 
