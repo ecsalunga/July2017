@@ -61,6 +61,7 @@ export class DataLayer {
     DATA_USER: string = "user";
     DATA_REPORT: string = "report";
     DATA_CONVERSATION: string = "conversation";
+    DATA_INFO: string = "info";
 
     BORROW_PRODUCT: string = "Product";
 
@@ -129,7 +130,8 @@ export class DataLayer {
     UserSelections: Array<UserInfo>;
     UserBorrow: Array<UserInfo>;
     UserSeller: Array<UserInfo>;
-    
+    UserShowInfo: UserInfo;
+
     UserAccess: AccessInfo;
     UserPending: UserInfo;
     UserIsDefaultSystemUser: boolean;

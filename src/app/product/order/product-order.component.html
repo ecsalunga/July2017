@@ -30,7 +30,7 @@
               <td>
                 {{ GetDate(item.ActionDate) | date : 'short' }}
               </td>
-              <td>
+              <td class="clickable mainColor" (click)="LoadUser(item)">
                 {{ item.BuyerName }}
               </td>
               <td>
@@ -77,7 +77,7 @@
               <td>
                 {{ GetDate(item.ActionDate) | date : 'short' }}
               </td>
-              <td>
+              <td class="clickable mainColor" (click)="LoadUser(item)">
                 {{ item.BuyerName }}
               </td>
               <td>
@@ -124,7 +124,7 @@
               <td>
                 {{ GetDate(item.ActionDate) | date : 'short' }}
               </td>
-              <td>
+              <td class="clickable mainColor" (click)="LoadUser(item)">
                 {{ item.BuyerName }}
               </td>
               <td>

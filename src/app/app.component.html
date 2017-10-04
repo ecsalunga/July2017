@@ -263,6 +263,31 @@
       Loading Resources...
     </div>
   </div>
+  <div *ngIf="showInfo" class="infoFrame">
+      <div class="close">
+        <button md-mini-fab (click)="HideInfo()">
+          <md-icon>close</md-icon>
+        </button>
+      </div>
+    <div class="infoBox">
+      <div class="vMediumSpacer"></div>
+      <div>
+          {{ DL.UserShowInfo.Name }}
+      </div>
+      <div>
+          {{ DL.UserShowInfo.Email }}
+      </div>
+      <div>
+          {{ DL.UserShowInfo.Address1 }} {{ DL.UserShowInfo.Address2 }}
+      </div>
+      <div>
+         {{ DL.UserShowInfo.Contact1 }} {{ DL.UserShowInfo.Contact1 }}
+      </div>
+      <div *ngIf="DL.UserShowInfo.ActionDate != null">
+        Last Active: {{ GetDate(DL.UserShowInfo.ActionDate) | date : 'short' }}
+      </div>
+    </div>
+  </div>
 </div>
 <input #imageSelector id="file" [hidden]="true" type="file" accept="image/*">
 <div [hidden]="true">

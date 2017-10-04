@@ -21,6 +21,10 @@ export class ProductOrderComponent implements OnInit {
     this.DL.LoadFromLink('product-order-detail');
   }
 
+  LoadUser(item: OrderInfo) {
+    this.DA.ShowUserInfo(item.MemberKey);
+  }
+
   HasClean(): boolean {
     let hasClean = false
     this.DL.ShowcaseUserDoneOrders.forEach(item => {

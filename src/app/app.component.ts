@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   @ViewChild('imageSelector', {read: ViewContainerRef })
   imageSelector: ViewContainerRef;
   isLoaded: boolean = false;
+  showInfo: boolean = false;
   show: string = "100%";
   hide: string = "0%"
   navWidth: string = "0%";
@@ -21,6 +22,10 @@ export class AppComponent implements OnInit {
   viewWidth: number;
 
   constructor(public core: Core, private DA: DataAccess, public DL: DataLayer, private renderer: Renderer) {}
+
+  GetDate(actionDate: number): Date {
+    return this.core.numberToDate(actionDate);
+  }
 
   onResize(event) {
     this.DL.ViewWidth = event.target.innerWidth; 
@@ -72,6 +77,11 @@ export class AppComponent implements OnInit {
     }
   }
 
+  HideInfo() {
+    this.showInfo = false;
+    this.loader =  this.hide;
+  }
+
   ngOnInit() {
     this.core.viewChild = this.viewChild;
     this.core.imageSelector = this.imageSelector;
@@ -80,6 +90,9 @@ export class AppComponent implements OnInit {
       if(data == this.DL.DATA_USER) {
         this.isLoaded = true;
         this.loader =  this.hide;
+      } else if(data == this.DL.DATA_INFO) {
+        this.showInfo = true;
+        this.loader =  this.show;
       }
     });
 

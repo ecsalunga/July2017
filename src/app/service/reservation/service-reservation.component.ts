@@ -35,6 +35,10 @@ export class ServiceReservationComponent implements OnInit {
     return hasClean;
   }
 
+  LoadUser(item: ReservationInfo) {
+    this.DA.ShowUserInfo(item.MemberKey);
+  }
+
   Visible(item: ReservationInfo): boolean {
     let view = true;
     if(!this.DL.UserAccess.ServiceReservationDoneView && ((item.Status == this.DL.STATUS_DONE && item.IsTransaction) || item.Status == this.DL.STATUS_CANCELLED))

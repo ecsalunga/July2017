@@ -166,6 +166,15 @@ export class DataAccess {
         });
     }
 
+    public ShowUserInfo(key: string) {
+        this.DL.UserAll.forEach(user => {
+            if(user.key == key) {
+                this.DL.UserShowInfo = user;
+                this.DataLoaded.emit(this.DL.DATA_INFO);
+            }
+        })
+    }
+
     public CommandSave(item: CommandInfo) {
         this.af.list(this.COMMAND, { query: { orderByChild: 'UserKey', equalTo: item.UserKey } }).first().subscribe(snapshots => {
             snapshots.forEach(snapshot => {
