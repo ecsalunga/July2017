@@ -257,7 +257,7 @@
   </div>
 </div>
 <div class="loading" [style.width]="loader">
-  <div class="loaderFrame">
+  <div *ngIf="!isLoaded" class="loaderFrame">
     <div class="loader"></div>
     <div class="loaderFooter">
       Loading Resources...

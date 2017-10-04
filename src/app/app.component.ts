@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
   @ViewChild('imageSelector', {read: ViewContainerRef })
   imageSelector: ViewContainerRef;
-
+  isLoaded: boolean = false;
   show: string = "100%";
   hide: string = "0%"
   navWidth: string = "0%";
@@ -77,8 +77,10 @@ export class AppComponent implements OnInit {
     this.core.imageSelector = this.imageSelector;
     this.DA.DataLoad();
     this.DA.DataLoaded.subscribe(data => {
-      if(data == this.DL.DATA_USER)
+      if(data == this.DL.DATA_USER) {
+        this.isLoaded = true;
         this.loader =  this.hide;
+      }
     });
 
     this.renderer.listen(this.imageSelector.element.nativeElement, 'change', (event) => {
