@@ -34,6 +34,14 @@
         <input id="txtOrder" type="number" mdInput placeholder="Display Order" [(ngModel)]="model.Order" />
       </md-form-field>
     </div>
+    <div>
+      <md-select placeholder="Booking Type" [(ngModel)]="model.BookingType">
+        <md-option *ngFor="let bookingType of DL.ServiceReservationBookingTypes" [value]="bookingType">
+          {{ bookingType }}
+        </md-option>
+      </md-select>
+    </div>
+    <div class="vSmallSpacer"></div>
     <div class="imageContainer">
       <img class="fullWidth" src="{{model.ImageURL}}" (load)="ImageLoaded()">
       <div class="imageEdit" [hidden]="!isLoaded" (click)="SelectFile()">Update Picture</div>

@@ -19,8 +19,17 @@ md-form-field {
     width: 120px;
 }
 
+.hour {
+    margin-right: 15px;
+    width: 100px;
+}
+
 .longText {
     width: 250px;
+}
+
+.schedule {
+    width: 275px;
 }
 
 .warning {

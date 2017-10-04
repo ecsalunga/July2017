@@ -19,6 +19,10 @@ export class ServiceBookingComponent implements OnInit {
     return this.core.keyDayToDate(keyDay);
   }
 
+  GetSchedule(booking: ReservationInfo): string {
+    return this.DL.GetHourSchedule(booking.FromHour, booking.To);
+  }
+
   IsDoneVisible(booking: ReservationInfo): boolean {
     return (booking.Status != this.DL.STATUS_REQUESTED 
       && booking.Status != this.DL.STATUS_CONFIRMED

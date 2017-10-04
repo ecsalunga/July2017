@@ -7,6 +7,7 @@ export class ServiceInfo {
     Description: string;
     Price: number;
     Order: number;
+    BookingType: string;
     ImageURL: string;
     Schedules: Array<ScheduleInfo>;
 
@@ -21,6 +22,7 @@ export class ReservationInfo implements IStatus {
     MemberKey: string;
     MemberName: string;
     From: number;
+    FromHour: number;
     To: number;
     ItemKey: string;
     Name: string;
@@ -29,6 +31,7 @@ export class ReservationInfo implements IStatus {
     ActionDate: number;
     Status: string;
     IsTransaction: boolean;
+    BookingType: string;
     Actions: Array<NameValue>;
 
     constructor() {

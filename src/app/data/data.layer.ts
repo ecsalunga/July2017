@@ -67,6 +67,9 @@ export class DataLayer {
     COMMAND_LOGOUT: string = "logout";
     COMMAND_POPCHAT: string = "popchat";
 
+    BOOKING_TYPE_DAY: string = "Day";
+    BOOKING_TYPE_HOUR: string = "Hour";
+
     Product: ProductInfo;
     Products: Array<ProductInfo>;
     ProductDiscount: ProductInfo;
@@ -86,6 +89,7 @@ export class DataLayer {
     ServiceReservationDone: Array<ReservationInfo>;
     ServiceReservationUserHasItem: boolean = false;
     ServiceReservationStatuses: Array<string>;
+    ServiceReservationBookingTypes: Array<string>;
     ServiceReservationTabIndex: number = 0;
 
     Transaction: TransactionInfo;
@@ -168,8 +172,8 @@ export class DataLayer {
     Messages: Array<MessageInfo>;
 
     Months: Array<NameValue>;
+    Hours: Array<NameValue>;
     Date: Date;
-    AccessTypes: Array<NameValue>;
 
     IsAuthenticating: boolean = false;
     IsSystemDataActiveLoaded: boolean = false;
@@ -234,12 +238,23 @@ export class DataLayer {
             new NameValue("December", 12)
         ];
 
-        this.AccessTypes = [
-            new NameValue("Administrator", 1),
-            new NameValue("Manager", 2),
-            new NameValue("Staff", 3),
-            new NameValue("User", 4),
-            new NameValue("Guest", 0)
+        this.Hours = [
+            new NameValue("8:00 AM", 8),
+            new NameValue("9:00 AM", 9),
+            new NameValue("10:00 AM", 10),
+            new NameValue("11:00 AM", 11),
+            new NameValue("12:00 PM", 12),
+            new NameValue("1:00 PM", 13),
+            new NameValue("2:00 PM", 14),
+            new NameValue("3:00 PM", 15),
+            new NameValue("4:00 PM", 16),
+            new NameValue("5:00 PM", 17),
+            new NameValue("6:00 PM", 18),
+            new NameValue("7:00 PM", 19),
+            new NameValue("8:00 PM", 20),
+            new NameValue("9:00 PM", 21),
+            new NameValue("10:00 PM", 22),
+            new NameValue("11:00 PM", 23)            
         ];
 
         this.DeliveryStatuses = [
@@ -272,6 +287,11 @@ export class DataLayer {
             this.STATUS_NOSHOW,
             this.STATUS_CANCELLED,
             this.STATUS_DONE
+        ];
+
+        this.ServiceReservationBookingTypes = [
+            this.BOOKING_TYPE_DAY,
+            this.BOOKING_TYPE_HOUR
         ];
 
         this.ProductDiscount = new ProductInfo();
@@ -370,6 +390,19 @@ export class DataLayer {
             return true;
 
         return false;
+    }
+
+    public GetHourSchedule(from: number, to: number): string {
+        let sched = "";
+        this.Hours.forEach(hour => {
+          if(hour.Value == from)
+            sched = hour.Name + " to ";
+        });
+        this.Hours.forEach(hour => {
+          if(hour.Value == to)
+            sched += hour.Name;
+        });
+        return sched;
     }
 
     public StatusUpdate(item: IStatus, status: string) {

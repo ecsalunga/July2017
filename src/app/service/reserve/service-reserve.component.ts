@@ -12,6 +12,8 @@ export class ServiceReserveComponent implements OnInit {
   FromDate: Date;
   ToDate: Date;
   ToDay: Date;
+  fromHour: number = 8;
+  toHour: number = 9;
   model: ServiceInfo;
   isReserving: boolean = false;
   selectedMember: UserInfo;
@@ -20,8 +22,8 @@ export class ServiceReserveComponent implements OnInit {
     this.model = Object.assign({}, this.DL.Service);
     this.ToDay = new Date();
     this.FromDate = this.ToDay;
-    this.ToDate = this.ToDay;
-
+    this.ToDate = new Date();
+    this.ToDate.setDate(this.ToDate.getDate() + 1);
     this.DL.Members.forEach(member => {
       if(this.DL.User.key == member.key) {
         this.selectedMember = member;
@@ -44,11 +46,18 @@ export class ServiceReserveComponent implements OnInit {
     info.ItemKey = this.model.key;
     info.Name = this.model.Name;
     info.Price = this.model.Price;
-    info.Count = this.GetDayCount();
+    info.Count = this.getCount();
+    info.BookingType = this.model.BookingType;
 
     this.DL.StatusUpdate(info, this.DL.STATUS_REQUESTED);
     info.From = this.core.dateToKeyDay(this.FromDate);
-    info.To = this.core.dateToKeyDay(this.ToDate);
+
+    if(info.BookingType == this.DL.BOOKING_TYPE_DAY)
+      info.To = this.core.dateToKeyDay(this.ToDate);
+    else {
+      info.FromHour = this.fromHour;
+      info.To = this.toHour;
+    }
 
     this.DA.ServiceReserveSave(info);
     this.DL.Display("Reservation", "Submitted!");
@@ -58,18 +67,37 @@ export class ServiceReserveComponent implements OnInit {
       this.LoadList();
   }
 
-  GetDayCount(): number {
-    let timeDiff = Math.abs(this.FromDate.getTime() - this.ToDate.getTime());
-    let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
-    return diffDays + 1;
+  GetSchedule(): string {
+    return this.DL.GetHourSchedule(this.fromHour, this.toHour);
+  }
+
+  getCount(): number {
+    if(this.model.BookingType == this.DL.BOOKING_TYPE_DAY) {
+      let timeDiff = Math.abs(this.FromDate.getTime() - this.ToDate.getTime());
+      let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+      return diffDays;
+    }
+    else
+      return this.toHour - this.fromHour;
   }
 
   CanAdd(): boolean {
+    if(!this.FromDate || !this.ToDate)
+      return false;
+    
     if(this.DL.KeyDay > this.core.dateToKeyDay(this.FromDate) || !this.selectedMember)
       return false;
 
-    return (this.core.dateToKeyDay(this.ToDate) >= this.core.dateToKeyDay(this.FromDate) 
+    if(this.model.BookingType == this.DL.BOOKING_TYPE_DAY) {
+      return (this.core.dateToKeyDay(this.ToDate) > this.core.dateToKeyDay(this.FromDate) 
       && this.core.dateToKeyDay(this.ToDate) >= this.core.dateToKeyDay(this.ToDay));
+    }
+    else {
+      if(!this.fromHour || !this.toHour)
+        return false;
+
+      return (this.toHour > this.fromHour);
+    }
   }
 
   LoadList() {

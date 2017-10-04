@@ -33,11 +33,20 @@
       <input id="txtService" readonly mdInput placeholder="Service" [(ngModel)]="model.Name" />
     </md-form-field>
   </div>
-  <div>
-    <md-form-field class="longText">
-      <input id="txtDate" readonly mdInput placeholder="Date Range" value="{{ GetDay(model.From) | date : 'mediumDate' }} to {{ GetDay(model.To) | date : 'mediumDate' }}" />
-    </md-form-field>
-  </div>
+  <ng-container *ngIf="model.BookingType == DL.BOOKING_TYPE_DAY; else elseHour">
+    <div>
+      <md-form-field class="longText">
+        <input id="txtDate" readonly mdInput placeholder="Date Range" value="{{ GetDay(model.From) | date : 'mediumDate' }} to {{ GetDay(model.To) | date : 'mediumDate' }}" />
+      </md-form-field>
+    </div>
+  </ng-container>
+  <ng-template #elseHour>
+    <div>
+      <md-form-field class="schedule">
+        <input id="txtDate" readonly mdInput placeholder="Schedule" value="{{ GetDay(model.From) | date : 'mediumDate' }} @ {{ GetSchedule() }}" />
+      </md-form-field>
+    </div>
+  </ng-template>
   <div>
     <md-form-field class="shortText">
       <input id="txtPrice" readonly mdInput placeholder="Price" value="{{ DL.CURRENCY }} {{ model.Price | number:'1.2-2' }}" />
@@ -45,7 +54,7 @@
   </div>
   <div>
     <md-form-field class="shortText">
-      <input id="txtQuantity" readonly mdInput placeholder="Number of days" [(ngModel)]="model.Count" />
+      <input id="txtQuantity" readonly mdInput placeholder="{{ model.BookingType == DL.BOOKING_TYPE_DAY ? 'Number of days' : 'Number of hours' }}" [(ngModel)]="model.Count" />
     </md-form-field>
   </div>
   <div>

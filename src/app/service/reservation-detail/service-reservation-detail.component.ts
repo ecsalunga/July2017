@@ -55,6 +55,10 @@ export class ServiceReservationDetailComponent implements OnInit {
     this.DL.Display("Reservation", "Deleted!");
     this.LoadList();
   }
+
+  GetSchedule(): string {
+    return this.DL.GetHourSchedule(this.model.FromHour, this.model.To);
+  }
   
   GetDate(keyDay: number): Date {
     return this.core.numberToDate(keyDay);
