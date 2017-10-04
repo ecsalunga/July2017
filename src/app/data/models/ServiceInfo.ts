@@ -32,6 +32,7 @@ export class ReservationInfo implements IStatus {
     Status: string;
     IsTransaction: boolean;
     BookingType: string;
+    Note: string;
     Actions: Array<NameValue>;
 
     constructor() {

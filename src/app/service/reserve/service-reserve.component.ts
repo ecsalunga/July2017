@@ -17,6 +17,7 @@ export class ServiceReserveComponent implements OnInit {
   model: ServiceInfo;
   isReserving: boolean = false;
   selectedMember: UserInfo;
+  note: string = "";
 
   constructor(private core: Core, private DA: DataAccess, public DL: DataLayer) {
     this.model = Object.assign({}, this.DL.Service);
@@ -37,6 +38,7 @@ export class ServiceReserveComponent implements OnInit {
 
   HideReserve() {
     this.isReserving = false;
+    this.note = "";
   }
 
   Reserve() {
@@ -45,6 +47,7 @@ export class ServiceReserveComponent implements OnInit {
     info.MemberName = this.selectedMember.Name;
     info.ItemKey = this.model.key;
     info.Name = this.model.Name;
+    info.Note = this.note;
     info.Price = this.model.Price;
     info.Count = this.getCount();
     info.BookingType = this.model.BookingType;

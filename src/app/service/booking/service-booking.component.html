@@ -38,6 +38,12 @@
           <input id="txtTotal" readonly mdInput placeholder="Total" value="{{ DL.CURRENCY }} {{ booking.Count * booking.Price | number:'1.2-2' }}" />
         </md-form-field>
       </div>
+      <div *ngIf="booking.Note != ''">
+        <div class="note">Note</div>
+        <div class="mainColor">
+          {{ booking.Note }}
+        </div>
+      </div>
       <div class="hSpacer"></div>
       <div class="itemControl mainColor">
         <div class="cartSelection">

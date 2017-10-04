@@ -34,3 +34,7 @@ md-form-field {
 .shortText {
     width: 120px;
 }
+
+.note {
+    font-size: 16px;
+}

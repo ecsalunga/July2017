@@ -24,13 +24,14 @@ export class ServiceBookingComponent implements OnInit {
   }
 
   IsDoneVisible(booking: ReservationInfo): boolean {
-    return (booking.Status != this.DL.STATUS_REQUESTED 
-      && booking.Status != this.DL.STATUS_CONFIRMED
-      && booking.Status != this.DL.STATUS_CHECKEDIN  
-      && booking.Status != this.DL.STATUS_DONE);
+    return (booking.Status == this.DL.STATUS_REJECTED
+      || booking.Status == this.DL.STATUS_CHECKOUT);
   }
 
   SetStatusDone(item: ReservationInfo) {
+    if(item.Status == this.DL.STATUS_REJECTED)
+      item.IsTransaction = true;
+
     this.DL.StatusUpdate(item, this.DL.STATUS_DONE);
     this.DA.ServiceReserveSave(item);
     this.DL.DisplayPublic("Reservation", "Hidden!");

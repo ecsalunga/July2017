@@ -76,6 +76,12 @@
         </md-option>
       </md-select>
     </div>
+    <div class="vSmallSpacer"></div>
+    <div>
+      <md-form-field class="fullWidth">
+        <textarea [disabled]="!CanSave()" id="txtNote" mdInput placeholder="Note" [(ngModel)]="model.Note"></textarea>
+      </md-form-field>
+    </div>
     <div class="hSpacer"></div>
     <table>
         <tr class="rightRow">
@@ -91,6 +97,12 @@
       </table>
   </ng-container>
   <ng-template #reserveLink>
+    <div *ngIf="model.Note != ''">
+      <div class="note">Note</div>
+      <div class="mainColor">
+        {{ model.Note }}
+      </div>
+    </div>
     <div class="hSpacer"></div>
     <div class="rightRow mainColor">
       <button md-raised-button (click)="BackToPublic()" mdTooltip="Back to booking" mdTooltipPosition="above">

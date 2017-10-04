@@ -28,7 +28,12 @@ export class ServiceReservationDetailComponent implements OnInit {
   }
 
   Save() {
-    if(this.DL.ServiceReservation.Status != this.selectedStatus) {
+    if(this.DL.ServiceReservation.Status != this.selectedStatus || this.DL.ServiceReservation.Note != this.model.Note) {
+      if((this.model.Status == this.DL.STATUS_REJECTED 
+        || this.model.Status == this.DL.STATUS_CANCELLED 
+        || this.model.Status == this.DL.STATUS_NOSHOW) && this.selectedStatus == this.DL.STATUS_DONE)
+        this.model.IsTransaction = true;
+
       this.DL.StatusUpdate(this.model, this.selectedStatus);
       this.DA.ServiceReserveSave(this.model);
       this.DL.Display("Reservation", "Saved!");
