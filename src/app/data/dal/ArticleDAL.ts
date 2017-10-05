@@ -17,11 +17,11 @@ export class ArticleDAL {
                 info.key = snapshot.$key;
                 this.DL.Articles.push(info);
 
-                if(info.IsActive) {
+                if(info.IsActive)
                     this.DL.ArticleLive.push(info);
-                    this.DL.ArticleCount++;
-                }
             });
+
+            this.DL.ArticleCount = this.DL.ArticleLive.length;
         });
     }
 
