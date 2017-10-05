@@ -48,7 +48,8 @@ export class ArticleDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     tinymce.init({
       selector: '#txtBlurb',
       menubar: false,
-      toolbar: 'undo redo |  formatselect | bold italic |  removeformat',
+      plugins: ['code'],
+      toolbar: 'code undo redo |  formatselect | bold italic |  removeformat',
       skin_url: 'assets/skins/lightgray',
       height : 100,
       setup: editor => {
@@ -63,8 +64,8 @@ export class ArticleDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     tinymce.init({
       selector: '#txtContent',
       menubar: false,
-      plugins: ['paste', 'textcolor', 'table'],
-      toolbar: 'undo redo |  formatselect | bold italic underline forecolor backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat',
+      plugins: ['textcolor', 'table', 'code', 'lists'],
+      toolbar: 'code undo redo | formatselect fontselect fontsizeselect | bold italic underline forecolor backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table removeformat',
       skin_url: 'assets/skins/lightgray',
       height : 250,
       setup: editor => {
