@@ -1,11 +1,5 @@
 <div class="content" #Content></div>
 <div class="rightRow">
-  <div class="author">
-    {{ DL.Article.Author }}
-  </div>
-  <div class="date">
-    {{ GetDate(DL.Article.ActionDate) | date : 'short' }}
-  </div>
   <div class="hSpacer"></div>
   <div *ngIf="DL.ArticleCount > 0" class="mainColor">
     <button md-raised-button (click)="LoadList()">

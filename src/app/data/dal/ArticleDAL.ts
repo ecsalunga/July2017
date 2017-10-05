@@ -7,7 +7,7 @@ export class ArticleDAL {
     constructor(private DL: DataLayer, private af: AngularFireDatabase) { }
 
     public Load() {
-        this.af.list(this.PATH, { query: { orderByChild: 'Title' } }).first().subscribe(snapshots => {
+        this.af.list(this.PATH, { query: { orderByChild: 'Order' } }).first().subscribe(snapshots => {
             this.DL.Articles = new Array<ArticleInfo>();
             this.DL.ArticleLive = new Array<ArticleInfo>();
             this.DL.ArticleCount = 0;

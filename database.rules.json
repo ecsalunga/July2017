@@ -95,7 +95,7 @@
     "articles": {
       ".read": "true",
       ".write": "true",
-      ".indexOn": "Title"
+      ".indexOn": "Order"
     },
     "messages": {
       "conversations": {

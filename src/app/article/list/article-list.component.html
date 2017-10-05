@@ -8,6 +8,9 @@
           <th>
             Date
           </th>
+          <th>
+            Order
+          </th>
           <th class="rightRow">
             Action
           </th>
@@ -20,6 +23,9 @@
           </td>
           <td>
             {{ GetDate(item.ActionDate) | date : 'short' }}
+          </td>
+          <td>
+            {{ item.Order }}
           </td>
           <td class="rightRow">
             <button md-mini-fab (click)="SelectItem(item)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>

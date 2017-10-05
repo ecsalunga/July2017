@@ -4,6 +4,7 @@ export class ArticleInfo {
     Blurb: string;
     Content: string;
     Author: string;
+    Order: number;
     IsActive: boolean;
     ActionDate: number;
 
