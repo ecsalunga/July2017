@@ -47,6 +47,7 @@ export class ArticleDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   ngAfterViewInit() {
     tinymce.init({
       selector: '#txtBlurb',
+      branding: false,
       menubar: false,
       plugins: ['code'],
       toolbar: 'code undo redo formatselect | bold removeformat',
@@ -63,6 +64,7 @@ export class ArticleDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
     tinymce.init({
       selector: '#txtContent',
+      branding: false,
       menubar: false,
       plugins: ['textcolor', 'table', 'code', 'lists'],
       toolbar: 'code undo redo formatselect | fontselect fontsizeselect | bold italic underline forecolor backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table removeformat',
