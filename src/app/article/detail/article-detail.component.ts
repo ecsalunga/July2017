@@ -49,7 +49,7 @@ export class ArticleDetailComponent implements OnInit, AfterViewInit, OnDestroy 
       selector: '#txtBlurb',
       menubar: false,
       plugins: ['code'],
-      toolbar: 'code undo redo |  formatselect | bold italic |  removeformat',
+      toolbar: 'code undo redo formatselect | bold italic |  removeformat',
       skin_url: 'assets/skins/lightgray',
       height : 100,
       setup: editor => {
@@ -65,7 +65,7 @@ export class ArticleDetailComponent implements OnInit, AfterViewInit, OnDestroy 
       selector: '#txtContent',
       menubar: false,
       plugins: ['textcolor', 'table', 'code', 'lists'],
-      toolbar: 'code undo redo | formatselect fontselect fontsizeselect | bold italic underline forecolor backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table removeformat',
+      toolbar: 'code undo redo formatselect | fontselect fontsizeselect | bold italic underline forecolor backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table removeformat',
       skin_url: 'assets/skins/lightgray',
       height : 250,
       setup: editor => {
