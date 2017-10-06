@@ -49,7 +49,7 @@ export class ArticleDetailComponent implements OnInit, AfterViewInit, OnDestroy 
       selector: '#txtBlurb',
       menubar: false,
       plugins: ['code'],
-      toolbar: 'code undo redo formatselect | bold italic |  removeformat',
+      toolbar: 'code undo redo formatselect | bold removeformat',
       skin_url: 'assets/skins/lightgray',
       height : 100,
       setup: editor => {
