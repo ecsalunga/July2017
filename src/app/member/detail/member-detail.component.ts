@@ -27,6 +27,10 @@ export class MemberDetailComponent implements OnInit {
     }
   }
 
+  GetDate(actionDate: number): Date {
+    return this.core.numberToDate(actionDate);
+  }
+
   IsHidden() : boolean {
     return !this.isLoaded || (!this.DL.UserAccess.MemberEdit && !(!this.model.key));
   }

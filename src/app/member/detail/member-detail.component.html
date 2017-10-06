@@ -52,6 +52,10 @@
       <div (click)="ResetPicture()">Reset</div>
     </div>
   </div>
+  <div class="vSmallSpacer"></div>
+  <div *ngIf="model.ActionDate != null">
+    Last Active: {{ GetDate(model.ActionDate) | date : 'short' }}
+  </div>
   <div class="hSpacer"></div>
   <table>
     <tr class="rightRow">

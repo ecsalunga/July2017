@@ -20,6 +20,10 @@ export class UserDetailComponent implements OnInit {
     this.joinDate = this.core.numberToDate(this.model.JoinDate);
   }
 
+  GetDate(actionDate: number): Date {
+    return this.core.numberToDate(actionDate);
+  }
+
   Save() {
     this.model.JoinDate = this.core.dateToNumber(this.joinDate);
     this.DA.UserSave(this.model);
