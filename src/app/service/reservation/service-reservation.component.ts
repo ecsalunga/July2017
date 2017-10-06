@@ -9,7 +9,10 @@ import { ReservationInfo } from '../../data/models';
   styleUrls: ['./service-reservation.component.css']
 })
 export class ServiceReservationComponent implements OnInit {
-  constructor(private core: Core, public DL: DataLayer, private DA: DataAccess) { }
+  constructor(private core: Core, public DL: DataLayer, private DA: DataAccess) {
+    if(this.DL.SOURCE == this.DL.MENU)
+      this.DL.ServiceReservationTabIndex = 0;
+  }
   
   GetDate(keyDay: number): Date {
     return this.core.numberToDate(keyDay);

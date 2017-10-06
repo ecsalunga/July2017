@@ -9,7 +9,10 @@ import { OrderInfo } from '../../data/models';
   styleUrls: ['./product-order.component.css']
 })
 export class ProductOrderComponent implements OnInit {
-  constructor(private core: Core, public DL: DataLayer, private DA: DataAccess) { }
+  constructor(private core: Core, public DL: DataLayer, private DA: DataAccess) {
+    if(this.DL.SOURCE == this.DL.MENU)
+      this.DL.ShowcaseOrderTabIndex = 0;
+  }
   
   GetDate(keyDay: number): Date {
     return this.core.numberToDate(keyDay);
