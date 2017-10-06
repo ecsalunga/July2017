@@ -60,7 +60,7 @@ export class DataLayer {
 
     DATA_USER: string = "user";
     DATA_REPORT: string = "report";
-    DATA_CONVERSATION: string = "conversation";
+    DATA_MESSAGE: string = "message";
     DATA_INFO: string = "info";
 
     BORROW_PRODUCT: string = "Product";
@@ -181,6 +181,7 @@ export class DataLayer {
     IsSystemDataActiveLoaded: boolean = false;
     IsDataActiveLoaded: boolean = false;
     IsCommandLoaded: boolean = false;
+    IsMessageLoaded: boolean = false;
     
     ShowLogin: boolean = true;
     SignupName: string;

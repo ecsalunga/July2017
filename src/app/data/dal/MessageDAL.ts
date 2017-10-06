@@ -21,26 +21,30 @@ export class MessageDAL {
                     this.DL.Conversations.push(info);
             });
 
-            if(!this.DL.IsCommandLoaded)
-                this.DA.DataLoaded.emit(this.DL.DATA_CONVERSATION);
-        });
+            if(!this.DL.IsMessageLoaded) {
+                this.af.list(this.PATH_MESSAGE, { query: { orderByChild: 'ConversationKey' } }).subscribe(snapshots => {
+                    this.DL.Messages = new Array<MessageInfo>();
+        
+                    snapshots.forEach(snapshot => {
+                        let info: MessageInfo = snapshot;
+                        info.key = snapshot.$key;
+        
+                        if(this.DL.Conversation && this.DL.Conversation.key == info.ConversationKey) {
+                            this.DL.Messages.push(info);
+                        }
+                    });
+        
+                    this.DL.Messages.sort((item1, item2) => item1.ActionDate - item2.ActionDate);
+                    
+                    if(this.DL.Messages.length > 0)
+                        this.MessageReceived.emit(null);
 
-        this.af.list(this.PATH_MESSAGE, { query: { orderByChild: 'ConversationKey' } }).subscribe(snapshots => {
-            this.DL.Messages = new Array<MessageInfo>();
-
-            snapshots.forEach(snapshot => {
-                let info: MessageInfo = snapshot;
-                info.key = snapshot.$key;
-
-                if(this.DL.Conversation && this.DL.Conversation.key == info.ConversationKey) {
-                    this.DL.Messages.push(info);
-                }
-            });
-
-            this.DL.Messages.sort((item1, item2) => item1.ActionDate - item2.ActionDate);
-            
-            if(this.DL.Messages.length > 0)
-                this.MessageReceived.emit(null);
+                    if(!this.DL.IsMessageLoaded) {
+                        this.DA.DataLoaded.emit(this.DL.DATA_MESSAGE);
+                        this.DL.IsMessageLoaded = true;
+                    }
+                });
+            }
         });
     }
 

@@ -76,9 +76,9 @@ export class DataAccess {
         this.articleDAL = new ArticleDAL(DL, af);
 
         this.DataLoaded.subscribe(data => {
-            if(data == this.DL.DATA_CONVERSATION && !this.DL.IsCommandLoaded) {
-                this.DL.IsCommandLoaded = true;
+            if(data == this.DL.DATA_MESSAGE && !this.DL.IsCommandLoaded) {
                 this.CommandLoad();
+                this.DL.IsCommandLoaded = true;
             } 
         });
     }
