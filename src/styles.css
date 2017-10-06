@@ -311,6 +311,10 @@ th {
     .longRes            { width: 250px; }
 }
 
+@media (min-width: 1200px) {
+    .imageContainerRes  { height: 400px; }
+}
+
 
 .container:after {
     content: "";
