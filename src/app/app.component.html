@@ -284,7 +284,7 @@
          {{ DL.UserShowInfo.Contact1 }} {{ DL.UserShowInfo.Contact1 }}
       </div>
       <div *ngIf="DL.UserShowInfo.ActionDate != null">
-        Last Active: {{ GetDate(DL.UserShowInfo.ActionDate) | date : 'short' }}
+        Last login: {{ GetDate(DL.UserShowInfo.ActionDate) | date : 'short' }}
       </div>
     </div>
   </div>
