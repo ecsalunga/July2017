@@ -265,13 +265,12 @@ export class DataAccess {
             this.DL.User.ActionDate = this.DL.GetActionDate();
             this.UserSave(this.DL.User);
 
-            if (this.DL.User.IsMember || this.DL.User.IsSystemUser) {
+            if (this.DL.User.IsMember || this.DL.User.IsSystemUser)
                 this.GeneralActiveDataLoad();
-                this.DL.SetPermission();
-            }
 
             if (this.DL.User.IsSystemUser) {
                 this.DataSystemLoad();
+                this.DL.SetPermission();
                 this.DL.LoadFromMenu(this.DL.UserAccess.ModuleStart);
             }
             else
