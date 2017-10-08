@@ -1,10 +1,11 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyDUoThNZjhQ0iDWhw_nvPIhjBLrkrpGkoA",
-    authDomain: "temp-system.firebaseapp.com",
-    databaseURL: "https://temp-system.firebaseio.com",
-    storageBucket: "temp-system.appspot.com",
-    messagingSenderId: "1098645781584"
+    apiKey: "AIzaSyCmfsUeKSR5CwJItufGVN0cVnggct-84-Y",
+    authDomain: "acqua-perfetta.firebaseapp.com",
+    databaseURL: "https://acqua-perfetta.firebaseio.com",
+    projectId: "acqua-perfetta",
+    storageBucket: "acqua-perfetta.appspot.com",
+    messagingSenderId: "131375727911"
   }
 };
