@@ -62,6 +62,7 @@ export class DataLayer {
     DATA_REPORT: string = "report";
     DATA_MESSAGE: string = "message";
     DATA_INFO: string = "info";
+    DATA_GALLERY: string = "gallery";
 
     BORROW_PRODUCT: string = "Product";
 
@@ -85,11 +86,11 @@ export class DataLayer {
 
     Gallery: GalleryInfo;
     Galleries: Array<GalleryInfo>;
+    GalleryActive: Array<GalleryInfo>;
     GalleryCount: number;
     GalleryPhoto: GalleryPhotoInfo;
     GalleryPhotos: Array<GalleryPhotoInfo>;
     GallerySelectedPhotos: Array<GalleryPhotoInfo>;
-    GalleryPhotoCount: number;
 
     ServiceReservation: ReservationInfo;
     ServiceReservationUser: Array<ReservationInfo>;
@@ -515,7 +516,6 @@ export class DataLayer {
         });
 
         this.GallerySelectedPhotos.sort((item1, item2) => item1.Order - item2.Order);
-        this.GalleryPhotoCount = this.GallerySelectedPhotos.length;
     }
     
     private appendIfSet(value: string): string {

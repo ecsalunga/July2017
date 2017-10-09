@@ -74,6 +74,12 @@
         <span>Article</span>
       </button>
     </ng-container>
+    <ng-container *ngIf="DL.GalleryCount > 0">
+      <button md-menu-item (click)="LoadPage('website-gallery')">
+        <md-icon>photo_library</md-icon>
+        <span>Gallery</span>
+      </button>
+    </ng-container>
     <ng-container *ngIf="DL.UserAccess.MessageView">
       <button md-menu-item (click)="LoadPage(DL.UserAccess.MessageManage ? 'message-list' : 'message-message')">
         <md-icon>message</md-icon>
@@ -291,6 +297,28 @@
       </div>
       <div *ngIf="DL.UserShowInfo.ActionDate != null">
         Last login: {{ GetDate(DL.UserShowInfo.ActionDate) | date : 'short' }}
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showGallery">
+    <div class="vMediumSpacer"></div>
+    <div class="headerToolbar">
+      <div class="galleryClose">
+        <button md-mini-fab (click)="HideGallery()">
+          <md-icon>close</md-icon>
+        </button>
+      </div>
+    </div>
+    <div id="sliderFrame">
+      <div id="slider">
+        <ng-container *ngFor="let item of DL.GallerySelectedPhotos">
+          <img class="fullWidth" src='{{ item.ImageURL }}' />
+        </ng-container>
+      </div>
+      <div style="text-align:center;padding:20px;z-index:20;">
+        <a onclick="imageSlider.previous()" class="group2-Prev"></a>
+        <a id='auto' class="group2-Pause" onclick="switchAutoAdvance()"></a>
+        <a onclick="imageSlider.next()" class="group2-Next"></a>
       </div>
     </div>
   </div>

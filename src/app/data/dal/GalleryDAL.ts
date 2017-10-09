@@ -10,14 +10,17 @@ export class GalleryDAL {
     public Load() {
         this.af.list(this.PATH, { query: { orderByChild: 'Order' }}).first().subscribe(snapshots => {
             this.DL.Galleries = new Array<GalleryInfo>();
-
+            this.DL.GalleryActive = new Array<GalleryInfo>();
             snapshots.forEach(snapshot => {
                 let info: GalleryInfo = snapshot;
                 info.key = snapshot.$key;
                 this.DL.Galleries.push(info);
+
+                if(info.IsActive)
+                    this.DL.GalleryActive.push(info);
             });
 
-            this.DL.GalleryCount = this.DL.Galleries.length;
+            this.DL.GalleryCount = this.DL.GalleryActive.length;
         });
     }
 

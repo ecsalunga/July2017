@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   imageSelector: ViewContainerRef;
   isLoaded: boolean = false;
   showInfo: boolean = false;
+  showGallery: boolean = false;
   show: string = "100%";
   hide: string = "0%"
   navWidth: string = "0%";
@@ -82,6 +83,11 @@ export class AppComponent implements OnInit {
     this.loader =  this.hide;
   }
 
+  HideGallery() {
+    this.showGallery = false;
+    this.loader =  this.hide;
+  }
+
   ngOnInit() {
     this.core.viewChild = this.viewChild;
     this.core.imageSelector = this.imageSelector;
@@ -92,6 +98,9 @@ export class AppComponent implements OnInit {
         this.loader =  this.hide;
       } else if(data == this.DL.DATA_INFO) {
         this.showInfo = true;
+        this.loader =  this.show;
+      } else if(data == this.DL.DATA_GALLERY) {
+        this.showGallery = true;
         this.loader =  this.show;
       }
     });

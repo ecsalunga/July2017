@@ -181,6 +181,12 @@ export class DataAccess {
         })
     }
 
+    public LoadGallery(item: GalleryInfo) {
+        this.DL.SetGalleryPhotos(item);
+        if(this.DL.GallerySelectedPhotos.length > 0)
+        this.DataLoaded.emit(this.DL.DATA_GALLERY);
+    }
+
     public CommandSave(item: CommandInfo) {
         this.af.list(this.COMMAND, { query: { orderByChild: 'UserKey', equalTo: item.UserKey } }).first().subscribe(snapshots => {
             snapshots.forEach(snapshot => {
