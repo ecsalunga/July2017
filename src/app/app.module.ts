@@ -85,6 +85,8 @@ import { ArticleListComponent } from './article/list/article-list.component';
 import { ArticleDetailComponent } from './article/detail/article-detail.component';
 import { WebsiteArticleComponent } from './website/article/website-article.component';
 import { WebsiteArticleFullComponent } from './website/article-full/website-article-full.component';
+import { GalleryListComponent } from './gallery/list/gallery-list.component';
+import { GalleryDetailComponent } from './gallery/detail/gallery-detail.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +111,7 @@ import { WebsiteArticleFullComponent } from './website/article-full/website-arti
     SubscriptionDetailComponent, SubscriptionSubscriberComponent, SubscriptionProductComponent,
     SubscriptionProductComponent, SubscriptionQuotaComponent, SubscriptionQuotaDetailComponent,
     ArticleListComponent, ArticleDetailComponent, WebsiteArticleComponent, 
-    WebsiteArticleFullComponent
+    WebsiteArticleFullComponent, GalleryListComponent, GalleryDetailComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, MdButtonModule,
@@ -144,7 +146,8 @@ import { WebsiteArticleFullComponent } from './website/article-full/website-arti
     UserSellerComponent, SubscriptionListComponent, SubscriptionDetailComponent,
     SubscriptionSubscriberComponent, SubscriptionProductComponent, SubscriptionQuotaComponent,
     SubscriptionQuotaDetailComponent, ArticleListComponent, ArticleDetailComponent,
-    WebsiteArticleComponent, WebsiteArticleFullComponent
+    WebsiteArticleComponent, WebsiteArticleFullComponent, GalleryListComponent,
+    GalleryDetailComponent
   ]
 })
 export class AppModule {

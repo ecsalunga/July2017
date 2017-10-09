@@ -1,0 +1,23 @@
+::ng-deep .mat-slide-toggle-content {
+    font-size: inherit;
+}
+
+.longText {
+    width: 300px;
+}
+
+md-form-field {
+    font-size: 16px;
+}
+
+.shortText {
+    width: 120px;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.content {
+    height: 300px;
+}

@@ -195,6 +195,12 @@
       </button>
     </ng-container>
     <ng-container *ngIf="DL.UserAccess.ArticleView">
+      <button md-menu-item (click)="LoadPage('gallery-list')">
+        <md-icon>photo_library</md-icon>
+        <span>Gallery</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.UserAccess.ArticleView">
       <button md-menu-item (click)="LoadPage('article-list')">
         <md-icon>event_note</md-icon>
         <span>Article</span>

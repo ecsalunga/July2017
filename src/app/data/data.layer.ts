@@ -11,7 +11,7 @@ import {
     ServiceInfo, ConversationInfo, MessageInfo,
     ReservationInfo, Name2Value, IStatus,
     SubscriptionInfo, QuotaInfo, PurchaseInfo,
-    ArticleInfo
+    ArticleInfo, GalleryInfo, GalleryPhotoInfo
 } from './models';
 
 @Injectable()
@@ -82,6 +82,11 @@ export class DataLayer {
     Services: Array<ServiceInfo>;
     ServiceToday: Array<ServiceInfo>;
     ServiceTodayCount: number;
+
+    Gallery: GalleryInfo;
+    Galleries: Array<GalleryInfo>;
+    GalleryPhoto: GalleryPhotoInfo;
+    GalleryPhotos: Array<GalleryPhotoInfo>;
 
     ServiceReservation: ReservationInfo;
     ServiceReservationUser: Array<ReservationInfo>;

@@ -18,6 +18,7 @@ import { ServiceDAL } from './dal/ServiceDAL';
 import { MessageDAL } from './dal/MessageDAL';
 import { SubscriptionDAL } from './dal/SubscriptionDAL';
 import { ArticleDAL } from './dal/ArticleDAL';
+import { GalleryDAL } from './dal/GalleryDAL';
 
 import { MdDialog } from '@angular/material';
 import { MessagePopupComponent } from '../message/popup/message-popup.component';
@@ -31,7 +32,8 @@ import {
     SystemSettingInfo, SnapshotInfo, OrderInfo,
     ServiceInfo, CommandInfo, ConversationInfo,
     MessageInfo, ReservationInfo, SubscriptionInfo,
-    QuotaInfo, ArticleInfo
+    QuotaInfo, ArticleInfo, GalleryInfo,
+    GalleryPhotoInfo
 } from './models';
 
 @Injectable()
@@ -53,6 +55,7 @@ export class DataAccess {
     messageDAL: MessageDAL;
     subscriptionDAL: SubscriptionDAL;
     articleDAL: ArticleDAL;
+    galleryDAL: GalleryDAL;
 
     USERS: string = "/users";
     SETTING: string = "/setting";
@@ -74,6 +77,7 @@ export class DataAccess {
         this.snapshotDAL = new SnapshotDAL(DL, af);
         this.subscriptionDAL = new SubscriptionDAL(core, DL, af);
         this.articleDAL = new ArticleDAL(DL, af);
+        this.galleryDAL = new GalleryDAL(DL, af);
 
         this.DataLoaded.subscribe(data => {
             if(data == this.DL.DATA_MESSAGE && !this.DL.IsCommandLoaded) {
@@ -121,6 +125,8 @@ export class DataAccess {
         this.showcaseDAL.Load();
         this.subscriptionDAL.Load();
         this.serviceDAL.Load();
+        this.galleryDAL.Load();
+        this.galleryDAL.LoadPhotos();
         this.UserLoad();
     }
 
@@ -443,6 +449,16 @@ export class DataAccess {
     public ShowcaseSave(item: ShowcaseInfo) {
         this.showcaseDAL.Save(item);
         this.showcaseDAL.Load();
+    }
+
+    public GallerySave(item: GalleryInfo) {
+        this.galleryDAL.Save(item);
+        this.galleryDAL.Load();
+    }
+
+    GalleryPhotoSave(item: GalleryPhotoInfo) {
+        this.galleryDAL.SavePhoto(item);
+        this.galleryDAL.LoadPhotos();
     }
 
     public ShowcaseOrderSave(item: OrderInfo) {
