@@ -15,3 +15,7 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+
+# Do not merge files
+/src/index.html merge=ours
+/environments/* merge=ours
