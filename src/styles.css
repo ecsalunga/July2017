@@ -299,7 +299,7 @@ th {
 }
 
 .longRes {
-    width: 175px;
+    width: 150px;
 }
   
 @media (min-width: 720px) {
