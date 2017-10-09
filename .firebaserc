@@ -1,6 +1,5 @@
 {
   "projects": {
-    "default": "acqua-perfetta"
     "default": "temp-system"
   }
 }
