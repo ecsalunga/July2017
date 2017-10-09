@@ -23,3 +23,4 @@
 database.rules.json merge=ours
 .firebaserc merge=ours
 .angular-cli.json merge=ours
+favicon.xcf merge=ours
