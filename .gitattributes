@@ -15,3 +15,11 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+
+# Do not merge files
+/src/index.html merge=ours
+/src/environments/* merge=ours
+/src/assets/*.png merge=ours
+database.rules.json merge=ours
+.firebaserc merge=ours
+.angular-cli.json merge=ours
