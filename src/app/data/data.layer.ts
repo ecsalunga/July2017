@@ -85,8 +85,11 @@ export class DataLayer {
 
     Gallery: GalleryInfo;
     Galleries: Array<GalleryInfo>;
+    GalleryCount: number;
     GalleryPhoto: GalleryPhotoInfo;
     GalleryPhotos: Array<GalleryPhotoInfo>;
+    GallerySelectedPhotos: Array<GalleryPhotoInfo>;
+    GalleryPhotoCount: number;
 
     ServiceReservation: ReservationInfo;
     ServiceReservationUser: Array<ReservationInfo>;
@@ -501,6 +504,18 @@ export class DataLayer {
         }
 
         return hasAdjustment;
+    }
+
+    public SetGalleryPhotos(item: GalleryInfo) {
+        this.GallerySelectedPhotos = new Array<GalleryPhotoInfo>();
+
+        this.GalleryPhotos.forEach(photo => {
+            if(photo.GalleryKey == item.key)
+                this.GallerySelectedPhotos.push(photo);
+        });
+
+        this.GallerySelectedPhotos.sort((item1, item2) => item1.Order - item2.Order);
+        this.GalleryPhotoCount = this.GallerySelectedPhotos.length;
     }
     
     private appendIfSet(value: string): string {

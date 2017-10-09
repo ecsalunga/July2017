@@ -16,6 +16,8 @@ export class GalleryDAL {
                 info.key = snapshot.$key;
                 this.DL.Galleries.push(info);
             });
+
+            this.DL.GalleryCount = this.DL.Galleries.length;
         });
     }
 

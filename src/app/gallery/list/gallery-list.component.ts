@@ -23,7 +23,7 @@ export class GalleryListComponent implements OnInit {
 
   SelectPhoto(item: GalleryInfo) {
     this.DL.Gallery = item;
-    this.DL.LoadFromLink("gallery-photos");
+    this.DL.LoadFromLink("gallery-photo-list");
   }
 
   AddItem(){
