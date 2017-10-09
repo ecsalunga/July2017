@@ -18,4 +18,8 @@
 
 # Do not merge files
 /src/index.html merge=ours
-/environments/* merge=ours
+/src/environments/* merge=ours
+/src/assets/*.png merge=ours
+database.rules.json merge=ours
+.firebaserc merge=ours
+.angular-cli.json merge=ours
