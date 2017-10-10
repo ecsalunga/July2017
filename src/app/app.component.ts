@@ -95,15 +95,13 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.galleryOptions = [
       {
-          height: '500px',
+          height: '400px',
           fullWidth: true,
           imageAutoPlayInterval: 5000,
-          thumbnailsColumns: 7,
           imageSwipe: true,
-          imageArrows: true,
           imageAutoPlay: true,
           imageArrowsAutoHide: true,
-          thumbnailsArrows: true,
+          thumbnailsArrowsAutoHide: true,
           previewSwipe: true,
           previewCloseOnEsc: true,
           previewCloseOnClick: true,
