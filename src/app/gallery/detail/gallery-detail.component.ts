@@ -21,10 +21,10 @@ export class GalleryDetailComponent implements OnInit {
     if(!this.model.Name)
       return false;
 
-    if(this.model.key && !this.DL.UserAccess.ArticleEdit)
+    if(this.model.key && !this.DL.UserAccess.GalleryEdit)
       return false;
 
-    if(!this.model.key && !this.DL.UserAccess.ArticleAdd)
+    if(!this.model.key && !this.DL.UserAccess.GalleryAdd)
       return false;
 
     return true;

@@ -30,10 +30,10 @@ export class GalleryPhotoDetailComponent implements OnInit {
     if(!this.model.Name)
       return false;
 
-    if(this.model.key && !this.DL.UserAccess.ArticleEdit)
+    if(this.model.key && !this.DL.UserAccess.GalleryPhotoEdit)
       return false;
 
-    if(!this.model.key && !this.DL.UserAccess.ArticleAdd)
+    if(!this.model.key && !this.DL.UserAccess.GalleryPhotoAdd)
       return false;
 
     return true;

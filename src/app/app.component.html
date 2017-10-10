@@ -200,7 +200,7 @@
         <span>Snapshot</span>
       </button>
     </ng-container>
-    <ng-container *ngIf="DL.UserAccess.ArticleView">
+    <ng-container *ngIf="DL.UserAccess.GalleryView">
       <button md-menu-item (click)="LoadPage('gallery-list')">
         <md-icon>photo_library</md-icon>
         <span>Gallery</span>
@@ -301,7 +301,6 @@
     </div>
   </div>
   <div *ngIf="showGallery">
-    <div class="vMediumSpacer"></div>
     <div class="headerToolbar">
       <div class="galleryClose">
         <button md-mini-fab (click)="HideGallery()">
@@ -309,18 +308,7 @@
         </button>
       </div>
     </div>
-    <div id="sliderFrame">
-      <div id="slider">
-        <ng-container *ngFor="let item of DL.GallerySelectedPhotos">
-          <img class="fullWidth" src='{{ item.ImageURL }}' />
-        </ng-container>
-      </div>
-      <div style="text-align:center;padding:20px;z-index:20;">
-        <a onclick="imageSlider.previous()" class="group2-Prev"></a>
-        <a id='auto' class="group2-Pause" onclick="switchAutoAdvance()"></a>
-        <a onclick="imageSlider.next()" class="group2-Next"></a>
-      </div>
-    </div>
+    <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
   </div>
 </div>
 <input #imageSelector id="file" [hidden]="true" type="file" accept="image/*">

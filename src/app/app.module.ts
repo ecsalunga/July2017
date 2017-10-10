@@ -12,12 +12,11 @@ import {
   MdSlideToggleModule, MdTooltipModule, MdTabsModule,
   DateAdapter
  } from '@angular/material';
-
 import { AngularFireModule } from 'angularfire2'
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
-
+import { NgxGalleryModule } from 'ngx-gallery';
 import { Core } from './core';
 import { DataAccess, DataLayer } from './data';
 
@@ -127,7 +126,7 @@ import { GalleryWidgetComponent } from './gallery/widget/gallery-widget.componen
     MdSlideToggleModule, MdSnackBarModule, MdTooltipModule,
     FormsModule, MdDialogModule, MdTabsModule,
     ReactiveFormsModule, AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule, AngularFireDatabaseModule
+    AngularFireAuthModule, AngularFireDatabaseModule, NgxGalleryModule
   ],
   providers: [Core, DataAccess, DataLayer],
   bootstrap: [AppComponent],
