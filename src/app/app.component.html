@@ -71,7 +71,7 @@
     <ng-container *ngIf="DL.ArticleCount > 0">
       <button md-menu-item (click)="LoadPage('website-article')">
         <md-icon>event_note</md-icon>
-        <span>Article</span>
+        <span>Publications</span>
       </button>
     </ng-container>
     <ng-container *ngIf="DL.GalleryCount > 0">
@@ -203,7 +203,7 @@
     <ng-container *ngIf="DL.UserAccess.GalleryView">
       <button md-menu-item (click)="LoadPage('gallery-list')">
         <md-icon>photo_library</md-icon>
-        <span>Gallery</span>
+        <span>Pictures</span>
       </button>
     </ng-container>
     <ng-container *ngIf="DL.UserAccess.ArticleView">

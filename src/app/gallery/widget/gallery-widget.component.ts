@@ -16,6 +16,6 @@ export class GalleryWidgetComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Gallery List";
+    
   }
 }

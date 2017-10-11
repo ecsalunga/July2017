@@ -17,6 +17,6 @@ export class WebsiteArticleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.DL.TITLE = "Article List";
+    this.DL.TITLE = "Publications";
   }
 }

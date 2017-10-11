@@ -232,7 +232,9 @@ export class DataLayer {
         this.PublicModules = [
             new NameValue("Home", "website-home"),
             new NameValue("Catalog", "website-catalog"),
-            new NameValue("Reserve", "website-reservation")
+            new NameValue("Reserve", "website-reservation"),
+            new NameValue("Gallery", "website-gallery"),
+            new NameValue("Publications", "website-article")
         ];
 
         this.Months = [
