@@ -8,6 +8,9 @@
           <div class="{{ DL.GalleryCount > 1 ? 'itemDescriptionRes' : 'itemDescription' }}">
             <div class="blurb" [innerHTML]="item.Description"></div>
           </div>
+          <div class="{{ this.DL.GalleryCount > 1 ? 'imageContainerRes' : 'imageContainer' }}">
+            <img class="fullWidth" src="{{item.ImageURL}}" />
+          </div>
           <div class="itemControl mainColor">
             <div class="selection">
               <div>

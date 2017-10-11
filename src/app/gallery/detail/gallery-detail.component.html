@@ -20,6 +20,11 @@
       Active
     </md-slide-toggle>
   </div>
+  <div class="vSmallSpacer"></div>
+  <div class="imageContainer">
+    <img class="fullWidth" src="{{model.ImageURL}}" (load)="ImageLoaded()">
+    <div class="imageEdit" [hidden]="!isLoaded" (click)="SelectFile()">Update Picture</div>
+  </div>
   <div class="hSpacer"></div>
   <div class="rightRow">
     <button md-fab (click)="Save()" [disabled]="!CanSave()" mdTooltip="Save" mdTooltipPosition="above"><md-icon>save</md-icon></button>

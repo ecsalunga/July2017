@@ -4,6 +4,10 @@ export class GalleryInfo {
     Description: string;
     Order: number;
     IsActive: boolean;
+    ImageURL: string;
+    constructor(defaultImageURL: string) {
+        this.ImageURL = defaultImageURL;
+    }
 }
 
 export class GalleryPhotoInfo {

@@ -9,12 +9,21 @@ import { GalleryInfo } from '../../data/models';
 })
 export class GalleryDetailComponent implements OnInit {
   model: GalleryInfo;
+  isLoaded: boolean = true;
 
   constructor(private DA: DataAccess, public DL: DataLayer) {
     if (this.DL.Gallery)
       this.model = Object.assign({}, this.DL.Gallery);
     else
-      this.model = new GalleryInfo();
+      this.model = new GalleryInfo(this.DL.DefaultImageURL);
+  }
+
+  SelectFile() {
+    this.DL.SelectImage("images/gallery/");
+  }
+
+  ImageLoaded() {
+    this.isLoaded = true;
   }
 
   CanSave(): boolean {
@@ -42,5 +51,13 @@ export class GalleryDetailComponent implements OnInit {
 
   ngOnInit() {
     this.DL.TITLE = "Gallery Details";
+    
+    this.DA.ImageUploaded.subscribe(url => {
+      this.model.ImageURL = url;
+    });
+    this.DA.DataChecked.subscribe(isValid => {
+      if(isValid) 
+        this.isLoaded = false;
+    });
   }
 }
