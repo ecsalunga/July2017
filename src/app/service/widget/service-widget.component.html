@@ -12,7 +12,7 @@
           <img class="fullWidth" src="{{item.ImageURL}}" />
         </div>
         <div class="itemControl mainColor">
-          <div class="cartPrice">
+          <div *ngIf="item.Price != null && item.Price > 0" class="cartPrice">
             {{ DL.CURRENCY }} {{ item.Price | number:'1.2-2' }}
           </div>
           <div *ngIf="CanBook()" class="cartSelection">

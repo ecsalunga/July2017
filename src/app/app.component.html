@@ -300,7 +300,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="showGallery">
+  <div *ngIf="showGallery" class="gallery">
     <div class="headerToolbar">
       <div class="galleryClose">
         <button md-mini-fab (click)="HideGallery()">
@@ -308,7 +308,9 @@
         </button>
       </div>
     </div>
-    <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+    <div class="slides"> 
+      <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+    </div>
   </div>
 </div>
 <input #imageSelector id="file" [hidden]="true" type="file" accept="image/*">

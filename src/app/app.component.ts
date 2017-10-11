@@ -93,23 +93,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.galleryOptions = [
-      {
-          height: '400px',
-          fullWidth: true,
-          imageAutoPlayInterval: 5000,
-          imageSwipe: true,
-          imageAutoPlay: true,
-          imageArrowsAutoHide: true,
-          thumbnailsArrowsAutoHide: true,
-          previewSwipe: true,
-          previewCloseOnEsc: true,
-          previewCloseOnClick: true,
-          previewAutoPlayPauseOnHover: true,
-          imageAnimation: NgxGalleryAnimation.Zoom
-      }
-    ];
-
     this.core.viewChild = this.viewChild;
     this.core.imageSelector = this.imageSelector;
     this.DA.DataLoad();
@@ -131,6 +114,22 @@ export class AppComponent implements OnInit {
           };
           this.galleryImages.push(image);
         });
+        this.galleryOptions = [
+          {
+              width: this.DL.ViewWidth > 800 ? '800px' : this.DL.ViewWidth + 'px',
+              imageAutoPlayInterval: 7000,
+              imageSwipe: true,
+              imageAutoPlay: true,
+              imageArrowsAutoHide: true,
+              thumbnailsArrowsAutoHide: true,
+              previewSwipe: true,
+              previewCloseOnEsc: true,
+              previewCloseOnClick: true,
+              previewAutoPlayPauseOnHover: true,
+              thumbnailsColumns: 5,
+              imageAnimation: NgxGalleryAnimation.Slide
+          }
+        ];
 
         this.showGallery = true;
         this.loader =  this.show;
