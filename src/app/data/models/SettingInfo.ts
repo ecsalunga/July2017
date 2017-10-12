@@ -18,6 +18,7 @@ export class ModuleSettingInfo {
 export class SystemSettingInfo {
     Name: string;
     Footer: string;
+    ShowFooterLogo: boolean;
     CurrencySymbol: string;
     ImageSize: number;
     

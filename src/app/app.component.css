@@ -49,6 +49,10 @@
     margin: auto;
 }
 
+.imageFooter {
+    height: 45px;
+}
+
 .infoBox {
     padding: 20px;
     border-radius: 10px;
