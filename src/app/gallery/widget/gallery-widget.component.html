@@ -1,0 +1,27 @@
+<div class="container">
+    <ng-container *ngFor="let item of DL.GalleryActive">
+      <div class="{{ DL.GalleryCount > 1 ? 'columnRes' : 'column' }}">
+        <div class="item">
+          <div class="itemHeader">
+            <div class="itemName">{{ item.Name }}</div>
+          </div>
+          <div class="{{ DL.GalleryCount > 1 ? 'itemDescriptionRes' : 'itemDescription' }}">
+            <div class="blurb" [innerHTML]="item.Description"></div>
+          </div>
+          <div class="{{ this.DL.GalleryCount > 1 ? 'imageContainerRes' : 'imageContainer' }}">
+            <img class="fullWidth" src="{{item.ImageURL}}" />
+          </div>
+          <div class="itemControl mainColor">
+            <div class="selection">
+              <div>
+                <button md-raised-button (click)="View(item)">
+                  <md-icon>pageview</md-icon>
+                  <span>View</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>

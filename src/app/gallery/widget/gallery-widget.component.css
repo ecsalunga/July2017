@@ -1,0 +1,19 @@
+.fullWidth {
+    width: 100%;
+}
+
+.itemControl {
+    overflow: auto;
+    padding: 10px;
+} 
+
+.cartPrice {
+    float: left; 
+    margin-top: 20px;
+    margin-left: 10px;
+    height: 30px;
+}
+
+.selection {
+    float: right; 
+}

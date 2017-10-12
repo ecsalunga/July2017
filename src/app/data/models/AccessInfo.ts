@@ -120,4 +120,11 @@ export class AccessInfo {
     MessageView: boolean;
     MessageManage: boolean;
     MessagePop: boolean;
+
+    GalleryView: boolean;
+    GalleryAdd: boolean;
+    GalleryEdit: boolean;
+    GalleryPhotoView: boolean;
+    GalleryPhotoAdd: boolean;
+    GalleryPhotoEdit: boolean;
 }

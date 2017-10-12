@@ -71,7 +71,13 @@
     <ng-container *ngIf="DL.ArticleCount > 0">
       <button md-menu-item (click)="LoadPage('website-article')">
         <md-icon>event_note</md-icon>
-        <span>Article</span>
+        <span>Publication</span>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="DL.GalleryCount > 0">
+      <button md-menu-item (click)="LoadPage('website-gallery')">
+        <md-icon>photo_library</md-icon>
+        <span>Gallery</span>
       </button>
     </ng-container>
     <ng-container *ngIf="DL.UserAccess.MessageView">
@@ -194,6 +200,12 @@
         <span>Snapshot</span>
       </button>
     </ng-container>
+    <ng-container *ngIf="DL.UserAccess.GalleryView">
+      <button md-menu-item (click)="LoadPage('gallery-list')">
+        <md-icon>photo_library</md-icon>
+        <span>Pictures</span>
+      </button>
+    </ng-container>
     <ng-container *ngIf="DL.UserAccess.ArticleView">
       <button md-menu-item (click)="LoadPage('article-list')">
         <md-icon>event_note</md-icon>
@@ -251,7 +263,7 @@
     </div>
   </div>
   <div class="footer">
-    <div><img md-card-avatar src="assets/favicon-192x192.png"></div>
+    <div class="imageFooter"><img *ngIf="DL.SystemSetting.ShowFooterLogo" md-card-avatar src="assets/favicon-192x192.png"></div>
     <div>{{ DL.SystemSetting.Footer }}</div>
     <div class="brand">Powered by <a href="mailto:emmanuel.salunga@gmail.com">ecsalunga</a></div>
   </div>
@@ -286,6 +298,18 @@
       <div *ngIf="DL.UserShowInfo.ActionDate != null">
         Last login: {{ GetDate(DL.UserShowInfo.ActionDate) | date : 'short' }}
       </div>
+    </div>
+  </div>
+  <div *ngIf="showGallery" class="gallery">
+    <div class="headerToolbar">
+      <div class="galleryClose">
+        <button md-mini-fab (click)="HideGallery()">
+          <md-icon>close</md-icon>
+        </button>
+      </div>
+    </div>
+    <div class="slides"> 
+      <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
     </div>
   </div>
 </div>

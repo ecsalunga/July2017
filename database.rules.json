@@ -120,6 +120,18 @@
         ".write": "true",
         ".indexOn": "ActionDate"
       }
+    },
+    "galleries": {
+      "items": {
+        ".read": "true",
+        ".write": "true",
+        ".indexOn": "Order"
+      },
+      "photos": {
+        ".read": "true",
+        ".write": "true",
+        ".indexOn": ["GalleryKey", "Order"]
+      }
     }
   }
 }

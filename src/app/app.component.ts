@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, Renderer } from '@angular/core';
 import { Core } from './core';
 import { DataAccess, DataLayer } from './data';
+import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,9 @@ import { DataAccess, DataLayer } from './data';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  galleryOptions: NgxGalleryOptions[];
+  galleryImages: Array<NgxGalleryImage>;
+
   @ViewChild('viewChild', {read: ViewContainerRef})
   viewChild: ViewContainerRef;
 
@@ -15,6 +19,7 @@ export class AppComponent implements OnInit {
   imageSelector: ViewContainerRef;
   isLoaded: boolean = false;
   showInfo: boolean = false;
+  showGallery: boolean = false;
   show: string = "100%";
   hide: string = "0%"
   navWidth: string = "0%";
@@ -82,6 +87,11 @@ export class AppComponent implements OnInit {
     this.loader =  this.hide;
   }
 
+  HideGallery() {
+    this.showGallery = false;
+    this.loader =  this.hide;
+  }
+
   ngOnInit() {
     this.core.viewChild = this.viewChild;
     this.core.imageSelector = this.imageSelector;
@@ -92,6 +102,36 @@ export class AppComponent implements OnInit {
         this.loader =  this.hide;
       } else if(data == this.DL.DATA_INFO) {
         this.showInfo = true;
+        this.loader =  this.show;
+      } else if(data == this.DL.DATA_GALLERY) {
+        this.galleryImages = new Array<NgxGalleryImage>();
+        this.DL.GallerySelectedPhotos.forEach(i => {
+          let image = {
+            small: i.ImageURL,
+            medium: i.ImageURL,
+            big: i.ImageURL,
+            description: i.Description
+          };
+          this.galleryImages.push(image);
+        });
+        this.galleryOptions = [
+          {
+              width: this.DL.ViewWidth > 800 ? '800px' : this.DL.ViewWidth + 'px',
+              imageAutoPlayInterval: 7000,
+              imageSwipe: true,
+              imageAutoPlay: true,
+              imageArrowsAutoHide: true,
+              thumbnailsArrowsAutoHide: true,
+              previewSwipe: true,
+              previewCloseOnEsc: true,
+              previewCloseOnClick: true,
+              previewAutoPlayPauseOnHover: true,
+              thumbnailsColumns: 5,
+              imageAnimation: NgxGalleryAnimation.Slide
+          }
+        ];
+
+        this.showGallery = true;
         this.loader =  this.show;
       }
     });

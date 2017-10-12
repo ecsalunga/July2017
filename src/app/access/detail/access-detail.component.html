@@ -63,6 +63,52 @@
       </td>
     </tr>
     <tr>
+      <td colspan="3" class="accessLabel">Gallery</td>
+    </tr>
+    <tr>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.GalleryView">
+          View
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.GalleryAdd">
+          Add
+        </md-slide-toggle>
+      </td>
+      <td>
+        <md-slide-toggle [(ngModel)]="model.GalleryEdit">
+          Edit
+        </md-slide-toggle>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table style="margin-left: 10px;">
+          <tr>
+            <td colspan="3" class="accessLabel">Photo</td>
+          </tr>
+          <tr>
+            <td class="subAccess">
+              <md-slide-toggle [(ngModel)]="model.GalleryPhotoView">
+                View
+              </md-slide-toggle>
+            </td>
+            <td class="subAccess">
+              <md-slide-toggle [(ngModel)]="model.GalleryPhotoAdd">
+                Add
+              </md-slide-toggle>
+            </td>
+            <td>
+              <md-slide-toggle [(ngModel)]="model.GalleryPhotoEdit">
+                Edit
+              </md-slide-toggle>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
       <td colspan="3" class="accessLabel">Expense</td>
     </tr>
     <tr>

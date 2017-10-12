@@ -12,12 +12,11 @@ import {
   MdSlideToggleModule, MdTooltipModule, MdTabsModule,
   DateAdapter
  } from '@angular/material';
-
 import { AngularFireModule } from 'angularfire2'
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
-
+import { NgxGalleryModule } from 'ngx-gallery';
 import { Core } from './core';
 import { DataAccess, DataLayer } from './data';
 
@@ -85,6 +84,12 @@ import { ArticleListComponent } from './article/list/article-list.component';
 import { ArticleDetailComponent } from './article/detail/article-detail.component';
 import { WebsiteArticleComponent } from './website/article/website-article.component';
 import { WebsiteArticleFullComponent } from './website/article-full/website-article-full.component';
+import { GalleryListComponent } from './gallery/list/gallery-list.component';
+import { GalleryDetailComponent } from './gallery/detail/gallery-detail.component';
+import { GalleryPhotoListComponent } from './gallery/photo-list/gallery-photo-list.component';
+import { GalleryPhotoDetailComponent } from './gallery/photo-detail/gallery-photo-detail.component';
+import { WebsiteGalleryComponent } from './website/gallery/website-gallery.component';
+import { GalleryWidgetComponent } from './gallery/widget/gallery-widget.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +114,9 @@ import { WebsiteArticleFullComponent } from './website/article-full/website-arti
     SubscriptionDetailComponent, SubscriptionSubscriberComponent, SubscriptionProductComponent,
     SubscriptionProductComponent, SubscriptionQuotaComponent, SubscriptionQuotaDetailComponent,
     ArticleListComponent, ArticleDetailComponent, WebsiteArticleComponent, 
-    WebsiteArticleFullComponent
+    WebsiteArticleFullComponent, GalleryListComponent, GalleryDetailComponent,
+    GalleryPhotoListComponent, GalleryPhotoDetailComponent, WebsiteGalleryComponent,
+    GalleryWidgetComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, MdButtonModule,
@@ -119,7 +126,7 @@ import { WebsiteArticleFullComponent } from './website/article-full/website-arti
     MdSlideToggleModule, MdSnackBarModule, MdTooltipModule,
     FormsModule, MdDialogModule, MdTabsModule,
     ReactiveFormsModule, AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule, AngularFireDatabaseModule
+    AngularFireAuthModule, AngularFireDatabaseModule, NgxGalleryModule
   ],
   providers: [Core, DataAccess, DataLayer],
   bootstrap: [AppComponent],
@@ -144,7 +151,9 @@ import { WebsiteArticleFullComponent } from './website/article-full/website-arti
     UserSellerComponent, SubscriptionListComponent, SubscriptionDetailComponent,
     SubscriptionSubscriberComponent, SubscriptionProductComponent, SubscriptionQuotaComponent,
     SubscriptionQuotaDetailComponent, ArticleListComponent, ArticleDetailComponent,
-    WebsiteArticleComponent, WebsiteArticleFullComponent
+    WebsiteArticleComponent, WebsiteArticleFullComponent, GalleryListComponent,
+    GalleryDetailComponent, GalleryPhotoListComponent, GalleryPhotoDetailComponent,
+    WebsiteGalleryComponent, GalleryWidgetComponent
   ]
 })
 export class AppModule {

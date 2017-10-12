@@ -1,0 +1,47 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Active
+        </th>
+        <th>
+          Order
+        </th>
+        <th class="rightRow">
+          Action
+        </th>
+      </tr>
+    </thead>
+    <ng-container *ngFor="let item of DL.GallerySelectedPhotos">
+      <tr>
+        <td>
+          {{ item.Name }}
+        </td>
+        <td class="{{ (Active(item) == 'Yes') ?  'good' : 'bad' }}">
+          {{ Active(item) }}
+        </td>
+        <td>
+          {{ item.Order }}
+        </td>
+        <td class="rightRow">
+          <button md-mini-fab (click)="SelectItem(item)" mdTooltip="View" mdTooltipPosition="above"><md-icon>pageview</md-icon></button>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+  <div class="hSpacer"></div>
+  <table>
+    <tr class="rightRow">
+      <td>
+          <button md-fab (click)="AddItem()" [disabled]="!DL.UserAccess.GalleryPhotoAdd" mdTooltip="Add" mdTooltipPosition="above"><md-icon>note_add</md-icon></button>
+      </td>
+      <td>
+          <button md-fab (click)="LoadList()" mdTooltip="Back to gallery" mdTooltipPosition="above"><md-icon>assignment_return</md-icon></button>
+      </td>
+    </tr>
+  </table>
+</div>

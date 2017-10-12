@@ -11,7 +11,7 @@ import {
     ServiceInfo, ConversationInfo, MessageInfo,
     ReservationInfo, Name2Value, IStatus,
     SubscriptionInfo, QuotaInfo, PurchaseInfo,
-    ArticleInfo
+    ArticleInfo, GalleryInfo, GalleryPhotoInfo
 } from './models';
 
 @Injectable()
@@ -62,6 +62,7 @@ export class DataLayer {
     DATA_REPORT: string = "report";
     DATA_MESSAGE: string = "message";
     DATA_INFO: string = "info";
+    DATA_GALLERY: string = "gallery";
 
     BORROW_PRODUCT: string = "Product";
 
@@ -82,6 +83,14 @@ export class DataLayer {
     Services: Array<ServiceInfo>;
     ServiceToday: Array<ServiceInfo>;
     ServiceTodayCount: number;
+
+    Gallery: GalleryInfo;
+    Galleries: Array<GalleryInfo>;
+    GalleryActive: Array<GalleryInfo>;
+    GalleryCount: number;
+    GalleryPhoto: GalleryPhotoInfo;
+    GalleryPhotos: Array<GalleryPhotoInfo>;
+    GallerySelectedPhotos: Array<GalleryPhotoInfo>;
 
     ServiceReservation: ReservationInfo;
     ServiceReservationUser: Array<ReservationInfo>;
@@ -223,7 +232,9 @@ export class DataLayer {
         this.PublicModules = [
             new NameValue("Home", "website-home"),
             new NameValue("Catalog", "website-catalog"),
-            new NameValue("Reserve", "website-reservation")
+            new NameValue("Reserve", "website-reservation"),
+            new NameValue("Gallery", "website-gallery"),
+            new NameValue("Publications", "website-article")
         ];
 
         this.Months = [
@@ -496,6 +507,17 @@ export class DataLayer {
         }
 
         return hasAdjustment;
+    }
+
+    public SetGalleryPhotos(item: GalleryInfo) {
+        this.GallerySelectedPhotos = new Array<GalleryPhotoInfo>();
+
+        this.GalleryPhotos.forEach(photo => {
+            if(photo.GalleryKey == item.key)
+                this.GallerySelectedPhotos.push(photo);
+        });
+
+        this.GallerySelectedPhotos.sort((item1, item2) => item1.Order - item2.Order);
     }
     
     private appendIfSet(value: string): string {
